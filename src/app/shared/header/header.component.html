@@ -11,16 +11,16 @@
                 <!-- Logo icon --><b>
                                 <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
                                 <!-- Dark Logo icon -->
-                                <img src="assets/images/logo-icon.png" alt="homepage" class="dark-logo" />
+                <img src="assets/images/logo-sgi.png" alt="homepage" class="dark-logo" style="height: 40px;"/>
                                 <!-- Light Logo icon -->
-                                <img src="assets/images/logo-light-icon.png" alt="homepage" class="light-logo" />
+                                <img src="assets/images/logo-sgi.png" alt="homepage" class="light-logo" style="height: 40px;"/>
                             </b>
                 <!--End Logo icon -->
                 <!-- Logo text --><span>
                              <!-- dark Logo text -->
-                             <img src="assets/images/logo-text.png" alt="homepage" class="dark-logo" />
+                             <img src="assets/images/logo-itsf-color.png" alt="homepage" class="dark-logo" style="height: 30px; padding-left: 25px;"/>
                              <!-- Light Logo text -->    
-                             <img src="assets/images/logo-light-text.png" class="light-logo" alt="homepage" /></span> </a>
+                             <img src="assets/images/logo-itsf-blanco.png" class="light-logo" alt="homepage" style="height: 30px; padding-left: 25px;"/></span> </a>
         </div>
         <!-- ============================================================== -->
         <!-- End Logo -->
@@ -44,7 +44,7 @@
                 <!-- ============================================================== -->
                 <li class="nav-item hidden-xs-down search-box"> <a class="nav-link hidden-sm-down waves-effect waves-dark" href="javascript:void(0)"><i class="ti-search"></i></a>
                     <form class="app-search">
-                        <input type="text" class="form-control" placeholder="Search & enter"> <a class="srh-btn"><i class="ti-close"></i></a> </form>
+                        <input type="text" class="form-control" placeholder="Buscar y enter"> <a class="srh-btn"><i class="ti-close"></i></a> </form>
                 </li>
                 <!-- ============================================================== -->
                 <!-- Messages -->
@@ -56,7 +56,7 @@
                     <div class="dropdown-menu mailbox dropdown-menu-right animated bounceInDown" aria-labelledby="2">
                         <ul>
                             <li>
-                                <div class="drop-title">You have 4 new messages</div>
+                                <div class="drop-title">Tienes 4 nuevos mensajes</div>
                             </li>
                             <li>
                                 <div class="message-center">
@@ -106,25 +106,24 @@
                 <!-- Profile -->
                 <!-- ============================================================== -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../assets/images/users/1.jpg" alt="user" class="profile-pic" /></a>
+                    <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../assets/images/users/icon-user.png" alt="user" class="profile-pic" /></a>
                     <div class="dropdown-menu dropdown-menu-right animated flipInY">
                         <ul class="dropdown-user">
                             <li>
                                 <div class="dw-user-box">
-                                    <div class="u-img"><img src="assets/images/users/1.jpg" alt="user"></div>
+                                    <div class="u-img"><img src="assets/images/users/icon-user.png" alt="user"></div>
                                     <div class="u-text">
-                                        <h4>Steave Jobs</h4>
-                                        <p class="text-muted">varun@gmail.com</p><a href="pages-profile.html" class="btn btn-rounded btn-danger btn-sm">View Profile</a></div>
+                                        <h4>Aldo Neri</h4>
+                                        <p class="text-muted">test@gmail.com</p><a href="pages-profile.html" class="btn btn-rounded btn-danger btn-sm">Ver Perfil</a></div>
                                 </div>
                             </li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="#"><i class="ti-user"></i> My Profile</a></li>
-                            <li><a href="#"><i class="ti-wallet"></i> My Balance</a></li>
-                            <li><a href="#"><i class="ti-email"></i> Inbox</a></li>
+                            <li><a href="#"><i class="ti-user"></i> Mi Perfil</a></li>
+                            <li><a href="#"><i class="ti-email"></i> Mensajes</a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="#"><i class="ti-settings"></i> Account Setting</a></li>
+                            <li><a routerLink="/account-settings"><i class="ti-settings"></i> Ajustes</a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="#"><i class="fa fa-power-off"></i> Logout</a></li>
+                            <li><a (click)="_usuarioService.logout()" class="pointer"><i class="fa fa-power-off"></i> Cerrar Sesión</a></li>
                         </ul>
                     </div>
                 </li>

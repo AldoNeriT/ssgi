@@ -7,15 +7,15 @@ export class SidebarService {
 
   menu: any = [
     {
-      titulo: 'Principal',
-      icono: 'mdi mdi-gauge',
+      titulo: 'Sistema ABC',
+      icono: 'mdi mdi-account-settings-variant',
       submenu: [
         { titulo: 'Dashboard', url: '/dashboard' },
         { titulo: 'ProgressBar', url: '/progress' },
-        { titulo: 'Graficas1', url: '/graficas1' }
+        { titulo: 'Registro Usuarios', url: '/registro' }
       ]
     }
-  ]
+  ];
 
   constructor() { }
 }

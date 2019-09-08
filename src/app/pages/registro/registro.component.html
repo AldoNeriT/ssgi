@@ -1,0 +1,118 @@
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Lista de Usuarios</h4>
+                <h6 class="card-subtitle"></h6>
+                <div class="table-responsive">
+                    <table id="demo-foo-addrow" class="table m-t-30 table-hover contact-list" data-page-size="10">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Nombre</th>
+                                <th>Apellidos</th>
+                                <th>Usuario</th>
+                                <th>Correo</th>
+                                <th>Puesto</th>
+                                <th>Tipo de Usuario</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Aldo</td>
+                                <td>Neri Torres</td>
+                                <td>aldo_neri</td>
+                                <td>aldo_neri@outlook.com</td>
+                                <td>Jefe</td>
+                                <td>ADMIN</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Jorge</td>
+                                <td>Madera López</td>
+                                <td>madera_666</td>
+                                <td>madera@gmail.com</td>
+                                <td>Jefe</td>
+                                <td>ADMIN</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>Adrian</td>
+                                <td>Ramos Ortiz</td>
+                                <td>wila_ramos</td>
+                                <td>adrianramos97@outlook.com</td>
+                                <td>Chacha</td>
+                                <td>USER</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="2">
+                                    <button type="button" class="btn btn-info btn-rounded" data-toggle="modal" data-target="#add-contact">Agregar Nuevo Usuario</button>
+                                </td>
+                                <div id="add-contact" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                                <h4 class="modal-title" id="myModalLabel">Agregar Nuevo Usuario</h4>
+                                            </div>
+
+                                            <div class="modal-body">
+                                                <form ngNativeValidate [formGroup]="forma" (ngSubmit)="registrarUsuario()" action="index.html" class="form-horizontal form-material">
+                                                    <div class="form-group">
+                                                        <div class="col-md-12 m-b-20">
+                                                            <input formControlName="numEmpleado" name="numEmpleado" type="number" class="form-control" placeholder="Número de Empleado" required> </div>
+                                                        <div class="col-md-12 m-b-20">
+                                                            <input formControlName="usuario" name="usuario" type="text" class="form-control" placeholder="Usuario" required> </div>
+                                                        <div class="col-md-12 m-b-20">
+                                                            <input formControlName="nombre" name="nombre" type="text" class="form-control" placeholder="Nombre" required> </div>
+                                                        <div class="col-md-12 m-b-20">
+                                                            <input formControlName="priApellido" name="priApellido" type="text" class="form-control" placeholder="Primer Apellido" required> </div>
+                                                        <div class="col-md-12 m-b-20">
+                                                            <input formControlName="segApellido" name="segApellido" type="text" class="form-control" placeholder="Segundo Apellido"> </div>
+                                                        <div class="col-md-12 m-b-20">
+                                                            <input formControlName="correo" name="correo" type="email" class="form-control" placeholder="Correo" required> </div>
+                                                        <div class="col-md-12 m-b-20">
+                                                            <input formControlName="telefono" name="telefono" type="text" class="form-control" placeholder="Telefono" required> </div>
+                                                        <div class="col-md-12 m-b-20">
+                                                            <input formControlName="puesto" name="puesto" type="text" class="form-control" placeholder="Puesto" required> </div>
+                                                        <div class="col-md-12 m-b-20">
+                                                            <input formControlName="contrasenia" name="contrasenia" type="password" class="form-control" placeholder="Contraseña" required> </div>
+                                                        <div class="col-md-12 m-b-20">
+                                                            <input formControlName="contrasenia2" name="contrasenia2" type="password" class="form-control" placeholder="Confirmar Contraseña" required> </div>
+                                                        <div class="form-group" *ngIf="forma.errors?.sonIguales && !forma.pristine">
+                                                            <p class="text-danger">
+                                                                Las contraseñas deben de ser iguales.
+                                                            </p>
+                                                        </div>
+                                                        <div class="col-md-12 m-b-20">
+                                                            <input formControlName="tipoUser" name="tipoUser" type="text" class="form-control" placeholder="Tipo de Usuario" required> </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="submit" class="btn btn-info waves-effect">Guardar</button>
+                                                        <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Cancelar</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+
+
+                                        </div>
+                                        <!-- /.modal-content -->
+                                    </div>
+                                    <!-- /.modal-dialog -->
+                                </div>
+                                <td colspan="7">
+                                    <div class="text-right">
+                                        <ul class="pagination"> </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
