@@ -3,8 +3,9 @@ import { Usuario } from '../../models/usuario.model';
 import { HttpClient } from '@angular/common/http';
 import { URL_SERVICIOS } from '../../config/config';
 
-import { map } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { throwError } from 'rxjs';
 
 @Injectable()
 export class UsuarioService {
@@ -76,6 +77,11 @@ export class UsuarioService {
               // localStorage.setItem('usuario', JSON.stringify( resp.usuario ) );
 
               return true;
+            }),
+            catchError( err => {
+              swal('Error', err.error.err.message, 'error');
+              // console.log(err.error.err.message);
+              return throwError( err ) ;
             })
           );
   }
@@ -100,6 +106,11 @@ export class UsuarioService {
           console.log('Respuestaaaaaa Actualizado: ',  resp );
           return resp.usuario;
 
+        }),
+        catchError( err => {
+          swal('Error', err.error.err.message, 'error');
+          // console.log(err.error.err.message);
+          return throwError( err ) ;
         })
       );
 
@@ -117,6 +128,11 @@ export class UsuarioService {
           console.log('Respuestaaaaaa Creado: ',  resp );
           return resp.usuario;
 
+        }),
+        catchError( err => {
+          swal('Error', err.error.err.message, 'error');
+          // console.log(err.error.err.message);
+          return throwError( err ) ;
         })
       );
     }
@@ -133,6 +149,11 @@ export class UsuarioService {
         this.totalUsuarios = resp.cuantos;
         return resp.usuarios;
 
+      }),
+      catchError( err => {
+        swal('Error', err.error.err.message, 'error');
+        // console.log(err.error.err.message);
+        return throwError( err ) ;
       })
     );
   }
@@ -147,6 +168,11 @@ export class UsuarioService {
         this.totalUsuarios = resp.cuantos;
         return resp.usuarios;
 
+      }),
+      catchError( err => {
+        swal('Error', err.error.err.message, 'error');
+        // console.log(err.error.err.message);
+        return throwError( err ) ;
       })
     );
   }
@@ -161,6 +187,11 @@ export class UsuarioService {
         console.log('Usuario Cargado Individualmente', resp.usuario );
         return resp.usuario;
 
+      }),
+      catchError( err => {
+        swal('Error', err.error.err.message, 'error');
+        // console.log(err.error.err.message);
+        return throwError( err ) ;
       })
     );
   }
@@ -176,6 +207,11 @@ export class UsuarioService {
         // console.log('Respuestaaaaaa: ',  resp );
         return resp;
 
+      }),
+      catchError( err => {
+        swal('Error', err.error.err.message, 'error');
+        // console.log(err.error.err.message);
+        return throwError( err ) ;
       })
     );
   }
@@ -191,6 +227,11 @@ export class UsuarioService {
         // console.log('Respuestaaaaaa: ',  resp );
         return resp;
 
+      }),
+      catchError( err => {
+        swal('Error', err.error.err.message, 'error');
+        // console.log(err.error.err.message);
+        return throwError( err ) ;
       })
     );
   }
@@ -214,6 +255,11 @@ export class UsuarioService {
         console.log('Respuestaaaaaa Activado: ',  resp );
         return resp.usuario;
 
+      }),
+      catchError( err => {
+        swal('Error', err.error.err.message, 'error');
+        // console.log(err.error.err.message);
+        return throwError( err ) ;
       })
     );
   }
@@ -237,6 +283,11 @@ export class UsuarioService {
         console.log('Respuestaaaaaa Activado: ',  resp );
         return resp.usuario;
 
+      }),
+      catchError( err => {
+        swal('Error', err.error.err.message, 'error');
+        // console.log(err.error.err.message);
+        return throwError( err ) ;
       })
     );
   }
