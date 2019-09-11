@@ -11,6 +11,8 @@ import { ProgressComponent } from './progress/progress.component';
 import { RegistroComponent } from './registro/registro.component';
 import { AccoutSettingsComponent } from './accout-settings/accout-settings.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { UsuariosComponent } from './usuarios/usuarios.component';
+import { UsuarioComponent } from './usuarios/usuario.component';
 
 
 @NgModule({
@@ -19,7 +21,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
         DashboardComponent,
         ProgressComponent,
         RegistroComponent,
-        AccoutSettingsComponent
+        AccoutSettingsComponent,
+        UsuariosComponent,
+        UsuarioComponent
     ],
     exports: [
         DashboardComponent,

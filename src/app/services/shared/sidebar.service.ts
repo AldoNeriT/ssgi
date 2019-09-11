@@ -10,9 +10,10 @@ export class SidebarService {
       titulo: 'Sistema ABC',
       icono: 'mdi mdi-account-settings-variant',
       submenu: [
+        { titulo: 'Usuarios', url: '/usuarios' },
         { titulo: 'Dashboard', url: '/dashboard' },
         { titulo: 'ProgressBar', url: '/progress' },
-        { titulo: 'Registro Usuarios', url: '/registro' }
+        { titulo: 'Pendiente', url: '/registro' }
       ]
     }
   ];

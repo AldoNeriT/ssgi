@@ -12,7 +12,7 @@ export class Usuario {
         public contraseña: string,
         public tipo_Usuario: string,
         public segundo_Apellido?: string,
-        public estado?: boolean,
-        public _id?: string
+        public _id?: string,
+        public estado?: boolean
     ) { }
 }

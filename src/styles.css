@@ -5,3 +5,15 @@
 .pointer {
     cursor: pointer;
 }
+
+
+/* centrar texto y boton del sweet alert */
+
+.swal-footer,
+.swal-text {
+    text-align: center;
+}
+
+.alinear_derecha {
+    float: right;
+}

@@ -7,7 +7,7 @@ import { SettingsService } from './services/service.index';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'ssgi';
+  title = 'SASGI';
 
   // tslint:disable-next-line: variable-name
   constructor( public _ajustes: SettingsService ) {

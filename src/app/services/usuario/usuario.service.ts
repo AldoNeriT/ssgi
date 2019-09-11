@@ -9,6 +9,8 @@ import { Router } from '@angular/router';
 @Injectable()
 export class UsuarioService {
 
+  totalUsuarios: number = 0;
+
   usuario: Usuario;
   token: string;
 
@@ -83,17 +85,160 @@ export class UsuarioService {
     // tslint:disable-next-line: prefer-const
     let url = URL_SERVICIOS + '/usuario';
 
-    return this.http.post( url, usuario );
+    console.log('CONTIENE ID???????????', usuario._id );
 
-    // return this.http.post( url, usuario )
-    // .pipe(
-    //   map( (resp: any ) => {
+    if ( usuario._id ) {
+      // *** Aqui se ACTUALIZA el Usuario ***
+      url += '/' + usuario._id;
+      // url += '?token=' + this.token;
 
-    //     swal('Usuario Creado', usuario.nombre, 'success');
-    //     return resp.usuario;
+      return this.http.put( url, usuario )
+      .pipe(
+        map( (resp: any ) => {
 
-    //   })
-    // );
+          swal('Usuario Actualizado', usuario.nombre + ' ' + usuario.primer_Apellido + ' se actualizo exitosamente', 'success');
+          console.log('Respuestaaaaaa Actualizado: ',  resp );
+          return resp.usuario;
+
+        })
+      );
+
+    } else {
+      // *** Aqui se CREA el Usuario ***
+
+      // url += '?token=' + this.token;
+      // console.log(url);
+
+      return this.http.post( url, usuario )
+      .pipe(
+        map( (resp: any ) => {
+
+          swal('Usuario Creado', usuario.nombre + ' ' + usuario.primer_Apellido + ' se a creado exitosamente', 'success');
+          console.log('Respuestaaaaaa Creado: ',  resp );
+          return resp.usuario;
+
+        })
+      );
+    }
 
   }
+
+  cargarUsuarios() {
+    let url = URL_SERVICIOS + '/usuario';
+
+    return this.http.get( url )
+    .pipe(
+      map( (resp: any ) => {
+
+        this.totalUsuarios = resp.cuantos;
+        return resp.usuarios;
+
+      })
+    );
+  }
+
+  cargarUsuariosInactivos() {
+    let url = URL_SERVICIOS + '/usuario/inactivos';
+
+    return this.http.get( url )
+    .pipe(
+      map( (resp: any ) => {
+
+        this.totalUsuarios = resp.cuantos;
+        return resp.usuarios;
+
+      })
+    );
+  }
+
+  cargarUsuario( id: string) {
+    let url = URL_SERVICIOS + '/usuario/' + id;
+
+    return this.http.get( url )
+    .pipe(
+      map( (resp: any ) => {
+
+        console.log('Usuario Cargado Individualmente', resp.usuario );
+        return resp.usuario;
+
+      })
+    );
+  }
+
+  desactivarUsuario( id: string ) {
+    let url = URL_SERVICIOS + '/usuario/' + id;
+
+    return this.http.delete( url )
+    .pipe(
+      map( (resp: any ) => {
+
+        swal('Usuario Desactivado', '', 'success');
+        // console.log('Respuestaaaaaa: ',  resp );
+        return resp;
+
+      })
+    );
+  }
+
+  desactivarUsuarioPermanente( id: string ) {
+    let url = URL_SERVICIOS + '/usuario/inactivos/' + id;
+
+    return this.http.delete( url )
+    .pipe(
+      map( (resp: any ) => {
+
+        swal('Usuario Eliminado', '', 'success');
+        // console.log('Respuestaaaaaa: ',  resp );
+        return resp;
+
+      })
+    );
+  }
+
+  activarUsuario( id: string ) {
+
+    // tslint:disable-next-line: prefer-const
+    let url = URL_SERVICIOS + '/usuario/inactivos/' + id;
+
+    console.log('CONTIENE ID???????????', id );
+
+    // *** Aqui se ACTUALIZA el Usuario ***
+    // url += '/' + usuario._id;
+    // url += '?token=' + this.token;
+
+    return this.http.put( url, '' )
+    .pipe(
+      map( (resp: any ) => {
+
+        swal('Usuario Activado', '', 'success');
+        console.log('Respuestaaaaaa Activado: ',  resp );
+        return resp.usuario;
+
+      })
+    );
+  }
+
+  actualizarPass( usuario: Usuario ) {
+
+    // tslint:disable-next-line: prefer-const
+    let url = URL_SERVICIOS + '/usuario/password/' + usuario._id;
+
+    console.log('CONTIENE ID???????????', usuario._id );
+
+    // *** Aqui se ACTUALIZA el Usuario ***
+    // url += '/' + usuario._id;
+    // url += '?token=' + this.token;
+
+    return this.http.put( url, usuario )
+    .pipe(
+      map( (resp: any ) => {
+
+        swal('Contraseña Actualizada', '', 'success');
+        console.log('Respuestaaaaaa Activado: ',  resp );
+        return resp.usuario;
+
+      })
+    );
+  }
+
 }

@@ -4,6 +4,8 @@ import { NgForm } from '@angular/forms';
 import { UsuarioService } from '../services/service.index';
 import { Usuario } from '../models/usuario.model';
 
+import swal from 'sweetalert';
+
 declare function init_plugins();
 
 @Component({
@@ -48,6 +50,10 @@ export class LoginComponent implements OnInit {
     // console.log( forma.valid );
     // console.log( forma.value );
     // this.router.navigate(['/dashboard']);
+  }
+
+  perdiCuenta() {
+    swal('¡Importante!', 'Para recuperar los datos de tu cuenta, favor de comunicarte con el Administrador del Sistema', 'warning');
   }
 
 }
