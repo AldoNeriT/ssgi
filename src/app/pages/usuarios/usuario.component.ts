@@ -149,8 +149,13 @@ export class UsuarioComponent implements OnInit {
 
   crearUsuario() {
 
-    console.log( 'Forma Válida', this.forma.valid );
-    console.log( this.forma.value );
+    // console.log( 'Forma Válida', this.forma.valid );
+    // console.log( this.forma.value );
+    // console.log('SELECT DE TIPO USER', this.forma.value.tipoUser);
+
+    if ( !this.forma.value.tipoUser ) {
+      swal('Error', 'Elige un tipo de Usuario', 'error');
+    }
 
     if ( this.forma.invalid ) {
       return;
@@ -188,6 +193,10 @@ export class UsuarioComponent implements OnInit {
 
     // console.log( 'Forma Válida Actualizar', this.formaActualizar.valid );
     // console.log( this.formaActualizar.value );
+
+    if ( !this.formaActualizar.value.tipoUser ) {
+      swal('Error', 'Elige un tipo de Usuario', 'error');
+    }
 
     if ( this.formaActualizar.invalid ) {
       return;
