@@ -13,7 +13,8 @@ export class SidebarService {
         { titulo: 'Home', url: '/home' },
         { titulo: 'Institución', url: '/institucion' },
         { titulo: 'Usuarios', url: '/usuarios' },
-        { titulo: 'Normas', url: '/normas' }
+        { titulo: 'Normas', url: '/normas' },
+        { titulo: 'Procesos', url: '/procesos' }
       ]
     }
   ];

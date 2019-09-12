@@ -8,31 +8,33 @@ import { PagesComponent } from './pages.component';
 
 import { PipesModule } from '../pipes/pipes.module';
 
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { ProgressComponent } from './progress/progress.component';
-import { RegistroComponent } from './registro/registro.component';
+import { PrincipalComponent } from './principal/principal.component';
+import { InstitucionComponent } from './institucion/institucion.component';
+import { NormasComponent } from './normas/normas.component';
 import { AccoutSettingsComponent } from './accout-settings/accout-settings.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { UsuarioComponent } from './usuarios/usuario.component';
 import { ProfileComponent } from './profile/profile.component';
+import { ProcesosComponent } from './procesos/procesos.component';
 
 
 @NgModule({
     declarations: [
         PagesComponent,
-        DashboardComponent,
-        ProgressComponent,
-        RegistroComponent,
+        PrincipalComponent,
+        InstitucionComponent,
+        NormasComponent,
         AccoutSettingsComponent,
         UsuariosComponent,
         UsuarioComponent,
-        ProfileComponent
+        ProfileComponent,
+        ProcesosComponent
     ],
     exports: [
-        DashboardComponent,
-        ProgressComponent,
-        RegistroComponent
+        PrincipalComponent,
+        InstitucionComponent,
+        NormasComponent
     ],
     imports: [
         SharedModule,

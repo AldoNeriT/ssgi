@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-progress',
-  templateUrl: './progress.component.html',
+  selector: 'app-procesos',
+  templateUrl: './procesos.component.html',
   styles: []
 })
-export class ProgressComponent implements OnInit {
+export class ProcesosComponent implements OnInit {
 
   constructor() { }
 
