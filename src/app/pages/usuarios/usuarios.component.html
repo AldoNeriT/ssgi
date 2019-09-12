@@ -151,7 +151,7 @@
                             </tr> -->
                             <tr *ngFor="let usuario of usuarios">
                                 <td>{{usuario.nombre_Usuario}}</td>
-                                <td>{{usuario.nombre + ' ' + usuario.primer_Apellido + ' ' + usuario.segundo_Apellido}}</td>
+                                <td>{{usuario.nombre + ' ' + usuario.primer_Apellido + ' ' + (usuario.segundo_Apellido || '')}}</td>
                                 <td>{{usuario.tipo_Usuario}}</td>
                                 <td>
                                     <div class="btn-group" role="group" aria-label="Basic example">

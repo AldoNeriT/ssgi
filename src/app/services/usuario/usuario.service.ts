@@ -102,7 +102,7 @@ export class UsuarioService {
       .pipe(
         map( (resp: any ) => {
 
-          swal('Usuario Actualizado', usuario.nombre + ' ' + usuario.primer_Apellido + ' se actualizo exitosamente', 'success');
+          swal('Usuario Actualizado', usuario.nombre + ' ' + usuario.primer_Apellido + ' ' + usuario.segundo_Apellido + ' se actualizo exitosamente', 'success');
           console.log('Respuestaaaaaa Actualizado: ',  resp );
           return resp.usuario;
 
@@ -124,7 +124,7 @@ export class UsuarioService {
       .pipe(
         map( (resp: any ) => {
 
-          swal('Usuario Creado', usuario.nombre + ' ' + usuario.primer_Apellido + ' se a creado exitosamente', 'success');
+          swal('Usuario Creado', usuario.nombre + ' ' + usuario.primer_Apellido + ' ' + usuario.segundo_Apellido + ' se a creado exitosamente', 'success');
           console.log('Respuestaaaaaa Creado: ',  resp );
           return resp.usuario;
 
@@ -280,6 +280,34 @@ export class UsuarioService {
       map( (resp: any ) => {
 
         swal('Contraseña Actualizada', '', 'success');
+        console.log('Respuestaaaaaa Activado: ',  resp );
+        return resp.usuario;
+
+      }),
+      catchError( err => {
+        swal('Error', err.error.err.message, 'error');
+        // console.log(err.error.err.message);
+        return throwError( err ) ;
+      })
+    );
+  }
+
+  actualizarMiPerfil( usuario: Usuario ) {
+
+    // tslint:disable-next-line: prefer-const
+    let url = URL_SERVICIOS + '/usuario/***/' + usuario._id;
+
+    console.log('CONTIENE ID???????????', usuario._id );
+
+    // *** Aqui se ACTUALIZA el Usuario ***
+    // url += '/' + usuario._id;
+    // url += '?token=' + this.token;
+
+    return this.http.put( url, usuario )
+    .pipe(
+      map( (resp: any ) => {
+
+        swal('Datos Actualizados', '', 'success');
         console.log('Respuestaaaaaa Activado: ',  resp );
         return resp.usuario;
 

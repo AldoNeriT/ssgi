@@ -6,6 +6,8 @@ import { SharedModule } from '../shared/shared.module';
 
 import { PagesComponent } from './pages.component';
 
+import { PipesModule } from '../pipes/pipes.module';
+
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProgressComponent } from './progress/progress.component';
 import { RegistroComponent } from './registro/registro.component';
@@ -13,6 +15,7 @@ import { AccoutSettingsComponent } from './accout-settings/accout-settings.compo
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { UsuarioComponent } from './usuarios/usuario.component';
+import { ProfileComponent } from './profile/profile.component';
 
 
 @NgModule({
@@ -23,7 +26,8 @@ import { UsuarioComponent } from './usuarios/usuario.component';
         RegistroComponent,
         AccoutSettingsComponent,
         UsuariosComponent,
-        UsuarioComponent
+        UsuarioComponent,
+        ProfileComponent
     ],
     exports: [
         DashboardComponent,
@@ -35,7 +39,8 @@ import { UsuarioComponent } from './usuarios/usuario.component';
         PAGES_ROUTES,
         CommonModule,
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        PipesModule
     ]
 })
 export class PagesModule {}

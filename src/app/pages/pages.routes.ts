@@ -8,6 +8,7 @@ import { AccoutSettingsComponent } from './accout-settings/accout-settings.compo
 import { LoginGuardGuard } from '../services/service.index';
 import { UsuarioComponent } from './usuarios/usuario.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
+import { ProfileComponent } from './profile/profile.component';
 
 
 
@@ -17,14 +18,15 @@ const pagesRoutes: Routes = [
         component: PagesComponent,
         canActivate: [ LoginGuardGuard],
         children: [
-            { path: 'dashboard', component: DashboardComponent, data: { titulo: 'Dashboard' } },
-            { path: 'progress', component: ProgressComponent, data: { titulo: 'Progress' } },
-            { path: 'registro', component: RegistroComponent, data: { titulo: 'Registro' } },
+            { path: 'home', component: DashboardComponent, data: { titulo: 'Home' } },
+            { path: 'institucion', component: ProgressComponent, data: { titulo: 'Institucion' } },
+            { path: 'normar', component: RegistroComponent, data: { titulo: 'Normas' } },
             { path: 'usuarios', component: UsuariosComponent, data: { titulo: 'Lista de Usuarios' } },
             { path: 'usuario/:id', component: UsuarioComponent, data: { titulo: 'Usuario' } },
             { path: 'usuario/:ver/:id', component: UsuarioComponent, data: { titulo: 'Usuario' } },
             { path: 'account-settings', component: AccoutSettingsComponent, data: { titulo: 'Ajustes del Tema' } },
-            { path: '', redirectTo: '/dashboard', pathMatch: 'full'}
+            { path: 'perfil', component: ProfileComponent, data: { titulo: 'Mi Perfil' } },
+            { path: '', redirectTo: '/home', pathMatch: 'full'}
         ]
      }
 ];

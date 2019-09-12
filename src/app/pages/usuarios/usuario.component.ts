@@ -295,12 +295,12 @@ export class UsuarioComponent implements OnInit {
             this.usuarioV = usuario.nombre_Usuario;
             this.nombreV = usuario.nombre;
             this.priApellidoV = usuario.primer_Apellido;
-            this.segApellidoV = usuario.segundo_Apellido;
+            this.segApellidoV = usuario.segundo_Apellido || '';
             this.correoV = usuario.email;
             this.telefonoV = usuario.telefono;
             this.puestoV = usuario.puesto;
             this.tipoUserV = usuario.tipo_Usuario;
-            this.titulo += usuario.nombre + ' ' + usuario.primer_Apellido;
+            this.titulo += usuario.nombre + ' ' + usuario.primer_Apellido + ' ' + (usuario.segundo_Apellido || '');
           });
   }
 
@@ -310,7 +310,7 @@ export class UsuarioComponent implements OnInit {
             // console.log( resp );
             // *** La Respuesta es el arreglo como esta en la Base de
             //     datos y se le insertan los valores al formulario ***
-            this.titulo += usuario.nombre + ' ' + usuario.primer_Apellido;
+            this.titulo += usuario.nombre + ' ' + usuario.primer_Apellido + ' ' + (usuario.segundo_Apellido || '');
           });
   }
 }

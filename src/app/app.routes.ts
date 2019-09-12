@@ -18,7 +18,6 @@ const appRoutes: Routes = [
     //     ]
     //  },
     { path: 'login', component: LoginComponent, data: { titulo: 'Login' }  },
-    { path: 'register', component: LoginComponent },
     { path: '**', component: NopagefoundComponent }
 ];
 
