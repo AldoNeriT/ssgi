@@ -4,9 +4,6 @@
 <div *ngIf="mostrarActivos" class="row">
     <div class="col-12">
         <div class="card">
-            <!-- <div class="card-header bg-theme text-white">
-                Total de Activos: {{_usuarioService.totalUsuarios}}
-            </div> -->
             <div class="card-body">
                 <div class="row">
                     <div class="col-4">
@@ -51,46 +48,6 @@
                                     </div>
                                 </td>
                             </tr>
-                            <!-- <tr>
-                                <td>sdfgdfgf</td>
-                                <td>sdfgdfgf</td>
-                                <td>sdfgdfgf</td>
-                                <td>Ver</td>
-                                <td>Editar</td>
-                                <td>Eliminar</td>
-                            </tr>
-                            <tr>
-                                <td>sdfgdfgf</td>
-                                <td>sdfgdfgf</td>
-                                <td>sdfgdfgf</td>
-                                <td>Ver</td>
-                                <td>Editar</td>
-                                <td>Eliminar</td>
-                            </tr>
-                            <tr>
-                                <td>sdfgdfgf</td>
-                                <td>sdfgdfgf</td>
-                                <td>sdfgdfgf</td>
-                                <td>Ver</td>
-                                <td>Editar</td>
-                                <td>Eliminar</td>
-                            </tr>
-                            <tr>
-                                <td>sdfgdfgf</td>
-                                <td>sdfgdfgf</td>
-                                <td>sdfgdfgf</td>
-                                <td>Ver</td>
-                                <td>Editar</td>
-                                <td>Eliminar</td>
-                            </tr>
-                            <tr>
-                                <td>zdfgdfgf</td>
-                                <td>sdfgdfgf</td>
-                                <td>sdfgdfgf</td>
-                                <td>Ver</td>
-                                <td>Editar</td>
-                                <td>Eliminar</td>
-                            </tr> -->
                         </tbody>
                     </table>
                 </div>
@@ -105,15 +62,13 @@
 <div *ngIf="!mostrarActivos" class="row">
     <div class="col-12">
         <div class="card">
-            <!-- <div class="card-header bg-theme text-white">
-                Total de Inactivos: {{_usuarioService.totalUsuarios}}
-            </div> -->
             <div class="card-body">
                 <div class="row">
+                    <div class="col-2"></div>
                     <div class="col-8 text-center">
                         <h1>Usuarios en Papelera: {{_usuarioService.totalUsuarios}}</h1>
                     </div>
-                    <div class="col-4">
+                    <div class="col-2">
                         <button (click)="cambiarCatalogo()" type="button" class="btn btn-rounded btn-outline-secondary alinear_derecha"><i class="mdi mdi-account-multiple"></i></button>
                     </div>
                 </div>
@@ -128,27 +83,6 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- <tr *ngFor="let usuario of usuarios">
-                                <td>{{usuario.nombre_Usuario}}</td>
-                                <td>{{usuario.nombre + ' ' + usuario.primer_Apellido + ' ' + usuario.segundo_Apellido}}</td>
-                                <td>{{usuario.tipo_Usuario}}</td>
-                                <td>
-                                    <div class="btn-group" role="group" aria-label="Basic example">
-                                        <button [routerLink]="['/usuario', 'ver', usuario._id]" class="btn btn-themecolor">
-                                            <i class="mdi mdi-eye"></i>
-                                        </button>&nbsp;
-                                        <button [routerLink]="['/usuario', usuario._id]" class="btn btn-secondary">
-                                            <i class="mdi mdi-pencil"></i>
-                                        </button>&nbsp;
-                                        <button [routerLink]="['/usuario', 'pass', usuario._id]" class="btn btn-outline-secondary">
-                                            <i class="mdi mdi-lock"></i>
-                                        </button>&nbsp;
-                                        <button (click)="desactivarUsuario( usuario )" class="btn btn-danger">
-                                            <i class="mdi mdi-delete"></i>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr> -->
                             <tr *ngFor="let usuario of usuarios">
                                 <td>{{usuario.nombre_Usuario}}</td>
                                 <td>{{usuario.nombre + ' ' + usuario.primer_Apellido + ' ' + (usuario.segundo_Apellido || '')}}</td>

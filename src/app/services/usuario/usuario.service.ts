@@ -17,7 +17,6 @@ export class UsuarioService {
 
   constructor( public http: HttpClient,
                public router: Router) {
-    // console.log('Servicio de Usuario listo');
     this.cargarStorage();
   }
 
@@ -34,6 +33,7 @@ export class UsuarioService {
       this.token = '';
       this.usuario = null;
     }
+
   }
 
   guardarStorage( id: string, token: string, usuario: Usuario) {
@@ -44,9 +44,11 @@ export class UsuarioService {
 
     this.usuario = usuario;
     this.token = token;
+
   }
 
   logout() {
+
     this.usuario = null;
     this.token = '';
 
@@ -54,6 +56,7 @@ export class UsuarioService {
     localStorage.removeItem('usuario');
 
     this.router.navigate(['/login']);
+
   }
 
   login( usuario: Usuario, recordar: boolean = false) {
@@ -64,23 +67,16 @@ export class UsuarioService {
       localStorage.removeItem('userName');
     }
 
-    // tslint:disable-next-line: prefer-const
     let url = URL_SERVICIOS + '/login';
+
     return this.http.post( url, usuario )
           .pipe(
             map( (resp: any) => {
-
               this.guardarStorage( resp.id, resp.token, resp.usuario)
-
-              // localStorage.setItem('id', resp.id);
-              // localStorage.setItem('token', resp.token);
-              // localStorage.setItem('usuario', JSON.stringify( resp.usuario ) );
-
               return true;
             }),
             catchError( err => {
               swal('Error', err.error.err.message, 'error');
-              // console.log(err.error.err.message);
               return throwError( err ) ;
             })
           );
@@ -88,28 +84,26 @@ export class UsuarioService {
 
   crearUsuario( usuario: Usuario ) {
 
-    // tslint:disable-next-line: prefer-const
     let url = URL_SERVICIOS + '/usuario';
-
-    console.log('CONTIENE ID???????????', usuario._id );
 
     if ( usuario._id ) {
       // *** Aqui se ACTUALIZA el Usuario ***
       url += '/' + usuario._id;
-      // url += '?token=' + this.token;
+
+      // *** TOKEN ***
+      url += '?token=' + this.token;
 
       return this.http.put( url, usuario )
       .pipe(
         map( (resp: any ) => {
-
-          swal('Usuario Actualizado', usuario.nombre + ' ' + usuario.primer_Apellido + ' ' + usuario.segundo_Apellido + ' se actualizo exitosamente', 'success');
-          console.log('Respuestaaaaaa Actualizado: ',  resp );
+          swal('Usuario Actualizado', usuario.nombre +
+               ' ' + usuario.primer_Apellido +
+               ' ' + usuario.segundo_Apellido +
+               ' se actualizo exitosamente', 'success');
           return resp.usuario;
-
         }),
         catchError( err => {
           swal('Error', err.error.err.message, 'error');
-          // console.log(err.error.err.message);
           return throwError( err ) ;
         })
       );
@@ -117,21 +111,20 @@ export class UsuarioService {
     } else {
       // *** Aqui se CREA el Usuario ***
 
-      // url += '?token=' + this.token;
-      // console.log(url);
+        // *** TOKEN ***
+      url += '?token=' + this.token;
 
       return this.http.post( url, usuario )
       .pipe(
         map( (resp: any ) => {
-
-          swal('Usuario Creado', usuario.nombre + ' ' + usuario.primer_Apellido + ' ' + usuario.segundo_Apellido + ' se a creado exitosamente', 'success');
-          console.log('Respuestaaaaaa Creado: ',  resp );
+          swal('Usuario Creado', usuario.nombre +
+               ' ' + usuario.primer_Apellido +
+               ' ' + usuario.segundo_Apellido +
+               ' se a creado exitosamente', 'success');
           return resp.usuario;
-
         }),
         catchError( err => {
           swal('Error', err.error.err.message, 'error');
-          // console.log(err.error.err.message);
           return throwError( err ) ;
         })
       );
@@ -140,181 +133,167 @@ export class UsuarioService {
   }
 
   cargarUsuarios() {
+
     let url = URL_SERVICIOS + '/usuario';
+
+    // *** TOKEN ***
+    url += '?token=' + this.token;
 
     return this.http.get( url )
     .pipe(
       map( (resp: any ) => {
-
         this.totalUsuarios = resp.cuantos;
         return resp.usuarios;
-
       }),
       catchError( err => {
         swal('Error', err.error.err.message, 'error');
-        // console.log(err.error.err.message);
         return throwError( err ) ;
       })
     );
+
   }
 
   cargarUsuariosInactivos() {
+
     let url = URL_SERVICIOS + '/usuario/inactivos';
+
+    // *** TOKEN ***
+    url += '?token=' + this.token;
 
     return this.http.get( url )
     .pipe(
       map( (resp: any ) => {
-
         this.totalUsuarios = resp.cuantos;
         return resp.usuarios;
-
       }),
       catchError( err => {
         swal('Error', err.error.err.message, 'error');
-        // console.log(err.error.err.message);
         return throwError( err ) ;
       })
     );
+
   }
 
   cargarUsuario( id: string) {
+
     let url = URL_SERVICIOS + '/usuario/' + id;
+
+    // *** TOKEN ***
+    url += '?token=' + this.token;
 
     return this.http.get( url )
     .pipe(
       map( (resp: any ) => {
-
-        console.log('Usuario Cargado Individualmente', resp.usuario );
         return resp.usuario;
-
       }),
       catchError( err => {
         swal('Error', err.error.err.message, 'error');
-        // console.log(err.error.err.message);
         return throwError( err ) ;
       })
     );
+
   }
 
   desactivarUsuario( id: string ) {
+
     let url = URL_SERVICIOS + '/usuario/' + id;
+
+    // *** TOKEN ***
+    url += '?token=' + this.token;
 
     return this.http.delete( url )
     .pipe(
       map( (resp: any ) => {
-
         swal('Usuario Desactivado', '', 'success');
-        // console.log('Respuestaaaaaa: ',  resp );
         return resp;
-
       }),
       catchError( err => {
         swal('Error', err.error.err.message, 'error');
-        // console.log(err.error.err.message);
         return throwError( err ) ;
       })
     );
+
   }
 
   desactivarUsuarioPermanente( id: string ) {
+
     let url = URL_SERVICIOS + '/usuario/inactivos/' + id;
+
+    // *** TOKEN ***
+    url += '?token=' + this.token;
 
     return this.http.delete( url )
     .pipe(
       map( (resp: any ) => {
-
         swal('Usuario Eliminado', '', 'success');
-        // console.log('Respuestaaaaaa: ',  resp );
         return resp;
-
       }),
       catchError( err => {
         swal('Error', err.error.err.message, 'error');
-        // console.log(err.error.err.message);
         return throwError( err ) ;
       })
     );
+
   }
 
   activarUsuario( id: string ) {
 
-    // tslint:disable-next-line: prefer-const
     let url = URL_SERVICIOS + '/usuario/inactivos/' + id;
 
-    console.log('CONTIENE ID???????????', id );
-
-    // *** Aqui se ACTUALIZA el Usuario ***
-    // url += '/' + usuario._id;
-    // url += '?token=' + this.token;
+    // *** TOKEN ***
+    url += '?token=' + this.token;
 
     return this.http.put( url, '' )
     .pipe(
       map( (resp: any ) => {
-
         swal('Usuario Activado', '', 'success');
-        console.log('Respuestaaaaaa Activado: ',  resp );
         return resp.usuario;
-
       }),
       catchError( err => {
         swal('Error', err.error.err.message, 'error');
-        // console.log(err.error.err.message);
         return throwError( err ) ;
       })
     );
+
   }
 
   actualizarPass( usuario: Usuario ) {
 
-    // tslint:disable-next-line: prefer-const
     let url = URL_SERVICIOS + '/usuario/password/' + usuario._id;
 
-    console.log('CONTIENE ID???????????', usuario._id );
-
-    // *** Aqui se ACTUALIZA el Usuario ***
-    // url += '/' + usuario._id;
-    // url += '?token=' + this.token;
+    // *** TOKEN ***
+    url += '?token=' + this.token;
 
     return this.http.put( url, usuario )
     .pipe(
       map( (resp: any ) => {
-
         swal('Contraseña Actualizada', '', 'success');
-        console.log('Respuestaaaaaa Activado: ',  resp );
         return resp.usuario;
-
       }),
       catchError( err => {
         swal('Error', err.error.err.message, 'error');
-        // console.log(err.error.err.message);
         return throwError( err ) ;
       })
     );
+
   }
 
   actualizarMiPerfil( usuario: Usuario ) {
 
-    // tslint:disable-next-line: prefer-const
-    let url = URL_SERVICIOS + '/usuario/***/' + usuario._id;
+    let url = URL_SERVICIOS + '/usuario/miperfil/' + usuario._id;
 
-    console.log('CONTIENE ID???????????', usuario._id );
-
-    // *** Aqui se ACTUALIZA el Usuario ***
-    // url += '/' + usuario._id;
-    // url += '?token=' + this.token;
+    // *** TOKEN ***
+    url += '?token=' + this.token;
 
     return this.http.put( url, usuario )
     .pipe(
       map( (resp: any ) => {
-
+        this.usuario = resp.usuario;
         swal('Datos Actualizados', '', 'success');
-        console.log('Respuestaaaaaa Activado: ',  resp );
         return resp.usuario;
-
       }),
       catchError( err => {
         swal('Error', err.error.err.message, 'error');
-        // console.log(err.error.err.message);
         return throwError( err ) ;
       })
     );

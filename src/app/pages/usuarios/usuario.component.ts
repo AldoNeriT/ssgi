@@ -18,7 +18,7 @@ export class UsuarioComponent implements OnInit {
   ver: string;
   titulo: string;
 
-  // *** Variables para llos Formularios ***
+  // *** Variables para los Formularios ***
   mostrarFormAgregar: boolean;
   mostrarFormEditar: boolean;
   mostrarFormVer: boolean;
@@ -38,13 +38,11 @@ export class UsuarioComponent implements OnInit {
   constructor( public _usuarioService: UsuarioService,
                public router: Router,
                public activatedRoute: ActivatedRoute
-  ) { 
+  ) {
     activatedRoute.params.subscribe( params => {
 
       this.id = params['id'];
-      console.log('EL ID ES...........', this.id );
       this.ver = params['ver'];
-      console.log('EL VER ES...........', this.ver );
 
       if ( this.ver === 'ver') {
         this.cargarUsuarioVer( this.id );
@@ -130,9 +128,7 @@ export class UsuarioComponent implements OnInit {
 
     return ( group: FormGroup ) => {
 
-      // tslint:disable-next-line: prefer-const
       let pass1 = group.controls[campo1].value;
-      // tslint:disable-next-line: prefer-const
       let pass2 = group.controls[campo2].value;
 
       if ( pass1 === pass2 ) {
@@ -148,10 +144,6 @@ export class UsuarioComponent implements OnInit {
   }
 
   crearUsuario() {
-
-    // console.log( 'Forma Válida', this.forma.valid );
-    // console.log( this.forma.value );
-    // console.log('SELECT DE TIPO USER', this.forma.value.tipoUser);
 
     if ( !this.forma.value.tipoUser ) {
       swal('Error', 'Elige un tipo de Usuario', 'error');
@@ -184,15 +176,11 @@ export class UsuarioComponent implements OnInit {
     this._usuarioService.crearUsuario( usuario )
           .subscribe( resp => {
             this.router.navigate(['/usuarios']);
-            console.log( resp );
           });
 
   }
 
   actualizarUsuario() {
-
-    // console.log( 'Forma Válida Actualizar', this.formaActualizar.valid );
-    // console.log( this.formaActualizar.value );
 
     if ( !this.formaActualizar.value.tipoUser ) {
       swal('Error', 'Elige un tipo de Usuario', 'error');
@@ -225,14 +213,11 @@ export class UsuarioComponent implements OnInit {
     this._usuarioService.crearUsuario( usuario )
           .subscribe( resp => {
             this.router.navigate(['/usuarios']);
-            console.log( resp );
           });
 
   }
 
   actualizarPass() {
-    console.log( 'Forma Válida Password', this.formaPass.valid );
-    console.log( this.formaPass.value );
 
     if ( this.formaPass.invalid ) {
       return;
@@ -261,14 +246,14 @@ export class UsuarioComponent implements OnInit {
     this._usuarioService.actualizarPass( usuario)
           .subscribe( resp => {
             this.router.navigate(['/usuarios']);
-            console.log( resp );
           });
+
   }
 
   cargarUsuario( id: string) {
+
     this._usuarioService.cargarUsuario( id )
           .subscribe( usuario => {
-            // console.log( resp );
             // *** La Respuesta es el arreglo como esta en la Base de
             //     datos y se le insertan los valores al formulario ***
             this.formaActualizar.setValue({
@@ -283,12 +268,13 @@ export class UsuarioComponent implements OnInit {
               tipoUser: usuario.tipo_Usuario
             });
           });
+
   }
 
   cargarUsuarioVer( id: string) {
+
     this._usuarioService.cargarUsuario( id )
           .subscribe( usuario => {
-            // console.log( resp );
             // *** La Respuesta es el arreglo como esta en la Base de
             //     datos y se le insertan los valores al formulario ***
             this.numEmpleadoV = usuario.numero_Empleado;
@@ -302,15 +288,18 @@ export class UsuarioComponent implements OnInit {
             this.tipoUserV = usuario.tipo_Usuario;
             this.titulo += usuario.nombre + ' ' + usuario.primer_Apellido + ' ' + (usuario.segundo_Apellido || '');
           });
+
   }
 
   cargarUsuarioPass( id: string) {
+
     this._usuarioService.cargarUsuario( id )
           .subscribe( usuario => {
-            // console.log( resp );
             // *** La Respuesta es el arreglo como esta en la Base de
             //     datos y se le insertan los valores al formulario ***
             this.titulo += usuario.nombre + ' ' + usuario.primer_Apellido + ' ' + (usuario.segundo_Apellido || '');
           });
+
   }
+
 }

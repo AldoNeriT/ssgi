@@ -9,7 +9,6 @@ import { SettingsService } from '../../services/service.index';
 })
 export class AccoutSettingsComponent implements OnInit {
 
-  // tslint:disable-next-line: variable-name
   constructor( public _ajustes: SettingsService ) { }
 
   ngOnInit() {
@@ -19,7 +18,6 @@ export class AccoutSettingsComponent implements OnInit {
   cambiarColor( tema: string, link: any ) {
 
     this.aplicarCheck( link );
-
     this._ajustes.aplicarTema( tema );
 
   }
@@ -33,9 +31,11 @@ export class AccoutSettingsComponent implements OnInit {
     }
 
     link.classList.add('working');
+
   }
 
   colocarCheck() {
+
     let selectores: any = document.getElementsByClassName('selector');
 
     let tema = this._ajustes.ajustes.tema;

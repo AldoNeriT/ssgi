@@ -16,7 +16,7 @@ export class UsuariosComponent implements OnInit {
   mostrarActivos = true;
 
   constructor( @Inject(DOCUMENT) private _document,
-                public _usuarioService: UsuarioService ) {
+               public _usuarioService: UsuarioService ) {
   }
 
   ngOnInit() {
@@ -25,18 +25,19 @@ export class UsuariosComponent implements OnInit {
   }
 
   cargarUsuarios() {
+
     this._usuarioService.cargarUsuarios()
           .subscribe( usuarios => {
             this.usuarios = usuarios;
-            // console.log(usuarios);
           });
+
   }
 
   cargarUsuariosInactivos() {
+
     this._usuarioService.cargarUsuariosInactivos()
           .subscribe( usuarios => {
             this.usuarios = usuarios;
-            // console.log(usuarios);
           });
   }
 
@@ -52,11 +53,10 @@ export class UsuariosComponent implements OnInit {
       },
       dangerMode: true,
     })
-    .then((willDelete) => {
-      if (willDelete) {
+    .then((desactivar) => {
+      if (desactivar) {
         this._usuarioService.desactivarUsuario( usuario._id )
           .subscribe( (resp: any) => {
-            // console.log('RESP DEL DELETE', resp );
             this.cargarUsuarios();
           } );
       }
@@ -76,11 +76,10 @@ export class UsuariosComponent implements OnInit {
       },
       dangerMode: true,
     })
-    .then((willDelete) => {
-      if (willDelete) {
+    .then((activar) => {
+      if (activar) {
         this._usuarioService.activarUsuario( usuario._id )
           .subscribe( (resp: any) => {
-            // console.log('RESP DEL DELETE', resp );
             this.cargarUsuariosInactivos();
           } );
       }
@@ -100,18 +99,19 @@ export class UsuariosComponent implements OnInit {
       },
       dangerMode: true,
     })
-    .then((willDelete) => {
-      if (willDelete) {
+    .then((eliminar) => {
+      if (eliminar) {
         this._usuarioService.desactivarUsuarioPermanente( usuario._id )
           .subscribe( (resp: any) => {
-            // console.log('RESP DEL DELETE', resp );
             this.cargarUsuariosInactivos();
           } );
       }
     });
+
   }
 
   cambiarCatalogo() {
+
     this.mostrarActivos = !this.mostrarActivos;
     inicializando_table();
 
@@ -120,5 +120,7 @@ export class UsuariosComponent implements OnInit {
     } else {
       this.cargarUsuariosInactivos();
     }
+
   }
+
 }

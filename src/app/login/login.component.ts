@@ -15,7 +15,6 @@ declare function init_plugins();
 })
 export class LoginComponent implements OnInit {
 
-  // tslint:disable-next-line: no-inferrable-types
   recuerdame: boolean = false;
   userName: string;
 
@@ -25,10 +24,10 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     init_plugins();
 
-    // Poner en el input el usuario guardado en el localStorage
+    // *** Poner en el input el usuario guardado en el localStorage ***
     this.userName = localStorage.getItem('userName') || '';
 
-    // Si hay datos en la variable de userName del localStorage, el check recuerdame se queda en true
+    // *** Si hay datos en la variable de userName del localStorage, el check recuerdame se queda en true ***
     if ( this.userName.length > 1 ) {
       this.recuerdame = true;
     }
@@ -40,20 +39,16 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-    // tslint:disable-next-line: prefer-const
     let usuario = new Usuario(null, forma.value.usuario, null, null, null, null, null, forma.value.password, null, null);
 
     this._usuarioService.login( usuario, forma.value.recuerdame )
                   .subscribe( correcto => this.router.navigate(['/home']));
-
-    // Adentro del suscribe se crea el console.log de la respuesta, que retorna el objeto
-    // console.log( forma.valid );
-    // console.log( forma.value );
-    // this.router.navigate(['/dashboard']);
   }
 
   perdiCuenta() {
-    swal('¡Importante!', 'Para recuperar los datos de tu cuenta, favor de comunicarte con el Administrador del Sistema', 'warning');
+    swal('¡Importante!',
+         'Para recuperar los datos de tu cuenta, favor de comunicarte con el Administrador del Sistema',
+         'warning');
   }
 
 }

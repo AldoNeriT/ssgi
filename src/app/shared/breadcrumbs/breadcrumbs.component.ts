@@ -17,7 +17,6 @@ export class BreadcrumbsComponent implements OnInit {
 
     this.getDataRoute()
     .subscribe( data => {
-      // console.log(data);
       this.titulo = data.titulo;
       this.title.setTitle( `SASGI: ${this.titulo}` );
     });
@@ -28,6 +27,7 @@ export class BreadcrumbsComponent implements OnInit {
   }
 
   getDataRoute() {
+
     return this.router.events.pipe(
 
       filter( evento => evento instanceof ActivationEnd ),
