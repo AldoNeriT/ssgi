@@ -17,3 +17,13 @@
 .alinear_derecha {
     float: right;
 }
+
+.sgi_centrarInp {
+    text-align: center;
+    font-weight: bold;
+}
+
+.sgi_paddNorm {
+    padding-right: 15px;
+    padding-bottom: 15px;
+}

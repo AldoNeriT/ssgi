@@ -87,7 +87,7 @@ export class UsuariosComponent implements OnInit {
 
   }
 
-  desactivarUsuarioPermanente( usuario: Usuario) {
+  desactivarUsuarioPermanente( usuario: Usuario ) {
 
     swal({
       title: '¡Advertencia!',

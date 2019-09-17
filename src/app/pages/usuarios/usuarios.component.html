@@ -33,17 +33,17 @@
                                 <td>{{usuario.tipo_Usuario}}</td>
                                 <td>
                                     <div class="btn-group alinear_derecha" role="group" aria-label="Basic example">
-                                        <button [routerLink]="['/usuario', 'ver', usuario._id]" class="btn btn-themecolor">
-                                            <i class="mdi mdi-eye"></i>
+                                        <button [routerLink]="['/usuario', 'ver', usuario._id]" class="btn btn-outline-info">
+                                            <i class="fa fa-eye"></i>
                                         </button>&nbsp;
-                                        <button [routerLink]="['/usuario', usuario._id]" class="btn btn-secondary">
-                                            <i class="mdi mdi-pencil"></i>
+                                        <button [routerLink]="['/usuario', usuario._id]" class="btn btn-outline-secondary">
+                                            <i class="fa fa-edit"></i>
                                         </button>&nbsp;
                                         <button [routerLink]="['/usuario', 'pass', usuario._id]" class="btn btn-outline-secondary">
-                                            <i class="mdi mdi-lock"></i>
+                                            <i class="fa fa-lock"></i>
                                         </button>&nbsp;
-                                        <button (click)="desactivarUsuario( usuario )" class="btn btn-danger">
-                                            <i class="mdi mdi-delete"></i>
+                                        <button (click)="desactivarUsuario( usuario )" class="btn btn-outline-danger">
+                                            <i class="fa fa-folder-open"></i>
                                         </button>
                                     </div>
                                 </td>
@@ -89,11 +89,11 @@
                                 <td>{{usuario.tipo_Usuario}}</td>
                                 <td>
                                     <div class="btn-group" role="group" aria-label="Basic example">
-                                        <button (click)="activarUsuario( usuario )" class="btn btn-themecolor">
+                                        <button (click)="activarUsuario( usuario )" class="btn btn-outline-success">
                                             <i class="mdi mdi-account-convert"></i>
                                         </button>&nbsp;
-                                        <button (click)="desactivarUsuarioPermanente( usuario )" class="btn btn-danger">
-                                            <i class="mdi mdi-delete-forever"></i>
+                                        <button (click)="desactivarUsuarioPermanente( usuario )" class="btn btn-outline-danger">
+                                            <i class="fa fa-trash-o"></i>
                                         </button>
                                     </div>
                                 </td>

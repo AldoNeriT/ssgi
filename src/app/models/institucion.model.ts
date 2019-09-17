@@ -1,6 +1,9 @@
 export class Institucion {
 
     constructor(
-        public numero: string
+        public nombreInstitucion: string,
+        public domicilio: string,
+        public telefono: string,
+        public _id?: string
     ) { }
 }

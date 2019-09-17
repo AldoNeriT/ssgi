@@ -1,6 +1,10 @@
 export class Norma {
 
     constructor(
-        public numero: string
+        public nombreNorma: string,
+        public descripcion: string,
+        public archivoDigital: string,
+        public color: string,
+        public _id?: string
     ) { }
 }

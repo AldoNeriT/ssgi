@@ -1,1 +1,170 @@
-<p>normas works!</p>
+<!-- Example single danger button -->
+<div class="row">
+    <div class="col text-center">
+        <div class="btn-group sgi_paddNorm">
+            <button type="button" class="btn btn-block btn-xl btn-circle btn-outline-secondary" data-toggle="modal" data-target="#modalNormaAgregar">
+                <i class="mdi mdi-plus"></i>
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <h1>Total: {{_normaService.totalNormas}}</h1>
+        <hr class="m-t-0 m-b-40">
+    </div>
+</div>
+
+<div class="row">
+    <div class="col text-center">
+
+        <div *ngFor="let norma of normas" class="btn-group sgi_paddNorm">
+            <button type="button" class="btn btn-info dropdown-toggle btn-lg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {{norma.nombreNorma}}
+            </button>
+            <div class="dropdown-menu text-center animated slideInUp">
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#modalNormaVer">
+                        <i class="fa fa-eye"></i>
+                    </button>
+                    <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#modalNormaEditar">
+                        <i class="fa fa-edit"></i>
+                    </button>
+                    <button (click)="eliminarNorma( norma )" type="button" class="btn btn-outline-info">
+                        <i class="fa fa-trash-o"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- ============================================================== -->
+<!-- MODAL AGREGAR -->
+<!-- ============================================================== -->
+
+<div class="modal fade" id="modalNormaAgregar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalLabel1">Agregar Norma</h4>
+                <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button> -->
+            </div>
+            <div class="modal-body">
+                <form ngNativeValidate [formGroup]="forma" (ngSubmit)="agregarNorma()">
+                    <div class="form-group">
+                        <label for="recipient-name" class="control-label">Nombre:</label>
+                        <input formControlName="nombre" name="nombre" type="text" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="control-label">Descripción:</label>
+                        <textarea formControlName="descripcion" name="descripcion" class="form-control"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="recipient-name" class="control-label">Archivo Digital:</label>
+                        <input formControlName="archivo" name="archivo" type="text" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="recipient-name" class="control-label">Color:</label>
+                        <input formControlName="color" name="color" type="text" class="form-control">
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-themecolor">Guardar</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================== -->
+<!-- MODAL EDITAR -->
+<!-- ============================================================== -->
+
+<div class="modal fade" id="modalNormaEditar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalLabel1">Editar Norma</h4>
+                <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button> -->
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="recipient-name" class="control-label">Nombre:</label>
+                        <input type="text" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="control-label">Descripción:</label>
+                        <textarea class="form-control"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="recipient-name" class="control-label">Archivo Digital:</label>
+                        <input type="text" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="recipient-name" class="control-label">Color:</label>
+                        <input type="text" class="form-control">
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-themecolor">Guardar</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================== -->
+<!-- MODAL VER -->
+<!-- ============================================================== -->
+
+<div class="modal fade" id="modalNormaVer" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalLabel1">Datos de la Norma</h4>
+                <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button> -->
+            </div>
+            <div class="modal-body">
+                <div>
+                    <label for="recipient-name" class="control-label">Nombre:</label>
+                </div>
+                <div class="form-group">
+                    <label for="recipient-name" class="control-label">Ejemplo</label>
+                </div>
+                <div>
+                    <label for="message-text" class="control-label">Descripción:</label>
+                </div>
+                <div class="form-group">
+                    <label for="message-text" class="control-label">Ejemplo</label>
+                </div>
+                <div>
+                    <label for="recipient-name" class="control-label">Archivo Digital:</label>
+                </div>
+                <div class="form-group">
+                    <label for="recipient-name" class="control-label">Ejemplo</label>
+                </div>
+                <div>
+                    <label for="recipient-name" class="control-label">Color:</label>
+                </div>
+                <div class="form-group">
+                    <label for="recipient-name" class="control-label">Ejemplo</label>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

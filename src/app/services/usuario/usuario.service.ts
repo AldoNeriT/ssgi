@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Usuario } from '../../models/usuario.model';
 import { HttpClient } from '@angular/common/http';
+import { Usuario } from '../../models/usuario.model';
 import { URL_SERVICIOS } from '../../config/config';
 
 import { map, catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { throwError } from 'rxjs';
+import { throwError } from 'rxjs/internal/observable/throwError';
 
 @Injectable()
 export class UsuarioService {

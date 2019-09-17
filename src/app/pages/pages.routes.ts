@@ -20,7 +20,7 @@ const pagesRoutes: Routes = [
         canActivate: [ LoginGuardGuard],
         children: [
             { path: 'home', component: PrincipalComponent, data: { titulo: 'Home' } },
-            { path: 'institucion', component: InstitucionComponent, data: { titulo: 'Institucion' } },
+            { path: 'institucion', component: InstitucionComponent, data: { titulo: 'Institución' } },
             { path: 'normas', component: NormasComponent, data: { titulo: 'Normas' } },
             { path: 'procesos', component: ProcesosComponent, data: { titulo: 'Procesos' } },
             { path: 'usuarios', component: UsuariosComponent, data: { titulo: 'Lista de Usuarios' } },
