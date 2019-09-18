@@ -7,6 +7,8 @@ import { map, catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { throwError } from 'rxjs/internal/observable/throwError';
 
+import Swal from 'sweetalert2';
+
 @Injectable()
 export class UsuarioService {
 
@@ -76,7 +78,7 @@ export class UsuarioService {
               return true;
             }),
             catchError( err => {
-              swal('Error', err.error.err.message, 'error');
+              Swal.fire('Error', err.error.err.message, 'error');
               return throwError( err ) ;
             })
           );
@@ -96,11 +98,11 @@ export class UsuarioService {
       return this.http.put( url, usuario )
       .pipe(
         map( (resp: any ) => {
-          swal('Usuario Actualizado', '', 'success');
+          Swal.fire('Usuario Actualizado', '', 'success');
           return resp.usuario;
         }),
         catchError( err => {
-          swal('Error', err.error.err.message, 'error');
+          Swal.fire('Error', err.error.err.message, 'error');
           return throwError( err ) ;
         })
       );
@@ -114,11 +116,11 @@ export class UsuarioService {
       return this.http.post( url, usuario )
       .pipe(
         map( (resp: any ) => {
-          swal('Usuario Creado', `"${usuario.nombre_Usuario}" se ha creado exitosamente`, 'success');
+          Swal.fire('Usuario Creado', `"${usuario.nombre_Usuario}" se ha creado exitosamente`, 'success');
           return resp.usuario;
         }),
         catchError( err => {
-          swal('Error', err.error.err.message, 'error');
+          Swal.fire('Error', err.error.err.message, 'error');
           return throwError( err ) ;
         })
       );
@@ -140,7 +142,7 @@ export class UsuarioService {
         return resp.usuarios;
       }),
       catchError( err => {
-        swal('Error', err.error.err.message, 'error');
+        Swal.fire('Error', err.error.err.message, 'error');
         return throwError( err ) ;
       })
     );
@@ -161,7 +163,7 @@ export class UsuarioService {
         return resp.usuarios;
       }),
       catchError( err => {
-        swal('Error', err.error.err.message, 'error');
+        Swal.fire('Error', err.error.err.message, 'error');
         return throwError( err ) ;
       })
     );
@@ -181,7 +183,7 @@ export class UsuarioService {
         return resp.usuario;
       }),
       catchError( err => {
-        swal('Error', err.error.err.message, 'error');
+        Swal.fire('Error', err.error.err.message, 'error');
         return throwError( err ) ;
       })
     );
@@ -198,11 +200,11 @@ export class UsuarioService {
     return this.http.delete( url )
     .pipe(
       map( (resp: any ) => {
-        swal('Usuario Desactivado', '', 'success');
+        Swal.fire('Usuario Desactivado', '', 'success');
         return resp;
       }),
       catchError( err => {
-        swal('Error', err.error.err.message, 'error');
+        Swal.fire('Error', err.error.err.message, 'error');
         return throwError( err ) ;
       })
     );
@@ -219,11 +221,11 @@ export class UsuarioService {
     return this.http.delete( url )
     .pipe(
       map( (resp: any ) => {
-        swal('Usuario Eliminado', '', 'success');
+        Swal.fire('Usuario Eliminado', '', 'success');
         return resp;
       }),
       catchError( err => {
-        swal('Error', err.error.err.message, 'error');
+        Swal.fire('Error', err.error.err.message, 'error');
         return throwError( err ) ;
       })
     );
@@ -240,11 +242,11 @@ export class UsuarioService {
     return this.http.put( url, '' )
     .pipe(
       map( (resp: any ) => {
-        swal('Usuario Activado', '', 'success');
+        Swal.fire('Usuario Activado', '', 'success');
         return resp.usuario;
       }),
       catchError( err => {
-        swal('Error', err.error.err.message, 'error');
+        Swal.fire('Error', err.error.err.message, 'error');
         return throwError( err ) ;
       })
     );
@@ -261,11 +263,11 @@ export class UsuarioService {
     return this.http.put( url, usuario )
     .pipe(
       map( (resp: any ) => {
-        swal('Contraseña Actualizada', '', 'success');
+        Swal.fire('Contraseña Actualizada', '', 'success');
         return resp.usuario;
       }),
       catchError( err => {
-        swal('Error', err.error.err.message, 'error');
+        Swal.fire('Error', err.error.err.message, 'error');
         return throwError( err ) ;
       })
     );
@@ -283,11 +285,11 @@ export class UsuarioService {
     .pipe(
       map( (resp: any ) => {
         this.usuario = resp.usuario;
-        swal('Datos Actualizados', '', 'success');
+        Swal.fire('Datos Actualizados', '', 'success');
         return resp.usuario;
       }),
       catchError( err => {
-        swal('Error', err.error.err.message, 'error');
+        Swal.fire('Error', err.error.err.message, 'error');
         return throwError( err ) ;
       })
     );

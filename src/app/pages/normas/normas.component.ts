@@ -4,6 +4,7 @@ import { NormaService } from 'src/app/services/service.index';
 import { Norma } from '../../models/norma.model';
 import { Router, ActivatedRoute } from '@angular/router';
 
+import Swal from 'sweetalert2';
 import * as $ from 'jquery';
 
 declare function init_plugins();
@@ -146,18 +147,14 @@ export class NormasComponent implements OnInit {
 
   eliminarNorma( norma: Norma ) {
 
-    swal({
+    Swal.fire({
       title: '¡Advertencia!',
       text: `¿Estás seguro de eliminar la Norma "${norma.nombreNorma}"?`,
-      icon: 'warning',
-      buttons: {
-        cancel: true,
-        confirm: true,
-      },
-      dangerMode: true,
-    })
-    .then((eliminar) => {
-      if (eliminar) {
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'OK'
+    }).then((eliminar) => {
+      if (eliminar.value) {
         this._normaService.eliminarNorma( norma._id )
           .subscribe( (resp: any) => {
             this.cargarNormas();

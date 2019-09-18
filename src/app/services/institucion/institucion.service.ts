@@ -6,6 +6,8 @@ import { URL_SERVICIOS } from '../../config/config';
 import { map, catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs/internal/observable/throwError';
 
+import Swal from 'sweetalert2';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -32,7 +34,7 @@ export class InstitucionService {
         return resp;
       }),
       catchError( err => {
-        swal('Error', err.error.err.message, 'error');
+        Swal.fire('Error', err.error.err.message, 'error');
         return throwError( err ) ;
       })
     );
@@ -74,11 +76,11 @@ export class InstitucionService {
       return this.http.put( url, institucion )
       .pipe(
         map( (resp: any ) => {
-          swal('Institución Actualizada', '', 'success');
+          Swal.fire('Institución Actualizada', '', 'success');
           return resp.institucion;
         }),
         catchError( err => {
-          swal('Error', err.error.err.message, 'error');
+          Swal.fire('Error', err.error.err.message, 'error');
           return throwError( err ) ;
         })
       );
@@ -92,11 +94,11 @@ export class InstitucionService {
       return this.http.post( url, institucion )
       .pipe(
         map( (resp: any ) => {
-          swal('Institución Creada', `${institucion.nombreInstitucion} se ha creado exitosamente`, 'success');
+          Swal.fire('Institución Creada', `${institucion.nombreInstitucion} se ha creado exitosamente`, 'success');
           return resp.institucion;
         }),
         catchError( err => {
-          swal('Error', err.error.err.message, 'error');
+          Swal.fire('Error', err.error.err.message, 'error');
           return throwError( err ) ;
         })
       );
@@ -115,11 +117,11 @@ export class InstitucionService {
     return this.http.delete( url )
     .pipe(
       map( (resp: any ) => {
-        swal('Institución Eliminada', '', 'success');
+        Swal.fire('Institución Eliminada', '', 'success');
         return resp;
       }),
       catchError( err => {
-        swal('Error', err.error.err.message, 'error');
+        Swal.fire('Error', err.error.err.message, 'error');
         return throwError( err ) ;
       })
     );

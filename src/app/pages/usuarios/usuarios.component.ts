@@ -3,6 +3,8 @@ import { DOCUMENT } from '@angular/common';
 import { Usuario } from '../../models/usuario.model';
 import { UsuarioService } from '../../services/service.index';
 
+import Swal from 'sweetalert2';
+
 declare function inicializando_table();
 declare function init_plugins();
 
@@ -45,18 +47,14 @@ export class UsuariosComponent implements OnInit {
 
   desactivarUsuario( usuario: Usuario) {
 
-    swal({
+    Swal.fire({
       title: '¡Advertencia!',
       text: `¿Estás seguro de desactivar a "${usuario.nombre_Usuario}"?`,
-      icon: 'warning',
-      buttons: {
-        cancel: true,
-        confirm: true,
-      },
-      dangerMode: true,
-    })
-    .then((desactivar) => {
-      if (desactivar) {
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'OK'
+    }).then((desactivar) => {
+      if (desactivar.value) {
         this._usuarioService.desactivarUsuario( usuario._id )
           .subscribe( (resp: any) => {
             this.cargarUsuarios();
@@ -68,18 +66,14 @@ export class UsuariosComponent implements OnInit {
 
   activarUsuario( usuario: Usuario) {
 
-    swal({
+    Swal.fire({
       title: '¡Advertencia!',
       text: `¿Estás seguro de activar a "${usuario.nombre_Usuario}"?`,
-      icon: 'info',
-      buttons: {
-        cancel: true,
-        confirm: true,
-      },
-      dangerMode: true,
-    })
-    .then((activar) => {
-      if (activar) {
+      type: 'info',
+      showCancelButton: true,
+      confirmButtonText: 'OK'
+    }).then((activar) => {
+      if (activar.value) {
         this._usuarioService.activarUsuario( usuario._id )
           .subscribe( (resp: any) => {
             this.cargarUsuariosInactivos();
@@ -91,18 +85,14 @@ export class UsuariosComponent implements OnInit {
 
   desactivarUsuarioPermanente( usuario: Usuario ) {
 
-    swal({
+    Swal.fire({
       title: '¡Advertencia!',
       text: `¿Estás seguro de eliminar permanentemente a "${usuario.nombre_Usuario}"?`,
-      icon: 'error',
-      buttons: {
-        cancel: true,
-        confirm: true,
-      },
-      dangerMode: true,
-    })
-    .then((eliminar) => {
-      if (eliminar) {
+      type: 'error',
+      showCancelButton: true,
+      confirmButtonText: 'OK'
+    }).then((eliminar) => {
+      if (eliminar.value) {
         this._usuarioService.desactivarUsuarioPermanente( usuario._id )
           .subscribe( (resp: any) => {
             this.cargarUsuariosInactivos();

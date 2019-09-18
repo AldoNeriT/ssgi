@@ -4,7 +4,8 @@ import { NgForm } from '@angular/forms';
 import { UsuarioService } from '../services/service.index';
 import { Usuario } from '../models/usuario.model';
 
-import swal from 'sweetalert';
+// import swal from 'sweetalert';
+import Swal from 'sweetalert2';
 
 declare function init_plugins();
 
@@ -46,9 +47,14 @@ export class LoginComponent implements OnInit {
   }
 
   perdiCuenta() {
-    swal('¡Importante!',
-         'Para recuperar los datos de tu cuenta, favor de comunicarte con el Administrador del Sistema',
-         'warning');
+    // Swal.fire('¡Importante!',
+    //      'Para recuperar los datos de tu cuenta, favor de comunicarte con el Administrador del Sistema',
+    //      'warning');
+    Swal.fire({
+      title: '¡Importante!',
+      text: 'Para recuperar los datos de tu cuenta, favor de comunicarte con el Administrador del Sistema',
+      type: 'warning'
+    });
   }
 
 }

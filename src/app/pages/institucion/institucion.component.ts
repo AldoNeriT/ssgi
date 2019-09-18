@@ -3,6 +3,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { InstitucionService } from '../../services/institucion/institucion.service';
 import { Institucion } from '../../models/institucion.model';
 
+import Swal from 'sweetalert2';
+
 @Component({
   selector: 'app-institucion',
   templateUrl: './institucion.component.html',
@@ -99,18 +101,14 @@ export class InstitucionComponent implements OnInit {
   // *** ESTE METODO ES DE EMERGENCIA PARA BORRAR ***
   eliminarInstitucion( ) {
 
-    swal({
+    Swal.fire({
       title: '¡Advertencia!',
       text: '¿Estás seguro de eliminar la Institución?',
-      icon: 'warning',
-      buttons: {
-        cancel: true,
-        confirm: true,
-      },
-      dangerMode: true,
-    })
-    .then((eliminar) => {
-      if (eliminar) {
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'OK'
+    }).then((eliminar) => {
+      if (eliminar.value) {
         this._institucionService.eliminarInstitucion( this.idIns )
           .subscribe( (resp: any) => {
             this.cargarInstituciones();

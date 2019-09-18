@@ -6,6 +6,8 @@ import { URL_SERVICIOS } from '../../config/config';
 import { map, catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs/internal/observable/throwError';
 
+import Swal from 'sweetalert2';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -32,7 +34,7 @@ export class NormaService {
         return resp.normas;
       }),
       catchError( err => {
-        swal('Error', err.error.err.message, 'error');
+        Swal.fire('Error', err.error.err.message, 'error');
         return throwError( err ) ;
       })
     );
@@ -74,11 +76,11 @@ export class NormaService {
       return this.http.put( url, norma )
       .pipe(
         map( (resp: any ) => {
-          swal('Norma Actualizada', '', 'success');
+          Swal.fire('Norma Actualizada', '', 'success');
           return resp.norma;
         }),
         catchError( err => {
-          swal('Error', err.error.err.message, 'error');
+          Swal.fire('Error', err.error.err.message, 'error');
           return throwError( err ) ;
         })
       );
@@ -92,11 +94,11 @@ export class NormaService {
       return this.http.post( url, norma )
       .pipe(
         map( (resp: any ) => {
-          swal('Norma Creada', `La Norma "${norma.nombreNorma}" se ha creado exitosamente`, 'success');
+          Swal.fire('Norma Creada', `La Norma "${norma.nombreNorma}" se ha creado exitosamente`, 'success');
           return resp.norma;
         }),
         catchError( err => {
-          swal('Error', err.error.err.message, 'error');
+          Swal.fire('Error', err.error.err.message, 'error');
           return throwError( err ) ;
         })
       );
@@ -114,11 +116,11 @@ export class NormaService {
     return this.http.delete( url )
     .pipe(
       map( (resp: any ) => {
-        swal('Norma Eliminada', '', 'success');
+        Swal.fire('Norma Eliminada', '', 'success');
         return resp;
       }),
       catchError( err => {
-        swal('Error', err.error.err.message, 'error');
+        Swal.fire('Error', err.error.err.message, 'error');
         return throwError( err ) ;
       })
     );
