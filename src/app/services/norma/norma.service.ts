@@ -28,7 +28,6 @@ export class NormaService {
     return this.http.get( url )
     .pipe(
       map( (resp: any ) => {
-        console.log('SERVICIO RETORNO NORMAS', resp);
         this.totalNormas = resp.cuantos;
         return resp.normas;
       }),
@@ -40,25 +39,26 @@ export class NormaService {
 
   }
 
-  cargarNorma( id: string) {
+  // *** NO SE ESTA USANDO ESTE METODO   ***
+  // cargarNorma( id: string ) {
 
-    let url = URL_SERVICIOS + '/norma/' + id;
+  //   let url = URL_SERVICIOS + '/norma/' + id;
 
-    // *** TOKEN ***
-    // url += '?token=' + this.token;
+  //   // *** TOKEN ***
+  //   // url += '?token=' + this.token;
 
-    return this.http.get( url )
-    .pipe(
-      map( (resp: any ) => {
-        return resp.norma;
-      }),
-      catchError( err => {
-        swal('Error', err.error.err.message, 'error');
-        return throwError( err ) ;
-      })
-    );
+  //   return this.http.get( url )
+  //   .pipe(
+  //     map( (resp: any ) => {
+  //       return resp.norma;
+  //     }),
+  //     catchError( err => {
+  //       swal('Error', err.error.err.message, 'error');
+  //       return throwError( err ) ;
+  //     })
+  //   );
 
-  }
+  // }
 
   crearNorma( norma: Norma ) {
 
@@ -74,9 +74,7 @@ export class NormaService {
       return this.http.put( url, norma )
       .pipe(
         map( (resp: any ) => {
-          swal('Norma Actualizada',
-               'La Norma ' + norma.nombreNorma +
-               ' se actualizó exitosamente', 'success');
+          swal('Norma Actualizada', '', 'success');
           return resp.norma;
         }),
         catchError( err => {
@@ -94,14 +92,11 @@ export class NormaService {
       return this.http.post( url, norma )
       .pipe(
         map( (resp: any ) => {
-          swal('Norma Creada',
-               'La norma ' + norma.nombreNorma +
-               ' se a creado exitosamente', 'success');
+          swal('Norma Creada', `La Norma "${norma.nombreNorma}" se ha creado exitosamente`, 'success');
           return resp.norma;
         }),
         catchError( err => {
-          // swal('Error', err.error.err.message, 'error');
-          // swal('Error', err, 'error');
+          swal('Error', err.error.err.message, 'error');
           return throwError( err ) ;
         })
       );

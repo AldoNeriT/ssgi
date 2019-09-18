@@ -40,25 +40,25 @@ export class InstitucionService {
   }
 
   // *** ESTE METODO NO ES USADO, SE ELIMINARÁ ***
-  cargarInstitucion( id: string ) {
+  // cargarInstitucion( id: string ) {
 
-    let url = URL_SERVICIOS + '/institucion/' + id;
+  //   let url = URL_SERVICIOS + '/institucion/' + id;
 
-    // *** TOKEN ***
-    // url += '?token=' + this.token;
+  //   // *** TOKEN ***
+  //   // url += '?token=' + this.token;
 
-    return this.http.get( url )
-    .pipe(
-      map( (resp: any ) => {
-        return resp.institucion;
-      }),
-      catchError( err => {
-        swal('Error', err.error.err.message, 'error');
-        return throwError( err ) ;
-      })
-    );
+  //   return this.http.get( url )
+  //   .pipe(
+  //     map( (resp: any ) => {
+  //       return resp.institucion;
+  //     }),
+  //     catchError( err => {
+  //       swal('Error', err.error.err.message, 'error');
+  //       return throwError( err ) ;
+  //     })
+  //   );
 
-  }
+  // }
 
   crearInstitucion( institucion: Institucion ) {
 
@@ -74,9 +74,7 @@ export class InstitucionService {
       return this.http.put( url, institucion )
       .pipe(
         map( (resp: any ) => {
-          swal('Institucion Actualizada',
-               'La Institucion ' + institucion.nombreInstitucion +
-               ' se actualizó exitosamente', 'success');
+          swal('Institución Actualizada', '', 'success');
           return resp.institucion;
         }),
         catchError( err => {
@@ -94,9 +92,7 @@ export class InstitucionService {
       return this.http.post( url, institucion )
       .pipe(
         map( (resp: any ) => {
-          swal('Institucion Creada',
-               'La Institucion ' + institucion.nombreInstitucion +
-               ' se a creado exitosamente', 'success');
+          swal('Institución Creada', `${institucion.nombreInstitucion} se ha creado exitosamente`, 'success');
           return resp.institucion;
         }),
         catchError( err => {

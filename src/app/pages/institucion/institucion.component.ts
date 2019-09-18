@@ -36,9 +36,7 @@ export class InstitucionComponent implements OnInit {
 
     this._institucionService.cargarInstituciones()
           .subscribe( instituciones => {
-            // console.log('RETORNO DE CARGAR INSTITUCIONES', instituciones);
             this.instituciones = instituciones.instituciones;
-            // console.log('NUMERO INST', instituciones.cuantos);
             if ( instituciones.cuantos === 0) {
               this.mostrarBtnAgregar = true;
             } else {
@@ -53,8 +51,6 @@ export class InstitucionComponent implements OnInit {
     if ( this.formaInstitucion.invalid ) {
       return;
     }
-
-    // console.log('CONTIENE ID ID_INS', this.idIns);
 
     if ( this.idIns === null) {
       let institucion = new Institucion(
@@ -89,7 +85,6 @@ export class InstitucionComponent implements OnInit {
 
     this.mostrarEditable = true;
 
-    // DATOS PARA LLENAR EL FORM
     this.formaInstitucion.setValue({
       nombre: institucion.nombreInstitucion,
       domicilio: institucion.domicilio,
@@ -106,7 +101,7 @@ export class InstitucionComponent implements OnInit {
 
     swal({
       title: '¡Advertencia!',
-      text: '¿Estas seguro de eliminar la Institucion?',
+      text: '¿Estás seguro de eliminar la Institución?',
       icon: 'warning',
       buttons: {
         cancel: true,

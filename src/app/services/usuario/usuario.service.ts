@@ -96,10 +96,7 @@ export class UsuarioService {
       return this.http.put( url, usuario )
       .pipe(
         map( (resp: any ) => {
-          swal('Usuario Actualizado', usuario.nombre +
-               ' ' + usuario.primer_Apellido +
-               ' ' + usuario.segundo_Apellido +
-               ' se actualizo exitosamente', 'success');
+          swal('Usuario Actualizado', '', 'success');
           return resp.usuario;
         }),
         catchError( err => {
@@ -117,10 +114,7 @@ export class UsuarioService {
       return this.http.post( url, usuario )
       .pipe(
         map( (resp: any ) => {
-          swal('Usuario Creado', usuario.nombre +
-               ' ' + usuario.primer_Apellido +
-               ' ' + usuario.segundo_Apellido +
-               ' se a creado exitosamente', 'success');
+          swal('Usuario Creado', `"${usuario.nombre_Usuario}" se ha creado exitosamente`, 'success');
           return resp.usuario;
         }),
         catchError( err => {

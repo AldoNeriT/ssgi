@@ -1,7 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { NormaService } from 'src/app/services/service.index';
 import { Norma } from '../../models/norma.model';
+import { Router, ActivatedRoute } from '@angular/router';
+
+import * as $ from 'jquery';
+
+declare function init_plugins();
 
 @Component({
   selector: 'app-normas',
@@ -10,15 +15,33 @@ import { Norma } from '../../models/norma.model';
 })
 export class NormasComponent implements OnInit {
 
+  @ViewChild('txtNombreV', { static: false }) txtNombreV: ElementRef;
+  @ViewChild('txtDescripcionV', { static: false }) txtDescripcionV: ElementRef;
+  @ViewChild('txtArchV', { static: false }) txtArchV: ElementRef;
+  @ViewChild('txtColorV', { static: false }) txtColorV: ElementRef;
+
   normas: Norma[] = [];
   forma: FormGroup;
+  formaEditar: FormGroup;
 
-  constructor( public _normaService: NormaService ) {
+  idNor: string;
+
+  constructor( public _normaService: NormaService,
+               public router: Router,
+               public activatedRoute: ActivatedRoute ) {
 
   }
 
   ngOnInit() {
+    init_plugins();
     this.forma = new FormGroup({
+      nombre: new FormControl( null, Validators.required ),
+      descripcion: new FormControl( null, Validators.required ),
+      archivo: new FormControl( null, Validators.required ),
+      color: new FormControl( null, Validators.required )
+    });
+
+    this.formaEditar = new FormGroup({
       nombre: new FormControl( null, Validators.required ),
       descripcion: new FormControl( null, Validators.required ),
       archivo: new FormControl( null, Validators.required ),
@@ -32,7 +55,6 @@ export class NormasComponent implements OnInit {
 
     this._normaService.cargarNormas()
           .subscribe( normas => {
-            console.log('RETORNO DE CARGAR NORMAS', normas);
             this.normas = normas;
           });
 
@@ -57,16 +79,76 @@ export class NormasComponent implements OnInit {
             // this.router.navigate(['/normas']);
           });
 
+    // $('.show').hide();
+    // $('body').removeClass('modal-open');
+    // this.router.navigateByUrl('#/normas', {skipLocationChange: true}).then(() =>
+    // this.router.navigate(['/normas']));
+
+  }
+
+  formVer( norma: Norma ) {
+
+    this.txtNombreV.nativeElement.innerText = norma.nombreNorma;
+    this.txtDescripcionV.nativeElement.innerText = norma.descripcion;
+    this.txtArchV.nativeElement.innerText = norma.archivoDigital;
+
+    if ( norma.color === 'secondary') {
+      this.txtColorV.nativeElement.innerText = 'Blanco';
+    }
+    if ( norma.color === 'info') {
+      this.txtColorV.nativeElement.innerText = 'Azul';
+    }
+    if ( norma.color === 'success') {
+      this.txtColorV.nativeElement.innerText = 'Verde';
+    }
+    if ( norma.color === 'primary') {
+      this.txtColorV.nativeElement.innerText = 'Morado';
+    }
+    if ( norma.color === 'danger') {
+      this.txtColorV.nativeElement.innerText = 'Rojo';
+    }
+    if ( norma.color === 'warning') {
+      this.txtColorV.nativeElement.innerText = 'Amarillo';
+    }
+
+  }
+
+  formEditable( norma: Norma ) {
+
+    this.formaEditar.setValue({
+      nombre: norma.nombreNorma,
+      descripcion: norma.descripcion,
+      archivo: norma.archivoDigital,
+      color: norma.color
+    });
+
+    this.idNor = norma._id;
+
+    $('#modalNormaEditar > div > div > div > form > div.m-b-40').addClass('focused');
   }
 
   editarNorma() {
+
+    let norma = new Norma(
+      this.formaEditar.value.nombre,
+      this.formaEditar.value.descripcion,
+      this.formaEditar.value.archivo,
+      this.formaEditar.value.color,
+      this.idNor
+    );
+
+    this._normaService.crearNorma( norma )
+            .subscribe( resp => {
+              this.cargarNormas();
+            });
+
   }
 
   eliminarNorma( norma: Norma ) {
 
     swal({
       title: '¡Advertencia!',
-      text: '¿Estas seguro de eliminar la Norma?',
+      text: `¿Estás seguro de eliminar la Norma "${norma.nombreNorma}"?`,
       icon: 'warning',
       buttons: {
         cancel: true,

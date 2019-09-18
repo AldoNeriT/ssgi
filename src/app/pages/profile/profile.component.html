@@ -5,6 +5,7 @@
     <div class="form-body">
         <h3 class="box-title">Información del Usuario</h3>
         <hr class="m-t-0 m-b-40">
+
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group row">
@@ -14,7 +15,6 @@
                     </div>
                 </div>
             </div>
-            <!--/span-->
             <div class="col-md-6">
                 <div class="form-group row">
                     <label class="control-label text-right col-md-4">Nombre:</label>
@@ -23,9 +23,8 @@
                     </div>
                 </div>
             </div>
-            <!--/span-->
         </div>
-        <!--/row-->
+
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group row">
@@ -35,7 +34,6 @@
                     </div>
                 </div>
             </div>
-            <!--/span-->
             <div class="col-md-6">
                 <div class="form-group row">
                     <label class="control-label text-right col-md-4">Puesto:</label>
@@ -44,9 +42,8 @@
                     </div>
                 </div>
             </div>
-            <!--/span-->
         </div>
-        <!--/row-->
+
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group row">
@@ -56,7 +53,6 @@
                     </div>
                 </div>
             </div>
-            <!--/span-->
             <div class="col-md-6">
                 <div class="form-group row">
                     <label class="control-label text-right col-md-4">Telefono:</label>
@@ -65,9 +61,8 @@
                     </div>
                 </div>
             </div>
-            <!--/span-->
         </div>
-        <!--/row-->
+
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group row">
@@ -77,8 +72,8 @@
                     </div>
                 </div>
             </div>
-            <!--/span-->
         </div>
+
     </div>
     <div class="modal-footer">
         <button (click)="cargarDatos()" class="btn btn-themecolor waves-effect">Editar</button>
@@ -94,6 +89,7 @@
         <div class="form-body">
             <h3 class="box-title">Información del Usuario</h3>
             <hr class="m-t-0 m-b-40">
+
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group row">
@@ -103,7 +99,6 @@
                         </div>
                     </div>
                 </div>
-                <!--/span-->
                 <div class="col-md-6">
                     <div class="form-group row">
                         <label class="control-label text-right col-md-4">Nombre:</label>
@@ -112,9 +107,8 @@
                         </div>
                     </div>
                 </div>
-                <!--/span-->
             </div>
-            <!--/row-->
+
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group row">
@@ -124,7 +118,6 @@
                         </div>
                     </div>
                 </div>
-                <!--/span-->
                 <div class="col-md-6">
                     <div class="form-group row">
                         <label class="control-label text-right col-md-4">Puesto:</label>
@@ -133,31 +126,27 @@
                         </div>
                     </div>
                 </div>
-                <!--/span-->
             </div>
-            <!--/row-->
+
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group row">
                         <label class="control-label text-right col-md-4">Correo:</label>
                         <div class="col-md-8">
                             <input formControlName="correo" name="correo" type="email" class="form-control" placeholder="" value="{{ usuario.email }}" required>
-                            <!-- <small class="form-control-feedback"> Linea de Ayuda </small> -->
                         </div>
                     </div>
                 </div>
-                <!--/span-->
                 <div class="col-md-6">
                     <div class="form-group row">
                         <label class="control-label text-right col-md-4">Telefono:</label>
                         <div class="col-md-8">
                             <input formControlName="telefono" name="telefono" type="text" class="form-control" placeholder="" value="{{ usuario.telefono }}" required>
-                            <!-- <small class="form-control-feedback"> Linea de Ayuda </small> -->
                         </div>
                     </div>
                 </div>
-                <!--/span-->
             </div>
+
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group row">
@@ -167,8 +156,8 @@
                         </div>
                     </div>
                 </div>
-                <!--/span-->
             </div>
+
         </div>
         <div class="modal-footer">
             <button type="submit" class="btn btn-themecolor waves-effect">Guardar</button>

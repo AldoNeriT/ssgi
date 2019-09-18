@@ -145,9 +145,9 @@ export class UsuarioComponent implements OnInit {
 
   crearUsuario() {
 
-    if ( !this.forma.value.tipoUser ) {
-      swal('Error', 'Elige un tipo de Usuario', 'error');
-    }
+    // if ( !this.forma.value.tipoUser ) {
+    //   swal('Error', 'Elige un tipo de Usuario', 'error');
+    // }
 
     if ( this.forma.invalid ) {
       return;
@@ -182,9 +182,9 @@ export class UsuarioComponent implements OnInit {
 
   actualizarUsuario() {
 
-    if ( !this.formaActualizar.value.tipoUser ) {
-      swal('Error', 'Elige un tipo de Usuario', 'error');
-    }
+    // if ( !this.formaActualizar.value.tipoUser ) {
+    //   swal('Error', 'Elige un tipo de Usuario', 'error');
+    // }
 
     if ( this.formaActualizar.invalid ) {
       return;

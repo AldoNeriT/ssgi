@@ -54,7 +54,6 @@
         </div>
         <div class="modal-footer">
             <button (click)="pasarDatos( institucion )" class="btn btn-themecolor waves-effect">Editar</button>
-            <!-- <button (click)="cargarDatos()" class="btn btn-themecolor waves-effect">Editar</button> -->
         </div>
     </div>
 </div>
@@ -68,6 +67,7 @@
         <div class="form-body">
             <h3 class="box-title">Datos de la Institución</h3>
             <hr class="m-t-0 m-b-40">
+
             <div class="row">
                 <div class="col-md-12 text-center">
                     <div class="form-group">
@@ -75,9 +75,8 @@
                         <input formControlName="nombre" name="nombre" type="text" class="form-control sgi_centrarInp" value="" required>
                     </div>
                 </div>
-                <!--/span-->
             </div>
-            <!--/row-->
+
             <div class="row">
                 <div class="col-md-12 text-center">
                     <div class="form-group">
@@ -85,9 +84,8 @@
                         <input formControlName="domicilio" name="domicilio" type="text" class="form-control sgi_centrarInp" value="" required>
                     </div>
                 </div>
-                <!--/span-->
             </div>
-            <!--/row-->
+
             <div class="row">
                 <div class="col-md-12 text-center">
                     <div class="form-group">
@@ -95,8 +93,8 @@
                         <input formControlName="telefono" name="telefono" type="text" class="form-control sgi_centrarInp" value="" required>
                     </div>
                 </div>
-                <!--/span-->
             </div>
+
             <div class="row">
                 <div class="col-md-12 text-center">
                     <div class="form-group">
@@ -104,8 +102,8 @@
                         <input formControlName="imagen" name="imagen" type="text" class="form-control sgi_centrarInp" value="" required>
                     </div>
                 </div>
-                <!--/span-->
             </div>
+
         </div>
         <div class="modal-footer">
             <button (click)="eliminarInstitucion()" type="button" class="btn btn-danger waves-effect">Eliminar</button>

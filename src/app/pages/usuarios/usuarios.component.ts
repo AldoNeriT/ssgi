@@ -4,6 +4,7 @@ import { Usuario } from '../../models/usuario.model';
 import { UsuarioService } from '../../services/service.index';
 
 declare function inicializando_table();
+declare function init_plugins();
 
 @Component({
   selector: 'app-usuarios',
@@ -20,6 +21,7 @@ export class UsuariosComponent implements OnInit {
   }
 
   ngOnInit() {
+    init_plugins();
     inicializando_table();
     this.cargarUsuarios();
   }
@@ -45,7 +47,7 @@ export class UsuariosComponent implements OnInit {
 
     swal({
       title: '¡Advertencia!',
-      text: '¿Estas seguro de desactivar el Usuario?',
+      text: `¿Estás seguro de desactivar a "${usuario.nombre_Usuario}"?`,
       icon: 'warning',
       buttons: {
         cancel: true,
@@ -68,7 +70,7 @@ export class UsuariosComponent implements OnInit {
 
     swal({
       title: '¡Advertencia!',
-      text: '¿Estas seguro de activar el Usuario?',
+      text: `¿Estás seguro de activar a "${usuario.nombre_Usuario}"?`,
       icon: 'info',
       buttons: {
         cancel: true,
@@ -91,7 +93,7 @@ export class UsuariosComponent implements OnInit {
 
     swal({
       title: '¡Advertencia!',
-      text: '¿Estas seguro de eliminar permanentemente el Usuario?',
+      text: `¿Estás seguro de eliminar permanentemente a "${usuario.nombre_Usuario}"?`,
       icon: 'error',
       buttons: {
         cancel: true,
