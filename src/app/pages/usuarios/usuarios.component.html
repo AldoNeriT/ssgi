@@ -23,8 +23,8 @@
                         <div class="col-4">
                             <button [routerLink]="['/usuario','nuevo']" type="button" class="btn btn-rounded btn-themecolor">Agregar Nuevo Usuario</button>
                         </div>
-                        <div class="col-4">
-                            <h1>Usuarios: {{_usuarioService.totalUsuarios}}</h1>
+                        <div class="col-4 text-center">
+                            <span class="text text-themecolor">{{_usuarioService.totalUsuarios}} Usuarios</span>
                         </div>
                         <div class="col-4">
                             <button (click)="cambiarPapelera()" type="button" class="btn btn-rounded btn-outline-secondary alinear_derecha"><i class="mdi mdi-delete-sweep"></i></button>
@@ -44,19 +44,26 @@
                                 <tr *ngFor="let usuario of usuarios">
                                     <td>{{usuario.nombre_Usuario}}</td>
                                     <td>{{usuario.nombre + ' ' + usuario.primer_Apellido + ' ' + (usuario.segundo_Apellido || '')}}</td>
-                                    <td><span class="label label-themecolor">{{usuario.tipo_Usuario}}</span></td>
                                     <td>
-                                        <div class="btn-group alinear_derecha" role="group" aria-label="Basic example">
-                                            <button [routerLink]="['/usuario', 'ver', usuario._id]" class="btn btn-outline-info btn-rounded">
+                                        <!-- <span class="label label-themecolor">{{usuario.tipo_Usuario}}</span> -->
+                                        <span *ngIf="usuario.tipo_Usuario === 'ADMIN'" class="label label-info">Administrador</span>
+                                        <span *ngIf="usuario.tipo_Usuario === 'AUDITOR_LIDER'" class="label label-light-info">Auditor Líder</span>
+                                        <span *ngIf="usuario.tipo_Usuario === 'AUDITOR'" class="label label-success">Auditor</span>
+                                        <span *ngIf="usuario.tipo_Usuario === 'AUDITADO'" class="label label-light-success">Auditado</span>
+                                        <span *ngIf="usuario.tipo_Usuario === 'ALTA_DIRECCION'" class="label label-inverse">Alta Dirección</span>
+                                    </td>
+                                    <td>
+                                        <div aria-label="Basic example">
+                                            <button [routerLink]="['/usuario', 'ver', usuario._id]" class="btn btn-outline-info btn-circle">
                                                 <i class="fa fa-eye"></i>
                                             </button>&nbsp;
-                                            <button [routerLink]="['/usuario', usuario._id]" class="btn btn-outline-inverse btn-rounded">
+                                            <button [routerLink]="['/usuario', usuario._id]" class="btn btn-outline-inverse btn-circle">
                                                 <i class="fa fa-edit"></i>
                                             </button>&nbsp;
-                                            <button [routerLink]="['/usuario', 'pass', usuario._id]" class="btn btn-outline-inverse btn-rounded">
+                                            <button [routerLink]="['/usuario', 'pass', usuario._id]" class="btn btn-outline-inverse btn-circle">
                                                 <i class="fa fa-lock"></i>
                                             </button>&nbsp;
-                                            <button (click)="desactivarUsuario( usuario )" class="btn btn-outline-danger btn-rounded">
+                                            <button (click)="desactivarUsuario( usuario )" class="btn btn-outline-danger btn-circle">
                                                 <i class="fa fa-folder-open"></i>
                                             </button>
                                         </div>
@@ -83,7 +90,7 @@
                     <div class="row">
                         <div class="col-2"></div>
                         <div class="col-8 text-center">
-                            <h1>Usuarios en Papelera: {{_usuarioService.totalUsuarios}}</h1>
+                            <span class="text text-danger">{{_usuarioService.totalUsuarios}} Usuarios en Papelera</span>
                         </div>
                         <div class="col-2">
                             <button (click)="cambiarListaU()" type="button" class="btn btn-rounded btn-outline-secondary alinear_derecha"><i class="mdi mdi-account-multiple"></i></button>
@@ -103,13 +110,20 @@
                                 <tr *ngFor="let usuarioIn of usuariosIn">
                                     <td>{{usuarioIn.nombre_Usuario}}</td>
                                     <td>{{usuarioIn.nombre + ' ' + usuarioIn.primer_Apellido + ' ' + (usuarioIn.segundo_Apellido || '')}}</td>
-                                    <td>{{usuarioIn.tipo_Usuario}}</td>
                                     <td>
-                                        <div class="btn-group" role="group" aria-label="Basic example">
-                                            <button (click)="activarUsuario( usuarioIn )" class="btn btn-outline-success btn-rounded">
+                                        <!-- <span class="label label-themecolor">{{usuario.tipo_Usuario}}</span> -->
+                                        <span *ngIf="usuarioIn.tipo_Usuario === 'ADMIN'" class="label label-info">Administrador</span>
+                                        <span *ngIf="usuarioIn.tipo_Usuario === 'AUDITOR_LIDER'" class="label label-light-info">Auditor Líder</span>
+                                        <span *ngIf="usuarioIn.tipo_Usuario === 'AUDITOR'" class="label label-success">Auditor</span>
+                                        <span *ngIf="usuarioIn.tipo_Usuario === 'AUDITADO'" class="label label-light-success">Auditado</span>
+                                        <span *ngIf="usuarioIn.tipo_Usuario === 'ALTA_DIRECCION'" class="label label-inverse">Alta Dirección</span>
+                                    </td>
+                                    <td>
+                                        <div aria-label="Basic example">
+                                            <button (click)="activarUsuario( usuarioIn )" class="btn btn-outline-success btn-circle">
                                                 <i class="mdi mdi-account-convert"></i>
                                             </button>&nbsp;
-                                            <button (click)="desactivarUsuarioPermanente( usuarioIn )" class="btn btn-outline-danger btn-rounded">
+                                            <button (click)="desactivarUsuarioPermanente( usuarioIn )" class="btn btn-outline-danger btn-circle">
                                                 <i class="fa fa-trash-o"></i>
                                             </button>
                                         </div>

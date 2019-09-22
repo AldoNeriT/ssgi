@@ -1,6 +1,6 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { NormaService } from 'src/app/services/service.index';
+import { NormaService } from '../../services/service.index';
 import { Norma } from '../../models/norma.model';
 import { Router, ActivatedRoute } from '@angular/router';
 

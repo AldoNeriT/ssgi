@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-import { Usuario } from '../../models/usuario.model';
 import { UsuarioService } from '../../services/service.index';
+import { Usuario } from '../../models/usuario.model';
 
 import Swal from 'sweetalert2';
 

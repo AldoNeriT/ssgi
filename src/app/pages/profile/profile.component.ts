@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Usuario } from '../../models/usuario.model';
-import { UsuarioService } from '../../services/service.index';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { UsuarioService } from '../../services/service.index';
+import { Usuario } from '../../models/usuario.model';
 
 @Component({
   selector: 'app-profile',

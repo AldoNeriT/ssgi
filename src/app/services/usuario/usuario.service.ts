@@ -4,8 +4,8 @@ import { Usuario } from '../../models/usuario.model';
 import { URL_SERVICIOS } from '../../config/config';
 
 import { map, catchError } from 'rxjs/operators';
-import { Router } from '@angular/router';
 import { throwError } from 'rxjs/internal/observable/throwError';
+import { Router } from '@angular/router';
 
 import Swal from 'sweetalert2';
 

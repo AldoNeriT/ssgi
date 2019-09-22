@@ -1,6 +1,7 @@
 export class Proceso {
 
     constructor(
-        public numero: string
+        public nombreProceso: string,
+        public _id?: string
     ) { }
 }
