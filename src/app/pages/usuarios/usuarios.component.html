@@ -1,105 +1,123 @@
+<div *ngIf="cargando" id="loading" class="row" style="padding-top: 20px;">
+    <div class="col-sm-12">
+        <div class="text-center">
+            <span class="font-weight-bold">Cargando Datos</span>
+            <br><br>
+            <i class="fa fa-spinner fa-spin fa-3x text-themecolor"></i>
+            <br><br>
+            <span>Por favor espere un momento...</span>
+        </div>
+    </div>
+</div>
+
+
 <!-- ============================================================== -->
 <!-- CATALOGO DE USUARIOS ACTIVOS -->
 <!-- ============================================================== -->
-<div *ngIf="mostrarActivos" class="row">
-    <div class="col-12">
-        <div class="card">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-4">
-                        <button [routerLink]="['/usuario','nuevo']" type="button" class="btn btn-rounded btn-themecolor">Agregar Nuevo Usuario</button>
+<div *ngIf="!cargando">
+    <div *ngIf="mostrarActivos" class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-4">
+                            <button [routerLink]="['/usuario','nuevo']" type="button" class="btn btn-rounded btn-themecolor">Agregar Nuevo Usuario</button>
+                        </div>
+                        <div class="col-4">
+                            <h1>Usuarios: {{_usuarioService.totalUsuarios}}</h1>
+                        </div>
+                        <div class="col-4">
+                            <button (click)="cambiarPapelera()" type="button" class="btn btn-rounded btn-outline-secondary alinear_derecha"><i class="mdi mdi-delete-sweep"></i></button>
+                        </div>
                     </div>
-                    <div class="col-4">
-                        <h1>Usuarios: {{_usuarioService.totalUsuarios}}</h1>
+                    <div class="table-responsive m-t-40">
+                        <table class="table table-bordered table-striped myTable">
+                            <thead>
+                                <tr>
+                                    <th>Usuario</th>
+                                    <th>Nombre</th>
+                                    <th>Tipo de Usuario</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let usuario of usuarios">
+                                    <td>{{usuario.nombre_Usuario}}</td>
+                                    <td>{{usuario.nombre + ' ' + usuario.primer_Apellido + ' ' + (usuario.segundo_Apellido || '')}}</td>
+                                    <td><span class="label label-themecolor">{{usuario.tipo_Usuario}}</span></td>
+                                    <td>
+                                        <div class="btn-group alinear_derecha" role="group" aria-label="Basic example">
+                                            <button [routerLink]="['/usuario', 'ver', usuario._id]" class="btn btn-outline-info btn-rounded">
+                                                <i class="fa fa-eye"></i>
+                                            </button>&nbsp;
+                                            <button [routerLink]="['/usuario', usuario._id]" class="btn btn-outline-inverse btn-rounded">
+                                                <i class="fa fa-edit"></i>
+                                            </button>&nbsp;
+                                            <button [routerLink]="['/usuario', 'pass', usuario._id]" class="btn btn-outline-inverse btn-rounded">
+                                                <i class="fa fa-lock"></i>
+                                            </button>&nbsp;
+                                            <button (click)="desactivarUsuario( usuario )" class="btn btn-outline-danger btn-rounded">
+                                                <i class="fa fa-folder-open"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
-                    <div class="col-4">
-                        <button (click)="cambiarCatalogo()" type="button" class="btn btn-rounded btn-outline-secondary alinear_derecha"><i class="mdi mdi-delete-sweep"></i></button>
-                    </div>
-                </div>
-                <div class="table-responsive m-t-40">
-                    <table class="table table-bordered table-striped myTable">
-                        <thead>
-                            <tr>
-                                <th>Usuario</th>
-                                <th>Nombre</th>
-                                <th>Tipo</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let usuario of usuarios">
-                                <td>{{usuario.nombre_Usuario}}</td>
-                                <td>{{usuario.nombre + ' ' + usuario.primer_Apellido + ' ' + (usuario.segundo_Apellido || '')}}</td>
-                                <td>{{usuario.tipo_Usuario}}</td>
-                                <td>
-                                    <div class="btn-group alinear_derecha" role="group" aria-label="Basic example">
-                                        <button [routerLink]="['/usuario', 'ver', usuario._id]" class="btn btn-outline-info">
-                                            <i class="fa fa-eye"></i>
-                                        </button>&nbsp;
-                                        <button [routerLink]="['/usuario', usuario._id]" class="btn btn-outline-secondary">
-                                            <i class="fa fa-edit"></i>
-                                        </button>&nbsp;
-                                        <button [routerLink]="['/usuario', 'pass', usuario._id]" class="btn btn-outline-secondary">
-                                            <i class="fa fa-lock"></i>
-                                        </button>&nbsp;
-                                        <button (click)="desactivarUsuario( usuario )" class="btn btn-outline-danger">
-                                            <i class="fa fa-folder-open"></i>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
+
 <!-- ============================================================== -->
 <!-- CATALOGO DE USUARIOS INACTIVOS -->
 <!-- ============================================================== -->
-<div *ngIf="!mostrarActivos" class="row">
-    <div class="col-12">
-        <div class="card">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-2"></div>
-                    <div class="col-8 text-center">
-                        <h1>Usuarios en Papelera: {{_usuarioService.totalUsuarios}}</h1>
+<div *ngIf="!cargando">
+    <div *ngIf="!mostrarActivos" class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-2"></div>
+                        <div class="col-8 text-center">
+                            <h1>Usuarios en Papelera: {{_usuarioService.totalUsuarios}}</h1>
+                        </div>
+                        <div class="col-2">
+                            <button (click)="cambiarListaU()" type="button" class="btn btn-rounded btn-outline-secondary alinear_derecha"><i class="mdi mdi-account-multiple"></i></button>
+                        </div>
                     </div>
-                    <div class="col-2">
-                        <button (click)="cambiarCatalogo()" type="button" class="btn btn-rounded btn-outline-secondary alinear_derecha"><i class="mdi mdi-account-multiple"></i></button>
+                    <div class="table-responsive m-t-40">
+                        <table class="table table-bordered table-striped myTable">
+                            <thead>
+                                <tr>
+                                    <th>Usuario</th>
+                                    <th>Nombre</th>
+                                    <th>Tipo de Usuario</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let usuarioIn of usuariosIn">
+                                    <td>{{usuarioIn.nombre_Usuario}}</td>
+                                    <td>{{usuarioIn.nombre + ' ' + usuarioIn.primer_Apellido + ' ' + (usuarioIn.segundo_Apellido || '')}}</td>
+                                    <td>{{usuarioIn.tipo_Usuario}}</td>
+                                    <td>
+                                        <div class="btn-group" role="group" aria-label="Basic example">
+                                            <button (click)="activarUsuario( usuarioIn )" class="btn btn-outline-success btn-rounded">
+                                                <i class="mdi mdi-account-convert"></i>
+                                            </button>&nbsp;
+                                            <button (click)="desactivarUsuarioPermanente( usuarioIn )" class="btn btn-outline-danger btn-rounded">
+                                                <i class="fa fa-trash-o"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
-                </div>
-                <div class="table-responsive m-t-40">
-                    <table class="table table-bordered table-striped myTable">
-                        <thead>
-                            <tr>
-                                <th>Usuario</th>
-                                <th>Nombre</th>
-                                <th>Tipo</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let usuario of usuarios">
-                                <td>{{usuario.nombre_Usuario}}</td>
-                                <td>{{usuario.nombre + ' ' + usuario.primer_Apellido + ' ' + (usuario.segundo_Apellido || '')}}</td>
-                                <td>{{usuario.tipo_Usuario}}</td>
-                                <td>
-                                    <div class="btn-group" role="group" aria-label="Basic example">
-                                        <button (click)="activarUsuario( usuario )" class="btn btn-outline-success">
-                                            <i class="mdi mdi-account-convert"></i>
-                                        </button>&nbsp;
-                                        <button (click)="desactivarUsuarioPermanente( usuario )" class="btn btn-outline-danger">
-                                            <i class="fa fa-trash-o"></i>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
                 </div>
             </div>
         </div>

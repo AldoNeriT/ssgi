@@ -18,6 +18,8 @@ export class UsuarioComponent implements OnInit {
   ver: string;
   titulo: string;
 
+  cargando = true;
+
   // *** Variables para los Formularios ***
   mostrarFormAgregar: boolean;
   mostrarFormEditar: boolean;
@@ -58,6 +60,7 @@ export class UsuarioComponent implements OnInit {
           this.mostrarFormPassword = true;
         } else {
           if ( this.id === 'nuevo') {
+            this.cargando = false;
             this.titulo = 'Agregar Usuario';
             this.mostrarFormAgregar = true;
             this.mostrarFormEditar = false;
@@ -252,6 +255,8 @@ export class UsuarioComponent implements OnInit {
 
   cargarUsuario( id: string) {
 
+    this.cargando = true;
+
     this._usuarioService.cargarUsuario( id )
           .subscribe( usuario => {
             // *** La Respuesta es el arreglo como esta en la Base de
@@ -267,11 +272,15 @@ export class UsuarioComponent implements OnInit {
               puesto: usuario.puesto,
               tipoUser: usuario.tipo_Usuario
             });
+
+            this.cargando = false;
           });
 
   }
 
   cargarUsuarioVer( id: string) {
+
+    this.cargando = true;
 
     this._usuarioService.cargarUsuario( id )
           .subscribe( usuario => {
@@ -287,17 +296,22 @@ export class UsuarioComponent implements OnInit {
             this.puestoV = usuario.puesto;
             this.tipoUserV = usuario.tipo_Usuario;
             this.titulo += usuario.nombre + ' ' + usuario.primer_Apellido + ' ' + (usuario.segundo_Apellido || '');
+
+            this.cargando = false;
           });
 
   }
 
   cargarUsuarioPass( id: string) {
 
+    this.cargando = true;
+
     this._usuarioService.cargarUsuario( id )
           .subscribe( usuario => {
             // *** La Respuesta es el arreglo como esta en la Base de
             //     datos y se le insertan los valores al formulario ***
             this.titulo += usuario.nombre + ' ' + usuario.primer_Apellido + ' ' + (usuario.segundo_Apellido || '');
+            this.cargando = false;
           });
 
   }

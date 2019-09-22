@@ -27,6 +27,8 @@ export class NormasComponent implements OnInit {
 
   idNor: string;
 
+  cargando = true;
+
   constructor( public _normaService: NormaService,
                public router: Router,
                public activatedRoute: ActivatedRoute ) {
@@ -54,9 +56,12 @@ export class NormasComponent implements OnInit {
 
   cargarNormas() {
 
+    this.cargando = true;
+
     this._normaService.cargarNormas()
           .subscribe( normas => {
             this.normas = normas;
+            this.cargando = false;
           });
 
   }

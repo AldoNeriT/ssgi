@@ -21,6 +21,8 @@ export class InstitucionComponent implements OnInit {
 
   idIns: string;
 
+  cargando = true;
+
   constructor( public _institucionService: InstitucionService ) { }
 
   ngOnInit() {
@@ -36,6 +38,8 @@ export class InstitucionComponent implements OnInit {
 
   cargarInstituciones() {
 
+    this.cargando = true;
+
     this._institucionService.cargarInstituciones()
           .subscribe( instituciones => {
             this.instituciones = instituciones.instituciones;
@@ -44,6 +48,7 @@ export class InstitucionComponent implements OnInit {
             } else {
               this.mostrarBtnAgregar = false;
             }
+            this.cargando = false;
           });
 
   }

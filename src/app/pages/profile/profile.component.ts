@@ -15,8 +15,8 @@ export class ProfileComponent implements OnInit {
   mostrarEditable = false;
   usuario: Usuario;
 
-  constructor( public _usuarioService: UsuarioService) {
-  this.usuario = this._usuarioService.usuario;
+  constructor( public _usuarioService: UsuarioService ) {
+    this.usuario = this._usuarioService.usuario;
 }
 
   ngOnInit() {

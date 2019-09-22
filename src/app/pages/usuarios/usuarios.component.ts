@@ -16,7 +16,10 @@ declare function init_plugins();
 export class UsuariosComponent implements OnInit {
 
   usuarios: Usuario[] = [];
+  usuariosIn: Usuario[] = [];
   mostrarActivos = true;
+
+  cargando = true;
 
   constructor( @Inject(DOCUMENT) private _document,
                public _usuarioService: UsuarioService ) {
@@ -24,28 +27,43 @@ export class UsuariosComponent implements OnInit {
 
   ngOnInit() {
     init_plugins();
-    inicializando_table();
     this.cargarUsuarios();
+    inicializando_table();
   }
 
   cargarUsuarios() {
 
+    this.cargando = true;
+
     this._usuarioService.cargarUsuarios()
           .subscribe( usuarios => {
             this.usuarios = usuarios;
+            this.cargando = false;
+            inicializando_table();
           });
 
   }
 
   cargarUsuariosInactivos() {
 
+    this.cargando = true;
+
     this._usuarioService.cargarUsuariosInactivos()
           .subscribe( usuarios => {
-            this.usuarios = usuarios;
+            this.usuariosIn = usuarios;
+            this.cargando = false;
+            inicializando_table();
           });
   }
 
   desactivarUsuario( usuario: Usuario) {
+
+    if ( usuario._id === this._usuarioService.usuario._id) {
+      Swal.fire('No puedes eliminarte',
+      'Si deseas desactivar tu cuenta, hazlo desde otra cuenta Administrador o ROOT',
+      'error');
+      return;
+    }
 
     Swal.fire({
       title: '¡Advertencia!',
@@ -102,16 +120,32 @@ export class UsuariosComponent implements OnInit {
 
   }
 
-  cambiarCatalogo() {
+  // cambiarCatalogo() {
 
-    this.mostrarActivos = !this.mostrarActivos;
+  //   inicializando_table();
+  //   this.mostrarActivos = !this.mostrarActivos;
+
+  //   if ( this.mostrarActivos ) {
+  //     this.cargarUsuarios();
+  //   } else {
+  //     this.cargarUsuariosInactivos();
+  //   }
+
+  // }
+
+  cambiarPapelera() {
+
+    this.mostrarActivos = false;
+    this.cargarUsuariosInactivos();
     inicializando_table();
 
-    if ( this.mostrarActivos ) {
-      this.cargarUsuarios();
-    } else {
-      this.cargarUsuariosInactivos();
-    }
+  }
+
+  cambiarListaU() {
+
+    this.mostrarActivos = true;
+    this.cargarUsuarios();
+    inicializando_table();
 
   }
 
