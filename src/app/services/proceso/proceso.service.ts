@@ -105,6 +105,28 @@ export class ProcesoService {
 
   }
 
+  eliminarSubprocesosProceso( id: string ) {
+
+    // let url = URL_SERVICIOS + '/proceso/' + id;
+    let url = URL_SERVICIOS + '/subproceso/proceso/' + id;
+
+    // *** TOKEN ***
+    // url += '?token=' + this.token;
+
+    return this.http.delete( url )
+    .pipe(
+      map( (resp: any ) => {
+        // Swal.fire('Subprocesos del Proceso Eliminado', '', 'success');
+        return resp;
+      }),
+      catchError( err => {
+        Swal.fire('Error', err.error.err.message, 'error');
+        return throwError( err ) ;
+      })
+    );
+
+  }
+
   eliminarProceso( id: string ) {
 
     let url = URL_SERVICIOS + '/proceso/' + id;

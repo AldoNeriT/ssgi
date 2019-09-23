@@ -63,7 +63,8 @@ export class InstitucionComponent implements OnInit {
       let institucion = new Institucion(
         this.formaInstitucion.value.nombre,
         this.formaInstitucion.value.domicilio,
-        this.formaInstitucion.value.telefono
+        this.formaInstitucion.value.telefono,
+        this.formaInstitucion.value.imagen
       );
 
       this._institucionService.crearInstitucion( institucion )
@@ -76,6 +77,7 @@ export class InstitucionComponent implements OnInit {
         this.formaInstitucion.value.nombre,
         this.formaInstitucion.value.domicilio,
         this.formaInstitucion.value.telefono,
+        this.formaInstitucion.value.imagen,
         this.idIns
       );
 
@@ -96,7 +98,7 @@ export class InstitucionComponent implements OnInit {
       nombre: institucion.nombreInstitucion,
       domicilio: institucion.domicilio,
       telefono: institucion.telefono,
-      imagen: 'Sin Imagen'
+      imagen: institucion.img
     });
 
     this.idIns = institucion._id;

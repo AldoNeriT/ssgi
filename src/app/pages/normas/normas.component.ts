@@ -82,7 +82,6 @@ export class NormasComponent implements OnInit {
     this._normaService.crearNorma( norma )
           .subscribe( resp => {
             this.cargarNormas();
-            // this.router.navigate(['/normas']);
           });
 
     // $('.show').hide();
