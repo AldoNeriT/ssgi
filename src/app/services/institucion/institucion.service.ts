@@ -18,14 +18,26 @@ export class InstitucionService {
   institucion: Institucion;
   token: string;
 
-  constructor( public http: HttpClient ) { }
+  constructor( public http: HttpClient ) {
+    this.cargarStorage();
+  }
+
+  cargarStorage() {
+
+    if ( localStorage.getItem('token') ) {
+      this.token = localStorage.getItem('token');
+    } else {
+      this.token = '';
+    }
+
+  }
 
   cargarInstituciones() {
 
     let url = URL_SERVICIOS + '/institucion';
 
     // *** TOKEN ***
-    // url += '?token=' + this.token;
+    url += '?token=' + this.token;
 
     return this.http.get( url )
     .pipe(
@@ -71,7 +83,7 @@ export class InstitucionService {
       url += '/' + institucion._id;
 
       // *** TOKEN ***
-      // url += '?token=' + this.token;
+      url += '?token=' + this.token;
 
       return this.http.put( url, institucion )
       .pipe(
@@ -89,7 +101,7 @@ export class InstitucionService {
       // *** Aqui se CREA la Institucion ***
 
       // *** TOKEN ***
-      // url += '?token=' + this.token;
+      url += '?token=' + this.token;
 
       return this.http.post( url, institucion )
       .pipe(
@@ -112,7 +124,7 @@ export class InstitucionService {
     let url = URL_SERVICIOS + '/institucion/' + id;
 
     // *** TOKEN ***
-    // url += '?token=' + this.token;
+    url += '?token=' + this.token;
 
     return this.http.delete( url )
     .pipe(

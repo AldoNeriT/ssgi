@@ -18,14 +18,26 @@ export class NormaService {
   // norma: Norma;
   token: string;
 
-  constructor( public http: HttpClient ) { }
+  constructor( public http: HttpClient ) {
+    this.cargarStorage();
+   }
+
+  cargarStorage() {
+
+    if ( localStorage.getItem('token') ) {
+      this.token = localStorage.getItem('token');
+    } else {
+      this.token = '';
+    }
+
+  }
 
   cargarNormas() {
 
     let url = URL_SERVICIOS + '/norma';
 
     // *** TOKEN ***
-    // url += '?token=' + this.token;
+    url += '?token=' + this.token;
 
     return this.http.get( url )
     .pipe(
@@ -71,7 +83,7 @@ export class NormaService {
       url += '/' + norma._id;
 
       // *** TOKEN ***
-      // url += '?token=' + this.token;
+      url += '?token=' + this.token;
 
       return this.http.put( url, norma )
       .pipe(
@@ -99,7 +111,7 @@ export class NormaService {
       // *** Aqui se CREA la Norma ***
 
       // *** TOKEN ***
-      // url += '?token=' + this.token;
+      url += '?token=' + this.token;
 
       return this.http.post( url, norma )
       .pipe(
@@ -121,7 +133,7 @@ export class NormaService {
     let url = URL_SERVICIOS + '/norma/' + id;
 
     // *** TOKEN ***
-    // url += '?token=' + this.token;
+    url += '?token=' + this.token;
 
     return this.http.delete( url )
     .pipe(

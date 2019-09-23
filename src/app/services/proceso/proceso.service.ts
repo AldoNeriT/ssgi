@@ -18,14 +18,26 @@ export class ProcesoService {
   proceso: Proceso;
   token: string;
 
-  constructor( public http: HttpClient ) { }
+  constructor( public http: HttpClient ) {
+    this.cargarStorage();
+  }
+
+  cargarStorage() {
+
+    if ( localStorage.getItem('token') ) {
+      this.token = localStorage.getItem('token');
+    } else {
+      this.token = '';
+    }
+
+  }
 
   cargarProcesos() {
 
     let url = URL_SERVICIOS + '/proceso';
 
     // *** TOKEN ***
-    // url += '?token=' + this.token;
+    url += '?token=' + this.token;
 
     return this.http.get( url )
     .pipe(
@@ -46,7 +58,7 @@ export class ProcesoService {
     let url = URL_SERVICIOS + '/proceso/' + id;
 
     // *** TOKEN ***
-    // url += '?token=' + this.token;
+    url += '?token=' + this.token;
 
     return this.http.get( url )
     .pipe(
@@ -70,7 +82,7 @@ export class ProcesoService {
       url += '/' + proceso._id;
 
       // *** TOKEN ***
-      // url += '?token=' + this.token;
+      url += '?token=' + this.token;
 
       return this.http.put( url, proceso )
       .pipe(
@@ -88,7 +100,7 @@ export class ProcesoService {
       // *** Aqui se CREA el Proceso ***
 
       // *** TOKEN ***
-      // url += '?token=' + this.token;
+      url += '?token=' + this.token;
 
       return this.http.post( url, proceso )
       .pipe(
@@ -111,7 +123,7 @@ export class ProcesoService {
     let url = URL_SERVICIOS + '/subproceso/proceso/' + id;
 
     // *** TOKEN ***
-    // url += '?token=' + this.token;
+    url += '?token=' + this.token;
 
     return this.http.delete( url )
     .pipe(
@@ -132,7 +144,7 @@ export class ProcesoService {
     let url = URL_SERVICIOS + '/proceso/' + id;
 
     // *** TOKEN ***
-    // url += '?token=' + this.token;
+    url += '?token=' + this.token;
 
     return this.http.delete( url )
     .pipe(

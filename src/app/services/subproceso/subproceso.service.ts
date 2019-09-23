@@ -18,14 +18,26 @@ export class SubprocesoService {
   subproceso: Subproceso;
   token: string;
 
-  constructor( public http: HttpClient ) { }
+  constructor( public http: HttpClient ) {
+    this.cargarStorage();
+  }
+
+  cargarStorage() {
+
+    if ( localStorage.getItem('token') ) {
+      this.token = localStorage.getItem('token');
+    } else {
+      this.token = '';
+    }
+
+  }
 
   cargarSubprocesos() {
 
     let url = URL_SERVICIOS + '/subproceso';
 
     // *** TOKEN ***
-    // url += '?token=' + this.token;
+    url += '?token=' + this.token;
 
     return this.http.get( url )
     .pipe(
@@ -46,7 +58,7 @@ export class SubprocesoService {
     let url = URL_SERVICIOS + '/subproceso/' + id;
 
     // *** TOKEN ***
-    // url += '?token=' + this.token;
+    url += '?token=' + this.token;
 
     return this.http.get( url )
     .pipe(
@@ -66,7 +78,7 @@ export class SubprocesoService {
     let url = URL_SERVICIOS + '/subproceso/proceso/' + id;
 
     // *** TOKEN ***
-    // url += '?token=' + this.token;
+    url += '?token=' + this.token;
 
     return this.http.get( url )
     .pipe(
@@ -90,7 +102,7 @@ export class SubprocesoService {
       url += '/' + subproceso._id;
 
       // *** TOKEN ***
-      // url += '?token=' + this.token;
+      url += '?token=' + this.token;
 
       return this.http.put( url, subproceso )
       .pipe(
@@ -108,7 +120,7 @@ export class SubprocesoService {
       // *** Aqui se CREA el Subroceso ***
 
       // *** TOKEN ***
-      // url += '?token=' + this.token;
+      url += '?token=' + this.token;
 
       return this.http.post( url, subproceso )
       .pipe(
@@ -130,7 +142,7 @@ export class SubprocesoService {
     let url = URL_SERVICIOS + '/subproceso/' + id;
 
     // *** TOKEN ***
-    // url += '?token=' + this.token;
+    url += '?token=' + this.token;
 
     return this.http.delete( url )
     .pipe(
