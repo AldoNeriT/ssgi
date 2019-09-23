@@ -16,12 +16,12 @@
 
 <div *ngIf="!cargando">
     <div class="row">
-        <div class="col-12">
+        <div class="col-sm-12">
             <div class="card">
                 <div class="card-body">
                     <div class="vtabs">
-                        <ul class="nav nav-tabs tabs-vertical" role="tablist">
-                            <li *ngFor="let proceso of procesos" class="nav-item"> <a (click)="cargarSubprocesosProceso( proceso )" class="nav-link" data-toggle="tab" href="#{{ proceso._id }}" role="tab" aria-expanded="false">{{ proceso.nombreProceso }}</a> </li>
+                        <ul id="list-procesos" class="nav nav-tabs tabs-vertical" role="tablist">
+                            <li *ngFor="let proceso of procesos" class="nav-item"> <a id="a-{{ proceso._id }}" (click)="cargarSubprocesosProceso( proceso._id )" class="nav-link" data-toggle="tab" href="#{{ proceso._id }}" role="tab" aria-expanded="false">{{ proceso.nombreProceso }}</a> </li>
 
                             <li class="nav-item text-center"> <a class="nav-link" data-toggle="tab" href="" role="tab" aria-expanded="false" data-toggle="modal" data-target="#modalProcesoAgregar"><span><i class="mdi mdi-plus"></i></span></a> </li>
                         </ul>

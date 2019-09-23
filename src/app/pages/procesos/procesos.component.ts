@@ -61,6 +61,14 @@ export class ProcesosComponent implements OnInit {
     this.cargarProcesos();
   }
 
+  claseActive( id: string) {
+
+    $(`#a-${id}`).addClass('active');
+
+    console.log($(`#a-${id}`));
+
+  }
+
   // ************************************************
   // *** PROCESOS ***
   // ************************************************
@@ -89,17 +97,21 @@ export class ProcesosComponent implements OnInit {
 
   // }
 
-  cargarSubprocesosProceso( proceso: Proceso ) {
+  cargarSubprocesosProceso( id: string ) {
 
     this.cargando2 = true;
 
-    this._subprocesoService.cargarSubprocesosProceso( proceso._id )
+    this._subprocesoService.cargarSubprocesosProceso( id )
           .subscribe( subprocesos => {
             this.subprocesos = subprocesos;
             this.cargando2 = false;
           });
 
-    this.idPro = proceso._id;
+    this.idPro = id;
+
+    // $('#list-procesos > li > a:first').addClass('active');
+
+    // console.log($('#list-procesos > li > a:first'));
 
   }
 
@@ -189,7 +201,7 @@ export class ProcesosComponent implements OnInit {
 
     this._subprocesoService.crearSubproceso( subproceso )
           .subscribe( resp => {
-            this.cargarProcesos();
+            this.cargarSubprocesosProceso( this.idPro ) ;
           });
 
   }
@@ -217,7 +229,8 @@ export class ProcesosComponent implements OnInit {
 
     this._subprocesoService.crearSubproceso( subproceso )
             .subscribe( resp => {
-              this.cargarProcesos();
+              // this.cargarProcesos();
+              this.cargarSubprocesosProceso( this.idPro ) ;
             });
 
   }
@@ -234,7 +247,7 @@ export class ProcesosComponent implements OnInit {
       if (eliminar.value) {
         this._subprocesoService.eliminarSubproceso( subproceso._id )
           .subscribe( (resp: any) => {
-            this.cargarProcesos();
+            this.cargarSubprocesosProceso( this.idPro ) ;
           } );
       }
     });
