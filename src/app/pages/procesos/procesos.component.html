@@ -4,127 +4,34 @@
             <div class="card-body">
                 <div class="vtabs ">
                     <ul class="nav nav-tabs tabs-vertical" role="tablist">
-                        <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#proceso1" role="tab" aria-expanded="true">Planeación</a> </li>
-                        <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#proceso2" role="tab" aria-expanded="false">Académico</a> </li>
-                        <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#proceso3" role="tab" aria-expanded="false">Vinculación</a> </li>
+                        <li *ngFor="let proceso of procesos" class="nav-item"> <a (click)="cargarSubprocesosProceso( proceso )" class="nav-link" data-toggle="tab" href="#{{ proceso._id }}" role="tab" aria-expanded="false">{{ proceso.nombreProceso }}</a> </li>
+
                         <li class="nav-item text-center"> <a class="nav-link" data-toggle="tab" href="" role="tab" aria-expanded="false"><span><i class="mdi mdi-plus"></i></span></a> </li>
                     </ul>
 
-                    <div class="tab-content col-12">
-                        <div class="tab-pane active" id="proceso1" role="tabpanel" aria-expanded="true">
-                            <button type="button" class="btn btn-outline-info btn-block">Agregar Subproceso <i class="mdi mdi-plus"></i></button>
+                    <div class="tab-content col-sm-12">
+                        <div *ngFor="let proceso of procesos" class="tab-pane" id="{{ proceso._id }}" role="tabpanel" aria-expanded="false">
+                            <div class="row">
+                                <div class="col-sm-11" style="padding-right: 0px;">
+                                    <button type="button" (click)="agregarSubproceso( proceso._id )" class="btn btn-outline-info btn-block">Agregar Subproceso <i class="mdi mdi-plus"></i></button>
+                                </div>
+                                <div class="col-sm-1" style="padding-left: 0px;">
+                                    <button type="button" (click)="agregarSubproceso( proceso._id )" class="btn btn-outline-danger btn-block"><i class="mdi mdi-delete"></i></button>
+                                </div>
+                            </div>
                             <div class="table-responsive" style="padding-top: 20px;">
                                 <table class="table table-bordered">
                                     <thead>
                                         <tr>
                                             <th>Nombre</th>
-                                            <th>Descripción</th>
                                             <th>URL</th>
                                             <th class="text-nowrap">Acción</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>Planeación</td>
-                                            <td>Guía Técnica para la Elaboración del PIID de los Institutos, Unidades y Centros pertenecientes al TecNM</td>
-                                            <td>https://itsf.mx/site/</td>
-                                            <td class="text-nowrap">
-                                                <a href=""> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
-                                                <a href=""> <i class="fa fa-close text-danger"></i> </a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Presupuestación</td>
-                                            <td>Normatividad vigente aplicable en cada estado para planeación y gestión presupuestal</td>
-                                            <td>https://itsf.mx/site/</td>
-                                            <td class="text-nowrap">
-                                                <a href=""> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
-                                                <a href=""> <i class="fa fa-close text-danger"></i> </a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Seguimiento / Evaluación</td>
-                                            <td>Normatividad vigente aplicable en cada estado para planeación y gestión presupuestal</td>
-                                            <td>https://itsf.mx/site/</td>
-                                            <td class="text-nowrap">
-                                                <a href=""> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
-                                                <a href=""> <i class="fa fa-close text-danger"></i> </a>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="tab-pane" id="proceso2" role="tabpanel" aria-expanded="false">
-                            <button type="button" class="btn btn-outline-info btn-block">Agregar Subproceso <i class="mdi mdi-plus"></i></button>
-                            <div class="table-responsive" style="padding-top: 20px;">
-                                <table class="table table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th>Nombre</th>
-                                            <th>Descripción</th>
-                                            <th>URL</th>
-                                            <th class="text-nowrap">Acción</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>Inscripción</td>
-                                            <td>Procedimiento para la Inscripción</td>
-                                            <td>https://itsf.mx/site/</td>
-                                            <td class="text-nowrap">
-                                                <a href=""> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
-                                                <a href=""> <i class="fa fa-close text-danger"></i> </a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Reinscripción</td>
-                                            <td>Procedimiento para la reinscripción Manual de Lineamientos Académico- Administrativos del TecNM, versión octubre 2015, Capítulo 9. Lineamiento para la resolución de equivalencia de estudios</td>
-                                            <td>https://itsf.mx/site/</td>
-                                            <td class="text-nowrap">
-                                                <a href=""> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
-                                                <a href=""> <i class="fa fa-close text-danger"></i> </a>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="tab-pane" id="proceso3" role="tabpanel" aria-expanded="false">
-                            <button type="button" class="btn btn-outline-info btn-block">Agregar Subproceso <i class="mdi mdi-plus"></i></button>
-                            <div class="table-responsive" style="padding-top: 20px;">
-                                <table class="table table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th>Nombre</th>
-                                            <th>Descripción</th>
-                                            <th>URL</th>
-                                            <th class="text-nowrap">Acción</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>Promoción de la oferta educativa</td>
-                                            <td>NA</td>
-                                            <td>https://itsf.mx/site/</td>
-                                            <td class="text-nowrap">
-                                                <a href=""> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
-                                                <a href=""> <i class="fa fa-close text-danger"></i> </a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Visitas a Empresas</td>
-                                            <td>Procedimiento de Gestión del Curso</td>
-                                            <td>https://itsf.mx/site/</td>
-                                            <td class="text-nowrap">
-                                                <a href=""> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
-                                                <a href=""> <i class="fa fa-close text-danger"></i> </a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Servicio Social </td>
-                                            <td>Manual de Lineamientos Académico- Administrativos del TecNM, versión octubre 2015. Capítulo 11 Lineamiento para la operación y cumplimiento del Servicio Social.</td>
-                                            <td>https://itsf.mx/site/</td>
+                                        <tr *ngFor="let subproceso of subprocesos">
+                                            <td>{{ subproceso.nombreSubproceso }}</td>
+                                            <td>{{ subproceso.archivoDigital }}</td>
                                             <td class="text-nowrap">
                                                 <a href=""> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
                                                 <a href=""> <i class="fa fa-close text-danger"></i> </a>
@@ -141,6 +48,58 @@
     </div>
 </div>
 
+<!-- ============================================================== -->
+<!-- CON CODIGO ANGULAR -->
+<!-- ============================================================== -->
+
+<!-- <div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="vtabs ">
+                    <ul class="nav nav-tabs tabs-vertical" role="tablist">
+                        <li *ngFor="let proceso of procesos" class="nav-item"> <a class="nav-link" data-toggle="tab" href="#{{ proceso._id }}" role="tab" aria-expanded="false">{{ proceso.nombreProceso }}</a> </li>
+
+                        <li class="nav-item text-center"> <a class="nav-link" data-toggle="tab" href="" role="tab" aria-expanded="false"><span><i class="mdi mdi-plus"></i></span></a> </li>
+                    </ul>
+
+                    <div class="tab-content col-12">
+                        <div *ngFor="let proceso of procesos" class="tab-pane" id="{{ proceso._id }}" role="tabpanel" aria-expanded="false">
+                            <button type="button" (click)="agregarSubproceso( proceso._id )" class="btn btn-outline-info btn-block">Agregar Subproceso <i class="mdi mdi-plus"></i></button>
+                            <div class="table-responsive" style="padding-top: 20px;">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Proceso</th>
+                                            <th>Nombre</th>
+                                            <th>URL</th>
+                                            <th class="text-nowrap">Acción</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let subproceso of subprocesos; index as i">
+                                            <td *ngIf="(subproceso.proceso != null) && subproceso.proceso._id === proceso._id">{{ proceso.nombreProceso }}</td>
+                                            <td *ngIf="(subproceso.proceso != null) && subproceso.proceso._id === proceso._id">{{ subproceso.nombreSubproceso }}</td>
+                                            <td *ngIf="(subproceso.proceso != null) && subproceso.proceso._id === proceso._id">{{ subproceso.proceso }} {{ i }}</td>
+                                            <td *ngIf="(subproceso.proceso != null) && subproceso.proceso._id === proceso._id" class="text-nowrap">
+                                                <a href=""> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
+                                                <a href=""> <i class="fa fa-close text-danger"></i> </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+<!-- ============================================================== -->
+<!-- SIN NADA DE CODIGO ANGULAR -->
+<!-- ============================================================== -->
 
 <!-- <div class="row">
     <div class="col-12">

@@ -31,7 +31,7 @@ export class SubprocesoService {
     .pipe(
       map( (resp: any ) => {
         this.totalSubprocesos = resp.cuantos;
-        return resp;
+        return resp.subprocesos;
       }),
       catchError( err => {
         Swal.fire('Error', err.error.err.message, 'error');
