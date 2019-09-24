@@ -60,7 +60,7 @@ export class UsuariosComponent implements OnInit {
 
     if ( usuario._id === this._usuarioService.usuario._id) {
       Swal.fire('No puedes eliminarte',
-      'Si deseas desactivar tu cuenta, hazlo desde otra cuenta Administrador o ROOT',
+      'Si deseas desactivar tu cuenta, hazlo desde otra cuenta Administrador',
       'error');
       return;
     }

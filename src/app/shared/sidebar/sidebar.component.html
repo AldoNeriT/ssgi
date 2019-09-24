@@ -18,7 +18,12 @@
                 </li>
                 <li class="nav-devider"></li>
 
-                <li class="nav-small-cap">ADMINISTRADOR</li>
+                <li *ngIf="usuario.tipo_Usuario === 'ROOT'" class="nav-small-cap">ROOT</li>
+                <li *ngIf="usuario.tipo_Usuario === 'ADMIN'" class="nav-small-cap">ADMINISTRADOR</li>
+                <li *ngIf="usuario.tipo_Usuario === 'AUDITOR_LIDER'" class="nav-small-cap">AUDITOR LÍDER</li>
+                <li *ngIf="usuario.tipo_Usuario === 'AUDITOR'" class="nav-small-cap">AUDITOR</li>
+                <li *ngIf="usuario.tipo_Usuario === 'AUDITADO'" class="nav-small-cap">AUDITADO</li>
+                <li *ngIf="usuario.tipo_Usuario === 'ALTA_DIRECCION'" class="nav-small-cap">ALTA DIRECCIÓN</li>
                 <li *ngFor="let menu of _sidebar.menu">
                     <a class="has-arrow waves-effect waves-dark" aria-expanded="false"><i [class]="menu.icono"></i><span class="hide-menu">{{ menu.titulo }} <span class="label label-rouded label-themecolor pull-right">{{ menu.submenu.length }}</span></span></a>
                     <ul aria-expanded="false" class="collapse">

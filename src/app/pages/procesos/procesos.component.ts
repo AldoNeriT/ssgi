@@ -30,7 +30,7 @@ export class ProcesosComponent implements OnInit {
   idSub: string;
 
   cargando = true;
-  cargando2 = true;
+  cargando2 = false;
 
   constructor( public _procesoService: ProcesoService,
                public _subprocesoService: SubprocesoService ) { }
@@ -61,11 +61,15 @@ export class ProcesosComponent implements OnInit {
     this.cargarProcesos();
   }
 
-  claseActive( id: string) {
+  claseActive() {
 
-    $(`#a-${id}`).addClass('active');
+    // $('#list-procesos > li:first > a').addClass('active');
+    // $('#list-procesos > li:first > a').attr('aria-expanded', 'true');
+    // console.log($('#list-procesos > li:first > a'));
 
-    console.log($(`#a-${id}`));
+    // $('#list-procesos > li:first > a').addClass('active');
+    $('div.tab-pane:first').attr('aria-expanded', 'true');
+    console.log($('div.tab-pane:first'));
 
   }
 
@@ -82,7 +86,7 @@ export class ProcesosComponent implements OnInit {
             this.procesos = procesos;
             this.cargando = false;
           });
-
+    this.claseActive();
   }
 
   // cargarSubprocesos() {
@@ -169,7 +173,7 @@ export class ProcesosComponent implements OnInit {
       if (eliminar.value) {
         this._procesoService.eliminarSubprocesosProceso( proceso._id )
           .subscribe( (resp: any) => {
-            this.cargarProcesos();
+            // this.cargarProcesos();
           } );
         this._procesoService.eliminarProceso( proceso._id )
           .subscribe( (resp: any) => {

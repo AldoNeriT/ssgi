@@ -115,7 +115,14 @@
                                     <div class="u-img"><img src="assets/images/users/icon-user.png" alt="user"></div>
                                     <div class="u-text">
                                         <h4> {{ usuario.nombre + ' ' + usuario.primer_Apellido + ' ' + (usuario.segundo_Apellido || '') }} </h4>
-                                        <p class="text-muted">{{ usuario.tipo_Usuario }}</p><a routerLink="/perfil" class="btn btn-rounded btn-danger btn-sm">Ver Perfil</a></div>
+                                        <p *ngIf="usuario.tipo_Usuario === 'ROOT'" class="text-muted">ROOT</p>
+                                        <p *ngIf="usuario.tipo_Usuario === 'ADMIN'" class="text-muted">Administrador</p>
+                                        <p *ngIf="usuario.tipo_Usuario === 'AUDITOR_LIDER'" class="text-muted">Auditor Líder</p>
+                                        <p *ngIf="usuario.tipo_Usuario === 'AUDITOR'" class="text-muted">Auditor</p>
+                                        <p *ngIf="usuario.tipo_Usuario === 'AUDITADO'" class="text-muted">Auditado</p>
+                                        <p *ngIf="usuario.tipo_Usuario === 'ALTA_DIRECCION'" class="text-muted">Alta Dirección</p>
+                                        <a routerLink="/perfil" class="btn btn-rounded btn-danger btn-sm">Ver Perfil</a>
+                                    </div>
                                 </div>
                             </li>
                             <li role="separator" class="divider"></li>
