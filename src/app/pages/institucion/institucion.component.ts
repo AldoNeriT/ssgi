@@ -113,7 +113,13 @@ export class InstitucionComponent implements OnInit {
       text: '¿Estás seguro de eliminar la Institución?',
       type: 'warning',
       showCancelButton: true,
-      confirmButtonText: 'OK'
+      confirmButtonText: 'Sí',
+      cancelButtonText: 'No',
+      cancelButtonColor: '#e74c3c',
+      animation: false,
+      customClass: {
+        popup: 'animated tada'
+      }
     }).then((eliminar) => {
       if (eliminar.value) {
         this._institucionService.eliminarInstitucion( this.idIns )

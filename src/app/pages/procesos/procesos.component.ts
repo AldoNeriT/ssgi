@@ -168,7 +168,13 @@ export class ProcesosComponent implements OnInit {
       text: `¿Estás seguro de eliminar el Proceso "${proceso.nombreProceso}"?`,
       type: 'warning',
       showCancelButton: true,
-      confirmButtonText: 'OK'
+      confirmButtonText: 'Sí',
+      cancelButtonText: 'No',
+      cancelButtonColor: '#e74c3c',
+      animation: false,
+      customClass: {
+        popup: 'animated tada'
+      }
     }).then((eliminar) => {
       if (eliminar.value) {
         this._procesoService.eliminarSubprocesosProceso( proceso._id )
@@ -246,7 +252,13 @@ export class ProcesosComponent implements OnInit {
       text: `¿Estás seguro de eliminar el Subproceso "${subproceso.nombreSubproceso}"?`,
       type: 'warning',
       showCancelButton: true,
-      confirmButtonText: 'OK'
+      confirmButtonText: 'Sí',
+      cancelButtonText: 'No',
+      cancelButtonColor: '#e74c3c',
+      animation: false,
+      customClass: {
+        popup: 'animated tada'
+      }
     }).then((eliminar) => {
       if (eliminar.value) {
         this._subprocesoService.eliminarSubproceso( subproceso._id )

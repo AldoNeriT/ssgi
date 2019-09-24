@@ -93,11 +93,11 @@ export class NormaService {
             title: 'Norma Actualizada',
             type: 'success',
             showConfirmButton: false,
-            timer: 2000,
-            animation: false,
-            customClass: {
-              popup: 'animated zoomIn'
-            }
+            timer: 2000
+            // animation: false,
+            // customClass: {
+            //   popup: 'animated zoomIn'
+            // }
           });
           return resp.norma;
         }),
@@ -116,7 +116,13 @@ export class NormaService {
       return this.http.post( url, norma )
       .pipe(
         map( (resp: any ) => {
-          Swal.fire('Norma Creada', `La Norma "${norma.nombreNorma}" se ha creado exitosamente`, 'success');
+          Swal.fire({
+            title: 'Norma Creada',
+            text: `La Norma "${norma.nombreNorma}" se ha creado exitosamente`,
+            type: 'success',
+            showConfirmButton: false,
+            timer: 2000
+          });
           return resp.norma;
         }),
         catchError( err => {
@@ -138,7 +144,12 @@ export class NormaService {
     return this.http.delete( url )
     .pipe(
       map( (resp: any ) => {
-        Swal.fire('Norma Eliminada', '', 'success');
+        Swal.fire({
+          title: 'Norma Eliminada',
+          type: 'success',
+          showConfirmButton: false,
+          timer: 2000
+        });
         return resp;
       }),
       catchError( err => {

@@ -59,9 +59,15 @@ export class UsuariosComponent implements OnInit {
   desactivarUsuario( usuario: Usuario) {
 
     if ( usuario._id === this._usuarioService.usuario._id) {
-      Swal.fire('No puedes eliminarte',
-      'Si deseas desactivar tu cuenta, hazlo desde otra cuenta Administrador',
-      'error');
+      Swal.fire({
+        title: '¡No puedes eliminarte!',
+        text: 'Si deseas desactivar tu cuenta, hazlo desde otra cuenta Administrador',
+        type: 'error',
+        animation: false,
+        customClass: {
+          popup: 'animated tada'
+        }
+      });
       return;
     }
 
@@ -70,7 +76,13 @@ export class UsuariosComponent implements OnInit {
       text: `¿Estás seguro de desactivar a "${usuario.nombre_Usuario}"?`,
       type: 'warning',
       showCancelButton: true,
-      confirmButtonText: 'OK'
+      confirmButtonText: 'Sí',
+      cancelButtonText: 'No',
+      cancelButtonColor: '#e74c3c',
+      animation: false,
+      customClass: {
+        popup: 'animated tada'
+      }
     }).then((desactivar) => {
       if (desactivar.value) {
         this._usuarioService.desactivarUsuario( usuario._id )
@@ -87,9 +99,15 @@ export class UsuariosComponent implements OnInit {
     Swal.fire({
       title: '¡Advertencia!',
       text: `¿Estás seguro de activar a "${usuario.nombre_Usuario}"?`,
-      type: 'info',
+      type: 'warning',
       showCancelButton: true,
-      confirmButtonText: 'OK'
+      confirmButtonText: 'Sí',
+      cancelButtonText: 'No',
+      cancelButtonColor: '#e74c3c',
+      animation: false,
+      customClass: {
+        popup: 'animated tada'
+      }
     }).then((activar) => {
       if (activar.value) {
         this._usuarioService.activarUsuario( usuario._id )
@@ -108,7 +126,13 @@ export class UsuariosComponent implements OnInit {
       text: `¿Estás seguro de eliminar permanentemente a "${usuario.nombre_Usuario}"?`,
       type: 'error',
       showCancelButton: true,
-      confirmButtonText: 'OK'
+      confirmButtonText: 'Sí',
+      cancelButtonText: 'No',
+      cancelButtonColor: '#e74c3c',
+      animation: false,
+      customClass: {
+        popup: 'animated tada'
+      }
     }).then((eliminar) => {
       if (eliminar.value) {
         this._usuarioService.desactivarUsuarioPermanente( usuario._id )

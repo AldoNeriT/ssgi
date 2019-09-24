@@ -87,7 +87,12 @@ export class ProcesoService {
       return this.http.put( url, proceso )
       .pipe(
         map( (resp: any ) => {
-          Swal.fire('Proceso Actualizado', '', 'success');
+          Swal.fire({
+            title: 'Proceso Actualizado',
+            type: 'success',
+            showConfirmButton: false,
+            timer: 2000
+          });
           return resp.proceso;
         }),
         catchError( err => {
@@ -105,7 +110,13 @@ export class ProcesoService {
       return this.http.post( url, proceso )
       .pipe(
         map( (resp: any ) => {
-          Swal.fire('Proceso Creado', `${proceso.nombreProceso} se ha creado exitosamente`, 'success');
+          Swal.fire({
+            title: 'Proceso Creado',
+            text: `"${proceso.nombreProceso}" se ha creado exitosamente`,
+            type: 'success',
+            showConfirmButton: false,
+            timer: 2000
+          });
           return resp.proceso;
         }),
         catchError( err => {
@@ -128,7 +139,12 @@ export class ProcesoService {
     return this.http.delete( url )
     .pipe(
       map( (resp: any ) => {
-        // Swal.fire('Subprocesos del Proceso Eliminado', '', 'success');
+        // Swal.fire({
+        //   title: 'Subprocesos del Proceso Eliminado',
+        //   type: 'success',
+        //   showConfirmButton: false,
+        //   timer: 2000
+        // });
         return resp;
       }),
       catchError( err => {
@@ -149,7 +165,12 @@ export class ProcesoService {
     return this.http.delete( url )
     .pipe(
       map( (resp: any ) => {
-        Swal.fire('Proceso Eliminado', '', 'success');
+        Swal.fire({
+          title: 'Proceso Eliminado',
+          type: 'success',
+          showConfirmButton: false,
+          timer: 2000
+        });
         return resp;
       }),
       catchError( err => {

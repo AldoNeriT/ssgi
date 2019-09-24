@@ -88,7 +88,12 @@ export class InstitucionService {
       return this.http.put( url, institucion )
       .pipe(
         map( (resp: any ) => {
-          Swal.fire('Institución Actualizada', '', 'success');
+          Swal.fire({
+            title: 'Institución Actualizada',
+            type: 'success',
+            showConfirmButton: false,
+            timer: 2000
+          });
           return resp.institucion;
         }),
         catchError( err => {
@@ -106,7 +111,14 @@ export class InstitucionService {
       return this.http.post( url, institucion )
       .pipe(
         map( (resp: any ) => {
-          Swal.fire('Institución Creada', `${institucion.nombreInstitucion} se ha creado exitosamente`, 'success');
+
+          Swal.fire({
+            title: 'Institución Creada',
+            text: `"${institucion.nombreInstitucion}" se ha creado exitosamente`,
+            type: 'success',
+            showConfirmButton: false,
+            timer: 2000
+          });
           return resp.institucion;
         }),
         catchError( err => {
@@ -129,7 +141,12 @@ export class InstitucionService {
     return this.http.delete( url )
     .pipe(
       map( (resp: any ) => {
-        Swal.fire('Institución Eliminada', '', 'success');
+        Swal.fire({
+          title: 'Institución Eliminada',
+          type: 'success',
+          showConfirmButton: false,
+          timer: 2000
+        });
         return resp;
       }),
       catchError( err => {

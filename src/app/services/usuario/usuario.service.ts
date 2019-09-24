@@ -98,7 +98,12 @@ export class UsuarioService {
       return this.http.put( url, usuario )
       .pipe(
         map( (resp: any ) => {
-          Swal.fire('Usuario Actualizado', '', 'success');
+          Swal.fire({
+            title: 'Usuario Actualizado',
+            type: 'success',
+            showConfirmButton: false,
+            timer: 2000
+          });
           return resp.usuario;
         }),
         catchError( err => {
@@ -116,7 +121,13 @@ export class UsuarioService {
       return this.http.post( url, usuario )
       .pipe(
         map( (resp: any ) => {
-          Swal.fire('Usuario Creado', `"${usuario.nombre_Usuario}" se ha creado exitosamente`, 'success');
+          Swal.fire({
+            title: 'Usuario Creado',
+            text: `"${usuario.nombre_Usuario}" se ha creado exitosamente`,
+            type: 'success',
+            showConfirmButton: false,
+            timer: 2000
+          });
           return resp.usuario;
         }),
         catchError( err => {
@@ -200,7 +211,12 @@ export class UsuarioService {
     return this.http.delete( url )
     .pipe(
       map( (resp: any ) => {
-        Swal.fire('Usuario Desactivado', '', 'success');
+        Swal.fire({
+          title: 'Usuario Desactivado',
+          type: 'success',
+          showConfirmButton: false,
+          timer: 2000
+        });
         return resp;
       }),
       catchError( err => {
@@ -221,7 +237,12 @@ export class UsuarioService {
     return this.http.delete( url )
     .pipe(
       map( (resp: any ) => {
-        Swal.fire('Usuario Eliminado', '', 'success');
+        Swal.fire({
+          title: 'Usuario Eliminado',
+          type: 'success',
+          showConfirmButton: false,
+          timer: 2000
+        });
         return resp;
       }),
       catchError( err => {
@@ -242,7 +263,12 @@ export class UsuarioService {
     return this.http.put( url, '' )
     .pipe(
       map( (resp: any ) => {
-        Swal.fire('Usuario Activado', '', 'success');
+        Swal.fire({
+          title: 'Usuario Activado',
+          type: 'success',
+          showConfirmButton: false,
+          timer: 2000
+        });
         return resp.usuario;
       }),
       catchError( err => {
@@ -263,7 +289,12 @@ export class UsuarioService {
     return this.http.put( url, usuario )
     .pipe(
       map( (resp: any ) => {
-        Swal.fire('Contraseña Actualizada', '', 'success');
+        Swal.fire({
+          title: 'Contraseña Actualizada',
+          type: 'success',
+          showConfirmButton: false,
+          timer: 2000
+        });
         return resp.usuario;
       }),
       catchError( err => {
@@ -285,7 +316,12 @@ export class UsuarioService {
     .pipe(
       map( (resp: any ) => {
         this.usuario = resp.usuario;
-        Swal.fire('Datos Actualizados', '', 'success');
+        Swal.fire({
+          title: 'Datos Actualizados',
+          type: 'success',
+          showConfirmButton: false,
+          timer: 2000
+        });
         return resp.usuario;
       }),
       catchError( err => {

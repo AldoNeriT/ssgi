@@ -156,7 +156,13 @@ export class NormasComponent implements OnInit {
       text: `¿Estás seguro de eliminar la Norma "${norma.nombreNorma}"?`,
       type: 'warning',
       showCancelButton: true,
-      confirmButtonText: 'OK'
+      confirmButtonText: 'Sí',
+      cancelButtonText: 'No',
+      cancelButtonColor: '#e74c3c',
+      animation: false,
+      customClass: {
+        popup: 'animated tada'
+      }
     }).then((eliminar) => {
       if (eliminar.value) {
         this._normaService.eliminarNorma( norma._id )

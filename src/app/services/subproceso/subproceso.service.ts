@@ -107,7 +107,12 @@ export class SubprocesoService {
       return this.http.put( url, subproceso )
       .pipe(
         map( (resp: any ) => {
-          Swal.fire('Subproceso Actualizado', '', 'success');
+          Swal.fire({
+            title: 'Subproceso Actualizado',
+            type: 'success',
+            showConfirmButton: false,
+            timer: 2000
+          });
           return resp.subproceso;
         }),
         catchError( err => {
@@ -125,7 +130,13 @@ export class SubprocesoService {
       return this.http.post( url, subproceso )
       .pipe(
         map( (resp: any ) => {
-          Swal.fire('Subproceso Creado', `${subproceso.nombreSubproceso} se ha creado exitosamente`, 'success');
+          Swal.fire({
+            title: 'Subproceso Creado',
+            text: `"${subproceso.nombreSubproceso}" se ha creado exitosamente`,
+            type: 'success',
+            showConfirmButton: false,
+            timer: 2000
+          });
           return resp.subproceso;
         }),
         catchError( err => {
@@ -147,7 +158,12 @@ export class SubprocesoService {
     return this.http.delete( url )
     .pipe(
       map( (resp: any ) => {
-        Swal.fire('Subproceso Eliminado', '', 'success');
+        Swal.fire({
+          title: 'Subproceso Eliminado',
+          type: 'success',
+          showConfirmButton: false,
+          timer: 2000
+        });
         return resp;
       }),
       catchError( err => {
