@@ -1,6 +1,6 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { NormaService } from '../../services/service.index';
+import { NormaService, UsuarioService } from '../../services/service.index';
 import { Norma } from '../../models/norma.model';
 import { Router, ActivatedRoute } from '@angular/router';
 
@@ -30,6 +30,7 @@ export class NormasComponent implements OnInit {
   cargando = true;
 
   constructor( public _normaService: NormaService,
+               public _usuarioService: UsuarioService,
                public router: Router,
                public activatedRoute: ActivatedRoute ) {
 

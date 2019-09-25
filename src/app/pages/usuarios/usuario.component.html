@@ -13,7 +13,7 @@
 <div *ngIf="!cargando">
 
     <div *ngIf="!mostrarFormPassword" class="row">
-        <div class="col-8">
+        <div class="col-md-8 col-sm-12">
             <div class="card">
                 <div class="card-header bg-theme text-white">
                     {{ titulo }}
@@ -241,7 +241,7 @@
         </div>
 
 
-        <div class="col-4">
+        <div class="col-md-4 col-sm-12">
             <div class="card">
                 <div class="card-header bg-theme text-white">
                     Fotografia
@@ -269,11 +269,11 @@
                     <form ngNativeValidate [formGroup]="formaPass" (ngSubmit)="actualizarPass()">
                         <div class="">
                             <div class="row">
-                                <div class="col-md-6 m-b-20 text-center">
+                                <div class="col-md-6 col-sm-12 m-b-20 text-center">
                                     <label>Contraseña</label>
                                     <input formControlName="contrasenia" name="contrasenia" type="password" class="form-control sgi_centrarInp" required>
                                 </div>
-                                <div class="col-md-6 m-b-20 text-center">
+                                <div class="col-md-6 col-sm-12 m-b-20 text-center">
                                     <label>Confirmar Contraseña</label>
                                     <input formControlName="contrasenia2" name="contrasenia2" type="password" class="form-control sgi_centrarInp" required>
                                 </div>

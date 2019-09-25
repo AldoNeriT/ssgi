@@ -53,7 +53,11 @@ export class LoginComponent implements OnInit {
     Swal.fire({
       title: '¡Importante!',
       text: 'Para recuperar los datos de tu cuenta, favor de comunicarte con el Administrador del Sistema',
-      type: 'warning'
+      type: 'warning',
+      animation: false,
+      customClass: {
+        popup: 'animated heartBeat'
+      }
     });
   }
 

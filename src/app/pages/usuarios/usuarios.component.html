@@ -20,14 +20,14 @@
             <div class="card">
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-4">
-                            <button [routerLink]="['/usuario','nuevo']" type="button" class="btn btn-rounded btn-themecolor">Agregar Nuevo Usuario</button>
+                        <div class="col-md-4 col-sm-12">
+                            <button *ngIf="_usuarioService.usuario.tipo_Usuario !== 'AUDITOR_LIDER'" [routerLink]="['/usuario','nuevo']" type="button" class="btn btn-rounded btn-themecolor">Agregar Nuevo Usuario</button>
                         </div>
-                        <div class="col-4 text-center">
+                        <div class="col-md-4 col-sm-12 text-center">
                             <span class="text text-themecolor">{{_usuarioService.totalUsuarios}} Usuarios</span>
                         </div>
-                        <div class="col-4">
-                            <button (click)="cambiarPapelera()" type="button" class="btn btn-rounded btn-outline-secondary alinear_derecha"><i class="mdi mdi-delete-sweep"></i></button>
+                        <div class="col-md-4 col-sm-12">
+                            <button *ngIf="_usuarioService.usuario.tipo_Usuario !== 'AUDITOR_LIDER'" (click)="cambiarPapelera()" type="button" class="btn btn-rounded btn-outline-secondary alinear_derecha"><i class="mdi mdi-delete-sweep"></i></button>
                         </div>
                     </div>
                     <div class="table-responsive m-t-40">
@@ -57,13 +57,13 @@
                                             <button [routerLink]="['/usuario', 'ver', usuario._id]" class="btn btn-outline-info btn-circle">
                                                 <i class="fa fa-eye"></i>
                                             </button>&nbsp;
-                                            <button [routerLink]="['/usuario', usuario._id]" class="btn btn-outline-inverse btn-circle">
+                                            <button *ngIf="_usuarioService.usuario.tipo_Usuario !== 'AUDITOR_LIDER'" [routerLink]="['/usuario', usuario._id]" class="btn btn-outline-inverse btn-circle">
                                                 <i class="fa fa-edit"></i>
                                             </button>&nbsp;
-                                            <button [routerLink]="['/usuario', 'pass', usuario._id]" class="btn btn-outline-inverse btn-circle">
+                                            <button *ngIf="_usuarioService.usuario.tipo_Usuario !== 'AUDITOR_LIDER'" [routerLink]="['/usuario', 'pass', usuario._id]" class="btn btn-outline-inverse btn-circle">
                                                 <i class="fa fa-lock"></i>
                                             </button>&nbsp;
-                                            <button (click)="desactivarUsuario( usuario )" class="btn btn-outline-danger btn-circle">
+                                            <button *ngIf="_usuarioService.usuario.tipo_Usuario !== 'AUDITOR_LIDER'" (click)="desactivarUsuario( usuario )" class="btn btn-outline-danger btn-circle">
                                                 <i class="fa fa-folder-open"></i>
                                             </button>
                                         </div>
@@ -88,11 +88,11 @@
             <div class="card">
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-2"></div>
-                        <div class="col-8 text-center">
+                        <div class="col-md-2 col-sm-12"></div>
+                        <div class="col-md-8 col-sm-12 text-center">
                             <span class="text text-danger">{{_usuarioService.totalUsuarios}} Usuarios en Papelera</span>
                         </div>
-                        <div class="col-2">
+                        <div class="col-md-2 col-sm-12">
                             <button (click)="cambiarListaU()" type="button" class="btn btn-rounded btn-outline-secondary alinear_derecha"><i class="mdi mdi-account-multiple"></i></button>
                         </div>
                     </div>

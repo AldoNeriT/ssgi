@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { ProcesoService } from '../../services/service.index';
+import { ProcesoService, UsuarioService } from '../../services/service.index';
 import { SubprocesoService } from '../../services/subproceso/subproceso.service';
 import { Proceso } from '../../models/proceso.model';
 import { Subproceso } from '../../models/subproceso.model';
@@ -33,7 +33,8 @@ export class ProcesosComponent implements OnInit {
   cargando2 = false;
 
   constructor( public _procesoService: ProcesoService,
-               public _subprocesoService: SubprocesoService ) { }
+               public _subprocesoService: SubprocesoService,
+               public _usuarioService: UsuarioService, ) { }
 
   ngOnInit() {
     init_plugins();

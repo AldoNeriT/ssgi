@@ -66,7 +66,7 @@
 
             </div>
             <div class="modal-footer">
-                <button (click)="pasarDatos( institucion )" class="btn btn-themecolor waves-effect">Editar</button>
+                <button *ngIf="_usuarioService.usuario.tipo_Usuario !== 'AUDITOR_LIDER'" (click)="pasarDatos( institucion )" class="btn btn-themecolor waves-effect">Editar</button>
             </div>
         </div>
     </div>

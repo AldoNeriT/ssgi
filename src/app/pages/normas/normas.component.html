@@ -18,7 +18,7 @@
     <div class="row">
         <div class="col text-center">
             <div class="btn-group sgi_paddNorm">
-                <button type="button" class="btn btn-block btn-xl btn-circle btn-outline-secondary" data-toggle="modal" data-target="#modalNormaAgregar">
+                <button *ngIf="_usuarioService.usuario.tipo_Usuario !== 'AUDITOR_LIDER'" type="button" class="btn btn-block btn-xl btn-circle btn-outline-secondary" data-toggle="modal" data-target="#modalNormaAgregar">
                     <i class="mdi mdi-plus"></i>
                 </button>
             </div>
@@ -39,15 +39,15 @@
                 <button type="button" class="btn btn-{{norma.color}} dropdown-toggle btn-lg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     {{norma.nombreNorma}}
                 </button>
-                <div class="dropdown-menu text-center animated slideInUp">
+                <div class="dropdown-menu text-center animated heartBeat">
                     <div class="btn-group" role="group" aria-label="Basic example">
                         <button (click)="formVer( norma )" type="button" class="btn btn-outline-{{norma.color}}" data-toggle="modal" data-target="#modalNormaVer">
                             <i class="fa fa-eye"></i>
                         </button>
-                        <button (click)="formEditable( norma )" type="button" class="btn btn-outline-{{norma.color}}" data-toggle="modal" data-target="#modalNormaEditar">
+                        <button *ngIf="_usuarioService.usuario.tipo_Usuario !== 'AUDITOR_LIDER'" (click)="formEditable( norma )" type="button" class="btn btn-outline-{{norma.color}}" data-toggle="modal" data-target="#modalNormaEditar">
                             <i class="fa fa-edit"></i>
                         </button>
-                        <button (click)="eliminarNorma( norma )" type="button" class="btn btn-outline-{{norma.color}}">
+                        <button *ngIf="_usuarioService.usuario.tipo_Usuario !== 'AUDITOR_LIDER'" (click)="eliminarNorma( norma )" type="button" class="btn btn-outline-{{norma.color}}">
                             <i class="fa fa-trash-o"></i>
                         </button>
                     </div>

@@ -25,7 +25,7 @@
                                 <a id="a-{{ proceso._id }}" (click)="cargarSubprocesosProceso( proceso._id )" class="nav-link" data-toggle="tab" href="#{{ proceso._id }}" role="tab" aria-expanded="false">{{ proceso.nombreProceso }}</a>
                             </li>
 
-                            <li class="nav-item text-center">
+                            <li *ngIf="_usuarioService.usuario.tipo_Usuario !== 'AUDITOR_LIDER'" class="nav-item text-center">
                                 <a class="nav-link" data-toggle="tab" role="tab" aria-expanded="false" data-toggle="modal" data-target="#modalProcesoAgregar"><span>
                                     <i class="mdi mdi-plus"></i>
                                 </span></a>
@@ -47,14 +47,14 @@
                             </div>
 
                             <div *ngFor="let proceso of procesos" class="tab-pane" id="{{ proceso._id }}" role="tabpanel" aria-expanded="false">
-                                <div class="row">
-                                    <div class="col-sm-10" style="padding-right: 0px;">
+                                <div *ngIf="_usuarioService.usuario.tipo_Usuario !== 'AUDITOR_LIDER'" class="row">
+                                    <div class="col-md-10 col-sm-12" style="padding-right: 0px;">
                                         <button type="button" class="btn btn-outline-info btn-block" data-toggle="modal" data-target="#modalSubprocesoAgregar">Agregar Subproceso <i class="mdi mdi-plus"></i></button>
                                     </div>
-                                    <div class="col-sm-1" style="padding-left: 7.5px; padding-right: 7.5px;">
+                                    <div class="col-md-1 col-sm-6" style="padding-left: 7.5px; padding-right: 7.5px;">
                                         <button type="button" (click)="formEditable( proceso )" class="btn btn-outline-warning btn-block" data-toggle="modal" data-target="#modalProcesoEditar"><i class="mdi mdi-pencil"></i></button>
                                     </div>
-                                    <div class="col-sm-1" style="padding-left: 0px;">
+                                    <div class="col-md-1 col-sm-6" style="padding-left: 0px;">
                                         <button type="button" (click)="eliminarProceso( proceso )" class="btn btn-outline-danger btn-block"><i class="mdi mdi-delete"></i></button>
                                     </div>
                                 </div>
@@ -64,14 +64,14 @@
                                             <tr>
                                                 <th>Nombre</th>
                                                 <th>URL</th>
-                                                <th>Acción</th>
+                                                <th *ngIf="_usuarioService.usuario.tipo_Usuario !== 'AUDITOR_LIDER'">Acción</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr *ngFor="let subproceso of subprocesos">
                                                 <td>{{ subproceso.nombreSubproceso }}</td>
                                                 <td>{{ subproceso.archivoDigital }}</td>
-                                                <td>
+                                                <td *ngIf="_usuarioService.usuario.tipo_Usuario !== 'AUDITOR_LIDER'">
                                                     <div aria-label="Basic example">
                                                         <button (click)="formEditableSub( subproceso )" class="btn btn-sm btn-outline-inverse btn-circle" data-toggle="modal" data-target="#modalSubprocesoEditar">
                                                             <i class="fa fa-edit"></i>
