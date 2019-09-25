@@ -1,0 +1,59 @@
+<div class="row">
+    <div class="col text-center">
+        <div class="btn-group sgi_paddNorm">
+            <button type="button" class="btn btn-block btn-xl btn-circle btn-outline-secondary" data-toggle="modal" data-target="#modalNormaAgregar">
+                <i class="mdi mdi-plus"></i>
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <!-- <h1>Total: {{_normaService.totalNormas}}</h1> -->
+        <hr class="m-t-0 m-b-40">
+    </div>
+</div>
+
+<div class="row">
+    <div *ngFor="let plan of planes" class="col-md-6 col-sm-12">
+        <div class="card">
+            <div class="card-header bg-theme text-white text-center">
+                {{ plan.nombrePlan }}
+            </div>
+            <div class="card-body">
+                <div *ngFor="let auditoria of auditorias">
+                    <table *ngIf="auditoria.progreso === 'empezar' && plan._id === auditoria.plan._id" class="table full-color-table full-info-table hover-table pointer">
+                        <tbody>
+                            <tr (click)="imprimir()">
+                                <td>{{ auditoria.nombreAuditoria }}</td>
+                                <td class="text-right"><i class="mdi mdi-power mdi-24px text-info"></i></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table *ngIf="auditoria.progreso === 'encurso' && plan._id === auditoria.plan._id" class="table full-color-table full-warning-table hover-table pointer">
+                        <tbody>
+                            <tr>
+                                <td>{{ auditoria.nombreAuditoria }}</td>
+                                <td class="text-right"><i class="mdi mdi-clock mdi-24px text-warning"></i></td>
+                            </tr>
+                    </table>
+                    <table *ngIf="auditoria.progreso === 'terminado' && plan._id === auditoria.plan._id" class="table full-color-table full-success-table hover-table pointer">
+                        <tbody>
+                            <tr>
+                                <td>{{ auditoria.nombreAuditoria }}</td>
+                                <td class="text-right"><i class="mdi mdi-spellcheck mdi-24px text-success"></i></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div *ngIf="plan.estado === 'false'" class="card-footer bg-white text-dark text-center">
+                <label class="label label-warning"> No Validado </label>
+            </div>
+            <div *ngIf="plan.estado === 'true'" class="card-footer bg-white text-dark text-center">
+                <label class="label label-success"> Validado </label>
+            </div>
+        </div>
+    </div>
+</div>

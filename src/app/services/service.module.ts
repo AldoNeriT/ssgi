@@ -6,6 +6,7 @@ import { LoginGuardGuard,
          UsuarioGuard,
          NormaGuard,
          ProcesoGuard,
+         PlanGuard,
          SettingsService,
          SharedService,
          SidebarService,
@@ -13,7 +14,9 @@ import { LoginGuardGuard,
          UsuarioService,
          NormaService,
          ProcesoService,
-         SubprocesoService
+         SubprocesoService,
+         PlanService,
+         AuditoriaService
         } from './service.index';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -30,6 +33,7 @@ import { HttpClientModule } from '@angular/common/http';
     UsuarioGuard,
     NormaGuard,
     ProcesoGuard,
+    PlanGuard,
     SettingsService,
     SharedService,
     SidebarService,
@@ -37,7 +41,9 @@ import { HttpClientModule } from '@angular/common/http';
     UsuarioService,
     NormaService,
     ProcesoService,
-    SubprocesoService
+    SubprocesoService,
+    PlanService,
+    AuditoriaService
   ]
 })
 export class ServiceModule { }

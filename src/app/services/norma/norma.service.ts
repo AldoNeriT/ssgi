@@ -15,7 +15,6 @@ export class NormaService {
 
   totalNormas: number = 0;
 
-  // norma: Norma;
   token: string;
 
   constructor( public http: HttpClient ) {

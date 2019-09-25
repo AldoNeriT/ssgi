@@ -54,7 +54,8 @@ export class SidebarService {
           { titulo: 'Institución', url: '/institucion' },
           { titulo: 'Usuarios', url: '/usuarios' },
           { titulo: 'Normas', url: '/normas' },
-          { titulo: 'Procesos', url: '/procesos' }
+          { titulo: 'Procesos', url: '/procesos' },
+          { titulo: 'Plan de Auditorias', url: '/plan' }
         ]
       }
     ];
@@ -78,7 +79,8 @@ export class SidebarService {
           { titulo: 'Institución', url: '/institucion' },
           { titulo: 'Usuarios', url: '/usuarios' },
           { titulo: 'Normas', url: '/normas' },
-          { titulo: 'Procesos', url: '/procesos' }
+          { titulo: 'Procesos', url: '/procesos' },
+          { titulo: 'Plan de Auditorias', url: '/plan' }
         ]
       }
     ];
@@ -102,7 +104,8 @@ export class SidebarService {
           { titulo: 'Institución', url: '/institucion' },
           { titulo: 'Usuarios', url: '/usuarios' },
           { titulo: 'Normas', url: '/normas' },
-          { titulo: 'Procesos', url: '/procesos' }
+          { titulo: 'Procesos', url: '/procesos' },
+          { titulo: 'Plan de Auditorias', url: '/plan' }
         ]
       }
     ];
@@ -145,6 +148,13 @@ export class SidebarService {
         icono: 'mdi mdi-home',
         submenu: [
           { titulo: 'Home', url: '/home' }
+        ]
+      },
+      {
+        titulo: 'Auditorias',
+        icono: 'mdi mdi-book',
+        submenu: [
+          { titulo: 'Plan de Auditorias', url: '/plan' }
         ]
       }
     ];

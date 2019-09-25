@@ -17,6 +17,7 @@ import { UsuariosComponent } from './usuarios/usuarios.component';
 import { UsuarioComponent } from './usuarios/usuario.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ProcesosComponent } from './procesos/procesos.component';
+import { PlanComponent } from './plan/plan.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { ProcesosComponent } from './procesos/procesos.component';
         UsuariosComponent,
         UsuarioComponent,
         ProfileComponent,
-        ProcesosComponent
+        ProcesosComponent,
+        PlanComponent
     ],
     exports: [
         PrincipalComponent,
