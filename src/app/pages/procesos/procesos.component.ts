@@ -61,17 +61,17 @@ export class ProcesosComponent implements OnInit {
     this.cargarProcesos();
   }
 
-  claseActive() {
+  // claseActive() {
 
-    // $('#list-procesos > li:first > a').addClass('active');
-    // $('#list-procesos > li:first > a').attr('aria-expanded', 'true');
-    // console.log($('#list-procesos > li:first > a'));
+  //   // $('#list-procesos > li:first > a').addClass('active');
+  //   // $('#list-procesos > li:first > a').attr('aria-expanded', 'true');
+  //   // console.log($('#list-procesos > li:first > a'));
 
-    // $('#list-procesos > li:first > a').addClass('active');
-    $('div.tab-pane:first').attr('aria-expanded', 'true');
-    console.log($('div.tab-pane:first'));
+  //   // $('#list-procesos > li:first > a').addClass('active');
+  //   $('div.tab-pane:first').attr('aria-expanded', 'true');
+  //   // console.log($('div.tab-pane:first'));
 
-  }
+  // }
 
   // ************************************************
   // *** PROCESOS ***
@@ -86,7 +86,7 @@ export class ProcesosComponent implements OnInit {
             this.procesos = procesos;
             this.cargando = false;
           });
-    this.claseActive();
+    // this.claseActive();
   }
 
   // cargarSubprocesos() {

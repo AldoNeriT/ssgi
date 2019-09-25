@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { InstitucionService } from '../../services/institucion/institucion.service';
 import { Institucion } from '../../models/institucion.model';
+import { UsuarioService } from '../../services/service.index';
+
+declare function init_plugins();
 
 import Swal from 'sweetalert2';
 
@@ -23,9 +26,12 @@ export class InstitucionComponent implements OnInit {
 
   cargando = true;
 
-  constructor( public _institucionService: InstitucionService ) { }
+  constructor( public _institucionService: InstitucionService,
+               public _usuarioService: UsuarioService ) { }
 
   ngOnInit() {
+    init_plugins();
+
     this.formaInstitucion = new FormGroup({
       nombre: new FormControl( null, Validators.required ),
       domicilio: new FormControl( null, Validators.required ),

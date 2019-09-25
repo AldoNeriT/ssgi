@@ -5,7 +5,7 @@ import { UsuarioService } from '../usuario/usuario.service';
 @Injectable({
   providedIn: 'root'
 })
-export class LoginGuardGuard implements CanActivate {
+export class InstitucionGuard implements CanActivate {
 
   constructor(
     public _usuarioService: UsuarioService,
@@ -15,12 +15,15 @@ export class LoginGuardGuard implements CanActivate {
 
   canActivate() {
 
-    if ( this._usuarioService.estaLogueado() ) {
-      // console.log( 'PASO EL GUARD');
+    if (
+          (this._usuarioService.usuario.tipo_Usuario === 'ROOT') ||
+          (this._usuarioService.usuario.tipo_Usuario === 'ADMIN') ||
+          (this._usuarioService.usuario.tipo_Usuario === 'AUDITOR_LIDER')
+      ) {
       return true;
     } else {
-      // console.log( 'Bloqueado por guard');
-      this.router.navigate(['/login']);
+      console.log('Bloqueado por INSTITUCION GUARD');
+      this.router.navigate(['/home']);
       return false;
     }
   }

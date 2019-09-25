@@ -2,6 +2,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { LoginGuardGuard,
+         InstitucionGuard,
+         UsuarioGuard,
+         NormaGuard,
+         ProcesoGuard,
          SettingsService,
          SharedService,
          SidebarService,
@@ -22,6 +26,10 @@ import { HttpClientModule } from '@angular/common/http';
   ],
   providers: [
     LoginGuardGuard,
+    InstitucionGuard,
+    UsuarioGuard,
+    NormaGuard,
+    ProcesoGuard,
     SettingsService,
     SharedService,
     SidebarService,

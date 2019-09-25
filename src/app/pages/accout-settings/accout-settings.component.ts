@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { SettingsService } from '../../services/service.index';
 
+declare function init_plugins();
+
 @Component({
   selector: 'app-accout-settings',
   templateUrl: './accout-settings.component.html',
@@ -12,6 +14,8 @@ export class AccoutSettingsComponent implements OnInit {
   constructor( public _ajustes: SettingsService ) { }
 
   ngOnInit() {
+    init_plugins();
+    
     this.colocarCheck();
   }
 

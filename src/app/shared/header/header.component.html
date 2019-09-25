@@ -121,17 +121,17 @@
                                         <p *ngIf="usuario.tipo_Usuario === 'AUDITOR'" class="text-muted">Auditor</p>
                                         <p *ngIf="usuario.tipo_Usuario === 'AUDITADO'" class="text-muted">Auditado</p>
                                         <p *ngIf="usuario.tipo_Usuario === 'ALTA_DIRECCION'" class="text-muted">Alta Dirección</p>
-                                        <a routerLink="/perfil" class="btn btn-rounded btn-danger btn-sm">Ver Perfil</a>
+                                        <button routerLink="/perfil" type="button" class="btn btn-rounded btn-themecolor btn-sm">Ver Perfil</button>
                                     </div>
                                 </div>
                             </li>
                             <li role="separator" class="divider"></li>
-                            <li><a routerLink="/perfil"><i class="ti-user"></i> Mi Perfil</a></li>
-                            <li><a><i class="ti-email"></i> Mensajes</a></li>
+                            <li><a routerLink="/perfil"><i class="mdi mdi-account"></i> Mi Perfil</a></li>
+                            <li><a><i class="mdi mdi-email"></i> Mensajes</a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a routerLink="/account-settings"><i class="ti-settings"></i> Ajustes</a></li>
+                            <li><a routerLink="/account-settings"><i class="mdi mdi-settings"></i> Ajustes</a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a (click)="_usuarioService.logout()" class="pointer"><i class="fa fa-power-off"></i> Cerrar Sesión</a></li>
+                            <li><a (click)="_usuarioService.logout()" class="pointer"><i class="mdi mdi-power"></i> Cerrar Sesión</a></li>
                         </ul>
                     </div>
                 </li>
