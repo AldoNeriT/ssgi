@@ -87,7 +87,7 @@ export class PlanService {
       .pipe(
         map( (resp: any ) => {
           Swal.fire({
-            title: 'Plan Anual Actualizado',
+            title: 'Plan de Auditorías Actualizado',
             type: 'success',
             showConfirmButton: false,
             timer: 2000
@@ -110,8 +110,8 @@ export class PlanService {
       .pipe(
         map( (resp: any ) => {
           Swal.fire({
-            title: 'Plan Anual Creado',
-            text: `El Plan Anual "${plan.nombrePlan}" se ha creado exitosamente`,
+            title: 'Plan de Auditorías Creado',
+            text: `El Plan de Auditorías "${plan.nombrePlan}" se ha creado exitosamente`,
             type: 'success',
             showConfirmButton: false,
             timer: 2000
@@ -138,7 +138,7 @@ export class PlanService {
     .pipe(
       map( (resp: any ) => {
         Swal.fire({
-          title: 'Plan Anual Eliminado',
+          title: 'Plan de Auditorías Eliminado',
           type: 'success',
           showConfirmButton: false,
           timer: 2000

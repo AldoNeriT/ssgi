@@ -17,7 +17,7 @@
     <div class="row">
         <div class="col text-center">
             <div class="btn-group sgi_paddNorm">
-                <button type="button" class="btn btn-block btn-xl btn-circle btn-outline-secondary" data-toggle="modal" data-target="#modalNormaAgregar">
+                <button (click)="modalAgregar()" type="button" class="btn btn-block btn-xl btn-circle btn-outline-secondary">
                 <i class="mdi mdi-plus"></i>
             </button>
             </div>
@@ -36,7 +36,7 @@
     <!-- ============================================================== -->
 
     <div class="row">
-        <div *ngFor="let plan of planes" class="col-md-6 col-sm-12 accordion" role="tablist" aria-multiselectable="true">
+        <div *ngFor="let plan of planes" class="col-md-12 col-sm-12 accordion" role="tablist" aria-multiselectable="true">
             <div class="card">
                 <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#{{plan._id}}" aria-expanded="false" aria-controls="collapse">
                     <div class="card-header bg-theme text-white text-center" role="tab" id="headingOne">
@@ -50,6 +50,7 @@
                                 <tbody>
                                     <tr (click)="imprimir( auditoria._id )">
                                         <td>{{ auditoria.nombreAuditoria }}</td>
+                                        <td class="text-right">{{ auditoria.fechaInicial }} - {{ auditoria.fechaFinal }}</td>
                                         <td class="text-right"><i class="mdi mdi-power mdi-24px text-info"></i></td>
                                     </tr>
                                 </tbody>
@@ -58,6 +59,7 @@
                                 <tbody>
                                     <tr (click)="imprimir( auditoria._id )">
                                         <td>{{ auditoria.nombreAuditoria }}</td>
+                                        <td class="text-right">{{ auditoria.fechaInicial }} - {{ auditoria.fechaFinal }}</td>
                                         <td class="text-right"><i class="mdi mdi-clock mdi-24px text-warning"></i></td>
                                     </tr>
                             </table>
@@ -65,6 +67,7 @@
                                 <tbody>
                                     <tr (click)="imprimir( auditoria._id )">
                                         <td>{{ auditoria.nombreAuditoria }}</td>
+                                        <td class="text-right">{{ auditoria.fechaInicial }} - {{ auditoria.fechaFinal }}</td>
                                         <td class="text-right"><i class="mdi mdi-spellcheck mdi-24px text-success"></i></td>
                                     </tr>
                                 </tbody>
