@@ -7,15 +7,12 @@ export class Auditoria {
         public fechaFinal: string,
         public planE: string,
         public grupoAuditor: string,
-        public aditados: string,
+        public auditados: string,
         public objetivos: string,
         public alcance: string,
         public contacto: string,
         public progreso: string,
         public _id?: string,
-        public estado?: string,
-        public plan?: {
-            _id: string
-        }
+        public estado?: string
     ) { }
 }

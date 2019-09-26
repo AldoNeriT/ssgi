@@ -18,7 +18,7 @@ declare function init_plugins();
 export class PlanComponent implements OnInit {
 
   planes: Plan[] = [];
-  auditorias: Auditoria[] = [];
+  auditorias: any[] = [];
   forma: FormGroup;
   formaEditar: FormGroup;
 
@@ -40,33 +40,44 @@ export class PlanComponent implements OnInit {
 
   cargarPlanes() {
 
-    // this.cargando = true;
+    this.cargando = true;
 
     this._planService.cargarPlanes()
           .subscribe( planes => {
-            console.log(planes);
             this.planes = planes;
-            // this.cargando = false;
+            this.cargando = false;
           });
 
   }
 
   cargarAuditorias() {
 
-    // this.cargando = true;
+    this.cargando = true;
 
     this._auditoriaService.cargarAuditorias()
           .subscribe( auditorias => {
-            console.log(auditorias);
             this.auditorias = auditorias;
-            // this.cargando = false;
+            this.cargando = false;
           });
 
   }
 
-  imprimir() {
-    console.log('Hola');
-    this.router.navigate(['/home']);
+  cargarAuditoriasPlan( id: string ) {
+
+    this.cargando = true;
+
+    this._auditoriaService.cargarAuditoriasPlan( id )
+          .subscribe( auditorias => {
+            this.auditorias = auditorias;
+            $('#card-acordeon > div.collapse').removeClass('show');
+            $('#card-acordeon > a').attr('aria-expanded', 'false');
+            this.cargando = false;
+          });
+
+  }
+
+  imprimir( id: string ) {
+    console.log(id);
   }
 
 }

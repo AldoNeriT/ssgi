@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-// import { Norma } from '../../models/norma.model';
+import { Plan } from '../../models/plan.model';
 import { URL_SERVICIOS } from '../../config/config';
 
 import { map, catchError } from 'rxjs/operators';
@@ -43,6 +43,107 @@ export class PlanService {
       map( (resp: any ) => {
         this.totalPlanes = resp.cuantos;
         return resp.planes;
+      }),
+      catchError( err => {
+        Swal.fire('Error', err.error.err.message, 'error');
+        return throwError( err ) ;
+      })
+    );
+
+  }
+
+  cargarPlan( id: string ) {
+
+    let url = URL_SERVICIOS + '/plan/' + id;
+
+    // *** TOKEN ***
+    // url += '?token=' + this.token;
+
+    return this.http.get( url )
+    .pipe(
+      map( (resp: any ) => {
+        return resp.plan;
+      }),
+      catchError( err => {
+        Swal.fire('Error', err.error.err.message, 'error');
+        return throwError( err ) ;
+      })
+    );
+
+  }
+
+  crearPlan( plan: Plan ) {
+
+    let url = URL_SERVICIOS + '/plan';
+
+    if ( plan._id ) {
+      // *** Aqui se ACTUALIZA el Plan ***
+      url += '/' + plan._id;
+
+      // *** TOKEN ***
+      // url += '?token=' + this.token;
+
+      return this.http.put( url, plan )
+      .pipe(
+        map( (resp: any ) => {
+          Swal.fire({
+            title: 'Plan Anual Actualizado',
+            type: 'success',
+            showConfirmButton: false,
+            timer: 2000
+          });
+          return resp.plan;
+        }),
+        catchError( err => {
+          Swal.fire('Error', err.error.err.message, 'error');
+          return throwError( err ) ;
+        })
+      );
+
+    } else {
+      // *** Aqui se CREA el Plan ***
+
+      // *** TOKEN ***
+      // url += '?token=' + this.token;
+
+      return this.http.post( url, plan )
+      .pipe(
+        map( (resp: any ) => {
+          Swal.fire({
+            title: 'Plan Anual Creado',
+            text: `El Plan Anual "${plan.nombrePlan}" se ha creado exitosamente`,
+            type: 'success',
+            showConfirmButton: false,
+            timer: 2000
+          });
+          return resp.plan;
+        }),
+        catchError( err => {
+          Swal.fire('Error', err.error.err.message, 'error');
+          return throwError( err ) ;
+        })
+      );
+    }
+
+  }
+
+  eliminarNorma( id: string ) {
+
+    let url = URL_SERVICIOS + '/plan/' + id;
+
+    // *** TOKEN ***
+    // url += '?token=' + this.token;
+
+    return this.http.delete( url )
+    .pipe(
+      map( (resp: any ) => {
+        Swal.fire({
+          title: 'Plan Anual Eliminado',
+          type: 'success',
+          showConfirmButton: false,
+          timer: 2000
+        });
+        return resp;
       }),
       catchError( err => {
         Swal.fire('Error', err.error.err.message, 'error');
