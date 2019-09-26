@@ -46,32 +46,34 @@
                 <div id="{{plan._id}}" class="collapse" role="tabpanel" aria-labelledby="headingOne">
                     <div class="card-body">
                         <div *ngFor="let auditoria of auditorias">
-                            <table *ngIf="auditoria.progreso === 'empezar' && plan._id === auditoria.plan._id" class="table full-color-table full-info-table hover-table pointer">
-                                <tbody>
-                                    <tr (click)="imprimir( auditoria._id )">
-                                        <td>{{ auditoria.nombreAuditoria }}</td>
-                                        <td class="text-right">{{ auditoria.fechaInicial }} - {{ auditoria.fechaFinal }}</td>
-                                        <td class="text-right"><i class="mdi mdi-power mdi-24px text-info"></i></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <table *ngIf="auditoria.progreso === 'encurso' && plan._id === auditoria.plan._id" class="table full-color-table full-warning-table hover-table pointer">
-                                <tbody>
-                                    <tr (click)="imprimir( auditoria._id )">
-                                        <td>{{ auditoria.nombreAuditoria }}</td>
-                                        <td class="text-right">{{ auditoria.fechaInicial }} - {{ auditoria.fechaFinal }}</td>
-                                        <td class="text-right"><i class="mdi mdi-clock mdi-24px text-warning"></i></td>
-                                    </tr>
-                            </table>
-                            <table *ngIf="auditoria.progreso === 'terminado' && plan._id === auditoria.plan._id" class="table full-color-table full-success-table hover-table pointer">
-                                <tbody>
-                                    <tr (click)="imprimir( auditoria._id )">
-                                        <td>{{ auditoria.nombreAuditoria }}</td>
-                                        <td class="text-right">{{ auditoria.fechaInicial }} - {{ auditoria.fechaFinal }}</td>
-                                        <td class="text-right"><i class="mdi mdi-spellcheck mdi-24px text-success"></i></td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            <div *ngIf="auditoria.plan !== null">
+                                <table *ngIf="auditoria.progreso === 'empezar' && plan._id === auditoria.plan._id" class="table full-color-table full-info-table hover-table pointer">
+                                    <tbody>
+                                        <tr (click)="imprimir( auditoria._id )">
+                                            <td>{{ auditoria.nombre }}</td>
+                                            <td class="text-right">{{ auditoria.fechaInicial }} - {{ auditoria.fechaFinal }}</td>
+                                            <td class="text-right"><i class="mdi mdi-power mdi-24px text-info"></i></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <table *ngIf="auditoria.progreso === 'encurso' && plan._id === auditoria.plan._id" class="table full-color-table full-warning-table hover-table pointer">
+                                    <tbody>
+                                        <tr (click)="imprimir( auditoria._id )">
+                                            <td>{{ auditoria.nombre }}</td>
+                                            <td class="text-right">{{ auditoria.fechaInicial }} - {{ auditoria.fechaFinal }}</td>
+                                            <td class="text-right"><i class="mdi mdi-clock mdi-24px text-warning"></i></td>
+                                        </tr>
+                                </table>
+                                <table *ngIf="auditoria.progreso === 'terminado' && plan._id === auditoria.plan._id" class="table full-color-table full-success-table hover-table pointer">
+                                    <tbody>
+                                        <tr (click)="imprimir( auditoria._id )">
+                                            <td>{{ auditoria.nombre }}</td>
+                                            <td class="text-right">{{ auditoria.fechaInicial }} - {{ auditoria.fechaFinal }}</td>
+                                            <td class="text-right"><i class="mdi mdi-spellcheck mdi-24px text-success"></i></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>

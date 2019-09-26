@@ -86,12 +86,12 @@ export class PlanService {
       return this.http.put( url, plan )
       .pipe(
         map( (resp: any ) => {
-          Swal.fire({
-            title: 'Plan de Auditorías Actualizado',
-            type: 'success',
-            showConfirmButton: false,
-            timer: 2000
-          });
+          // Swal.fire({
+          //   title: 'Plan de Auditorías Actualizado',
+          //   type: 'success',
+          //   showConfirmButton: false,
+          //   timer: 2000
+          // });
           return resp.plan;
         }),
         catchError( err => {
@@ -127,7 +127,7 @@ export class PlanService {
 
   }
 
-  eliminarNorma( id: string ) {
+  eliminarPlan( id: string ) {
 
     let url = URL_SERVICIOS + '/plan/' + id;
 
@@ -137,12 +137,12 @@ export class PlanService {
     return this.http.delete( url )
     .pipe(
       map( (resp: any ) => {
-        Swal.fire({
-          title: 'Plan de Auditorías Eliminado',
-          type: 'success',
-          showConfirmButton: false,
-          timer: 2000
-        });
+        // Swal.fire({
+        //   title: 'Plan de Auditorías Eliminado',
+        //   type: 'success',
+        //   showConfirmButton: false,
+        //   timer: 2000
+        // });
         return resp;
       }),
       catchError( err => {

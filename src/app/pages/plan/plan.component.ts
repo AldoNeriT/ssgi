@@ -57,6 +57,7 @@ export class PlanComponent implements OnInit {
     this._auditoriaService.cargarAuditorias()
           .subscribe( auditorias => {
             this.auditorias = auditorias;
+            console.log(this.auditorias);
             this.cargando = false;
           });
 
@@ -122,141 +123,181 @@ export class PlanComponent implements OnInit {
           // ************************************************
           // *** AQUI SE AGREGARA EL PLAN ***
           // ************************************************
+          let plan = new Plan(
+            result.value[0]
+          );
 
-          let cant: any[] = [];
-          let cont: any[] = [];
+          this._planService.crearPlan( plan )
+              .subscribe( resp => {
+                console.log(resp._id);
+                // this.cargarPlanes();
+                let cant: any[] = [];
+                let cont: any[] = [];
 
-          if (result.value[1] === '1') {
-            cant = ['1'];
-            cont = [
-              {
-                title: 'Auditoría 1',
-                text: '1'
-              }
-            ];
-            console.log(cant);
-          }
-          if (result.value[1] === '2') {
-            cant = ['1', '2'];
-            cont = [
-              {
-                title: 'Auditoría 1',
-                text: '1'
-              },
-              {
-                title: 'Auditoría 2',
-                text: '2'
-              }
-            ];
-            console.log(cant);
-          }
-          if (result.value[1] === '3') {
-            cant = ['1', '2', '3'];
-            cont = [
-              {
-                title: 'Auditoría 1',
-                text: '1'
-              },
-              {
-                title: 'Auditoría 2',
-                text: '2'
-              },
-              {
-                title: 'Auditoría 3',
-                text: '3'
-              }
-            ];
-            console.log(cant);
-          }
-          if (result.value[1] === '4') {
-            cant = ['1', '2', '3', '4'];
-            cont = [
-              {
-                title: 'Auditoría 1',
-                text: '1'
-              },
-              {
-                title: 'Auditoría 2',
-                text: '2'
-              },
-              {
-                title: 'Auditoría 3',
-                text: '3'
-              },
-              {
-                title: 'Auditoría 4',
-                text: '4'
-              }
-            ];
-            console.log(cant);
-          }
-          if (result.value[1] === '5') {
-            cant = ['1', '2', '3', '4', '5'];
-            cont = [
-              {
-                title: 'Auditoría 1',
-                text: '1'
-              },
-              {
-                title: 'Auditoría 2',
-                text: '2'
-              },
-              {
-                title: 'Auditoría 3',
-                text: '3'
-              },
-              {
-                title: 'Auditoría 4',
-                text: '4'
-              },
-              {
-                title: 'Auditoría 5',
-                text: '5'
-              }
-            ];
-            console.log(cant);
-          }
-          Swal.mixin({
-            input: 'text',
-            confirmButtonText: 'Siguiente',
-            cancelButtonText: 'Cancelar',
-            showCancelButton: true,
-            progressSteps: cant
-          }).queue(cont).then((result2) => {
-            if (result2.value) {
-              // ************************************************
-              // *** SI NO FUE CANCELADO EL FORMULARIO 2, PASA ESTO ***
-              // ************************************************
+                if (result.value[1] === '1') {
+                  cant = ['1'];
+                  cont = [
+                    {
+                      title: 'Auditoría 1',
+                      text: 'Escribe el nombre'
+                    }
+                  ];
+                  // console.log(cant);
+                }
+                if (result.value[1] === '2') {
+                  cant = ['1', '2'];
+                  cont = [
+                    {
+                      title: 'Auditoría 1',
+                      text: 'Escribe el nombre'
+                    },
+                    {
+                      title: 'Auditoría 2',
+                      text: 'Escribe el nombre'
+                    }
+                  ];
+                  // console.log(cant);
+                }
+                if (result.value[1] === '3') {
+                  cant = ['1', '2', '3'];
+                  cont = [
+                    {
+                      title: 'Auditoría 1',
+                      text: 'Escribe el nombre'
+                    },
+                    {
+                      title: 'Auditoría 2',
+                      text: 'Escribe el nombre'
+                    },
+                    {
+                      title: 'Auditoría 3',
+                      text: 'Escribe el nombre'
+                    }
+                  ];
+                  // console.log(cant);
+                }
+                if (result.value[1] === '4') {
+                  cant = ['1', '2', '3', '4'];
+                  cont = [
+                    {
+                      title: 'Auditoría 1',
+                      text: 'Escribe el nombre'
+                    },
+                    {
+                      title: 'Auditoría 2',
+                      text: 'Escribe el nombre'
+                    },
+                    {
+                      title: 'Auditoría 3',
+                      text: 'Escribe el nombre'
+                    },
+                    {
+                      title: 'Auditoría 4',
+                      text: 'Escribe el nombre'
+                    }
+                  ];
+                  // console.log(cant);
+                }
+                if (result.value[1] === '5') {
+                  cant = ['1', '2', '3', '4', '5'];
+                  cont = [
+                    {
+                      title: 'Auditoría 1',
+                      text: 'Escribe el nombre'
+                    },
+                    {
+                      title: 'Auditoría 2',
+                      text: 'Escribe el nombre'
+                    },
+                    {
+                      title: 'Auditoría 3',
+                      text: 'Escribe el nombre'
+                    },
+                    {
+                      title: 'Auditoría 4',
+                      text: 'Escribe el nombre'
+                    },
+                    {
+                      title: 'Auditoría 5',
+                      text: 'Escribe el nombre'
+                    }
+                  ];
+                  // console.log(cant);
+                }
+                Swal.mixin({
+                  input: 'text',
+                  confirmButtonText: 'Siguiente',
+                  cancelButtonText: 'Cancelar',
+                  showCancelButton: true,
+                  progressSteps: cant
+                }).queue(cont).then((result2) => {
+                  if (result2.value) {
+                    // ************************************************
+                    // *** SI NO FUE CANCELADO EL FORMULARIO 2, PASA ESTO ***
+                    // ************************************************
 
-              if ((result2.value[0] === '') ||
-                  (result2.value[1] === '') ||
-                  (result2.value[2] === '') ||
-                  (result2.value[3] === '') ||
-                  (result2.value[4] === '')) {
-                Swal.fire('Campo Vacío', 'Alguna Auditoría quedo con campos vacíos, inténtalo de nuevo', 'error');
-              } else {
-                Swal.fire({
-                  title: 'Respuestas',
-                  html:
-                    'Tus respuestas: ' + result2.value,
-                  confirmButtonText: 'Ok'
+                    if ((result2.value[0] === '') ||
+                        (result2.value[1] === '') ||
+                        (result2.value[2] === '') ||
+                        (result2.value[3] === '') ||
+                        (result2.value[4] === '')) {
+                      Swal.fire('Campo Vacío', 'Alguna Auditoría quedo con campos vacíos, inténtalo de nuevo', 'error');
+                    } else {
+                      Swal.fire({
+                        title: 'Respuestas',
+                        html:
+                          'Tus respuestas: ' + result2.value,
+                        confirmButtonText: 'Ok'
+                      });
+
+                      // ************************************************
+                      // *** AQUI SE AGREGARAN LAS AUDITORIAS QUE SEAN NECESARIAS ***
+                      // ************************************************
+
+                      console.log(result2.value.length);
+
+                      // tslint:disable-next-line: prefer-for-of
+                      for ( let i = 0; i < result2.value.length; i++) {
+                        // console.log(resp.nombrePlan + '_' + result2.value[i]);
+
+                        let auditoria = new Auditoria(
+                          resp.nombrePlan + '_' + result2.value[i],
+                          result2.value[i],
+                          [],
+                          new Date('2018-09-09'),
+                          new Date('2018-09-08'),
+                          resp._id,
+                          [],
+                          [],
+                          '',
+                          '',
+                          ''
+                        );
+
+                        this._auditoriaService.crearAuditoria( auditoria )
+                            .subscribe( resp3 => {
+                              this.cargarPlanes();
+                              this.cargarAuditorias();
+                            });
+
+                      }
+                    }
+                  } else {
+                    // ************************************************
+                    // *** SI FUE CANCELADO EL FORMULARIO 2, PASA ESTO ***
+                    // ************************************************
+
+                    // ************************************************
+                    // *** AQUI SE ELIMINARÁ EL PLAN CREADO ***
+                    // ************************************************
+                    this._planService.eliminarPlan( resp._id )
+                          .subscribe( resp2 => {
+                            this.cargarPlanes();
+                          });
+                    Swal.fire('Cancelado', 'Se canceló la creación de las Auditorías', 'error');
+                  }
                 });
-
-                // ************************************************
-                // *** AQUI SE AGREGARAN LAS AUDITORIAS QUE SEAN NECESARIAS ***
-                // ************************************************
-              }
-            } else {
-              // ************************************************
-              // *** SI FUE CANCELADO EL FORMULARIO 2, PASA ESTO ***
-              // ************************************************
-
-              // ************************************************
-              // *** AQUI SE ELIMINARÁ EL PLAN CREADO ***
-              // ************************************************
-              Swal.fire('Cancelado', 'Se canceló la creación de las Auditorías', 'error');
-            }
-          });
+              });
         }
       } else {
         // ************************************************
