@@ -331,4 +331,21 @@ export class UsuarioService {
     );
   }
 
+  validarContrasena( usuario: Usuario) {
+
+    let url = URL_SERVICIOS + '/usuario/director/' + usuario._id;
+
+    return this.http.post( url, usuario )
+          .pipe(
+            map( (resp: any) => {
+              console.log(resp);
+              return resp;
+            }),
+            catchError( err => {
+              Swal.fire('Error', err.error.err.message, 'error');
+              return throwError( err ) ;
+            })
+          );
+  }
+
 }

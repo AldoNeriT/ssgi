@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { PlanService, UsuarioService, AuditoriaService } from '../../services/service.index';
 import { Plan } from '../../models/plan.model';
 import { Auditoria } from '../../models/auditoria.model';
+import { Usuario } from '../../models/usuario.model';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import Swal from 'sweetalert2';
@@ -57,7 +58,7 @@ export class PlanComponent implements OnInit {
     this._auditoriaService.cargarAuditorias()
           .subscribe( auditorias => {
             this.auditorias = auditorias;
-            console.log(this.auditorias);
+            // console.log(this.auditorias);
             this.cargando = false;
           });
 
@@ -111,7 +112,15 @@ export class PlanComponent implements OnInit {
         // *** SI NO FUE CANCELADO EL FORMULARIO 1, PASA ESTO ***
         // ************************************************
         if (result.value[0] === '') {
-          Swal.fire('Campo Vacío', 'El nombre del Plan de Auditorías está vacío, inténtalo de nuevo', 'error');
+          Swal.fire({
+            title: '¡Campo Vacío!',
+            text: 'El nombre del Plan de Auditorías está vacío, inténtalo de nuevo',
+            type: 'error',
+            animation: false,
+            customClass: {
+              popup: 'animated tada'
+            }
+          });
         } else {
           // Swal.fire({
           //   title: 'Respuestas',
@@ -241,14 +250,30 @@ export class PlanComponent implements OnInit {
                         (result2.value[2] === '') ||
                         (result2.value[3] === '') ||
                         (result2.value[4] === '')) {
-                      Swal.fire('Campo Vacío', 'Alguna Auditoría quedo con campos vacíos, inténtalo de nuevo', 'error');
-                    } else {
                       Swal.fire({
-                        title: 'Respuestas',
-                        html:
-                          'Tus respuestas: ' + result2.value,
-                        confirmButtonText: 'Ok'
+                        title: '¡Campos Vacíos!',
+                        text: 'Alguna Auditoría quedo con campos vacíos, inténtalo de nuevo',
+                        type: 'error',
+                        animation: false,
+                        customClass: {
+                          popup: 'animated tada'
+                        }
                       });
+                      // ************************************************
+                      // *** AQUI SE ELIMINARÁ EL PLAN CREADO ***
+                      // ************************************************
+                      this._planService.eliminarPlanPermanente( resp._id )
+                          .subscribe( resp2 => {
+                            // this.cargarPlanes();
+                            // Swal.fire('Cancelado', 'Se canceló la creación de las Auditorías', 'error');
+                          });
+                    } else {
+                      // Swal.fire({
+                      //   title: 'Respuestas',
+                      //   html:
+                      //     'Tus respuestas: ' + result2.value,
+                      //   confirmButtonText: 'Ok'
+                      // });
 
                       // ************************************************
                       // *** AQUI SE AGREGARAN LAS AUDITORIAS QUE SEAN NECESARIAS ***
@@ -278,6 +303,7 @@ export class PlanComponent implements OnInit {
                             .subscribe( resp3 => {
                               this.cargarPlanes();
                               this.cargarAuditorias();
+                              Swal.fire('Auditorías Creadas', 'Enviaremos las Auditorías para su Validación', 'success');
                             });
 
                       }
@@ -290,11 +316,11 @@ export class PlanComponent implements OnInit {
                     // ************************************************
                     // *** AQUI SE ELIMINARÁ EL PLAN CREADO ***
                     // ************************************************
-                    this._planService.eliminarPlan( resp._id )
+                    this._planService.eliminarPlanPermanente( resp._id )
                           .subscribe( resp2 => {
-                            this.cargarPlanes();
+                            // this.cargarPlanes();
+                            Swal.fire('Cancelado', 'Se canceló la creación de las Auditorías', 'error');
                           });
-                    Swal.fire('Cancelado', 'Se canceló la creación de las Auditorías', 'error');
                   }
                 });
               });
@@ -304,6 +330,45 @@ export class PlanComponent implements OnInit {
         // *** SI FUE CANCELADO EL FORMULARIO 1, PASA ESTO ***
         // ************************************************
         Swal.fire('Cancelado', 'Se canceló la creación del Plan de Auditorías', 'error');
+      }
+    });
+  }
+
+  validarContrasena( usuario2: Usuario ) {
+    console.log( usuario2._id );
+    console.log( usuario2 );
+
+    Swal.fire({
+      title: 'Ingrese su contraseña',
+      input: 'password',
+      showCancelButton: true,
+      confirmButtonText: 'Validar',
+      cancelButtonText: 'Cancelar',
+      cancelButtonColor: '#e74c3c'
+    }).then((result) => {
+      if (result.value) {
+        let usuario = new Usuario(
+          usuario2.numero_Empleado,
+          usuario2.nombre_Usuario,
+          usuario2.numero_Empleado,
+          usuario2.primer_Apellido,
+          usuario2.email,
+          usuario2.telefono,
+          usuario2.puesto,
+          result.value,
+          usuario2.tipo_Usuario,
+          usuario2.segundo_Apellido,
+          usuario2._id
+        );
+        console.log('Entro al if');
+        this._usuarioService.validarContrasena( usuario )
+          .subscribe( resp => {
+            this.cargarPlanes();
+            this.cargarAuditorias();
+          });
+        // console.log(result.value);
+      } else {
+        console.log('Se cancelo la contraseña');
       }
     });
   }

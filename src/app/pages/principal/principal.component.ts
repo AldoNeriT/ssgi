@@ -15,15 +15,21 @@ export class PrincipalComponent implements OnInit {
   hora: number;
   titulo: string;
 
+  fecha: number;
+
   constructor( public _usuarioService: UsuarioService ) {
     this.usuario = this._usuarioService.usuario;
   }
 
   ngOnInit() {
     init_plugins();
-    
+
     this.hora = new Date().getHours();
     this.saludo();
+
+    this.fecha = new Date().getUTCDate();
+
+    console.log(this.fecha);
   }
 
   saludo() {

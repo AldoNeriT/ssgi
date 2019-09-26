@@ -86,12 +86,12 @@ export class PlanService {
       return this.http.put( url, plan )
       .pipe(
         map( (resp: any ) => {
-          // Swal.fire({
-          //   title: 'Plan de Auditorías Actualizado',
-          //   type: 'success',
-          //   showConfirmButton: false,
-          //   timer: 2000
-          // });
+          Swal.fire({
+            title: 'Plan de Auditorías Actualizado',
+            type: 'success',
+            showConfirmButton: false,
+            timer: 2000
+          });
           return resp.plan;
         }),
         catchError( err => {
@@ -109,13 +109,13 @@ export class PlanService {
       return this.http.post( url, plan )
       .pipe(
         map( (resp: any ) => {
-          Swal.fire({
-            title: 'Plan de Auditorías Creado',
-            text: `El Plan de Auditorías "${plan.nombrePlan}" se ha creado exitosamente`,
-            type: 'success',
-            showConfirmButton: false,
-            timer: 2000
-          });
+          // Swal.fire({
+          //   title: 'Plan de Auditorías Creado',
+          //   text: `El Plan de Auditorías "${plan.nombrePlan}" se ha creado exitosamente`,
+          //   type: 'success',
+          //   showConfirmButton: false,
+          //   timer: 2000
+          // });
           return resp.plan;
         }),
         catchError( err => {
@@ -130,6 +130,32 @@ export class PlanService {
   eliminarPlan( id: string ) {
 
     let url = URL_SERVICIOS + '/plan/' + id;
+
+    // *** TOKEN ***
+    // url += '?token=' + this.token;
+
+    return this.http.delete( url )
+    .pipe(
+      map( (resp: any ) => {
+        // Swal.fire({
+        //   title: 'Plan de Auditorías Eliminado',
+        //   type: 'success',
+        //   showConfirmButton: false,
+        //   timer: 2000
+        // });
+        return resp;
+      }),
+      catchError( err => {
+        Swal.fire('Error', err.error.err.message, 'error');
+        return throwError( err ) ;
+      })
+    );
+
+  }
+
+  eliminarPlanPermanente( id: string ) {
+
+    let url = URL_SERVICIOS + '/plan/eliminar/' + id;
 
     // *** TOKEN ***
     // url += '?token=' + this.token;

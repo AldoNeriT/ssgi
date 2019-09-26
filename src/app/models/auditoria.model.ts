@@ -12,8 +12,9 @@ export class Auditoria {
         public objetivos: string,
         public alcance: string,
         public contacto: string,
-        public progreso?: string,
+        public valido?: boolean,
+        public progreso?: boolean,
         public _id?: string,
-        public estado?: string
+        public estado?: boolean
     ) { }
 }
