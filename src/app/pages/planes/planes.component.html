@@ -1,0 +1,259 @@
+<div *ngIf="cargando" id="loading" class="row" style="padding-top: 20px;">
+    <div class="col-sm-12">
+        <div class="text-center">
+            <span class="font-weight-bold">Cargando Datos</span>
+            <br><br>
+            <i class="fa fa-spinner fa-spin fa-3x text-themecolor"></i>
+            <br><br>
+            <span>Por favor espere un momento...</span>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================== -->
+<!-- CONTENIDO ROOT, ADMIN Y AUDITOR LIDER-->
+<!-- ============================================================== -->
+<div *ngIf="(_usuarioService.usuario.tipo_Usuario === 'ROOT') || (_usuarioService.usuario.tipo_Usuario === 'ADMIN') || (_usuarioService.usuario.tipo_Usuario === 'AUDITOR_LIDER')">
+    <div *ngIf="!cargando">
+        <div class="row">
+            <div class="col text-center">
+                <div class="btn-group sgi_paddNorm">
+                    <button (click)="modalAgregar()" type="button" class="btn btn-block btn-xl btn-circle btn-outline-secondary">
+                <i class="mdi mdi-plus"></i>
+            </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <!-- <h1>Total: {{_normaService.totalNormas}}</h1> -->
+                <hr class="m-t-0 m-b-40">
+            </div>
+        </div>
+
+        <!-- ============================================================== -->
+        <!-- POR EL METODO cargarAuditorias() -->
+        <!-- ============================================================== -->
+
+        <div class="row">
+            <div *ngFor="let plan of planes" class="col-md-12 col-sm-12 accordion" role="tablist" aria-multiselectable="true">
+                <div class="card">
+                    <div class="card-header bg-theme text-white" role="tab" id="headingOne">
+                        <div class="row">
+                            <div class="col-md-10 text-center">
+                                <a class="collapsed text-white font-weight-bold" data-toggle="collapse" data-parent="#accordion" href="#{{plan._id}}" aria-expanded="false" aria-controls="collapse">
+                                    {{ plan.nombrePlan }}
+                                </a>
+                            </div>
+                            <div class="col-md-1 text-center">
+                                <a (click)="editarPlan( plan )"><i class="mdi mdi-pencil text-white pointer"></i></a>
+                            </div>
+                            <div class="col-md-1 text-center">
+                                <a (click)="eliminarPlan( plan )"><i class="mdi mdi-delete text-white pointer"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="{{plan._id}}" class="collapse" role="tabpanel" aria-labelledby="headingOne">
+                        <div class="card-body">
+                            <div *ngFor="let auditoria of auditorias">
+                                <div *ngIf="auditoria.plan !== null">
+                                    <table *ngIf="auditoria.progreso === 'empezar' && plan._id === auditoria.plan._id" class="table full-color-table full-info-table hover-table pointer">
+                                        <tbody>
+                                            <tr (click)="verAuditoria( auditoria )">
+                                                <td>{{ auditoria.nombre }}</td>
+                                                <td class="text-right">{{ auditoria.fechaInicial | date:'MM-dd-yyyy' }} / {{ auditoria.fechaFinal | date:'MM-dd-yyyy' }}</td>
+                                                <td class="text-right"><i class="mdi mdi-power mdi-24px text-info"></i></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <table *ngIf="auditoria.progreso === 'encurso' && plan._id === auditoria.plan._id" class="table full-color-table full-warning-table hover-table pointer">
+                                        <tbody>
+                                            <tr (click)="verAuditoria( auditoria )">
+                                                <td>{{ auditoria.nombre }}</td>
+                                                <td class="text-right">{{ auditoria.fechaInicial | date:'MM-dd-yyyy' }} / {{ auditoria.fechaFinal | date:'MM-dd-yyyy' }}</td>
+                                                <td class="text-right"><i class="mdi mdi-clock mdi-24px text-warning"></i></td>
+                                            </tr>
+                                    </table>
+                                    <table *ngIf="auditoria.progreso === 'terminado' && plan._id === auditoria.plan._id" class="table full-color-table full-success-table hover-table pointer">
+                                        <tbody>
+                                            <tr (click)="verAuditoria( auditoria )">
+                                                <td>{{ auditoria.nombre }}</td>
+                                                <td class="text-right">{{ auditoria.fechaInicial | date:'MM-dd-yyyy' }} / {{ auditoria.fechaFinal | date:'MM-dd-yyyy' }}</td>
+                                                <td class="text-right"><i class="mdi mdi-spellcheck mdi-24px text-success"></i></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="plan.valido === false" class="card-footer bg-white text-dark text-center">
+                        <label class="label label-danger"> No Validado </label>
+                    </div>
+                    <div *ngIf="plan.valido === true" class="card-footer bg-white text-dark text-center">
+                        <label class="label label-success"> Validado </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================== -->
+<!-- CONTENIDO AUDITOR, AUDITADOS -->
+<!-- ============================================================== -->
+<div *ngIf="(_usuarioService.usuario.tipo_Usuario === 'AUDITOR') || (_usuarioService.usuario.tipo_Usuario === 'AUDITADO')">
+    <div *ngIf="!cargando">
+        <div class="row">
+            <div *ngFor="let plan of planes" class="col-md-12 col-sm-12">
+                <div *ngIf="plan.valido === true">
+                    <div class="card">
+                        <div class="card-header bg-theme text-white text-center font-weight-bold">
+                            {{ plan.nombrePlan }}
+                        </div>
+                        <div class="card-body">
+                            <div *ngFor="let auditoria of auditorias">
+                                <div *ngIf="auditoria.plan !== null">
+                                    <table *ngIf="auditoria.progreso === 'empezar' && plan._id === auditoria.plan._id" class="table full-color-table full-info-table hover-table pointer">
+                                        <tbody>
+                                            <tr (click)="verAuditoria( auditoria )">
+                                                <td>{{ auditoria.nombre }}</td>
+                                                <td class="text-right">{{ auditoria.fechaInicial | date:'MM-dd-yyyy' }} / {{ auditoria.fechaFinal | date:'MM-dd-yyyy' }}</td>
+                                                <td class="text-right"><i class="mdi mdi-power mdi-24px text-info"></i></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <table *ngIf="auditoria.progreso === 'encurso' && plan._id === auditoria.plan._id" class="table full-color-table full-warning-table hover-table pointer">
+                                        <tbody>
+                                            <tr (click)="verAuditoria( auditoria )">
+                                                <td>{{ auditoria.nombre }}</td>
+                                                <td class="text-right">{{ auditoria.fechaInicial | date:'MM-dd-yyyy' }} / {{ auditoria.fechaFinal | date:'MM-dd-yyyy' }}</td>
+                                                <td class="text-right"><i class="mdi mdi-clock mdi-24px text-warning"></i></td>
+                                            </tr>
+                                    </table>
+                                    <table *ngIf="auditoria.progreso === 'terminado' && plan._id === auditoria.plan._id" class="table full-color-table full-success-table hover-table pointer">
+                                        <tbody>
+                                            <tr (click)="verAuditoria( auditoria )">
+                                                <td>{{ auditoria.nombre }}</td>
+                                                <td class="text-right">{{ auditoria.fechaInicial | date:'MM-dd-yyyy' }} / {{ auditoria.fechaFinal | date:'MM-dd-yyyy' }}</td>
+                                                <td class="text-right"><i class="mdi mdi-spellcheck mdi-24px text-success"></i></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================== -->
+<!-- ALTA DIRECCION -->
+<!-- ============================================================== -->
+<div *ngIf="_usuarioService.usuario.tipo_Usuario === 'ALTA_DIRECCION'">
+    <div *ngIf="!cargando">
+        <div class="row">
+            <div *ngFor="let plan of planes" class="col-md-12 col-sm-12">
+                <div class="card">
+                    <div class="card-header bg-theme text-white text-center font-weight-bold">
+                        {{ plan.nombrePlan }}
+                    </div>
+                    <div class="card-body">
+                        <div *ngFor="let auditoria of auditorias">
+                            <div *ngIf="auditoria.plan !== null">
+                                <table *ngIf="auditoria.progreso === 'empezar' && plan._id === auditoria.plan._id" class="table full-color-table full-info-table hover-table pointer">
+                                    <tbody>
+                                        <tr (click)="verAuditoria( auditoria )">
+                                            <td>{{ auditoria.nombre }}</td>
+                                            <td class="text-right">{{ auditoria.fechaInicial | date:'MM-dd-yyyy' }} / {{ auditoria.fechaFinal | date:'MM-dd-yyyy' }}</td>
+                                            <td class="text-right"><i class="mdi mdi-power mdi-24px text-info"></i></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <table *ngIf="auditoria.progreso === 'encurso' && plan._id === auditoria.plan._id" class="table full-color-table full-warning-table hover-table pointer">
+                                    <tbody>
+                                        <tr (click)="verAuditoria( auditoria )">
+                                            <td>{{ auditoria.nombre }}</td>
+                                            <td class="text-right">{{ auditoria.fechaInicial | date:'MM-dd-yyyy' }} / {{ auditoria.fechaFinal | date:'MM-dd-yyyy' }}</td>
+                                            <td class="text-right"><i class="mdi mdi-clock mdi-24px text-warning"></i></td>
+                                        </tr>
+                                </table>
+                                <table *ngIf="auditoria.progreso === 'terminado' && plan._id === auditoria.plan._id" class="table full-color-table full-success-table hover-table pointer">
+                                    <tbody>
+                                        <tr (click)="verAuditoria( auditoria )">
+                                            <td>{{ auditoria.nombre }}</td>
+                                            <td class="text-right">{{ auditoria.fechaInicial | date:'MM-dd-yyyy' }} / {{ auditoria.fechaFinal | date:'MM-dd-yyyy' }}</td>
+                                            <td class="text-right"><i class="mdi mdi-spellcheck mdi-24px text-success"></i></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div *ngIf="plan.valido === false" class="card-footer bg-white text-dark text-center">
+                        <button (click)="validarContrasena( _usuarioService.usuario, plan )" class="btn btn-themecolor">Validar</button>
+                    </div>
+                    <div *ngIf="plan.valido === true" class="card-footer bg-white text-success text-center">
+                        <a class="btn btn-outline-success disabled" role="button" aria-disabled="true">Ya validó este Plan de Auditorías</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================== -->
+<!-- CON EL METODO cargaAuditoriasPlan() -->
+<!-- ============================================================== -->
+
+<!-- <div class="row">
+    <div *ngFor="let plan of planes" class="col-md-6 col-sm-12 accordion" role="tablist" aria-multiselectable="true">
+        <div id="card-acordeon" class="card">
+            <a (click)="cargarAuditoriasPlan( plan._id )" class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#{{plan._id}}" aria-expanded="false" aria-controls="collapse">
+                <div class="card-header bg-theme text-white text-center" role="tab" id="heading{{plan._id}}">
+                    {{ plan.nombrePlan }}
+                </div>
+            </a>
+            <div id="{{plan._id}}" class="collapse" role="tabpanel" aria-labelledby="heading">
+                <div class="card-body">
+                    <div *ngFor="let auditoria of auditorias">
+                        <table *ngIf="auditoria.progreso === 'empezar'" class="table full-color-table full-info-table hover-table pointer">
+                            <tbody>
+                                <tr (click)="imprimir( auditoria._id )">
+                                    <td>{{ auditoria.nombreAuditoria }}</td>
+                                    <td class="text-right"><i class="mdi mdi-power mdi-24px text-info"></i></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table *ngIf="auditoria.progreso === 'encurso'" class="table full-color-table full-warning-table hover-table pointer">
+                            <tbody>
+                                <tr (click)="imprimir( auditoria._id )">
+                                    <td>{{ auditoria.nombreAuditoria }}</td>
+                                    <td class="text-right"><i class="mdi mdi-clock mdi-24px text-warning"></i></td>
+                                </tr>
+                        </table>
+                        <table *ngIf="auditoria.progreso === 'terminado'" class="table full-color-table full-success-table hover-table pointer">
+                            <tbody>
+                                <tr (click)="imprimir( auditoria._id )">
+                                    <td>{{ auditoria.nombreAuditoria }}</td>
+                                    <td class="text-right"><i class="mdi mdi-spellcheck mdi-24px text-success"></i></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="plan.estado === 'false'" class="card-footer bg-white text-dark text-center">
+                <label class="label label-danger"> No Validado </label>
+            </div>
+            <div *ngIf="plan.estado === 'true'" class="card-footer bg-white text-dark text-center">
+                <label class="label label-success"> Validado </label>
+            </div>
+        </div>
+    </div>
+</div> -->

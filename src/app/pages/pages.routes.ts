@@ -17,7 +17,8 @@ import { UsuarioComponent } from './usuarios/usuario.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { NormasComponent } from './normas/normas.component';
 import { ProcesosComponent } from './procesos/procesos.component';
-import { PlanComponent } from './plan/plan.component';
+import { PlanesComponent } from './planes/planes.component';
+import { AuditoriasComponent } from './auditorias/auditorias.component';
 
 
 
@@ -68,7 +69,8 @@ const pagesRoutes: Routes = [
                 canActivate: [ ProcesoGuard ],
                 data: { titulo: 'Procesos' }
             },
-            { path: 'plan', component: PlanComponent, data: { titulo: 'Plan de Auditorías' } },
+            { path: 'planes', component: PlanesComponent, data: { titulo: 'Plan de Auditorías' } },
+            { path: 'auditoria/:id', component: AuditoriasComponent, data: { titulo: 'Auditoría' } },
             { path: '', redirectTo: '/home', pathMatch: 'full'}
         ]
      }
