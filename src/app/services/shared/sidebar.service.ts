@@ -121,6 +121,13 @@ export class SidebarService {
         submenu: [
           { titulo: 'Home', url: '/home' }
         ]
+      },
+      {
+        titulo: 'Auditorias',
+        icono: 'mdi mdi-book',
+        submenu: [
+          { titulo: 'Plan de Auditorías', url: '/plan' }
+        ]
       }
     ];
 
@@ -134,6 +141,13 @@ export class SidebarService {
         icono: 'mdi mdi-home',
         submenu: [
           { titulo: 'Home', url: '/home' }
+        ]
+      },
+      {
+        titulo: 'Auditorias',
+        icono: 'mdi mdi-book',
+        submenu: [
+          { titulo: 'Plan de Auditorías', url: '/plan' }
         ]
       }
     ];

@@ -83,6 +83,7 @@ export class PlanComponent implements OnInit {
   }
 
   modalAgregar() {
+
     Swal.mixin({
       confirmButtonText: 'Siguiente',
       cancelButtonText: 'Cancelar',
@@ -334,9 +335,57 @@ export class PlanComponent implements OnInit {
     });
   }
 
-  validarContrasena( usuario2: Usuario ) {
-    console.log( usuario2._id );
-    console.log( usuario2 );
+  editarPlan( plan: Plan ) {
+
+    Swal.fire({
+      title: '¡Advertencia!',
+      text: 'Sólo podrás modificar el nombre. ¿Deseas continuar?',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí',
+      cancelButtonText: 'No',
+      cancelButtonColor: '#e74c3c',
+      animation: false,
+      customClass: {
+        popup: 'animated tada'
+      }
+    }).then((eliminar) => {
+      if (eliminar.value) {
+        // this._normaService.eliminarNorma( norma._id )
+        //   .subscribe( (resp: any) => {
+        //     this.cargarNormas();
+        //   } );
+      }
+    });
+
+  }
+
+  eliminarPlan( plan: Plan ) {
+
+    Swal.fire({
+      title: '¡Advertencia!',
+      text: `Si eliminas el Plan "${plan.nombrePlan}" se borrarán las Auditorías asociadas. ¿Deseas continuar?`,
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí',
+      cancelButtonText: 'No',
+      cancelButtonColor: '#e74c3c',
+      animation: false,
+      customClass: {
+        popup: 'animated tada'
+      }
+    }).then((eliminar) => {
+      if (eliminar.value) {
+        // this._normaService.eliminarNorma( norma._id )
+        //   .subscribe( (resp: any) => {
+        //     this.cargarNormas();
+        //   } );
+      }
+    });
+
+  }
+
+  validarContrasena( usuario2: Usuario, plan: Plan ) {
 
     Swal.fire({
       title: 'Ingrese su contraseña',
@@ -360,15 +409,16 @@ export class PlanComponent implements OnInit {
           usuario2.segundo_Apellido,
           usuario2._id
         );
-        console.log('Entro al if');
         this._usuarioService.validarContrasena( usuario )
           .subscribe( resp => {
-            this.cargarPlanes();
-            this.cargarAuditorias();
+            this._planService.validarPlan( plan )
+                .subscribe( resp2 => {
+                  this.cargarPlanes();
+                  this.cargarAuditorias();
+                });
           });
         // console.log(result.value);
       } else {
-        console.log('Se cancelo la contraseña');
       }
     });
   }

@@ -178,4 +178,30 @@ export class PlanService {
     );
 
   }
+
+  validarPlan( plan: Plan ) {
+
+    let url = URL_SERVICIOS + '/plan/validacion/' + plan._id;
+
+    // *** TOKEN ***
+    // url += '?token=' + this.token;
+
+    return this.http.put( url, plan )
+    .pipe(
+      map( (resp: any ) => {
+        Swal.fire({
+          title: 'Validación exitosa',
+          type: 'success',
+          showConfirmButton: false,
+          timer: 2000
+        });
+        return resp.norma;
+      }),
+      catchError( err => {
+        Swal.fire('Error', err.error.err.message, 'error');
+        return throwError( err ) ;
+      })
+    );
+
+  }
 }

@@ -5,8 +5,7 @@ import {
     InstitucionGuard,
     UsuarioGuard,
     NormaGuard,
-    ProcesoGuard,
-    PlanGuard
+    ProcesoGuard
 } from '../services/service.index';
 
 import { PagesComponent } from './pages.component';
@@ -69,12 +68,7 @@ const pagesRoutes: Routes = [
                 canActivate: [ ProcesoGuard ],
                 data: { titulo: 'Procesos' }
             },
-            {
-                path: 'plan',
-                component: PlanComponent,
-                canActivate: [ PlanGuard ],
-                data: { titulo: 'Plan de Auditorías' }
-            },
+            { path: 'plan', component: PlanComponent, data: { titulo: 'Plan de Auditorías' } },
             { path: '', redirectTo: '/home', pathMatch: 'full'}
         ]
      }

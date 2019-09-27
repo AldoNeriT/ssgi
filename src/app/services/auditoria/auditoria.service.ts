@@ -129,13 +129,13 @@ export class AuditoriaService {
       return this.http.post( url, auditoria )
       .pipe(
         map( (resp: any ) => {
-          Swal.fire({
-            title: 'Auditoría Creada',
-            text: `La Auditoría "${auditoria.nombreAuditoria}" se ha creado exitosamente`,
-            type: 'success',
-            showConfirmButton: false,
-            timer: 2000
-          });
+          // Swal.fire({
+          //   title: 'Auditoría Creada',
+          //   text: `La Auditoría "${auditoria.nombreAuditoria}" se ha creado exitosamente`,
+          //   type: 'success',
+          //   showConfirmButton: false,
+          //   timer: 2000
+          // });
           return resp.auditoria;
         }),
         catchError( err => {
