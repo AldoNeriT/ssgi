@@ -5561,7 +5561,7 @@ Table-Layout
 }
 
 .full-color-table.full-success-table thead th {
-    background-color: #06d79c;
+    background-color: #90ffdf;
     border: 0;
     color: #ffffff;
 }
@@ -5571,7 +5571,7 @@ Table-Layout
 }
 
 .full-color-table.full-success-table tr:hover {
-    background-color: #06d79c;
+    background-color: #a3ff90;
     color: #ffffff;
 }
 
@@ -5580,7 +5580,7 @@ Table-Layout
 }
 
 .full-color-table.full-info-table thead th {
-    background-color: #398bf7;
+    background-color: #a3ff90;
     border: 0;
     color: #ffffff;
 }
@@ -5590,7 +5590,7 @@ Table-Layout
 }
 
 .full-color-table.full-info-table tr:hover {
-    background-color: #398bf7;
+    background-color: #92c1fd;
     color: #ffffff;
 }
 
@@ -5599,7 +5599,7 @@ Table-Layout
 }
 
 .full-color-table.full-warning-table thead th {
-    background-color: #ffb22b;
+    background-color: #ffdda1;
     border: 0;
     color: #ffffff;
 }
@@ -5609,7 +5609,7 @@ Table-Layout
 }
 
 .full-color-table.full-warning-table tr:hover {
-    background-color: #ffb22b;
+    background-color: #ffdda1;
     color: #ffffff;
 }
 

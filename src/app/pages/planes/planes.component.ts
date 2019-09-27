@@ -78,64 +78,105 @@ export class PlanesComponent implements OnInit {
 
   }
 
-  verAuditoria( auditoria: Auditoria ) {
+  verAuditoria( auditoria: Auditoria, plan: Plan ) {
 
-    if ( auditoria.progreso === 'empezar') {
-      Swal.fire({
-        title: '¡Empezar!',
-        text: `¿Deseas iniciar la Auditoría "${auditoria.nombre}"?`,
-        type: 'question',
-        showCancelButton: true,
-        confirmButtonText: 'Empezar',
-        cancelButtonText: 'Cancelar',
-        animation: false,
-        customClass: {
-          popup: 'animated bounceInDown'
-        }
-      }).then((eliminar) => {
-        if (eliminar.value) {
-          this.router.navigate(['/auditoria/' + auditoria._id ]);
-        }
-      });
-    }
+    if ( plan.valido === true ) {
 
-    if ( auditoria.progreso === 'encurso') {
+      if ( auditoria.progreso === 'empezar') {
+        Swal.fire({
+          title: '¡Empezar!',
+          text: `¿Deseas iniciar la Auditoría "${auditoria.nombre}"?`,
+          type: 'question',
+          showCancelButton: true,
+          confirmButtonText: 'Empezar',
+          cancelButtonText: 'Cancelar',
+          animation: false,
+          customClass: {
+            popup: 'animated bounceInDown'
+          }
+        }).then((result) => {
+          if (result.value) {
+            this.router.navigate(['/auditoria/' + auditoria._id ]);
+          }
+        });
+      }
+
+      if ( auditoria.progreso === 'encurso') {
+        if ( auditoria.valido === true ) {
+          Swal.fire({
+            title: '¡En Curso!',
+            text: `La Auditoría "${auditoria.nombre}" está en curso`,
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Ver',
+            cancelButtonText: 'Cancelar',
+            animation: false,
+            customClass: {
+              popup: 'animated bounceInDown'
+            }
+          }).then((result) => {
+            if (result.value) {
+              // this.router.navigate(['/auditoria/' + auditoria._id ]);
+            }
+          });
+        } else {
+          Swal.fire({
+            title: '¡Advertencia!',
+            text: `No puedes ingresar hasta que validen la Auditoría "${auditoria.nombre}"`,
+            type: 'warning',
+            animation: false,
+            customClass: {
+              popup: 'animated pulse'
+            }
+          });
+        }
+      }
+
+      if ( auditoria.progreso === 'terminado') {
+        if ( auditoria.valido === true ) {
+          Swal.fire({
+            title: '¡Finalizado!',
+            text: `La Auditoría "${auditoria.nombre}" ha finalizado`,
+            type: 'success',
+            showCancelButton: true,
+            confirmButtonText: 'Ver',
+            cancelButtonText: 'Cancelar',
+            animation: false,
+            customClass: {
+              popup: 'animated bounceInDown'
+            }
+          }).then((result) => {
+            if (result.value) {
+              // this.router.navigate(['/auditoria/' + auditoria._id ]);
+            }
+          });
+        } else {
+          Swal.fire({
+            title: '¡Advertencia!',
+            text: `No puedes ingresar hasta que validen la Auditoría "${auditoria.nombre}"`,
+            type: 'warning',
+            animation: false,
+            customClass: {
+              popup: 'animated pulse'
+            }
+          });
+        }
+      }
+
+    } else {
+
       Swal.fire({
-        title: '¡En Curso!',
-        text: `La Auditoría "${auditoria.nombre}" está en curso`,
+        title: '¡Advertencia!',
+        text: `No puedes ingresar hasta que validen el Plan "${plan.nombrePlan}"`,
         type: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'Ver',
-        cancelButtonText: 'Cancelar',
         animation: false,
         customClass: {
-          popup: 'animated tada'
-        }
-      }).then((eliminar) => {
-        if (eliminar.value) {
-          // this.router.navigate(['/auditoria/' + auditoria._id ]);
+          popup: 'animated pulse'
         }
       });
+
     }
 
-    if ( auditoria.progreso === 'terminado') {
-      Swal.fire({
-        title: 'Terminada!',
-        text: `La Auditoría "${auditoria.nombre}" está terminada`,
-        type: 'success',
-        showCancelButton: true,
-        confirmButtonText: 'Ver',
-        cancelButtonText: 'Cancelar',
-        animation: false,
-        customClass: {
-          popup: 'animated tada'
-        }
-      }).then((eliminar) => {
-        if (eliminar.value) {
-          // this.router.navigate(['/auditoria/' + auditoria._id ]);
-        }
-      });
-    }
   }
 
   modalAgregar() {
@@ -412,8 +453,20 @@ export class PlanesComponent implements OnInit {
               this.cargarPlanes();
               this.cargarAuditorias();
             });
-        // console.log(result.value);
+        console.log('if ', result.value);
       } else {
+        if ( result.value === undefined) {
+        } else {
+          Swal.fire({
+            title: '¡Campo Vacío!',
+            text: 'El nombre del Plan de Auditorías está vacío, inténtalo de nuevo',
+            type: 'error',
+            animation: false,
+            customClass: {
+              popup: 'animated tada'
+            }
+          });
+        }
       }
     });
 
@@ -435,11 +488,14 @@ export class PlanesComponent implements OnInit {
       }
     }).then((eliminar) => {
       if (eliminar.value) {
-        // this._planService.eliminarPlan( plan._id )
-        //     .subscribe( (resp: any) => {
-        //         this.cargarPlanes();
-        //         this.cargarAuditorias();
-        //     } );
+        this._planService.eliminarAuditoriasPlan( plan._id )
+          .subscribe( (resp: any) => {
+          } );
+        this._planService.eliminarPlan( plan._id )
+            .subscribe( (resp: any) => {
+              this.cargarPlanes();
+              this.cargarAuditorias();
+            } );
       }
     });
 
@@ -477,10 +533,23 @@ export class PlanesComponent implements OnInit {
                   this.cargarAuditorias();
                 });
           });
-        // console.log(result.value);
+      // console.log(result.value);
       } else {
+        if ( result.value === undefined) {
+        } else {
+          Swal.fire({
+            title: '¡Campo Vacío!',
+            text: 'No ingresaste ninguna contraseña, inténtalo de nuevo',
+            type: 'error',
+            animation: false,
+            customClass: {
+              popup: 'animated tada'
+            }
+          });
+        }
       }
     });
+
   }
 
 }

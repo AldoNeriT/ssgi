@@ -12,10 +12,8 @@
                     </div>
                     <div class="form-group m-b-40">
                         <h5 class="m-t-20">Normas</h5>
-                        <select class="select2 m-b-10 select2-multiple" id="normas" style="width: 100%" multiple="multiple" data-placeholder="Escoge" required>
-                            <option value="Calidad">Calidad</option>
-                            <option value="Medio Ambiente">Medio Ambiente</option>
-                            <option value="Seguridad">Seguridad</option>
+                        <select class="select2 m-b-10 select2-multiple" id="normas" style="width: 100%" multiple="multiple" data-placeholder="Elige" required>
+                            <option *ngFor="let norma of normas" value="{{ norma._id }}"> {{ norma.nombreNorma }} </option>
                         </select>
                         <span class="help-block text-themecolor"><small>Puedes seleccionar varias Normas.</small></span>
                     </div>
@@ -26,19 +24,15 @@
                     </div>
                     <div class="form-group m-b-40">
                         <h5 class="m-t-20">Grupo Auditor</h5>
-                        <select class="select2 m-b-10 select2-multiple" id="auditores" style="width: 100%" multiple="multiple" data-placeholder="Escoge" required>
-                            <option value="Aldo">Aldo</option>
-                            <option value="Maiky">Maiky</option>
-                            <option value="Jorge">Jorge</option>
+                        <select class="select2 m-b-10 select2-multiple" id="auditores" style="width: 100%" multiple="multiple" data-placeholder="Elige" required>
+                            <option *ngFor="let auditor of auditores" value="{{ auditor._id }}"> {{ auditor.nombre }} </option>
                         </select>
                         <span class="help-block text-themecolor"><small>Puedes seleccionar varios Auditores.</small></span>
                     </div>
                     <div class="form-group m-b-40">
                         <h5 class="m-t-20">Grupo Auditados</h5>
-                        <select class="select2 m-b-10 select2-multiple" id="auditados" style="width: 100%" multiple="multiple" data-placeholder="Escoge" required>
-                            <option value="Neri">Neri</option>
-                            <option value="Ramos">Ramos</option>
-                            <option value="Madera">Madera</option>
+                        <select class="select2 m-b-10 select2-multiple" id="auditados" style="width: 100%" multiple="multiple" data-placeholder="Elige" required>
+                            <option *ngFor="let auditado of auditados" value="{{ auditado._id }}"> {{ auditado.nombre }} </option>
                         </select>
                         <span class="help-block text-themecolor"><small>Puedes seleccionar varios Auditados.</small></span>
                     </div>

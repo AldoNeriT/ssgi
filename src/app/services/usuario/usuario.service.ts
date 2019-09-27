@@ -348,4 +348,25 @@ export class UsuarioService {
           );
   }
 
+  cargarUsuariosPorTipo( role: string ) {
+
+    let url = URL_SERVICIOS + '/usuario/tipo/' + role;
+
+    // *** TOKEN ***
+    // url += '?token=' + this.token;
+
+    return this.http.get( url )
+    .pipe(
+      map( (resp: any ) => {
+        // this.totalUsuarios = resp.cuantos;
+        return resp.usuarios;
+      }),
+      catchError( err => {
+        Swal.fire('Error', err.error.err.message, 'error');
+        return throwError( err ) ;
+      })
+    );
+
+  }
+
 }

@@ -137,12 +137,12 @@ export class PlanService {
     return this.http.delete( url )
     .pipe(
       map( (resp: any ) => {
-        // Swal.fire({
-        //   title: 'Plan de Auditorías Eliminado',
-        //   type: 'success',
-        //   showConfirmButton: false,
-        //   timer: 2000
-        // });
+        Swal.fire({
+          title: 'Plan de Auditorías Eliminado',
+          type: 'success',
+          showConfirmButton: false,
+          timer: 2000
+        });
         return resp;
       }),
       catchError( err => {
@@ -165,6 +165,32 @@ export class PlanService {
       map( (resp: any ) => {
         // Swal.fire({
         //   title: 'Plan de Auditorías Eliminado',
+        //   type: 'success',
+        //   showConfirmButton: false,
+        //   timer: 2000
+        // });
+        return resp;
+      }),
+      catchError( err => {
+        Swal.fire('Error', err.error.err.message, 'error');
+        return throwError( err ) ;
+      })
+    );
+
+  }
+
+  eliminarAuditoriasPlan( id: string ) {
+
+    let url = URL_SERVICIOS + '/auditoria/plan/' + id;
+
+    // *** TOKEN ***
+    // url += '?token=' + this.token;
+
+    return this.http.delete( url )
+    .pipe(
+      map( (resp: any ) => {
+        // Swal.fire({
+        //   title: 'Subprocesos del Proceso Eliminado',
         //   type: 'success',
         //   showConfirmButton: false,
         //   timer: 2000
