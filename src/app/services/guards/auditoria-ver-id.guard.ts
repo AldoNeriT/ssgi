@@ -5,7 +5,7 @@ import { UsuarioService } from '../usuario/usuario.service';
 @Injectable({
   providedIn: 'root'
 })
-export class ProcesoGuard implements CanActivate {
+export class AuditoriaVerIdGuard implements CanActivate {
 
   constructor(
     public _usuarioService: UsuarioService,
@@ -16,16 +16,14 @@ export class ProcesoGuard implements CanActivate {
   canActivate() {
 
     if (
-          (this._usuarioService.usuario.tipo_Usuario === 'ROOT') ||
-          (this._usuarioService.usuario.tipo_Usuario === 'ADMIN') ||
-          (this._usuarioService.usuario.tipo_Usuario === 'AUDITOR_LIDER')
+          this._usuarioService.usuario.tipo_Usuario === 'ALTA_DIRECCION'
       ) {
       return true;
     } else {
-      console.log('Bloqueado por PROCESO GUARD');
+      console.log('Bloqueado por AUDITORIA:VER:ID GUARD');
       this.router.navigate(['/home']);
       return false;
     }
   }
-
+  
 }

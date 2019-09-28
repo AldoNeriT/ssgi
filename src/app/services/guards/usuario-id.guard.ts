@@ -5,7 +5,7 @@ import { UsuarioService } from '../usuario/usuario.service';
 @Injectable({
   providedIn: 'root'
 })
-export class NormaGuard implements CanActivate {
+export class UsuarioIdGuard implements CanActivate {
 
   constructor(
     public _usuarioService: UsuarioService,
@@ -17,15 +17,14 @@ export class NormaGuard implements CanActivate {
 
     if (
           (this._usuarioService.usuario.tipo_Usuario === 'ROOT') ||
-          (this._usuarioService.usuario.tipo_Usuario === 'ADMIN') ||
-          (this._usuarioService.usuario.tipo_Usuario === 'AUDITOR_LIDER')
+          (this._usuarioService.usuario.tipo_Usuario === 'ADMIN')
       ) {
       return true;
     } else {
-      console.log('Bloqueado por NORMA GUARD');
+      console.log('Bloqueado por USUARIO:ID GUARD');
       this.router.navigate(['/home']);
       return false;
     }
   }
-
+  
 }

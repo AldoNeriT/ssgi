@@ -2,10 +2,9 @@ import { RouterModule, Routes } from '@angular/router';
 
 import {
     LoginGuardGuard,
-    InstitucionGuard,
-    UsuarioGuard,
-    NormaGuard,
-    ProcesoGuard
+    AbcGuard,
+    UsuarioIdGuard,
+    AuditoriaVerIdGuard
 } from '../services/service.index';
 
 import { PagesComponent } from './pages.component';
@@ -36,42 +35,52 @@ const pagesRoutes: Routes = [
             {
                 path: 'institucion',
                 component: InstitucionComponent,
-                canActivate: [ InstitucionGuard ],
+                canActivate: [ AbcGuard ],
                 data: { titulo: 'Institución' }
             },
             {
                 path: 'usuarios',
                 component: UsuariosComponent,
-                canActivate: [ UsuarioGuard ],
+                canActivate: [ AbcGuard ],
                 data: { titulo: 'Lista de Usuarios' }
             },
             {
                 path: 'usuario/:id',
                 component: UsuarioComponent,
-                canActivate: [ UsuarioGuard ],
+                canActivate: [ UsuarioIdGuard ],
                 data: { titulo: 'Usuario' }
             },
             {
                 path: 'usuario/:ver/:id',
                 component: UsuarioComponent,
-                canActivate: [ UsuarioGuard ],
+                canActivate: [ AbcGuard ],
                 data: { titulo: 'Usuario' }
             },
             {
                 path: 'normas',
                 component: NormasComponent,
-                canActivate: [ NormaGuard ],
+                canActivate: [ AbcGuard ],
                 data: { titulo: 'Normas' }
             },
             {
                 path: 'procesos',
                 component: ProcesosComponent,
-                canActivate: [ ProcesoGuard ],
+                canActivate: [ AbcGuard ],
                 data: { titulo: 'Procesos' }
             },
             { path: 'planes', component: PlanesComponent, data: { titulo: 'Plan de Auditorías' } },
-            { path: 'auditoria/:id', component: AuditoriasComponent, data: { titulo: 'Auditoría' } },
-            { path: 'auditoria/:ver/:id', component: AuditoriasComponent, data: { titulo: 'Auditoría' } },
+            {
+                path: 'auditoria/:id',
+                component: AuditoriasComponent,
+                canActivate: [ AbcGuard ],
+                data: { titulo: 'Auditoría' }
+            },
+            {
+                path: 'auditoria/:ver/:id',
+                component: AuditoriasComponent,
+                canActivate: [ AuditoriaVerIdGuard ],
+                data: { titulo: 'Auditoría' }
+            },
             { path: '', redirectTo: '/home', pathMatch: 'full'}
         ]
      }

@@ -5,7 +5,7 @@ import { UsuarioService } from '../usuario/usuario.service';
 @Injectable({
   providedIn: 'root'
 })
-export class UsuarioGuard implements CanActivate {
+export class AbcGuard implements CanActivate {
 
   constructor(
     public _usuarioService: UsuarioService,
@@ -22,7 +22,7 @@ export class UsuarioGuard implements CanActivate {
       ) {
       return true;
     } else {
-      console.log('Bloqueado por USUARIO GUARD');
+      console.log('Bloqueado por ABC GUARD');
       this.router.navigate(['/home']);
       return false;
     }

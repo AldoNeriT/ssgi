@@ -812,7 +812,7 @@ export class PlanesComponent implements OnInit {
           }
         }).then((result) => {
           if (result.value) {
-            this.router.navigate(['/auditoria/' + auditoria._id ]);
+            this.router.navigate(['/auditoria/ver/' + auditoria._id ]);
           }
         });
       }
