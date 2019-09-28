@@ -78,106 +78,9 @@ export class PlanesComponent implements OnInit {
 
   }
 
-  verAuditoria( auditoria: Auditoria, plan: Plan ) {
-
-    if ( plan.valido === true ) {
-
-      if ( auditoria.progreso === 'empezar') {
-        Swal.fire({
-          title: '¡Empezar!',
-          text: `¿Deseas iniciar la Auditoría "${auditoria.nombre}"?`,
-          type: 'question',
-          showCancelButton: true,
-          confirmButtonText: 'Empezar',
-          cancelButtonText: 'Cancelar',
-          animation: false,
-          customClass: {
-            popup: 'animated bounceInDown'
-          }
-        }).then((result) => {
-          if (result.value) {
-            this.router.navigate(['/auditoria/' + auditoria._id ]);
-          }
-        });
-      }
-
-      if ( auditoria.progreso === 'encurso') {
-        if ( auditoria.valido === true ) {
-          Swal.fire({
-            title: '¡En Curso!',
-            text: `La Auditoría "${auditoria.nombre}" está en curso`,
-            type: 'warning',
-            showCancelButton: true,
-            confirmButtonText: 'Ver',
-            cancelButtonText: 'Cancelar',
-            animation: false,
-            customClass: {
-              popup: 'animated bounceInDown'
-            }
-          }).then((result) => {
-            if (result.value) {
-              // this.router.navigate(['/auditoria/' + auditoria._id ]);
-            }
-          });
-        } else {
-          Swal.fire({
-            title: '¡Advertencia!',
-            text: `No puedes ingresar hasta que validen la Auditoría "${auditoria.nombre}"`,
-            type: 'warning',
-            animation: false,
-            customClass: {
-              popup: 'animated pulse'
-            }
-          });
-        }
-      }
-
-      if ( auditoria.progreso === 'terminado') {
-        if ( auditoria.valido === true ) {
-          Swal.fire({
-            title: '¡Finalizado!',
-            text: `La Auditoría "${auditoria.nombre}" ha finalizado`,
-            type: 'success',
-            showCancelButton: true,
-            confirmButtonText: 'Ver',
-            cancelButtonText: 'Cancelar',
-            animation: false,
-            customClass: {
-              popup: 'animated bounceInDown'
-            }
-          }).then((result) => {
-            if (result.value) {
-              // this.router.navigate(['/auditoria/' + auditoria._id ]);
-            }
-          });
-        } else {
-          Swal.fire({
-            title: '¡Advertencia!',
-            text: `No puedes ingresar hasta que validen la Auditoría "${auditoria.nombre}"`,
-            type: 'warning',
-            animation: false,
-            customClass: {
-              popup: 'animated pulse'
-            }
-          });
-        }
-      }
-
-    } else {
-
-      Swal.fire({
-        title: '¡Advertencia!',
-        text: `No puedes ingresar hasta que validen el Plan "${plan.nombrePlan}"`,
-        type: 'warning',
-        animation: false,
-        customClass: {
-          popup: 'animated pulse'
-        }
-      });
-
-    }
-
-  }
+  // ************************************************
+  // *** PLANES ***
+  // ************************************************
 
   modalAgregar() {
 
@@ -549,6 +452,214 @@ export class PlanesComponent implements OnInit {
         }
       }
     });
+
+  }
+
+  // ************************************************
+  // *** AUDITORÍAS ***
+  // ************************************************
+
+  verAuditoria( auditoria: Auditoria, plan: Plan ) {
+
+    if ( plan.valido === true ) {
+
+      if ( auditoria.progreso === 'empezar') {
+        Swal.fire({
+          title: '¡Empezar!',
+          text: `¿Deseas iniciar la Auditoría "${auditoria.nombre}"?`,
+          type: 'question',
+          showCancelButton: true,
+          confirmButtonText: 'Empezar',
+          cancelButtonText: 'Cancelar',
+          animation: false,
+          customClass: {
+            popup: 'animated bounceInDown'
+          }
+        }).then((result) => {
+          if (result.value) {
+            this.router.navigate(['/auditoria/' + auditoria._id ]);
+          }
+        });
+      }
+
+      if ( auditoria.progreso === 'encurso') {
+        if ( auditoria.valido === true ) {
+          Swal.fire({
+            title: '¡En Curso!',
+            text: `La Auditoría "${auditoria.nombre}" está en curso`,
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Ver',
+            cancelButtonText: 'Cancelar',
+            animation: false,
+            customClass: {
+              popup: 'animated bounceInDown'
+            }
+          }).then((result) => {
+            if (result.value) {
+              // this.router.navigate(['/auditoria/' + auditoria._id ]);
+            }
+          });
+        } else {
+          Swal.fire({
+            title: '¡Advertencia!',
+            text: `No puedes ingresar hasta que validen la Auditoría "${auditoria.nombre}"`,
+            type: 'warning',
+            animation: false,
+            customClass: {
+              popup: 'animated pulse'
+            }
+          });
+        }
+      }
+
+      if ( auditoria.progreso === 'terminado') {
+        if ( auditoria.valido === true ) {
+          Swal.fire({
+            title: '¡Finalizado!',
+            text: `La Auditoría "${auditoria.nombre}" ha finalizado`,
+            type: 'success',
+            showCancelButton: true,
+            confirmButtonText: 'Ver',
+            cancelButtonText: 'Cancelar',
+            animation: false,
+            customClass: {
+              popup: 'animated bounceInDown'
+            }
+          }).then((result) => {
+            if (result.value) {
+              // this.router.navigate(['/auditoria/' + auditoria._id ]);
+            }
+          });
+        } else {
+          Swal.fire({
+            title: '¡Advertencia!',
+            text: `No puedes ingresar hasta que validen la Auditoría "${auditoria.nombre}"`,
+            type: 'warning',
+            animation: false,
+            customClass: {
+              popup: 'animated pulse'
+            }
+          });
+        }
+      }
+
+    } else {
+
+      Swal.fire({
+        title: '¡Advertencia!',
+        text: `No puedes ingresar hasta que validen el Plan "${plan.nombrePlan}"`,
+        type: 'warning',
+        animation: false,
+        customClass: {
+          popup: 'animated pulse'
+        }
+      });
+
+    }
+
+  }
+
+  agregarAuditoria( plan: Plan ) {
+
+    if ( plan.valido === true ) {
+      Swal.fire({
+        title: '¡Advertencia!',
+        text: `Si agregas una nueva Auditoría estarías modificando el Plan y se necesitaría validación nuevamente. ¿Deseas continuar?`,
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Sí',
+        cancelButtonText: 'No',
+        animation: false,
+        customClass: {
+          popup: 'animated tada'
+        }
+      }).then((result) => {
+        if (result.value) {
+          console.log('Se puede agregar pero se invalidará el Plan');
+          this.router.navigate(['/auditoria/nuevo' ]);
+        }
+      });
+    } else {
+      console.log('Se puede agregar directamente');
+      this.router.navigate(['/auditoria/nuevo' ]);
+    }
+
+  }
+
+  editarAuditoria( auditoria: Auditoria ) {
+    console.log(auditoria._id);
+
+    if ( auditoria.progreso === 'encurso') {
+      if ( auditoria.valido === true ) {
+        Swal.fire({
+          title: '¡En Curso!',
+          text: `Si modificas la Auditoría "${auditoria.nombre}" se necesitará que la validen de nuevo. ¿Deseas continuar?`,
+          type: 'warning',
+          showCancelButton: true,
+          confirmButtonText: 'Sí',
+          cancelButtonText: 'No',
+          animation: false,
+          customClass: {
+            popup: 'animated tada'
+          }
+        }).then((result) => {
+          if (result.value) {
+            console.log('Se puede modificar pero se invalidará');
+            this.router.navigate(['/auditoria/' + auditoria._id ]);
+          }
+        });
+      } else {
+        console.log('Se puede modificar directamente');
+        this.router.navigate(['/auditoria/' + auditoria._id ]);
+      }
+    }
+
+  }
+
+  eliminarAuditoria( auditoria: Auditoria, plan: Plan ) {
+    console.log(auditoria._id);
+
+    if ( auditoria.progreso !== 'terminado') {
+      if ( plan.valido === true ) {
+        Swal.fire({
+          title: '¡En Curso!',
+          text: `Si eliminas la Auditoría "${auditoria.nombre}" estarías modificando
+                 el Plan y se necesitaría validación nuevamente. ¿Deseas continuar?`,
+          type: 'warning',
+          showCancelButton: true,
+          confirmButtonText: 'Sí',
+          cancelButtonText: 'No',
+          animation: false,
+          customClass: {
+            popup: 'animated tada'
+          }
+        }).then((result) => {
+          if (result.value) {
+            console.log('Se puede eliminar pero se invalidará el Plan');
+            // this.router.navigate(['/auditoria/' + auditoria._id ]);
+          }
+        });
+      } else {
+        Swal.fire({
+          title: '¡En Curso!',
+          text: `¿Estás seguro de eliminar "${auditoria.nombre}" del Plan "${plan.nombrePlan}"`,
+          type: 'warning',
+          showCancelButton: true,
+          confirmButtonText: 'Sí',
+          cancelButtonText: 'No',
+          animation: false,
+          customClass: {
+            popup: 'animated tada'
+          }
+        }).then((result) => {
+          if (result.value) {
+            console.log('Se puede eliminar directamente');
+            // this.router.navigate(['/auditoria/' + auditoria._id ]);
+          }
+        });
+      }
+    }
 
   }
 

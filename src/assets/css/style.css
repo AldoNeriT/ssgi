@@ -5710,11 +5710,11 @@ Table-Layout
 }
 
 .full-color-table.full-muted-table {
-    background-color: rgba(152, 166, 173, 0.2);
+    background-color: #fafafa;
 }
 
 .full-color-table.full-muted-table thead th {
-    background-color: #99abb4;
+    background-color: #c2c9ce;
     border: 0;
     color: #ffffff;
 }
@@ -5724,7 +5724,7 @@ Table-Layout
 }
 
 .full-color-table.full-muted-table tr:hover {
-    background-color: #99abb4;
+    background-color: #c2c9ce;
     color: #ffffff;
 }
 
