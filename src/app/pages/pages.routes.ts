@@ -71,6 +71,7 @@ const pagesRoutes: Routes = [
             },
             { path: 'planes', component: PlanesComponent, data: { titulo: 'Plan de Auditorías' } },
             { path: 'auditoria/:id', component: AuditoriasComponent, data: { titulo: 'Auditoría' } },
+            { path: 'auditoria/:ver/:id', component: AuditoriasComponent, data: { titulo: 'Auditoría' } },
             { path: '', redirectTo: '/home', pathMatch: 'full'}
         ]
      }

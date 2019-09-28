@@ -25,14 +25,14 @@
                     <div class="form-group m-b-40">
                         <h5 class="m-t-20">Grupo Auditor</h5>
                         <select class="select2 m-b-10 select2-multiple" id="auditores" style="width: 100%" multiple="multiple" data-placeholder="Elige" required>
-                            <option *ngFor="let auditor of auditores" value="{{ auditor._id }}"> {{ auditor.nombre }} </option>
+                            <option *ngFor="let auditor of auditores" value="{{ auditor._id }}"> {{ auditor.nombre + ' ' + auditor.primer_Apellido + ' ' + (auditor.segundo_Apellido || '') }} </option>
                         </select>
                         <span class="help-block text-themecolor"><small>Puedes seleccionar varios Auditores.</small></span>
                     </div>
                     <div class="form-group m-b-40">
                         <h5 class="m-t-20">Grupo Auditados</h5>
                         <select class="select2 m-b-10 select2-multiple" id="auditados" style="width: 100%" multiple="multiple" data-placeholder="Elige" required>
-                            <option *ngFor="let auditado of auditados" value="{{ auditado._id }}"> {{ auditado.nombre }} </option>
+                            <option *ngFor="let auditado of auditados" value="{{ auditado._id }}"> {{ auditado.nombre + ' ' + auditado.primer_Apellido + ' ' + (auditado.segundo_Apellido || '') }} </option>
                         </select>
                         <span class="help-block text-themecolor"><small>Puedes seleccionar varios Auditados.</small></span>
                     </div>
@@ -60,6 +60,113 @@
                         <button routerLink="/planes" type="button" class="btn btn-default waves-effect">Cancelar</button>
                     </div>
                 </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+                <h4 class="card-title">Datos de la Auditoria</h4>
+                <h6 class="card-subtitle">Pertecene al Plan</h6>
+
+                <div class="form-body">
+                    <div class="row">
+                        <div class="col-md-12 text-left" style="padding-top: 25px">
+                            <label class="text-themecolor"><small>Nombre de la Auditoría</small></label><br>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 text-left" style="padding: 0px 15px 24px">
+                            <label class="control-label">Nombre</label><br>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12 text-left">
+                            <label class="text-themecolor"><small>Normas</small></label><br>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 text-left" style="padding: 0px 15px 24px">
+                            <label class="control-label">Nombre</label><br>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12 text-left">
+                            <label class="text-themecolor"><small>Fecha Inicial - Fecha Final</small></label><br>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 text-left" style="padding: 0px 15px 24px">
+                            <label class="control-left">Nombre</label><br>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12 text-left">
+                            <label class="text-themecolor"><small>Auditores</small></label><br>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 text-left" style="padding: 0px 15px 24px">
+                            <label class="control-label">Nombre</label><br>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12 text-left">
+                            <label class="text-themecolor"><small>Auditados</small></label><br>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 text-left" style="padding: 0px 15px 24px">
+                            <label class="control-label">Nombre</label><br>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12 text-left">
+                            <label class="text-themecolor"><small>Objetivo</small></label><br>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 text-left" style="padding: 0px 15px 24px">
+                            <label class="control-label">Nombre</label><br>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12 text-left">
+                            <label class="text-themecolor"><small>Alcance</small></label><br>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 text-left" style="padding: 0px 15px 24px">
+                            <label class="control-label">Nombre</label><br>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12 text-left">
+                            <label class="text-themecolor"><small>Contacto</small></label><br>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 text-left" style="padding: 0px 15px 24px">
+                            <label class="control-label">Nombre</label><br>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-themecolor waves-effect">Regresar</button>
+                </div>
+
             </div>
         </div>
     </div>

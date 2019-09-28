@@ -338,7 +338,7 @@ export class UsuarioService {
     return this.http.post( url, usuario )
           .pipe(
             map( (resp: any) => {
-              console.log(resp);
+              // console.log(resp);
               return resp;
             }),
             catchError( err => {

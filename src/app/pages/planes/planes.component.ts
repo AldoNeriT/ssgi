@@ -10,6 +10,7 @@ import Swal from 'sweetalert2';
 import * as $ from 'jquery';
 
 declare function init_plugins();
+declare function inicializando_dateRange();
 
 @Component({
   selector: 'app-planes',
@@ -35,6 +36,8 @@ export class PlanesComponent implements OnInit {
 
   ngOnInit() {
     init_plugins();
+    inicializando_dateRange();
+
     this.cargarPlanes();
     this.cargarAuditorias();
   }
@@ -148,8 +151,22 @@ export class PlanesComponent implements OnInit {
                   cant = ['1'];
                   cont = [
                     {
-                      title: 'Auditoría 1',
-                      text: 'Escribe el nombre'
+                      html:
+                      '<h1 style="font-weight: bold;">Auditoría 1</h1>' +
+                      '<div style="display: block;">Nombre</div>' +
+                      '<input id="input1" class="swal2-input">' +
+                      '<div style="display: block;">Fecha Inicial</div>' +
+                      '<input class="swal2-input" id="input2" type="date">' +
+                      '<div style="display: block;">Fecha Final</div>' +
+                      '<input class="swal2-input" id="input3" type="date">',
+                      focusConfirm: false,
+                      preConfirm: () => {
+                        return [
+                          $('#input1').val(),
+                          $('#input2').val(),
+                          $('#input3').val()
+                        ];
+                      }
                     }
                   ];
                   // console.log(cant);
@@ -158,12 +175,40 @@ export class PlanesComponent implements OnInit {
                   cant = ['1', '2'];
                   cont = [
                     {
-                      title: 'Auditoría 1',
-                      text: 'Escribe el nombre'
+                      html:
+                      '<h1 style="font-weight: bold;">Auditoría 1</h1>' +
+                      '<div style="display: block;">Nombre</div>' +
+                      '<input id="input1" class="swal2-input">' +
+                      '<div style="display: block;">Fecha Inicial</div>' +
+                      '<input class="swal2-input" id="input2" type="date">' +
+                      '<div style="display: block;">Fecha Final</div>' +
+                      '<input class="swal2-input" id="input3" type="date">',
+                      focusConfirm: false,
+                      preConfirm: () => {
+                        return [
+                          $('#input1').val(),
+                          $('#input2').val(),
+                          $('#input3').val()
+                        ];
+                      }
                     },
                     {
-                      title: 'Auditoría 2',
-                      text: 'Escribe el nombre'
+                      html:
+                      '<h1 style="font-weight: bold;">Auditoría 2</h1>' +
+                      '<div style="display: block;">Nombre</div>' +
+                      '<input id="input1" class="swal2-input">' +
+                      '<div style="display: block;">Fecha Inicial</div>' +
+                      '<input class="swal2-input" id="input2" type="date">' +
+                      '<div style="display: block;">Fecha Final</div>' +
+                      '<input class="swal2-input" id="input3" type="date">',
+                      focusConfirm: false,
+                      preConfirm: () => {
+                        return [
+                          $('#input1').val(),
+                          $('#input2').val(),
+                          $('#input3').val()
+                        ];
+                      }
                     }
                   ];
                   // console.log(cant);
@@ -172,16 +217,58 @@ export class PlanesComponent implements OnInit {
                   cant = ['1', '2', '3'];
                   cont = [
                     {
-                      title: 'Auditoría 1',
-                      text: 'Escribe el nombre'
+                      html:
+                      '<h1 style="font-weight: bold;">Auditoría 1</h1>' +
+                      '<div style="display: block;">Nombre</div>' +
+                      '<input id="input1" class="swal2-input">' +
+                      '<div style="display: block;">Fecha Inicial</div>' +
+                      '<input class="swal2-input" id="input2" type="date">' +
+                      '<div style="display: block;">Fecha Final</div>' +
+                      '<input class="swal2-input" id="input3" type="date">',
+                      focusConfirm: false,
+                      preConfirm: () => {
+                        return [
+                          $('#input1').val(),
+                          $('#input2').val(),
+                          $('#input3').val()
+                        ];
+                      }
                     },
                     {
-                      title: 'Auditoría 2',
-                      text: 'Escribe el nombre'
+                      html:
+                      '<h1 style="font-weight: bold;">Auditoría 2</h1>' +
+                      '<div style="display: block;">Nombre</div>' +
+                      '<input id="input1" class="swal2-input">' +
+                      '<div style="display: block;">Fecha Inicial</div>' +
+                      '<input class="swal2-input" id="input2" type="date">' +
+                      '<div style="display: block;">Fecha Final</div>' +
+                      '<input class="swal2-input" id="input3" type="date">',
+                      focusConfirm: false,
+                      preConfirm: () => {
+                        return [
+                          $('#input1').val(),
+                          $('#input2').val(),
+                          $('#input3').val()
+                        ];
+                      }
                     },
                     {
-                      title: 'Auditoría 3',
-                      text: 'Escribe el nombre'
+                      html:
+                      '<h1 style="font-weight: bold;">Auditoría 3</h1>' +
+                      '<div style="display: block;">Nombre</div>' +
+                      '<input id="input1" class="swal2-input">' +
+                      '<div style="display: block;">Fecha Inicial</div>' +
+                      '<input class="swal2-input" id="input2" type="date">' +
+                      '<div style="display: block;">Fecha Final</div>' +
+                      '<input class="swal2-input" id="input3" type="date">',
+                      focusConfirm: false,
+                      preConfirm: () => {
+                        return [
+                          $('#input1').val(),
+                          $('#input2').val(),
+                          $('#input3').val()
+                        ];
+                      }
                     }
                   ];
                   // console.log(cant);
@@ -190,20 +277,76 @@ export class PlanesComponent implements OnInit {
                   cant = ['1', '2', '3', '4'];
                   cont = [
                     {
-                      title: 'Auditoría 1',
-                      text: 'Escribe el nombre'
+                      html:
+                      '<h1 style="font-weight: bold;">Auditoría 1</h1>' +
+                      '<div style="display: block;">Nombre</div>' +
+                      '<input id="input1" class="swal2-input">' +
+                      '<div style="display: block;">Fecha Inicial</div>' +
+                      '<input class="swal2-input" id="input2" type="date">' +
+                      '<div style="display: block;">Fecha Final</div>' +
+                      '<input class="swal2-input" id="input3" type="date">',
+                      focusConfirm: false,
+                      preConfirm: () => {
+                        return [
+                          $('#input1').val(),
+                          $('#input2').val(),
+                          $('#input3').val()
+                        ];
+                      }
                     },
                     {
-                      title: 'Auditoría 2',
-                      text: 'Escribe el nombre'
+                      html:
+                      '<h1 style="font-weight: bold;">Auditoría 2</h1>' +
+                      '<div style="display: block;">Nombre</div>' +
+                      '<input id="input1" class="swal2-input">' +
+                      '<div style="display: block;">Fecha Inicial</div>' +
+                      '<input class="swal2-input" id="input2" type="date">' +
+                      '<div style="display: block;">Fecha Final</div>' +
+                      '<input class="swal2-input" id="input3" type="date">',
+                      focusConfirm: false,
+                      preConfirm: () => {
+                        return [
+                          $('#input1').val(),
+                          $('#input2').val(),
+                          $('#input3').val()
+                        ];
+                      }
                     },
                     {
-                      title: 'Auditoría 3',
-                      text: 'Escribe el nombre'
+                      html:
+                      '<h1 style="font-weight: bold;">Auditoría 3</h1>' +
+                      '<div style="display: block;">Nombre</div>' +
+                      '<input id="input1" class="swal2-input">' +
+                      '<div style="display: block;">Fecha Inicial</div>' +
+                      '<input class="swal2-input" id="input2" type="date">' +
+                      '<div style="display: block;">Fecha Final</div>' +
+                      '<input class="swal2-input" id="input3" type="date">',
+                      focusConfirm: false,
+                      preConfirm: () => {
+                        return [
+                          $('#input1').val(),
+                          $('#input2').val(),
+                          $('#input3').val()
+                        ];
+                      }
                     },
                     {
-                      title: 'Auditoría 4',
-                      text: 'Escribe el nombre'
+                      html:
+                      '<h1 style="font-weight: bold;">Auditoría 4</h1>' +
+                      '<div style="display: block;">Nombre</div>' +
+                      '<input id="input1" class="swal2-input">' +
+                      '<div style="display: block;">Fecha Inicial</div>' +
+                      '<input class="swal2-input" id="input2" type="date">' +
+                      '<div style="display: block;">Fecha Final</div>' +
+                      '<input class="swal2-input" id="input3" type="date">',
+                      focusConfirm: false,
+                      preConfirm: () => {
+                        return [
+                          $('#input1').val(),
+                          $('#input2').val(),
+                          $('#input3').val()
+                        ];
+                      }
                     }
                   ];
                   // console.log(cant);
@@ -212,30 +355,99 @@ export class PlanesComponent implements OnInit {
                   cant = ['1', '2', '3', '4', '5'];
                   cont = [
                     {
-                      title: 'Auditoría 1',
-                      text: 'Escribe el nombre'
+                      html:
+                      '<h1 style="font-weight: bold;">Auditoría 1</h1>' +
+                      '<div style="display: block;">Nombre</div>' +
+                      '<input id="input1" class="swal2-input">' +
+                      '<div style="display: block;">Fecha Inicial</div>' +
+                      '<input class="swal2-input" id="input2" type="date">' +
+                      '<div style="display: block;">Fecha Final</div>' +
+                      '<input class="swal2-input" id="input3" type="date">',
+                      focusConfirm: false,
+                      preConfirm: () => {
+                        return [
+                          $('#input1').val(),
+                          $('#input2').val(),
+                          $('#input3').val()
+                        ];
+                      }
                     },
                     {
-                      title: 'Auditoría 2',
-                      text: 'Escribe el nombre'
+                      html:
+                      '<h1 style="font-weight: bold;">Auditoría 2</h1>' +
+                      '<div style="display: block;">Nombre</div>' +
+                      '<input id="input1" class="swal2-input">' +
+                      '<div style="display: block;">Fecha Inicial</div>' +
+                      '<input class="swal2-input" id="input2" type="date">' +
+                      '<div style="display: block;">Fecha Final</div>' +
+                      '<input class="swal2-input" id="input3" type="date">',
+                      focusConfirm: false,
+                      preConfirm: () => {
+                        return [
+                          $('#input1').val(),
+                          $('#input2').val(),
+                          $('#input3').val()
+                        ];
+                      }
                     },
                     {
-                      title: 'Auditoría 3',
-                      text: 'Escribe el nombre'
+                      html:
+                      '<h1 style="font-weight: bold;">Auditoría 3</h1>' +
+                      '<div style="display: block;">Nombre</div>' +
+                      '<input id="input1" class="swal2-input">' +
+                      '<div style="display: block;">Fecha Inicial</div>' +
+                      '<input class="swal2-input" id="input2" type="date">' +
+                      '<div style="display: block;">Fecha Final</div>' +
+                      '<input class="swal2-input" id="input3" type="date">',
+                      focusConfirm: false,
+                      preConfirm: () => {
+                        return [
+                          $('#input1').val(),
+                          $('#input2').val(),
+                          $('#input3').val()
+                        ];
+                      }
                     },
                     {
-                      title: 'Auditoría 4',
-                      text: 'Escribe el nombre'
+                      html:
+                      '<h1 style="font-weight: bold;">Auditoría 4</h1>' +
+                      '<div style="display: block;">Nombre</div>' +
+                      '<input id="input1" class="swal2-input">' +
+                      '<div style="display: block;">Fecha Inicial</div>' +
+                      '<input class="swal2-input" id="input2" type="date">' +
+                      '<div style="display: block;">Fecha Final</div>' +
+                      '<input class="swal2-input" id="input3" type="date">',
+                      focusConfirm: false,
+                      preConfirm: () => {
+                        return [
+                          $('#input1').val(),
+                          $('#input2').val(),
+                          $('#input3').val()
+                        ];
+                      }
                     },
                     {
-                      title: 'Auditoría 5',
-                      text: 'Escribe el nombre'
+                      html:
+                      '<h1 style="font-weight: bold;">Auditoría 5</h1>' +
+                      '<div style="display: block;">Nombre</div>' +
+                      '<input id="input1" class="swal2-input">' +
+                      '<div style="display: block;">Fecha Inicial</div>' +
+                      '<input class="swal2-input" id="input2" type="date">' +
+                      '<div style="display: block;">Fecha Final</div>' +
+                      '<input class="swal2-input" id="input3" type="date">',
+                      focusConfirm: false,
+                      preConfirm: () => {
+                        return [
+                          $('#input1').val(),
+                          $('#input2').val(),
+                          $('#input3').val()
+                        ];
+                      }
                     }
                   ];
                   // console.log(cant);
                 }
                 Swal.mixin({
-                  input: 'text',
                   confirmButtonText: 'Siguiente',
                   cancelButtonText: 'Cancelar',
                   showCancelButton: true,
@@ -246,14 +458,20 @@ export class PlanesComponent implements OnInit {
                     // *** SI NO FUE CANCELADO EL FORMULARIO 2, PASA ESTO ***
                     // ************************************************
 
-                    if ((result2.value[0] === '') ||
-                        (result2.value[1] === '') ||
-                        (result2.value[2] === '') ||
-                        (result2.value[3] === '') ||
-                        (result2.value[4] === '')) {
+                    let vacio = false;
+
+                    for (let i = 0; i < result2.value.length; i++) {
+                      for (let j = 0; j < 3; j++) {
+                        if ( result2.value[i][j] === '') {
+                          vacio = true;
+                        }
+                      }
+                    }
+
+                    if ( vacio === true) {
                       Swal.fire({
                         title: '¡Campos Vacíos!',
-                        text: 'Alguna Auditoría quedo con campos vacíos, inténtalo de nuevo',
+                        text: 'Alguna Auditoría quedó con campos vacíos, inténtalo de nuevo',
                         type: 'error',
                         animation: false,
                         customClass: {
@@ -288,10 +506,10 @@ export class PlanesComponent implements OnInit {
 
                         let auditoria = new Auditoria(
                           resp.nombrePlan + '_' + result2.value[i],
-                          result2.value[i],
+                          result2.value[i][0],
                           [],
-                          new Date('2018-09-09'),
-                          new Date('2018-09-08'),
+                          new Date(result2.value[i][1]),
+                          new Date(result2.value[i][2]),
                           resp._id,
                           [],
                           [],
@@ -404,7 +622,7 @@ export class PlanesComponent implements OnInit {
 
   }
 
-  validarContrasena( usuario2: Usuario, plan: Plan ) {
+  validarContrasenaPlan( usuario2: Usuario, plan: Plan ) {
 
     Swal.fire({
       title: 'Ingrese su contraseña',
@@ -560,6 +778,67 @@ export class PlanesComponent implements OnInit {
 
   }
 
+  verAuditoriaAltaD( auditoria: Auditoria ) {
+
+    if ( auditoria.progreso === 'encurso') {
+      if ( auditoria.valido === true ) {
+        Swal.fire({
+          title: '¡En Curso!',
+          text: `La Auditoría "${auditoria.nombre}" está en curso`,
+          type: 'warning',
+          showCancelButton: true,
+          confirmButtonText: 'Ver',
+          cancelButtonText: 'Cancelar',
+          animation: false,
+          customClass: {
+            popup: 'animated bounceInDown'
+          }
+        }).then((result) => {
+          if (result.value) {
+            // this.router.navigate(['/auditoria/' + auditoria._id ]);
+          }
+        });
+      } else {
+        Swal.fire({
+          title: '¡Empecemos!',
+          text: `Antes de validar la Auditoría "${auditoria.nombre}" verifica sus datos`,
+          type: 'warning',
+          showCancelButton: true,
+          confirmButtonText: 'Ver',
+          cancelButtonText: 'Cancelar',
+          animation: false,
+          customClass: {
+            popup: 'animated bounceInDown'
+          }
+        }).then((result) => {
+          if (result.value) {
+            this.router.navigate(['/auditoria/' + auditoria._id ]);
+          }
+        });
+      }
+    }
+
+    if ( auditoria.progreso === 'terminado') {
+      Swal.fire({
+        title: '¡Finalizado!',
+        text: `La Auditoría "${auditoria.nombre}" ha finalizado`,
+        type: 'success',
+        showCancelButton: true,
+        confirmButtonText: 'Ver',
+        cancelButtonText: 'Cancelar',
+        animation: false,
+        customClass: {
+          popup: 'animated bounceInDown'
+        }
+      }).then((result) => {
+        if (result.value) {
+          // this.router.navigate(['/auditoria/' + auditoria._id ]);
+        }
+      });
+    }
+
+  }
+
   agregarAuditoria( plan: Plan ) {
 
     if ( plan.valido === true ) {
@@ -660,6 +939,57 @@ export class PlanesComponent implements OnInit {
         });
       }
     }
+
+  }
+
+  validarContrasenaAudi( usuario2: Usuario, auditoria: Auditoria ) {
+
+    Swal.fire({
+      title: 'Ingrese su contraseña',
+      input: 'password',
+      showCancelButton: true,
+      confirmButtonText: 'Validar',
+      cancelButtonText: 'Cancelar',
+      cancelButtonColor: '#e74c3c'
+    }).then((result) => {
+      if (result.value) {
+        let usuario = new Usuario(
+          usuario2.numero_Empleado,
+          usuario2.nombre_Usuario,
+          usuario2.numero_Empleado,
+          usuario2.primer_Apellido,
+          usuario2.email,
+          usuario2.telefono,
+          usuario2.puesto,
+          result.value,
+          usuario2.tipo_Usuario,
+          usuario2.segundo_Apellido,
+          usuario2._id
+        );
+        this._usuarioService.validarContrasena( usuario )
+          .subscribe( resp => {
+            this._auditoriaService.validarAuditoria( auditoria )
+                .subscribe( resp2 => {
+                  this.cargarPlanes();
+                  this.cargarAuditorias();
+                });
+          });
+      // console.log(result.value);
+      } else {
+        if ( result.value === undefined) {
+        } else {
+          Swal.fire({
+            title: '¡Campo Vacío!',
+            text: 'No ingresaste ninguna contraseña, inténtalo de nuevo',
+            type: 'error',
+            animation: false,
+            customClass: {
+              popup: 'animated tada'
+            }
+          });
+        }
+      }
+    });
 
   }
 

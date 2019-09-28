@@ -173,4 +173,30 @@ export class AuditoriaService {
 
   }
 
+  validarAuditoria( auditoria: Auditoria ) {
+
+    let url = URL_SERVICIOS + '/auditoria/validacion/' + auditoria._id;
+
+    // *** TOKEN ***
+    // url += '?token=' + this.token;
+
+    return this.http.put( url, auditoria )
+    .pipe(
+      map( (resp: any ) => {
+        Swal.fire({
+          title: 'Validación exitosa',
+          type: 'success',
+          showConfirmButton: false,
+          timer: 2000
+        });
+        return resp;
+      }),
+      catchError( err => {
+        Swal.fire('Error', err.error.err.message, 'error');
+        return throwError( err ) ;
+      })
+    );
+
+  }
+
 }

@@ -221,7 +221,7 @@ export class PlanService {
           showConfirmButton: false,
           timer: 2000
         });
-        return resp.norma;
+        return resp;
       }),
       catchError( err => {
         Swal.fire('Error', err.error.err.message, 'error');

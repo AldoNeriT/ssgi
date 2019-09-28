@@ -45,11 +45,11 @@ export class AuditoriasComponent implements OnInit {
     this.cargarAuditores();
     this.cargarAuditados();
 
-    this.pruebaSplit('01/01/2019-01/31/2019');
+    this.pruebaSplit('2019-01-01/2019-01-25');
   }
 
   pruebaSplit( arr: string ) {
-    let splitted = arr.split('-');
+    let splitted = arr.split('/');
     console.log(splitted);
   }
 
