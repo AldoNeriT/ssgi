@@ -130,7 +130,9 @@ export class InstitucionService {
 
   }
 
+  // ************************************************
   // *** ESTE METODO ES DE EMERGENCIA PARA BORRAR ***
+  // ************************************************
   eliminarInstitucion( id: string ) {
 
     let url = URL_SERVICIOS + '/institucion/' + id;

@@ -61,7 +61,6 @@ export class PlanesComponent implements OnInit {
     this._auditoriaService.cargarAuditorias()
           .subscribe( auditorias => {
             this.auditorias = auditorias;
-            // console.log(this.auditorias);
             this.cargando = false;
           });
 
@@ -126,13 +125,6 @@ export class PlanesComponent implements OnInit {
             }
           });
         } else {
-          // Swal.fire({
-          //   title: 'Respuestas',
-          //   html:
-          //     'Tus respuestas: ' + result.value,
-          //   confirmButtonText: 'Ok'
-          // });
-
           // ************************************************
           // *** AQUI SE AGREGARA EL PLAN ***
           // ************************************************
@@ -142,8 +134,6 @@ export class PlanesComponent implements OnInit {
 
           this._planService.crearPlan( plan )
               .subscribe( resp => {
-                console.log(resp._id);
-                // this.cargarPlanes();
                 let cant: any[] = [];
                 let cont: any[] = [];
 
@@ -169,7 +159,6 @@ export class PlanesComponent implements OnInit {
                       }
                     }
                   ];
-                  // console.log(cant);
                 }
                 if (result.value[1] === '2') {
                   cant = ['1', '2'];
@@ -211,7 +200,6 @@ export class PlanesComponent implements OnInit {
                       }
                     }
                   ];
-                  // console.log(cant);
                 }
                 if (result.value[1] === '3') {
                   cant = ['1', '2', '3'];
@@ -271,7 +259,6 @@ export class PlanesComponent implements OnInit {
                       }
                     }
                   ];
-                  // console.log(cant);
                 }
                 if (result.value[1] === '4') {
                   cant = ['1', '2', '3', '4'];
@@ -349,7 +336,6 @@ export class PlanesComponent implements OnInit {
                       }
                     }
                   ];
-                  // console.log(cant);
                 }
                 if (result.value[1] === '5') {
                   cant = ['1', '2', '3', '4', '5'];
@@ -445,7 +431,6 @@ export class PlanesComponent implements OnInit {
                       }
                     }
                   ];
-                  // console.log(cant);
                 }
                 Swal.mixin({
                   confirmButtonText: 'Siguiente',
@@ -484,26 +469,13 @@ export class PlanesComponent implements OnInit {
                       this._planService.eliminarPlanPermanente( resp._id )
                           .subscribe( resp2 => {
                             // this.cargarPlanes();
-                            // Swal.fire('Cancelado', 'Se canceló la creación de las Auditorías', 'error');
                           });
                     } else {
-                      // Swal.fire({
-                      //   title: 'Respuestas',
-                      //   html:
-                      //     'Tus respuestas: ' + result2.value,
-                      //   confirmButtonText: 'Ok'
-                      // });
-
                       // ************************************************
                       // *** AQUI SE AGREGARAN LAS AUDITORIAS QUE SEAN NECESARIAS ***
                       // ************************************************
 
-                      console.log(result2.value.length);
-
-                      // tslint:disable-next-line: prefer-for-of
                       for ( let i = 0; i < result2.value.length; i++) {
-                        // console.log(resp.nombrePlan + '_' + result2.value[i]);
-
                         let auditoria = new Auditoria(
                           resp.nombrePlan + '_' + result2.value[i],
                           result2.value[i][0],
@@ -537,7 +509,6 @@ export class PlanesComponent implements OnInit {
                     // ************************************************
                     this._planService.eliminarPlanPermanente( resp._id )
                           .subscribe( resp2 => {
-                            // this.cargarPlanes();
                             Swal.fire('Cancelado', 'Se canceló la creación de las Auditorías', 'error');
                           });
                   }
@@ -574,7 +545,6 @@ export class PlanesComponent implements OnInit {
               this.cargarPlanes();
               this.cargarAuditorias();
             });
-        console.log('if ', result.value);
       } else {
         if ( result.value === undefined) {
         } else {
@@ -654,7 +624,6 @@ export class PlanesComponent implements OnInit {
                   this.cargarAuditorias();
                 });
           });
-      // console.log(result.value);
       } else {
         if ( result.value === undefined) {
         } else {
@@ -899,8 +868,6 @@ export class PlanesComponent implements OnInit {
     }).then(( result2 ) => {
       if (result2.value) {
 
-        console.log(result2.value);
-
         let vacio = false;
 
         for (let i = 0; i < 3; i++) {
@@ -949,9 +916,6 @@ export class PlanesComponent implements OnInit {
               });
 
         }
-
-      } else {
-        console.log('else ', result2.value);
       }
     });
 
@@ -974,12 +938,12 @@ export class PlanesComponent implements OnInit {
           }
         }).then((result) => {
           if (result.value) {
-            console.log('Se puede modificar pero se invalidará');
+            // Se puede modificar pero se invalidará'
             this.router.navigate(['/auditoria/' + auditoria._id ]);
           }
         });
       } else {
-        console.log('Se puede modificar directamente');
+        // Se puede modificar directamente
         this.router.navigate(['/auditoria/' + auditoria._id ]);
       }
     }
@@ -987,7 +951,6 @@ export class PlanesComponent implements OnInit {
   }
 
   eliminarAuditoria( auditoria: Auditoria, plan: Plan ) {
-    console.log(auditoria._id);
 
     if ( auditoria.progreso !== 'terminado') {
       if ( plan.valido === true ) {
@@ -1017,7 +980,7 @@ export class PlanesComponent implements OnInit {
       } else {
         Swal.fire({
           title: '¡En Curso!',
-          text: `¿Estás seguro de eliminar "${auditoria.nombre}" del Plan "${plan.nombrePlan}"`,
+          text: `¿Estás seguro de eliminar la Auditoría "${auditoria.nombre}" del Plan "${plan.nombrePlan}"?`,
           type: 'warning',
           showCancelButton: true,
           confirmButtonText: 'Sí',
@@ -1074,7 +1037,6 @@ export class PlanesComponent implements OnInit {
                   this.cargarAuditorias();
                 });
           });
-      // console.log(result.value);
       } else {
         if ( result.value === undefined) {
         } else {

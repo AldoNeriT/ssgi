@@ -87,16 +87,11 @@ export class NormaService {
       return this.http.put( url, norma )
       .pipe(
         map( (resp: any ) => {
-          // Swal.fire('Norma Actualizada', '', 'success');
           Swal.fire({
             title: 'Norma Actualizada',
             type: 'success',
             showConfirmButton: false,
             timer: 2000
-            // animation: false,
-            // customClass: {
-            //   popup: 'animated zoomIn'
-            // }
           });
           return resp.norma;
         }),

@@ -111,7 +111,9 @@ export class InstitucionComponent implements OnInit {
 
   }
 
+  // ************************************************
   // *** ESTE METODO ES DE EMERGENCIA PARA BORRAR ***
+  // ************************************************
   eliminarInstitucion( ) {
 
     Swal.fire({

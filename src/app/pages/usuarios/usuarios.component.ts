@@ -144,19 +144,6 @@ export class UsuariosComponent implements OnInit {
 
   }
 
-  // cambiarCatalogo() {
-
-  //   inicializando_table();
-  //   this.mostrarActivos = !this.mostrarActivos;
-
-  //   if ( this.mostrarActivos ) {
-  //     this.cargarUsuarios();
-  //   } else {
-  //     this.cargarUsuariosInactivos();
-  //   }
-
-  // }
-
   cambiarPapelera() {
 
     this.mostrarActivos = false;
