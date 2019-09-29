@@ -40,8 +40,8 @@ export class AuditoriasComponent implements OnInit {
   // *** Variables para la pestaña VER ***
   nombreV: string;
   normasV: string;
-  fechaInicialV: string;
-  fechaFinalV: string;
+  fechaInicialV: Date;
+  fechaFinalV: Date;
   planV: string;
   auditoresV: string;
   auditadosV: string;

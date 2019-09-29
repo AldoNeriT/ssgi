@@ -855,19 +855,109 @@ export class PlanesComponent implements OnInit {
         }
       }).then((result) => {
         if (result.value) {
-          console.log('Se puede agregar pero se invalidará el Plan');
-          this.router.navigate(['/auditoria/nuevo' ]);
+
+          // Modal
+          // Se puede agregar pero se invalidará el Plan
+
+          this.modalAgregarAuditoria( plan, true );
+
         }
       });
     } else {
-      console.log('Se puede agregar directamente');
-      this.router.navigate(['/auditoria/nuevo' ]);
+
+      // Modal
+      // Se puede agregar directamente
+
+      this.modalAgregarAuditoria( plan, false );
+
     }
 
   }
 
+  modalAgregarAuditoria( plan: Plan, invalidacion: boolean ) {
+
+    Swal.fire({
+      title: 'Nueva Auditoría',
+      showCancelButton: true,
+      confirmButtonText: 'Guardar',
+      cancelButtonText: 'Cancelar',
+      html:
+        '<div style="display: block;">Nombre</div>' +
+        '<input id="input1" class="swal2-input">' +
+        '<div style="display: block;">Fecha Inicial</div>' +
+        '<input class="swal2-input" id="input2" type="date">' +
+        '<div style="display: block;">Fecha Final</div>' +
+        '<input class="swal2-input" id="input3" type="date">',
+        focusConfirm: false,
+        preConfirm: () => {
+          return [
+            $('#input1').val(),
+            $('#input2').val(),
+            $('#input3').val()
+          ];
+        }
+    }).then(( result2 ) => {
+      if (result2.value) {
+
+        console.log(result2.value);
+
+        let vacio = false;
+
+        for (let i = 0; i < 3; i++) {
+          if ( result2.value[i] === '') {
+            vacio = true;
+          }
+        }
+
+        if ( vacio === true) {
+
+          Swal.fire({
+            title: '¡Campos Vacíos!',
+            text: 'Inténtalo de nuevo',
+            type: 'error',
+            animation: false,
+            customClass: {
+              popup: 'animated tada'
+            }
+          });
+
+        } else {
+
+          let auditoria = new Auditoria(
+            plan.nombrePlan + '_' + result2.value[0],
+            result2.value[0],
+            [],
+            new Date(result2.value[1]),
+            new Date(result2.value[2]),
+            plan._id,
+            [],
+            [],
+            '',
+            '',
+            ''
+          );
+
+          this._auditoriaService.crearAuditoria( auditoria )
+              .subscribe( resp3 => {
+                this.cargarPlanes();
+                this.cargarAuditorias();
+                if ( invalidacion ) {
+                  Swal.fire('Auditoría Creada', 'Enviaremos las modificaciones del Plan para su Validación', 'success');
+                } else {
+                  Swal.fire('Auditoría Creada', '', 'success');
+                }
+              });
+
+        }
+
+      } else {
+        console.log('else ', result2.value);
+      }
+    });
+
+  }
+
   editarAuditoria( auditoria: Auditoria ) {
-    console.log(auditoria._id);
 
     if ( auditoria.progreso === 'encurso') {
       if ( auditoria.valido === true ) {
@@ -915,8 +1005,13 @@ export class PlanesComponent implements OnInit {
           }
         }).then((result) => {
           if (result.value) {
-            console.log('Se puede eliminar pero se invalidará el Plan');
-            // this.router.navigate(['/auditoria/' + auditoria._id ]);
+            // Se puede eliminar pero se invalidará el Plan
+
+            this._auditoriaService.eliminarAuditoria( auditoria._id )
+                .subscribe( (resp: any) => {
+                  this.cargarPlanes();
+                  this.cargarAuditorias();
+                } );
           }
         });
       } else {
@@ -933,8 +1028,13 @@ export class PlanesComponent implements OnInit {
           }
         }).then((result) => {
           if (result.value) {
-            console.log('Se puede eliminar directamente');
-            // this.router.navigate(['/auditoria/' + auditoria._id ]);
+            // Se puede eliminar directamente
+
+            this._auditoriaService.eliminarAuditoria( auditoria._id )
+                .subscribe( (resp: any) => {
+                  this.cargarPlanes();
+                  this.cargarAuditorias();
+                } );
           }
         });
       }
