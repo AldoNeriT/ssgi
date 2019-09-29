@@ -93,15 +93,7 @@ export class AuditoriasComponent implements OnInit {
       contacto: new FormControl( null, Validators.required ),
     });
 
-    if ( this.ver === 'ver') {
-      this.cargarAuditoriaVer( this.id );
-      this.mostrarFormEditar = false;
-      this.mostrarFormVer = true;
-    } else {
-      this.cargarAuditoria( this.id );
-      this.mostrarFormEditar = true;
-      this.mostrarFormVer = false;
-    }
+    this.condiciones();
   }
 
   imprimirMultiSelect() {
@@ -114,7 +106,7 @@ export class AuditoriasComponent implements OnInit {
     // $('ul.select2-selection__rendered:eq(0)').html('');
     // $('ul.select2-selection__rendered:eq(0)').append('<li class="select2-selection__choice" title=" Seguridad "><span class="select2-selection__choice__remove" role="presentation">×</span> Seguridad </li>');
     // $('ul.select2-selection__rendered:eq(0)').append('<li class="select2-selection__choice" title=" Calidad "><span class="select2-selection__choice__remove" role="presentation">×</span> Calidad </li>');
-    
+
     // Extraer valores del select
     // $('#normas').val()
     // console.log($('#normas').val());
@@ -123,6 +115,18 @@ export class AuditoriasComponent implements OnInit {
   pruebaSplit( arr: string ) {
     let splitted = arr.split('/');
     console.log(splitted);
+  }
+
+  condiciones() {
+    if ( this.ver === 'ver') {
+      this.cargarAuditoriaVer( this.id );
+      this.mostrarFormEditar = false;
+      this.mostrarFormVer = true;
+    } else {
+      this.cargarAuditoria( this.id );
+      this.mostrarFormEditar = true;
+      this.mostrarFormVer = false;
+    }
   }
 
   cargarAuditoria( id: string) {
@@ -139,13 +143,22 @@ export class AuditoriasComponent implements OnInit {
             // *** La Respuesta es el arreglo como esta en la Base de
             //     datos y se le insertan los valores al formulario ***
 
-            console.log('RESPUESTA: ', auditoria);
+            console.log('Entro');
+
+            let fi: string = auditoria.fechaInicial;
+            let ff: string = auditoria.fechaFinal;
+            let fi1 = fi.split('T');
+            let ff1 = ff.split('T');
+            let fi2 = fi1[0].split('-');
+            let ff2 = ff1[0].split('-');
+            // año-mes-dia
+            // fi2:ff2 [0][1][2]
 
             this.formaEditar.setValue({
               nombre: auditoria.nombre,
               normas: auditoria.normas,
-              // fechas: auditoria.fechaInicial + '' + auditoria.fechaFinal,
-              fechas: '01/01/2019 - 05/05/2019',
+              // fechas: 'mes/dia/año - mes/dia/año',
+              fechas: `${fi2[1]}/${fi2[2]}/${fi2[0]} - ${ff2[1]}/${ff2[2]}/${ff2[0]}`,
               auditores: auditoria.grupoAuditor,
               auditados: auditoria.auditados,
               objetivos: auditoria.objetivos,
@@ -160,7 +173,7 @@ export class AuditoriasComponent implements OnInit {
             $('#formEditable > div > div > div > form > div.m-b-40').addClass('focused');
 
             // ************************************************
-            // *** AQUI SE AGREGARAN LOS DATOS A LOS SELECTS ***
+            // *** AQUI SE AGREGARAN LOS DATOS AL SELECT NORMAS 01 ***
             // ************************************************
 
             // Inicializando arreglos necesarios
@@ -168,20 +181,14 @@ export class AuditoriasComponent implements OnInit {
             let arrNormasNombre: any[] = [];
 
             // Llenando arreglos
-            // for ( let i = 0; i < this.normas.length; i++ ){
-            //   for ( let j = 0; j < auditoria.normas.length; j++ ) {
-            //     if ( this.normas[i] === auditoria.normas[j] ) {
-            //       arrNormas.push(`${i}: '${this.normas[i]}'`);
-            //     }
-            //   }
-            // }
-
-            arrNormas = ["0: '5d8148580e34b70017e458ec'", "2: '5d8148770e34b70017e458ee'"];
-            arrNormasNombre = ["Calidad", "Seguridad"];
-
-            // Imprimir lo que contiene cada arreglo
-            console.log('arrNormas: ', arrNormas);
-            console.log('arrNormasNombre: ', arrNormasNombre);
+            for ( let i = 0; i < this.normas.length; i++ ) {
+              for ( let j = 0; j < auditoria.normas.length; j++ ) {
+                if ( this.normas[i]._id === auditoria.normas[j]._id ) {
+                  arrNormas.push(`${i}: '${this.normas[i]._id}'`);
+                  arrNormasNombre.push(`${this.normas[i].nombreNorma}`);
+                }
+              }
+            }
 
             // Agregar arreglo al select
             $('#normas').val(arrNormas);
@@ -192,8 +199,63 @@ export class AuditoriasComponent implements OnInit {
               $('ul.select2-selection__rendered:eq(0)').append(`<li class="select2-selection__choice" title=" ${arrNormasNombre[k]} "><span class="select2-selection__choice__remove" role="presentation">×</span> ${arrNormasNombre[k]} </li>`);
             }
 
-            // Imprimir valor del select
-            console.log('valueSelect: ', $('#normas').val());
+            // ************************************************
+            // *** AQUI SE AGREGARAN LOS DATOS AL SELECT AUDITORES 02 ***
+            // ************************************************
+
+            // Inicializando arreglos necesarios
+            let arrAuditores: any[] = [];
+            let arrAuditoresNombre: any[] = [];
+
+            // Llenando arreglos
+            for ( let i = 0; i < this.auditores.length; i++ ) {
+              for ( let j = 0; j < auditoria.grupoAuditor.length; j++ ) {
+                if ( this.auditores[i]._id === auditoria.grupoAuditor[j]._id ) {
+                  arrAuditores.push(`${i}: '${this.auditores[i]._id}'`);
+                  arrAuditoresNombre.push(`${this.auditores[i].nombre} ${this.auditores[i].primer_Apellido} ${this.auditores[i].segundo_Apellido || ''}`);
+                }
+              }
+            }
+
+            // Agregar arreglo al select
+            $('#auditores').val(arrAuditores);
+
+            // Agregar el diseño al select
+            $('ul.select2-selection__rendered:eq(1)').html('');
+            for ( let k = 0; k < arrAuditores.length; k++ ) {
+              $('ul.select2-selection__rendered:eq(1)').append(`<li class="select2-selection__choice" title=" ${arrAuditoresNombre[k]} "><span class="select2-selection__choice__remove" role="presentation">×</span> ${arrAuditoresNombre[k]} </li>`);
+            }
+
+            // ************************************************
+            // *** AQUI SE AGREGARAN LOS DATOS AL SELECT AUDITADOS 03 ***
+            // ************************************************
+
+            // Inicializando arreglos necesarios
+            let arrAuditados: any[] = [];
+            let arrAuditadosNombre: any[] = [];
+
+            // Llenando arreglos
+            for ( let i = 0; i < this.auditados.length; i++ ) {
+              for ( let j = 0; j < auditoria.auditados.length; j++ ) {
+                if ( this.auditados[i]._id === auditoria.auditados[j]._id ) {
+                  arrAuditados.push(`${i}: '${this.auditados[i]._id}'`);
+                  arrAuditadosNombre.push(`${this.auditados[i].nombre} ${this.auditados[i].primer_Apellido} ${this.auditados[i].segundo_Apellido || ''}`);
+                }
+              }
+            }
+
+            // Agregar arreglo al select
+            $('#auditados').val(arrAuditados);
+
+            // Agregar el diseño al select
+            $('ul.select2-selection__rendered:eq(2)').html('');
+            for ( let k = 0; k < arrAuditados.length; k++ ) {
+              $('ul.select2-selection__rendered:eq(2)').append(`<li class="select2-selection__choice" title=" ${arrAuditadosNombre[k]} "><span class="select2-selection__choice__remove" role="presentation">×</span> ${arrAuditadosNombre[k]} </li>`);
+            }
+
+            // ************************************************
+            // *** FIN SELECTS ***
+            // ************************************************
 
             // this.cargando = false;
 
@@ -207,15 +269,54 @@ export class AuditoriasComponent implements OnInit {
 
     this._auditoriaService.cargarAuditoria( id )
           .subscribe( auditoria => {
+
+            console.log('Entro');
+
+            // Ver Normas
+            let arrNormasNombre: any[] = [];
+            let strNormas: string;
+            for ( let i = 0; i < this.normas.length; i++ ) {
+              for ( let j = 0; j < auditoria.normas.length; j++ ) {
+                if ( this.normas[i]._id === auditoria.normas[j]._id ) {
+                  arrNormasNombre.push(`${this.normas[i].nombreNorma}`);
+                }
+              }
+            }
+            strNormas = arrNormasNombre.join(', ');
+
+            // Ver Auditores
+            let arrAuditoresNombre: any[] = [];
+            let strAuditores: string;
+            for ( let i = 0; i < this.auditores.length; i++ ) {
+              for ( let j = 0; j < auditoria.grupoAuditor.length; j++ ) {
+                if ( this.auditores[i]._id === auditoria.grupoAuditor[j]._id ) {
+                  arrAuditoresNombre.push(`${this.auditores[i].nombre} ${this.auditores[i].primer_Apellido} ${this.auditores[i].segundo_Apellido || ''}`);
+                }
+              }
+            }
+            strAuditores = arrAuditoresNombre.join(', ');
+
+            // Ver Auditados
+            let arrAuditadosNombre: any[] = [];
+            let strAuditados: string;
+            for ( let i = 0; i < this.auditados.length; i++ ) {
+              for ( let j = 0; j < auditoria.auditados.length; j++ ) {
+                if ( this.auditados[i]._id === auditoria.auditados[j]._id ) {
+                  arrAuditadosNombre.push(`${this.auditados[i].nombre} ${this.auditados[i].primer_Apellido} ${this.auditados[i].segundo_Apellido || ''}`);
+                }
+              }
+            }
+            strAuditados = arrAuditadosNombre.join(', ');
+
             // *** La Respuesta es el arreglo como esta en la Base de
             //     datos y se le insertan los valores al formulario ***
             this.nombreV = auditoria.nombre;
-            this.normasV = auditoria.normas;
+            this.normasV = strNormas;
             this.fechaInicialV = auditoria.fechaInicial;
             this.fechaFinalV = auditoria.fechaFinal;
             this.planV = auditoria.plan.nombrePlan;
-            this.auditoresV = auditoria.grupoAuditor;
-            this.auditadosV = auditoria.auditados;
+            this.auditoresV = strAuditores;
+            this.auditadosV = strAuditados;
             this.objetivoV = auditoria.objetivos;
             this.alcanceV = auditoria.alcance;
             this.contactoV = auditoria.contacto;
@@ -232,7 +333,7 @@ export class AuditoriasComponent implements OnInit {
     this._normaService.cargarNormas()
           .subscribe( normas => {
             this.normas = normas;
-            // console.log(this.normas);
+            console.log('Normas: ', this.normas);
             // this.cargando = false;
           });
 
@@ -245,7 +346,7 @@ export class AuditoriasComponent implements OnInit {
     this._usuarioService.cargarUsuariosPorTipo('AUDITOR')
           .subscribe( auditores => {
             this.auditores = auditores;
-            // console.log(this.auditores);
+            console.log('Auditores: ', this.auditores);
             // this.cargando = false;
           });
 
@@ -258,7 +359,7 @@ export class AuditoriasComponent implements OnInit {
     this._usuarioService.cargarUsuariosPorTipo('AUDITADO')
           .subscribe( auditados => {
             this.auditados = auditados;
-            // console.log(this.auditados);
+            console.log('Auditados: ', this.auditados);
             // this.cargando = false;
           });
 
