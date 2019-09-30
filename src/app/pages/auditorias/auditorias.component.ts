@@ -34,9 +34,6 @@ export class AuditoriasComponent implements OnInit {
   progresoAudi: string;
 
   // *** Variables para los Formularios ***
-  mostrarFormEditar: boolean;
-  mostrarFormVer: boolean;
-
   cargando = true;
 
   // *** Variables para la pestaña VER ***
@@ -119,15 +116,7 @@ export class AuditoriasComponent implements OnInit {
   }
 
   condiciones() {
-    if ( this.ver === 'ver') {
-      this.cargarAuditoriaVer( this.id );
-      this.mostrarFormEditar = false;
-      this.mostrarFormVer = true;
-    } else {
-      this.cargarAuditoria( this.id );
-      this.mostrarFormEditar = true;
-      this.mostrarFormVer = false;
-    }
+    this.cargarAuditoria( this.id );
   }
 
   cargarAuditoria( id: string) {
@@ -149,12 +138,10 @@ export class AuditoriasComponent implements OnInit {
 
             let fi: string = auditoria.fechaInicial;
             let ff: string = auditoria.fechaFinal;
-            let fi1 = fi.split('T');
-            let ff1 = ff.split('T');
-            let fi2 = fi1[0].split('-');
-            let ff2 = ff1[0].split('-');
-            let fecha = `${fi2[1]}/${fi2[2]}/${fi2[0]} - ${ff2[1]}/${ff2[2]}/${ff2[0]}`;
-            console.log(fecha);
+            let fi1 = fi.split('-');
+            let ff1 = ff.split('-');
+            let fecha = `${fi1[1]}/${fi1[2]}/${fi1[0]} - ${ff1[1]}/${ff1[2]}/${ff1[0]}`;
+            // console.log(fecha);
             // año-mes-dia
             // fi2:ff2 [0][1][2]
 
@@ -272,76 +259,6 @@ export class AuditoriasComponent implements OnInit {
 
   }
 
-  cargarAuditoriaVer( id: string) {
-
-    this.cargando = true;
-
-    this._auditoriaService.cargarAuditoria( id )
-          .subscribe( auditoria => {
-
-            // console.log('Entro');
-
-            // Ver Normas
-            let arrNormasNombre: any[] = [];
-            let strNormas: string;
-            for ( let i = 0; i < this.normas.length; i++ ) {
-              for ( let j = 0; j < auditoria.normas.length; j++ ) {
-                if ( this.normas[i]._id === auditoria.normas[j]._id ) {
-                  arrNormasNombre.push(`${this.normas[i].nombreNorma}`);
-                }
-              }
-            }
-            strNormas = arrNormasNombre.join(', ');
-
-            // Ver Auditores
-            let arrAuditoresNombre: any[] = [];
-            let strAuditores: string;
-            for ( let i = 0; i < this.auditores.length; i++ ) {
-              for ( let j = 0; j < auditoria.grupoAuditor.length; j++ ) {
-                if ( this.auditores[i]._id === auditoria.grupoAuditor[j]._id ) {
-                  arrAuditoresNombre.push(`${this.auditores[i].nombre} ${this.auditores[i].primer_Apellido} ${this.auditores[i].segundo_Apellido || ''}`);
-                }
-              }
-            }
-            strAuditores = arrAuditoresNombre.join(', ');
-
-            // Ver Auditados
-            let arrAuditadosNombre: any[] = [];
-            let strAuditados: string;
-            for ( let i = 0; i < this.auditados.length; i++ ) {
-              for ( let j = 0; j < auditoria.auditados.length; j++ ) {
-                if ( this.auditados[i]._id === auditoria.auditados[j]._id ) {
-                  arrAuditadosNombre.push(`${this.auditados[i].nombre} ${this.auditados[i].primer_Apellido} ${this.auditados[i].segundo_Apellido || ''}`);
-                }
-              }
-            }
-            strAuditados = arrAuditadosNombre.join(', ');
-
-            // *** La Respuesta es el arreglo como esta en la Base de
-            //     datos y se le insertan los valores al formulario ***
-            this.nombreV = auditoria.nombre;
-            this.normasV = strNormas;
-            this.fechaInicialV = auditoria.fechaInicial;
-            this.fechaFinalV = auditoria.fechaFinal;
-            this.planV = auditoria.plan.nombrePlan;
-            this.auditoresV = strAuditores;
-            this.auditadosV = strAuditados;
-            this.objetivoV = auditoria.objetivos;
-            this.alcanceV = auditoria.alcance;
-            this.contactoV = auditoria.contacto;
-
-            this.idPlan = auditoria.plan._id;
-            this.idAuditoria = auditoria._id;
-
-            this.cargando = false;
-
-            init_plugins();
-            inicializando_multiSelect();
-            inicializando_dateRange();
-          });
-
-  }
-
   cargarNormas() {
 
     this.cargando = true;
@@ -398,43 +315,56 @@ export class AuditoriasComponent implements OnInit {
       // return;
     }
 
-    // let auditoria = new Auditoria(
-    //   this.forma.value.nombre,
-    //   this.forma.value.descripcion,
-    //   this.forma.value.archivo,
-    //   this.forma.value.color
-    // );
+    let fechas: any = $('#fechas').val();
+    let arrFechas = fechas.split(' - ');
+    let fi = arrFechas[0].split('/');
+    let ff = arrFechas[1].split('/');
+    let fechaI = fi[2] + '-' + fi[0] + '-' + fi[1];
+    let fechaF = ff[2] + '-' + ff[0] + '-' + ff[1];
+    // mes - dia - año
+    // [][][]
+
+    // console.log('fechas: ', fechas);
+    // console.log('fechaI: ', fechaI);
+    // console.log('fechaF: ', fechaF);
 
     let norma: any = $('#normas').val();
-    console.log('SelectNormas: ', norma);
-    console.log('SelectNormasLength: ', norma.length);
-    console.log('SelectNormas1: ', norma[0]);
-    console.log('SelectNormas2: ', norma[1]);
-
-    let norma1: string = norma[0];
-    let norma2: string = norma[1];
-    let rnorma1 = norma1.split(`'`);
-    let rnorma2 = norma2.split(`'`);
-    console.log('Norma1: ', rnorma1[1]);
-    console.log('Norma2: ', rnorma2[1]);
-
-    for ( let i = 0; i < norma.length; i++) {
-      
-    }
-
     let objNormas: any[] = [];
-    objNormas = [{_id: '5d81486c0e34b70017e458ed'}, {_id: '5d8e34c854d9040017111c19'}];
-    console.log('ObjNormas: ', objNormas);
+    for ( let i = 0; i < norma.length; i++) {
+      let normafor: string = norma[i];
+      let rnormafor = normafor.split(`'`);
+      objNormas.push({_id: rnormafor[1]});
+    }
+    // objNormas = [{_id: '5d81486c0e34b70017e458ed'}, {_id: '5d8e34c854d9040017111c19'}];
+    // console.log('ObjNormas: ', objNormas);
+
+    let auditor: any = $('#auditores').val();
+    let objAuditor: any[] = [];
+    for ( let i = 0; i < auditor.length; i++) {
+      let auditorfor: string = auditor[i];
+      let rauditorfor = auditorfor.split(`'`);
+      objAuditor.push({_id: rauditorfor[1]});
+    }
+    // console.log('objAuditor: ', objAuditor);
+
+    let auditado: any = $('#auditados').val();
+    let objAuditado: any[] = [];
+    for ( let i = 0; i < auditado.length; i++) {
+      let auditadofor: string = auditado[i];
+      let rauditadofor = auditadofor.split(`'`);
+      objAuditado.push({_id: rauditadofor[1]});
+    }
+    // console.log('objAuditados: ', objAuditado);
 
     let auditoria = new Auditoria(
       this.planV + '_' + this.formaEditar.value.nombre,
       this.formaEditar.value.nombre,
       objNormas,
-      new Date('2018-09-09'),
-      new Date('2018-09-10'),
+      fechaI,
+      fechaF,
       this.idPlan,
-      [],
-      [],
+      objAuditor,
+      objAuditado,
       this.formaEditar.value.objetivos,
       this.formaEditar.value.alcance,
       this.formaEditar.value.contacto,
@@ -443,45 +373,15 @@ export class AuditoriasComponent implements OnInit {
 
     console.log('auditoria: ', auditoria);
 
-    // this._auditoriaService.crearAuditoria( auditoria )
-    //       .subscribe( resp => {
-    //         console.log('Se actualizo: ', resp);
-    //       });
+    this._auditoriaService.crearAuditoria( auditoria )
+          .subscribe( resp => {
+            this.router.navigate(['/planes']);
+          });
 
     // $('.show').hide();
     // $('body').removeClass('modal-open');
     // this.router.navigateByUrl('#/normas', {skipLocationChange: true}).then(() =>
     // this.router.navigate(['/normas']));
-
-  }
-
-  editarAuditoria() {
-
-    if ( this.formaEditar.invalid ) {
-      return;
-    }
-
-    let auditoria = new Auditoria(
-      this.planV + '_' + this.formaEditar.value.nombre,
-      this.formaEditar.value.nombre,
-      this.formaEditar.value.normas,
-      new Date('2000-01-01'),
-      new Date('2000-01-01'),
-      this.idPlan,
-      this.formaEditar.value.auditores,
-      this.formaEditar.value.auditados,
-      this.formaEditar.value.objetivos,
-      this.formaEditar.value.alcance,
-      this.formaEditar.value.contacto,
-      this.id
-    );
-
-    console.log('IMPRIMIR: ', auditoria);
-
-    // this._auditoriaService.crearAuditoria( auditoria )
-    //       .subscribe( resp => {
-    //         this.router.navigate(['/planes']);
-    //       });
 
   }
 

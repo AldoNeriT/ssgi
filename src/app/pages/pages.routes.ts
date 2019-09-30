@@ -3,8 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import {
     LoginGuardGuard,
     AbcGuard,
-    UsuarioIdGuard,
-    AuditoriaVerIdGuard
+    UsuarioIdGuard
 } from '../services/service.index';
 
 import { PagesComponent } from './pages.component';
@@ -73,12 +72,6 @@ const pagesRoutes: Routes = [
                 path: 'auditoria/:id',
                 component: AuditoriasComponent,
                 canActivate: [ AbcGuard ],
-                data: { titulo: 'Auditoría' }
-            },
-            {
-                path: 'auditoria/:ver/:id',
-                component: AuditoriasComponent,
-                canActivate: [ AuditoriaVerIdGuard ],
                 data: { titulo: 'Auditoría' }
             },
             { path: '', redirectTo: '/home', pathMatch: 'full'}

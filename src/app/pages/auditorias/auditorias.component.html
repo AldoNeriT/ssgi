@@ -11,7 +11,7 @@
 </div>
 
 <div *ngIf="!cargando">
-    <div *ngIf="mostrarFormEditar" class="row" id="formEditable">
+    <div class="row" id="formEditable">
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
@@ -72,120 +72,13 @@
                         </div>
 
                         <div class="modal-footer">
-                            <!-- <button *ngIf="progresoAudi === 'empezar'" type="submit" class="btn btn-themecolor waves-effect">Empezar</button> -->
-                            <!-- <button *ngIf="progresoAudi === 'encurso'" type="submit" class="btn btn-themecolor waves-effect">Editar</button> -->
-                            <button type="submit" class="btn btn-themecolor waves-effect">Editar</button>
+                            <button *ngIf="progresoAudi === 'empezar'" type="submit" class="btn btn-themecolor waves-effect">Empezar</button>
+                            <button *ngIf="progresoAudi === 'encurso'" type="submit" class="btn btn-themecolor waves-effect">Editar</button>
+                            <!-- <button type="submit" class="btn btn-themecolor waves-effect">Editar</button> -->
                             <!-- <button (click)="imprimirMultiSelect()" type="button" class="btn btn-default waves-effect">Cancelar</button> -->
                             <button routerLink="/planes" type="button" class="btn btn-default waves-effect">Cancelar</button>
                         </div>
                     </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div *ngIf="mostrarFormVer" class="row">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-body">
-
-                    <h4 class="card-title">Datos de la Auditoria</h4>
-                    <h6 class="card-subtitle">Plan: {{ planV }} </h6>
-
-                    <div class="form-body">
-                        <div class="row">
-                            <div class="col-md-12 text-left" style="padding-top: 25px">
-                                <label class="text-themecolor"><small>Nombre de la Auditoría</small></label><br>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12 text-left" style="padding: 0px 15px 24px">
-                                <label class="control-label"> {{ nombreV }} </label><br>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-12 text-left">
-                                <label class="text-themecolor"><small>Normas</small></label><br>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12 text-left" style="padding: 0px 15px 24px">
-                                <label class="control-label"> {{ normasV }} </label><br>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-12 text-left">
-                                <label class="text-themecolor"><small>Fecha Inicial - Fecha Final</small></label><br>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12 text-left" style="padding: 0px 15px 24px">
-                                <label class="control-left"> {{ fechaInicialV | date:'full' }} / {{ fechaFinalV | date:'full' }} </label><br>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-12 text-left">
-                                <label class="text-themecolor"><small>Auditores</small></label><br>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12 text-left" style="padding: 0px 15px 24px">
-                                <label class="control-label"> {{ auditoresV }} </label><br>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-12 text-left">
-                                <label class="text-themecolor"><small>Auditados</small></label><br>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12 text-left" style="padding: 0px 15px 24px">
-                                <label class="control-label"> {{ auditadosV }} </label><br>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-12 text-left">
-                                <label class="text-themecolor"><small>Objetivo</small></label><br>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12 text-left" style="padding: 0px 15px 24px">
-                                <label class="control-label"> {{ objetivoV }} </label><br>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-12 text-left">
-                                <label class="text-themecolor"><small>Alcance</small></label><br>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12 text-left" style="padding: 0px 15px 24px">
-                                <label class="control-label"> {{ alcanceV }} </label><br>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-12 text-left">
-                                <label class="text-themecolor"><small>Contacto</small></label><br>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12 text-left" style="padding: 0px 15px 24px">
-                                <label class="control-label"> {{ contactoV }} </label><br>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="modal-footer">
-                        <button routerLink="/planes" class="btn btn-themecolor waves-effect">Regresar</button>
-                    </div>
-
                 </div>
             </div>
         </div>

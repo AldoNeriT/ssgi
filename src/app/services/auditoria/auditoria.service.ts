@@ -107,7 +107,7 @@ export class AuditoriaService {
       .pipe(
         map( (resp: any ) => {
           Swal.fire({
-            title: 'Auditoría Actualizada',
+            title: '¡Listo!',
             type: 'success',
             showConfirmButton: false,
             timer: 2000

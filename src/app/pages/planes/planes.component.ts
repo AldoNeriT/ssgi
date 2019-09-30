@@ -477,11 +477,11 @@ export class PlanesComponent implements OnInit {
 
                       for ( let i = 0; i < result2.value.length; i++) {
                         let auditoria = new Auditoria(
-                          resp.nombrePlan + '_' + result2.value[i],
+                          resp.nombrePlan + '_' + result2.value[i][0],
                           result2.value[i][0],
                           [],
-                          new Date(result2.value[i][1]),
-                          new Date(result2.value[i][2]),
+                          result2.value[i][1],
+                          result2.value[i][2],
                           resp._id,
                           [],
                           [],
@@ -781,7 +781,7 @@ export class PlanesComponent implements OnInit {
           }
         }).then((result) => {
           if (result.value) {
-            this.router.navigate(['/auditoria/ver/' + auditoria._id ]);
+            // this.router.navigate(['/auditoria/' + auditoria._id ]);
           }
         });
       }
@@ -894,8 +894,8 @@ export class PlanesComponent implements OnInit {
             plan.nombrePlan + '_' + result2.value[0],
             result2.value[0],
             [],
-            new Date(result2.value[1]),
-            new Date(result2.value[2]),
+            result2.value[1],
+            result2.value[2],
             plan._id,
             [],
             [],

@@ -1,7 +1,6 @@
 export { LoginGuardGuard } from './guards/login-guard.guard';
 export { AbcGuard } from './guards/abc.guard';
 export { UsuarioIdGuard } from './guards/usuario-id.guard';
-export { AuditoriaVerIdGuard } from './guards/auditoria-ver-id.guard';
 
 export { SettingsService } from './settings/settings.service';
 export { SharedService } from './shared/shared.service';

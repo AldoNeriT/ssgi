@@ -65,7 +65,7 @@
                                                 <td (click)="verAuditoria( auditoria, plan )" *ngIf="auditoria.valido === false" class="bg-danger pointer" style="width: 3px; padding-left: 0px; padding-right: 0px"></td>
                                                 <td (click)="verAuditoria( auditoria, plan )" class="pointer" style="width: 50px;"><i class="mdi mdi-power mdi-24px text-info"></i></td>
                                                 <td (click)="verAuditoria( auditoria, plan )" class="pointer">{{ auditoria.nombre }}</td>
-                                                <td (click)="verAuditoria( auditoria, plan )" class="text-right pointer">{{ auditoria.fechaInicial | date:'MM-dd-yyyy' }} / {{ auditoria.fechaFinal | date:'MM-dd-yyyy' }}</td>
+                                                <td (click)="verAuditoria( auditoria, plan )" class="text-right pointer">{{ auditoria.fechaInicial }} / {{ auditoria.fechaFinal }}</td>
                                                 <td class="text-center" style="width: 50px;"><a (click)="editarAuditoria( auditoria )" *ngIf="auditoria.progreso === 'encurso'"><i class="mdi mdi-pencil text-dark pointer"></i></a></td>
                                                 <td class="text-center" style="width: 50px;"><a (click)="eliminarAuditoria( auditoria, plan )" *ngIf="auditoria.progreso !== 'terminado'"><i class="mdi mdi-delete text-dark pointer"></i></a></td>
                                             </tr>
@@ -78,7 +78,7 @@
                                                 <td (click)="verAuditoria( auditoria, plan )" *ngIf="auditoria.valido === false" class="bg-danger pointer" style="width: 3px; padding-left: 0px; padding-right: 0px"></td>
                                                 <td (click)="verAuditoria( auditoria, plan )" class="pointer" style="width: 50px;"><i class="mdi mdi-clock mdi-24px text-warning"></i></td>
                                                 <td (click)="verAuditoria( auditoria, plan )" class="pointer">{{ auditoria.nombre }}</td>
-                                                <td (click)="verAuditoria( auditoria, plan )" class="text-right pointer">{{ auditoria.fechaInicial | date:'MM-dd-yyyy' }} / {{ auditoria.fechaFinal | date:'MM-dd-yyyy' }}</td>
+                                                <td (click)="verAuditoria( auditoria, plan )" class="text-right pointer">{{ auditoria.fechaInicial }} / {{ auditoria.fechaFinal }}</td>
                                                 <td class="text-center" style="width: 50px;"><a (click)="editarAuditoria( auditoria )" *ngIf="auditoria.progreso === 'encurso'"><i class="mdi mdi-pencil text-dark pointer"></i></a></td>
                                                 <td class="text-center" style="width: 50px;"><a (click)="eliminarAuditoria( auditoria, plan )" *ngIf="auditoria.progreso !== 'terminado'"><i class="mdi mdi-delete text-dark pointer"></i></a></td>
                                             </tr>
@@ -90,7 +90,7 @@
                                                 <td (click)="verAuditoria( auditoria, plan )" *ngIf="auditoria.valido === false" class="bg-danger pointer" style="width: 3px; padding-left: 0px; padding-right: 0px"></td>
                                                 <td (click)="verAuditoria( auditoria, plan )" class="pointer" style="width: 50px;"><i class="mdi mdi-spellcheck mdi-24px text-success"></i></td>
                                                 <td (click)="verAuditoria( auditoria, plan )" class="pointer">{{ auditoria.nombre }}</td>
-                                                <td (click)="verAuditoria( auditoria, plan )" class="text-right pointer">{{ auditoria.fechaInicial | date:'MM-dd-yyyy' }} / {{ auditoria.fechaFinal | date:'MM-dd-yyyy' }}</td>
+                                                <td (click)="verAuditoria( auditoria, plan )" class="text-right pointer">{{ auditoria.fechaInicial }} / {{ auditoria.fechaFinal }}</td>
                                                 <td class="text-center" style="width: 50px;"><a (click)="editarAuditoria( auditoria )" *ngIf="auditoria.progreso === 'encurso'"><i class="mdi mdi-pencil text-dark pointer"></i></a></td>
                                                 <td class="text-center" style="width: 50px;"><a (click)="eliminarAuditoria( auditoria, plan )" *ngIf="auditoria.progreso !== 'terminado'"><i class="mdi mdi-delete text-dark pointer"></i></a></td>
                                             </tr>
@@ -141,7 +141,7 @@
                                                 <td *ngIf="auditoria.valido === false" class="bg-danger" style="width: 3px; padding-left: 0px; padding-right: 0px"></td>
                                                 <td style="width: 50px;"><i class="mdi mdi-clock mdi-24px text-warning"></i></td>
                                                 <td>{{ auditoria.nombre }}</td>
-                                                <td class="text-right">{{ auditoria.fechaInicial | date:'MM-dd-yyyy' }} / {{ auditoria.fechaFinal | date:'MM-dd-yyyy' }}</td>
+                                                <td class="text-right">{{ auditoria.fechaInicial }} / {{ auditoria.fechaFinal }}</td>
                                             </tr>
                                     </table>
                                     <table *ngIf="(auditoria.progreso === 'terminado') && (plan._id === auditoria.plan._id)" class="table full-color-table full-success-table hover-table pointer">
@@ -151,7 +151,7 @@
                                                 <td *ngIf="auditoria.valido === false" class="bg-danger" style="width: 3px; padding-left: 0px; padding-right: 0px"></td>
                                                 <td style="width: 50px;"><i class="mdi mdi-spellcheck mdi-24px text-success"></i></td>
                                                 <td>{{ auditoria.nombre }}</td>
-                                                <td class="text-right">{{ auditoria.fechaInicial | date:'MM-dd-yyyy' }} / {{ auditoria.fechaFinal | date:'MM-dd-yyyy' }}</td>
+                                                <td class="text-right">{{ auditoria.fechaInicial }} / {{ auditoria.fechaFinal }}</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -186,7 +186,7 @@
                                             <td *ngIf="auditoria.valido === false" class="bg-danger" style="width: 3px; padding-left: 0px; padding-right: 0px"></td>
                                             <td style="width: 50px;"><i class="mdi mdi-power mdi-24px text-info"></i></td>
                                             <td>{{ auditoria.nombre }}</td>
-                                            <td class="text-right">{{ auditoria.fechaInicial | date:'MM-dd-yyyy' }} / {{ auditoria.fechaFinal | date:'MM-dd-yyyy' }}</td>
+                                            <td class="text-right">{{ auditoria.fechaInicial }} / {{ auditoria.fechaFinal }}</td>
                                             <td class="text-center" style="width: 100px;">
                                                 <button (click)="validarContrasenaAudi( _usuarioService.usuario, auditoria )" *ngIf="(plan.valido === true) && (auditoria.valido === false) && (auditoria.progreso === 'encurso')" class="btn btn-themecolor btn-sm">Validar</button>
                                                 <a *ngIf="(plan.valido === true) && (auditoria.valido === true)" class="btn btn-outline-secondary btn-sm disabled" role="button" aria-disabled="true">Validado</a>
@@ -201,7 +201,7 @@
                                             <td (click)="verAuditoriaAltaD( auditoria )" *ngIf="auditoria.valido === false" class="bg-danger pointer" style="width: 3px; padding-left: 0px; padding-right: 0px"></td>
                                             <td (click)="verAuditoriaAltaD( auditoria )" class="pointer" style="width: 50px;"><i class="mdi mdi-clock mdi-24px text-warning"></i></td>
                                             <td (click)="verAuditoriaAltaD( auditoria )" class="pointer">{{ auditoria.nombre }}</td>
-                                            <td (click)="verAuditoriaAltaD( auditoria )" class="text-right pointer">{{ auditoria.fechaInicial | date:'MM-dd-yyyy' }} / {{ auditoria.fechaFinal | date:'MM-dd-yyyy' }}</td>
+                                            <td (click)="verAuditoriaAltaD( auditoria )" class="text-right pointer">{{ auditoria.fechaInicial }} / {{ auditoria.fechaFinal }}</td>
                                             <td class="text-center" style="width: 100px;">
                                                 <button (click)="validarContrasenaAudi( _usuarioService.usuario, auditoria )" *ngIf="(plan.valido === true) && (auditoria.valido === false) && (auditoria.progreso === 'encurso')" class="btn btn-themecolor btn-sm">Validar</button>
                                                 <a *ngIf="(plan.valido === true) && (auditoria.valido === true)" class="btn btn-outline-secondary btn-sm disabled" role="button" aria-disabled="true">Validado</a>
@@ -215,7 +215,7 @@
                                             <td (click)="verAuditoriaAltaD( auditoria )" *ngIf="auditoria.valido === false" class="bg-danger pointer" style="width: 3px; padding-left: 0px; padding-right: 0px"></td>
                                             <td (click)="verAuditoriaAltaD( auditoria )" class="pointer" style="width: 50px;"><i class="mdi mdi-spellcheck mdi-24px text-success"></i></td>
                                             <td (click)="verAuditoriaAltaD( auditoria )" class="pointer">{{ auditoria.nombre }}</td>
-                                            <td (click)="verAuditoriaAltaD( auditoria )" class="text-right pointer">{{ auditoria.fechaInicial | date:'MM-dd-yyyy' }} / {{ auditoria.fechaFinal | date:'MM-dd-yyyy' }}</td>
+                                            <td (click)="verAuditoriaAltaD( auditoria )" class="text-right pointer">{{ auditoria.fechaInicial }} / {{ auditoria.fechaFinal }}</td>
                                             <td class="text-center" style="width: 100px;">
                                                 <button (click)="validarContrasenaAudi( _usuarioService.usuario, auditoria )" *ngIf="(plan.valido === true) && (auditoria.valido === false) && (auditoria.progreso === 'encurso')" class="btn btn-themecolor btn-sm">Validar</button>
                                                 <a *ngIf="(plan.valido === true) && (auditoria.valido === true)" class="btn btn-outline-secondary btn-sm disabled" role="button" aria-disabled="true">Validado</a>
