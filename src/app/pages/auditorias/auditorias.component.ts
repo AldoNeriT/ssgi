@@ -30,6 +30,7 @@ export class AuditoriasComponent implements OnInit {
   ver: string;
 
   idPlan: string;
+  idAuditoria: string;
   progresoAudi: string;
 
   // *** Variables para los Formularios ***
@@ -88,7 +89,7 @@ export class AuditoriasComponent implements OnInit {
       fechas: new FormControl( null, Validators.required ),
       auditores: new FormControl( null, Validators.required ),
       auditados: new FormControl( null, Validators.required ),
-      objetivos: new FormControl( null, [Validators.required, Validators.email] ),
+      objetivos: new FormControl( null, Validators.required ),
       alcance: new FormControl( null, Validators.required ),
       contacto: new FormControl( null, Validators.required ),
     });
@@ -114,7 +115,7 @@ export class AuditoriasComponent implements OnInit {
 
   pruebaSplit( arr: string ) {
     let splitted = arr.split('/');
-    console.log(splitted);
+    // console.log(splitted);
   }
 
   condiciones() {
@@ -144,6 +145,7 @@ export class AuditoriasComponent implements OnInit {
             //     datos y se le insertan los valores al formulario ***
 
             // console.log('Entro');
+            // console.log(auditoria);
 
             let fi: string = auditoria.fechaInicial;
             let ff: string = auditoria.fechaFinal;
@@ -151,6 +153,8 @@ export class AuditoriasComponent implements OnInit {
             let ff1 = ff.split('T');
             let fi2 = fi1[0].split('-');
             let ff2 = ff1[0].split('-');
+            let fecha = `${fi2[1]}/${fi2[2]}/${fi2[0]} - ${ff2[1]}/${ff2[2]}/${ff2[0]}`;
+            console.log(fecha);
             // año-mes-dia
             // fi2:ff2 [0][1][2]
 
@@ -158,7 +162,7 @@ export class AuditoriasComponent implements OnInit {
               nombre: auditoria.nombre,
               normas: auditoria.normas,
               // fechas: 'mes/dia/año - mes/dia/año',
-              fechas: `${fi2[1]}/${fi2[2]}/${fi2[0]} - ${ff2[1]}/${ff2[2]}/${ff2[0]}`,
+              fechas: fecha,
               auditores: auditoria.grupoAuditor,
               auditados: auditoria.auditados,
               objetivos: auditoria.objetivos,
@@ -168,6 +172,7 @@ export class AuditoriasComponent implements OnInit {
 
             this.planV = auditoria.plan.nombrePlan;
             this.idPlan = auditoria.plan._id;
+            this.idAuditoria = auditoria._id;
             this.progresoAudi = auditoria.progreso;
 
             $('#formEditable > div > div > div > form > div.m-b-40').addClass('focused');
@@ -325,6 +330,9 @@ export class AuditoriasComponent implements OnInit {
             this.alcanceV = auditoria.alcance;
             this.contactoV = auditoria.contacto;
 
+            this.idPlan = auditoria.plan._id;
+            this.idAuditoria = auditoria._id;
+
             this.cargando = false;
 
             init_plugins();
@@ -379,6 +387,71 @@ export class AuditoriasComponent implements OnInit {
             inicializando_multiSelect();
             inicializando_dateRange();
           });
+
+  }
+
+  agregarAuditoria() {
+
+    if ( this.formaEditar.invalid ) {
+      // console.log('invalido');
+      // console.log(this.formaEditar.value);
+      // return;
+    }
+
+    // let auditoria = new Auditoria(
+    //   this.forma.value.nombre,
+    //   this.forma.value.descripcion,
+    //   this.forma.value.archivo,
+    //   this.forma.value.color
+    // );
+
+    let norma: any = $('#normas').val();
+    console.log('SelectNormas: ', norma);
+    console.log('SelectNormasLength: ', norma.length);
+    console.log('SelectNormas1: ', norma[0]);
+    console.log('SelectNormas2: ', norma[1]);
+
+    let norma1: string = norma[0];
+    let norma2: string = norma[1];
+    let rnorma1 = norma1.split(`'`);
+    let rnorma2 = norma2.split(`'`);
+    console.log('Norma1: ', rnorma1[1]);
+    console.log('Norma2: ', rnorma2[1]);
+
+    for ( let i = 0; i < norma.length; i++) {
+      
+    }
+
+    let objNormas: any[] = [];
+    objNormas = [{_id: '5d81486c0e34b70017e458ed'}, {_id: '5d8e34c854d9040017111c19'}];
+    console.log('ObjNormas: ', objNormas);
+
+    let auditoria = new Auditoria(
+      this.planV + '_' + this.formaEditar.value.nombre,
+      this.formaEditar.value.nombre,
+      objNormas,
+      new Date('2018-09-09'),
+      new Date('2018-09-10'),
+      this.idPlan,
+      [],
+      [],
+      this.formaEditar.value.objetivos,
+      this.formaEditar.value.alcance,
+      this.formaEditar.value.contacto,
+      this.idAuditoria
+    );
+
+    console.log('auditoria: ', auditoria);
+
+    // this._auditoriaService.crearAuditoria( auditoria )
+    //       .subscribe( resp => {
+    //         console.log('Se actualizo: ', resp);
+    //       });
+
+    // $('.show').hide();
+    // $('body').removeClass('modal-open');
+    // this.router.navigateByUrl('#/normas', {skipLocationChange: true}).then(() =>
+    // this.router.navigate(['/normas']));
 
   }
 
