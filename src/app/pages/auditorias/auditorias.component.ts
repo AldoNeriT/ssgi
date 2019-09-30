@@ -136,14 +136,14 @@ export class AuditoriasComponent implements OnInit {
     // this.cargarAuditores();
     // this.cargarAuditados();
 
-    // this.cargando = true;
+    this.cargando = true;
 
     this._auditoriaService.cargarAuditoria( id )
           .subscribe( auditoria => {
             // *** La Respuesta es el arreglo como esta en la Base de
             //     datos y se le insertan los valores al formulario ***
 
-            console.log('Entro');
+            // console.log('Entro');
 
             let fi: string = auditoria.fechaInicial;
             let ff: string = auditoria.fechaFinal;
@@ -257,7 +257,11 @@ export class AuditoriasComponent implements OnInit {
             // *** FIN SELECTS ***
             // ************************************************
 
-            // this.cargando = false;
+            this.cargando = false;
+
+            init_plugins();
+            inicializando_multiSelect();
+            inicializando_dateRange();
 
           });
 
@@ -265,12 +269,12 @@ export class AuditoriasComponent implements OnInit {
 
   cargarAuditoriaVer( id: string) {
 
-    // this.cargando = true;
+    this.cargando = true;
 
     this._auditoriaService.cargarAuditoria( id )
           .subscribe( auditoria => {
 
-            console.log('Entro');
+            // console.log('Entro');
 
             // Ver Normas
             let arrNormasNombre: any[] = [];
@@ -321,46 +325,59 @@ export class AuditoriasComponent implements OnInit {
             this.alcanceV = auditoria.alcance;
             this.contactoV = auditoria.contacto;
 
-            // this.cargando = false;
+            this.cargando = false;
+
+            init_plugins();
+            inicializando_multiSelect();
+            inicializando_dateRange();
           });
 
   }
 
   cargarNormas() {
 
-    // this.cargando = true;
+    this.cargando = true;
 
     this._normaService.cargarNormas()
           .subscribe( normas => {
             this.normas = normas;
-            console.log('Normas: ', this.normas);
-            // this.cargando = false;
+            // console.log('Normas: ', this.normas);
+            this.cargando = false;
+            init_plugins();
+            inicializando_multiSelect();
+            inicializando_dateRange();
           });
 
   }
 
   cargarAuditores() {
 
-    // this.cargando = true;
+    this.cargando = true;
 
     this._usuarioService.cargarUsuariosPorTipo('AUDITOR')
           .subscribe( auditores => {
             this.auditores = auditores;
-            console.log('Auditores: ', this.auditores);
-            // this.cargando = false;
+            // console.log('Auditores: ', this.auditores);
+            this.cargando = false;
+            init_plugins();
+            inicializando_multiSelect();
+            inicializando_dateRange();
           });
 
   }
 
   cargarAuditados() {
 
-    // this.cargando = true;
+    this.cargando = true;
 
     this._usuarioService.cargarUsuariosPorTipo('AUDITADO')
           .subscribe( auditados => {
             this.auditados = auditados;
-            console.log('Auditados: ', this.auditados);
-            // this.cargando = false;
+            // console.log('Auditados: ', this.auditados);
+            this.cargando = false;
+            init_plugins();
+            inicializando_multiSelect();
+            inicializando_dateRange();
           });
 
   }
