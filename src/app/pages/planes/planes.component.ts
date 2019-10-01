@@ -684,7 +684,7 @@ export class PlanesComponent implements OnInit {
             }
           }).then((result) => {
             if (result.value) {
-              // this.router.navigate(['/auditoria/' + auditoria._id ]);
+              this.router.navigate(['/menu-auditoria/' + auditoria._id ]);
             }
           });
         } else {
@@ -715,7 +715,7 @@ export class PlanesComponent implements OnInit {
             }
           }).then((result) => {
             if (result.value) {
-              // this.router.navigate(['/auditoria/' + auditoria._id ]);
+              this.router.navigate(['/menu-auditoria/' + auditoria._id ]);
             }
           });
         } else {
@@ -764,7 +764,7 @@ export class PlanesComponent implements OnInit {
           }
         }).then((result) => {
           if (result.value) {
-            // this.router.navigate(['/auditoria/' + auditoria._id ]);
+            this.router.navigate(['/menu-auditoria/' + auditoria._id ]);
           }
         });
       } else {
@@ -781,7 +781,7 @@ export class PlanesComponent implements OnInit {
           }
         }).then((result) => {
           if (result.value) {
-            // this.router.navigate(['/auditoria/' + auditoria._id ]);
+            this.router.navigate(['/planeacion/' + auditoria._id + '/' + this._usuarioService.usuario._id]);
           }
         });
       }
@@ -801,7 +801,7 @@ export class PlanesComponent implements OnInit {
         }
       }).then((result) => {
         if (result.value) {
-          // this.router.navigate(['/auditoria/' + auditoria._id ]);
+          this.router.navigate(['/menu-auditoria/' + auditoria._id ]);
         }
       });
     }

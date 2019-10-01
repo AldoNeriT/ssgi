@@ -36,7 +36,7 @@ export class AuditoriaService {
     let url = URL_SERVICIOS + '/auditoria';
 
     // *** TOKEN ***
-    // url += '?token=' + this.token;
+    url += '?token=' + this.token;
 
     return this.http.get( url )
     .pipe(
@@ -57,7 +57,7 @@ export class AuditoriaService {
     let url = URL_SERVICIOS + '/auditoria/' + id;
 
     // *** TOKEN ***
-    // url += '?token=' + this.token;
+    url += '?token=' + this.token;
 
     return this.http.get( url )
     .pipe(
@@ -77,7 +77,7 @@ export class AuditoriaService {
     let url = URL_SERVICIOS + '/auditoria/plan/' + id;
 
     // *** TOKEN ***
-    // url += '?token=' + this.token;
+    url += '?token=' + this.token;
 
     return this.http.get( url )
     .pipe(
@@ -101,7 +101,7 @@ export class AuditoriaService {
       url += '/' + auditoria._id;
 
       // *** TOKEN ***
-      // url += '?token=' + this.token;
+      url += '?token=' + this.token;
 
       return this.http.put( url, auditoria )
       .pipe(
@@ -124,7 +124,7 @@ export class AuditoriaService {
       // *** Aqui se CREA la Auditoria ***
 
       // *** TOKEN ***
-      // url += '?token=' + this.token;
+      url += '?token=' + this.token;
 
       return this.http.post( url, auditoria )
       .pipe(
@@ -152,7 +152,7 @@ export class AuditoriaService {
     let url = URL_SERVICIOS + '/auditoria/' + id;
 
     // *** TOKEN ***
-    // url += '?token=' + this.token;
+    url += '?token=' + this.token;
 
     return this.http.delete( url )
     .pipe(
@@ -178,7 +178,7 @@ export class AuditoriaService {
     let url = URL_SERVICIOS + '/auditoria/validacion/' + auditoria._id;
 
     // *** TOKEN ***
-    // url += '?token=' + this.token;
+    url += '?token=' + this.token;
 
     return this.http.put( url, auditoria )
     .pipe(

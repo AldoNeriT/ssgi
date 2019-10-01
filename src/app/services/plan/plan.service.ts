@@ -36,7 +36,7 @@ export class PlanService {
     let url = URL_SERVICIOS + '/plan';
 
     // *** TOKEN ***
-    // url += '?token=' + this.token;
+    url += '?token=' + this.token;
 
     return this.http.get( url )
     .pipe(
@@ -57,7 +57,7 @@ export class PlanService {
     let url = URL_SERVICIOS + '/plan/' + id;
 
     // *** TOKEN ***
-    // url += '?token=' + this.token;
+    url += '?token=' + this.token;
 
     return this.http.get( url )
     .pipe(
@@ -81,7 +81,7 @@ export class PlanService {
       url += '/' + plan._id;
 
       // *** TOKEN ***
-      // url += '?token=' + this.token;
+      url += '?token=' + this.token;
 
       return this.http.put( url, plan )
       .pipe(
@@ -104,7 +104,7 @@ export class PlanService {
       // *** Aqui se CREA el Plan ***
 
       // *** TOKEN ***
-      // url += '?token=' + this.token;
+      url += '?token=' + this.token;
 
       return this.http.post( url, plan )
       .pipe(
@@ -132,7 +132,7 @@ export class PlanService {
     let url = URL_SERVICIOS + '/plan/' + id;
 
     // *** TOKEN ***
-    // url += '?token=' + this.token;
+    url += '?token=' + this.token;
 
     return this.http.delete( url )
     .pipe(
@@ -158,7 +158,7 @@ export class PlanService {
     let url = URL_SERVICIOS + '/plan/eliminar/' + id;
 
     // *** TOKEN ***
-    // url += '?token=' + this.token;
+    url += '?token=' + this.token;
 
     return this.http.delete( url )
     .pipe(
@@ -184,7 +184,7 @@ export class PlanService {
     let url = URL_SERVICIOS + '/auditoria/plan/' + id;
 
     // *** TOKEN ***
-    // url += '?token=' + this.token;
+    url += '?token=' + this.token;
 
     return this.http.delete( url )
     .pipe(
@@ -210,7 +210,7 @@ export class PlanService {
     let url = URL_SERVICIOS + '/plan/validacion/' + plan._id;
 
     // *** TOKEN ***
-    // url += '?token=' + this.token;
+    url += '?token=' + this.token;
 
     return this.http.put( url, plan )
     .pipe(
