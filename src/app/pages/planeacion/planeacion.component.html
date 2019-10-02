@@ -1,1 +1,57 @@
-<h1>Planeación</h1>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div style="padding-bottom: 35px;">
+                    <h4 class="card-title">Auditoría: </h4>
+                    <h6 class="card-subtitle">Normas de Referencia: {{ normasV }}</h6>
+                    <h6 class="card-subtitle">Objetivo: {{ objetivosV }}</h6>
+                    <h6 class="card-subtitle">Alcance: {{ alcanceV }}</h6>
+                </div>
+
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <div class="btn-group sgi_paddNorm">
+                            <button type="button" class="btn btn-block btn-lg btn-outline-secondary">
+                                <i class="mdi mdi-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <hr class="m-t-0 m-b-40">
+                    </div>
+                </div>
+
+                <div *ngFor="let planeacion of planeaciones" style="padding-bottom: 40px;">
+                    <h4 class="card-title text-muted font-bold">Fecha: {{ planeacion.fecha }}</h4>
+                    <table class="table full-color-table full-muted-table hover-table color-bordered-table muted-bordered-table">
+                        <thead class="text-center">
+                            <tr>
+                                <th>Horario</th>
+                                <th>Proceso / Actividad-Requisito / Criterio</th>
+                                <th>Participantes</th>
+                                <th>Contacto</th>
+                                <th>Área / Sitio</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-center">
+                            <tr>
+                                <td>{{ planeacion.horario }}</td>
+                                <td>Académico / Reinscripciones</td>
+                                <td>Aldo, Adrián, Madera</td>
+                                <td>Jorge</td>
+                                <td>{{ planeacion.area }}</td>
+                            </tr>
+                            <tr class="pointer">
+                                <td colspan="5"><i class="mdi mdi-plus"></i></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

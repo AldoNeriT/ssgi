@@ -13,4 +13,5 @@ export { ProcesoService } from './proceso/proceso.service';
 export { SubprocesoService } from './subproceso/subproceso.service';
 export { PlanService } from './plan/plan.service';
 export { AuditoriaService } from './auditoria/auditoria.service';
+export { PlaneacionService } from './planeacion/planeacion.service';
 

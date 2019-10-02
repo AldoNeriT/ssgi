@@ -85,6 +85,8 @@ export class NormasComponent implements OnInit {
             this.cargarNormas();
           });
 
+    // $('#modalNormaAgregar').modal('hide');
+
     // $('.show').hide();
     // $('body').removeClass('modal-open');
     // this.router.navigateByUrl('#/normas', {skipLocationChange: true}).then(() =>

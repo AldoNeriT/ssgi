@@ -13,7 +13,8 @@ import { LoginGuardGuard,
          ProcesoService,
          SubprocesoService,
          PlanService,
-         AuditoriaService
+         AuditoriaService,
+         PlaneacionService
         } from './service.index';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -37,7 +38,8 @@ import { HttpClientModule } from '@angular/common/http';
     ProcesoService,
     SubprocesoService,
     PlanService,
-    AuditoriaService
+    AuditoriaService,
+    PlaneacionService
   ]
 })
 export class ServiceModule { }

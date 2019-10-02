@@ -8,26 +8,31 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class MenuAuditoriaComponent implements OnInit {
 
+  id: string;
+
   constructor( public router: Router,
-               public activatedRoute: ActivatedRoute
-               ) { }
+               public activatedRoute: ActivatedRoute ) {
+    activatedRoute.params.subscribe( params => {
+      this.id = params['idA'];
+    });
+  }
 
   ngOnInit() {
   }
 
   redirigirPlaneacion() {
-    this.router.navigate(['/planeacion/' + 'audi' + '/' + 'user']);
+    this.router.navigate(['/planeacion/' + this.id]);
   }
 
   redirigirLista() {
-    this.router.navigate(['/listaVerificacion/' + 'audi' + '/' + 'user']);
+    this.router.navigate(['/listaVerificacion/' + this.id + '/' + 'user']);
   }
 
   redirigirInforme() {
-    this.router.navigate(['/informe/' + 'audi' + '/' + 'user']);
+    this.router.navigate(['/informe/' + this.id + '/' + 'user']);
   }
 
   redirigirBitacora() {
-    this.router.navigate(['/bitacora/' + 'audi' + '/' + 'user']);
+    this.router.navigate(['/bitacora/' + this.id + '/' + 'user']);
   }
 }

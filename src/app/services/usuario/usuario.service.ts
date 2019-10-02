@@ -335,6 +335,9 @@ export class UsuarioService {
 
     let url = URL_SERVICIOS + '/usuario/director/' + usuario._id;
 
+    // *** TOKEN ***
+    url += '?token=' + this.token;
+
     return this.http.post( url, usuario )
           .pipe(
             map( (resp: any) => {

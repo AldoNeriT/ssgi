@@ -77,7 +77,7 @@ const pagesRoutes: Routes = [
                 data: { titulo: 'Auditoría' }
             },
             { path: 'menu-auditoria/:idA', component: MenuAuditoriaComponent, data: { titulo: 'Menú de Auditorias' } },
-            { path: 'planeacion/:idA/:idU', component: PlaneacionComponent, data: { titulo: 'Planeación' } },
+            { path: 'planeacion/:idA', component: PlaneacionComponent, data: { titulo: 'Planeación' } },
             { path: 'listaVerificacion/:idA/:idU', component: ListaVerificacionComponent, data: { titulo: 'Lista de Verificación' } },
             { path: 'informe/:idA/:idU', component: InformeComponent, data: { titulo: 'Informe' } },
             { path: 'bitacora/:idA/:idU', component: BitacoraAccionesComponent, data: { titulo: 'Bitacora de Acciones' } },

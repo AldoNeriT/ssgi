@@ -5552,7 +5552,7 @@ Table-Layout
 }
 
 .full-color-table.full-primary-table tr:hover {
-    background-color: #745af2;
+    background-color: #a193e5;
     color: #ffffff;
 }
 
@@ -5561,7 +5561,7 @@ Table-Layout
 }
 
 .full-color-table.full-success-table thead th {
-    background-color: #90ffdf;
+    background-color: #59fa39;
     border: 0;
     color: #ffffff;
 }
@@ -5580,7 +5580,7 @@ Table-Layout
 }
 
 .full-color-table.full-info-table thead th {
-    background-color: #a3ff90;
+    background-color: #398bf7;
     border: 0;
     color: #ffffff;
 }
@@ -5599,7 +5599,7 @@ Table-Layout
 }
 
 .full-color-table.full-warning-table thead th {
-    background-color: #ffdda1;
+    background-color: #ffb22b;
     border: 0;
     color: #ffffff;
 }
@@ -5628,7 +5628,7 @@ Table-Layout
 }
 
 .full-color-table.full-danger-table tr:hover {
-    background-color: #ef5350;
+    background-color: #ee8f8e;
     color: #ffffff;
 }
 
@@ -5714,7 +5714,7 @@ Table-Layout
 }
 
 .full-color-table.full-muted-table thead th {
-    background-color: #c2c9ce;
+    background-color: #99abb4;
     border: 0;
     color: #ffffff;
 }

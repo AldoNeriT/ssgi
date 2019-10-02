@@ -17,9 +17,9 @@
                 <div class="card-body">
                     <h4 class="card-title">Empezar con la Auditoria</h4>
                     <h6 class="card-subtitle">Plan: {{ planV }}</h6>
-                    <h6 class="card-subtitle">IdP: {{ idPlan }}</h6>
+                    <!-- <h6 class="card-subtitle">IdP: {{ idPlan }}</h6>
                     <h6 class="card-subtitle">IdA: {{ idAuditoria }}</h6>
-                    <h6 class="card-subtitle">Progreso: {{ progresoAudi }}</h6>
+                    <h6 class="card-subtitle">Progreso: {{ progresoAudi }}</h6> -->
                     <form ngNativeValidate [formGroup]="formaEditar" (ngSubmit)="agregarAuditoria()" class="floating-labels m-t-40">
                         <div class="form-group m-b-40">
                             <input type="text" class="form-control" formControlName="nombre" name="nombre" id="nombre" required>
