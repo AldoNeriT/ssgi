@@ -20,6 +20,9 @@
     <!-- Date Range Picker -->
     <link href="assets/plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
 
+    <!-- Clock Picker -->
+    <link href="assets/plugins/clockpicker/dist/jquery-clockpicker.min.css" rel="stylesheet">
+
     <!-- Custom CSS -->
     <link href="assets/css/style.css" rel="stylesheet">
     <!-- You can change the theme colors from here -->
@@ -69,6 +72,9 @@
     <script src="assets/plugins/moment/moment.js"></script>
     <script src="assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
 
+    <!-- Clock Picker -->
+    <script src="assets/plugins/clockpicker/dist/jquery-clockpicker.min.js"></script>
+
     <!--Custom JavaScript -->
     <script src="assets/js/custom.js"></script>
 
@@ -96,30 +102,36 @@
                     applyClass: 'btn-themecolor',
                     cancelClass: 'btn-secondary'
                 });
-                // $('.input-daterange-timepicker').daterangepicker({
-                //     timePicker: true,
-                //     format: 'MM/DD/YYYY h:mm A',
-                //     timePickerIncrement: 30,
-                //     timePicker12Hour: true,
-                //     timePickerSeconds: false,
-                //     buttonClasses: ['btn', 'btn-sm'],
-                //     applyClass: 'btn-themecolor',
-                //     cancelClass: 'btn-secondary'
-                // });
-                // $('.input-limit-datepicker').daterangepicker({
-                //     format: 'MM/DD/YYYY',
-                //     minDate: '06/01/2015',
-                //     maxDate: '06/30/2015',
-                //     buttonClasses: ['btn', 'btn-sm'],
-                //     applyClass: 'btn-themecolor',
-                //     cancelClass: 'btn-secondary',
-                //     dateLimit: {
-                //         days: 6
-                //     }
-                // });
             });
         }
     </script>
+
+    <script id="sClockPicker">
+        function inicializando_clockPicker() {
+            $(document).ready(function() {
+                $('#single-input').clockpicker({
+                    placement: 'bottom',
+                    align: 'left',
+                    autoclose: true,
+                    'default': 'now'
+                });
+                $('.clockpicker').clockpicker({
+                    donetext: 'Done',
+                }).find('input').change(function() {
+                    // console.log(this.value);
+                });
+                $('#check-minutes').click(function(e) {
+                    // Have to stop propagation here
+                    e.stopPropagation();
+                    input.clockpicker('show').clockpicker('toggleView', 'minutes');
+                });
+                if (/mobile/i.test(navigator.userAgent)) {
+                    $('input').prop('readOnly', true);
+                }
+            });
+        }
+    </script>
+
 </body>
 
 </html>

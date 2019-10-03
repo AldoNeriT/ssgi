@@ -12,7 +12,7 @@
                 <div class="row">
                     <div class="col-12 text-center">
                         <div class="btn-group sgi_paddNorm">
-                            <button type="button" class="btn btn-block btn-lg btn-outline-secondary">
+                            <button type="button" class="btn btn-block btn-lg btn-outline-secondary" (click)="redirigirNuevo()">
                                 <i class="mdi mdi-plus"></i>
                             </button>
                         </div>
@@ -29,21 +29,27 @@
                     <table class="table full-color-table full-muted-table hover-table color-bordered-table muted-bordered-table">
                         <thead class="text-center">
                             <tr>
+                                <th style="width: 1px; padding-left: 0px; padding-right: 0px"></th>
                                 <th>Horario</th>
                                 <th>Proceso / Actividad-Requisito / Criterio</th>
                                 <th>Participantes</th>
                                 <th>Contacto</th>
                                 <th>Área / Sitio</th>
-                                <th>Fecha</th>
                             </tr>
                         </thead>
-                        <tbody class="text-center">
+                        <tbody>
                             <tr *ngFor="let planeacion of planeaciones" class="pointer">
-                                <td *ngIf="planeacion.fecha === fecha" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <td *ngIf="planeacion.fecha === fecha" style="width: 1px; padding-left: 0px; padding-right: 0px">
+                                    <!-- <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        
+                                    </button> -->
                                     <div class="btn-group">
                                         <div class="dropdown-menu text-center animated pulse">
                                             <div class="btn-group" role="group" aria-label="Basic example">
-                                                <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#modalNormaEditar">
+                                                <button type="button" class="btn btn-outline-secondary">
+                                                        <i class="fa fa-eye"></i>
+                                                    </button>
+                                                <button type="button" class="btn btn-outline-secondary">
                                                     <i class="fa fa-edit"></i>
                                                 </button>
                                                 <button type="button" class="btn btn-outline-secondary">
@@ -52,15 +58,14 @@
                                             </div>
                                         </div>
                                     </div>
-                                    {{ planeacion.horario }}
                                 </td>
+                                <td *ngIf="planeacion.fecha === fecha" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ planeacion.horario }}</td>
                                 <td *ngIf="planeacion.fecha === fecha" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Académico / Reinscripciones</td>
                                 <td *ngIf="planeacion.fecha === fecha" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Aldo, Adrián, Madera</td>
                                 <td *ngIf="planeacion.fecha === fecha" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Jorge</td>
                                 <td *ngIf="planeacion.fecha === fecha" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ planeacion.area }}</td>
-                                <td *ngIf="planeacion.fecha === fecha" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ planeacion.fecha }}</td>
                             </tr>
-                            <tr class="pointer">
+                            <tr class="pointer text-center" (click)="redirigirNuevo()">
                                 <td colspan="6"><i class="mdi mdi-plus"></i></td>
                             </tr>
                         </tbody>

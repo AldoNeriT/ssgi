@@ -18,7 +18,8 @@ import { ProcesosComponent } from './procesos/procesos.component';
 import { PlanesComponent } from './planes/planes.component';
 import { AuditoriasComponent } from './auditorias/auditorias.component';
 import { MenuAuditoriaComponent } from './menu-auditoria/menu-auditoria.component';
-import { PlaneacionComponent } from './planeacion/planeacion.component';
+import { PlaneacionesComponent } from './planeaciones/planeaciones.component';
+import { PlaneacionComponent } from './planeaciones/planeacion.component';
 import { ListaVerificacionComponent } from './lista-verificacion/lista-verificacion.component';
 import { InformeComponent } from './informe/informe.component';
 import { BitacoraAccionesComponent } from './bitacora-acciones/bitacora-acciones.component';
@@ -77,7 +78,8 @@ const pagesRoutes: Routes = [
                 data: { titulo: 'Auditoría' }
             },
             { path: 'menu-auditoria/:idA', component: MenuAuditoriaComponent, data: { titulo: 'Menú de Auditorias' } },
-            { path: 'planeacion/:idA', component: PlaneacionComponent, data: { titulo: 'Planeación' } },
+            { path: 'planeacion/:idA', component: PlaneacionesComponent, data: { titulo: 'Planeación' } },
+            { path: 'planeacionA/:idA', component: PlaneacionComponent, data: { titulo: 'Planeación' } },
             { path: 'listaVerificacion/:idA/:idU', component: ListaVerificacionComponent, data: { titulo: 'Lista de Verificación' } },
             { path: 'informe/:idA/:idU', component: InformeComponent, data: { titulo: 'Informe' } },
             { path: 'bitacora/:idA/:idU', component: BitacoraAccionesComponent, data: { titulo: 'Bitacora de Acciones' } },

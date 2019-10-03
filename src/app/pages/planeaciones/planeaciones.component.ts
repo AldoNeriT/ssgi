@@ -2,18 +2,19 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { PlaneacionService, AuditoriaService } from '../../services/service.index';
 import { Planeacion } from '../../models/planeacion.model';
-import { Auditoria } from '../../models/auditoria.model';
 import { Router, ActivatedRoute } from '@angular/router';
 
+import Swal from 'sweetalert2';
+import * as $ from 'jquery';
+
 declare function init_plugins();
-declare function inicializando_dateRange();
 
 @Component({
-  selector: 'app-planeacion',
-  templateUrl: './planeacion.component.html',
+  selector: 'app-planeaciones',
+  templateUrl: './planeaciones.component.html',
   styles: []
 })
-export class PlaneacionComponent implements OnInit {
+export class PlaneacionesComponent implements OnInit {
 
   planeaciones: Planeacion[] = [];
   // auditoria: any[] = [];
@@ -41,7 +42,6 @@ export class PlaneacionComponent implements OnInit {
 
   ngOnInit() {
     init_plugins();
-    inicializando_dateRange();
 
     this.cargarPlaneacionesAudi( this.id );
     this.cargarAuditoria( this.id );
@@ -114,6 +114,10 @@ export class PlaneacionComponent implements OnInit {
             // this.cargando = false;
           });
 
+  }
+
+  redirigirNuevo(){
+    this.router.navigate(['/planeacionA/' + this.id]);
   }
 
 }

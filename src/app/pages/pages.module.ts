@@ -20,10 +20,11 @@ import { ProcesosComponent } from './procesos/procesos.component';
 import { PlanesComponent } from './planes/planes.component';
 import { AuditoriasComponent } from './auditorias/auditorias.component';
 import { MenuAuditoriaComponent } from './menu-auditoria/menu-auditoria.component';
-import { PlaneacionComponent } from './planeacion/planeacion.component';
+import { PlaneacionesComponent } from './planeaciones/planeaciones.component';
 import { ListaVerificacionComponent } from './lista-verificacion/lista-verificacion.component';
 import { InformeComponent } from './informe/informe.component';
 import { BitacoraAccionesComponent } from './bitacora-acciones/bitacora-acciones.component';
+import { PlaneacionComponent } from './planeaciones/planeacion.component';
 
 
 @NgModule({
@@ -40,10 +41,11 @@ import { BitacoraAccionesComponent } from './bitacora-acciones/bitacora-acciones
         PlanesComponent,
         AuditoriasComponent,
         MenuAuditoriaComponent,
-        PlaneacionComponent,
+        PlaneacionesComponent,
         ListaVerificacionComponent,
         InformeComponent,
-        BitacoraAccionesComponent
+        BitacoraAccionesComponent,
+        PlaneacionComponent
     ],
     exports: [
         PrincipalComponent,
