@@ -31,20 +31,39 @@
                         </div>
                     </div>
                     <div class="table-responsive m-t-40">
-                        <table class="table table-bordered table-striped myTable">
+                        <table class="table table-bordered table-striped full-color-table full-muted-table hover-table myTable">
                             <thead>
                                 <tr>
-                                    <th>Usuario</th>
-                                    <th>Nombre</th>
-                                    <th>Tipo de Usuario</th>
-                                    <th></th>
+                                    <th class="text-dark">Usuario</th>
+                                    <th class="text-dark">Nombre</th>
+                                    <th class="text-dark">Tipo de Usuario</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let usuario of usuarios">
-                                    <td>{{usuario.nombre_Usuario}}</td>
-                                    <td>{{usuario.nombre + ' ' + usuario.primer_Apellido + ' ' + (usuario.segundo_Apellido || '')}}</td>
-                                    <td>
+                                <tr *ngFor="let usuario of usuarios" class="pointer">
+                                    <td data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <div class="btn-group">
+                                            <div class="dropdown-menu text-center animated pulse" style="width: 180px;">
+                                                <div class="btn-group" role="group" aria-label="Basic example">
+                                                    <button [routerLink]="['/usuario', 'ver', usuario._id]" class="btn btn-outline-info">
+                                                        <i class="fa fa-eye"></i>
+                                                    </button>
+                                                    <button *ngIf="_usuarioService.usuario.tipo_Usuario !== 'AUDITOR_LIDER'" [routerLink]="['/usuario', usuario._id]" class="btn btn-outline-inverse">
+                                                        <i class="fa fa-edit"></i>
+                                                    </button>
+                                                    <button *ngIf="_usuarioService.usuario.tipo_Usuario !== 'AUDITOR_LIDER'" [routerLink]="['/usuario', 'pass', usuario._id]" class="btn btn-outline-inverse">
+                                                        <i class="fa fa-lock"></i>
+                                                    </button>
+                                                    <button *ngIf="_usuarioService.usuario.tipo_Usuario !== 'AUDITOR_LIDER'" (click)="desactivarUsuario( usuario )" class="btn btn-outline-danger">
+                                                        <i class="fa fa-folder-open"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {{usuario.nombre_Usuario}}
+                                    </td>
+                                    <td data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{usuario.nombre + ' ' + usuario.primer_Apellido + ' ' + (usuario.segundo_Apellido || '')}}</td>
+                                    <td data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <!-- <span class="label label-themecolor">{{usuario.tipo_Usuario}}</span> -->
                                         <span *ngIf="usuario.tipo_Usuario === 'ADMIN'" class="label label-info">Administrador</span>
                                         <span *ngIf="usuario.tipo_Usuario === 'AUDITOR_LIDER'" class="label label-light-info">Auditor Líder</span>
@@ -52,7 +71,7 @@
                                         <span *ngIf="usuario.tipo_Usuario === 'AUDITADO'" class="label label-light-success">Auditado</span>
                                         <span *ngIf="usuario.tipo_Usuario === 'ALTA_DIRECCION'" class="label label-inverse">Alta Dirección</span>
                                     </td>
-                                    <td>
+                                    <!-- <td>
                                         <div aria-label="Basic example">
                                             <button [routerLink]="['/usuario', 'ver', usuario._id]" class="btn btn-outline-info btn-circle">
                                                 <i class="fa fa-eye"></i>
@@ -67,7 +86,7 @@
                                                 <i class="fa fa-folder-open"></i>
                                             </button>
                                         </div>
-                                    </td>
+                                    </td> -->
                                 </tr>
                             </tbody>
                         </table>

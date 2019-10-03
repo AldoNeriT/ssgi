@@ -21,12 +21,14 @@ export class PlaneacionComponent implements OnInit {
   formaEditar: FormGroup;
 
   id: string;
+  arrFechasT: any[] = [];
+  arrFechas: any[] = [];
 
   cargando = true;
 
   objetivosV: string;
   alcanceV: string;
-  normasV: any[] = [];
+  normasV: string;
 
   constructor( public _planeacionService: PlaneacionService,
                public _auditoriaService: AuditoriaService,
@@ -52,8 +54,39 @@ export class PlaneacionComponent implements OnInit {
     this._planeacionService.cargarPlaneacionesAudi( id )
           .subscribe( planeaciones => {
             this.planeaciones = planeaciones;
-            console.log(this.planeaciones);
+            // console.log(this.planeaciones);
             // this.cargando = false;
+
+            // Se extraen las fechas a un array
+            for ( let pl of planeaciones) {
+              this.arrFechasT.push(pl.fecha);
+            }
+
+            // Se eliminas duplicados
+            for ( let i = 0; i < this.arrFechasT.length; i++ ) {
+              for ( let j = 0; j < this.arrFechasT.length - 1; j++ ) {
+                if ( i !== j ) {
+                  if ( this.arrFechasT[i] === this.arrFechasT[j] ) {
+                    // eliminamos su valor
+                    this.arrFechasT[i] = '';
+                  }
+                }
+              }
+            }
+
+            // Se crean el nuevo array de fechas sin los duplicados
+            for ( let fech of this.arrFechasT) {
+              if ( fech !== '') {
+                this.arrFechas.push(fech);
+              }
+            }
+
+            // Ordenamos el array
+            this.arrFechas.sort();
+
+            // console.log('fechasT', this.arrFechasT);
+            // console.log('fechas', this.arrFechas);
+
           });
 
   }
@@ -69,7 +102,15 @@ export class PlaneacionComponent implements OnInit {
 
             this.objetivosV = auditoria.objetivos;
             this.alcanceV = auditoria.alcance;
-            this.normasV = auditoria.normas;
+
+            let arrNormasV: any[] = [];
+            for ( let nor of  auditoria.normas) {
+              arrNormasV.push(nor.nombreNorma);
+            }
+
+            this.normasV = arrNormasV.join(', ');
+
+
             // this.cargando = false;
           });
 

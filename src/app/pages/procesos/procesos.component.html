@@ -59,7 +59,7 @@
                                     </div>
                                 </div>
                                 <div *ngIf="!cargando2" class="table-responsive" style="padding-top: 20px;">
-                                    <table class="table table-bordered">
+                                    <table class="table full-color-table full-info-table hover-table color-bordered-table info-bordered-table">
                                         <thead>
                                             <tr>
                                                 <th>Nombre</th>
@@ -73,10 +73,10 @@
                                                 <td>{{ subproceso.archivoDigital }}</td>
                                                 <td *ngIf="_usuarioService.usuario.tipo_Usuario !== 'AUDITOR_LIDER'">
                                                     <div aria-label="Basic example">
-                                                        <button (click)="formEditableSub( subproceso )" class="btn btn-sm btn-outline-inverse btn-circle" data-toggle="modal" data-target="#modalSubprocesoEditar">
+                                                        <button (click)="formEditableSub( subproceso )" class="btn btn-sm btn-outline-info" data-toggle="modal" data-target="#modalSubprocesoEditar">
                                                             <i class="fa fa-edit"></i>
                                                         </button>&nbsp;
-                                                        <button (click)="eliminarSubproceso( subproceso )" class="btn btn-sm btn-outline-danger btn-circle">
+                                                        <button (click)="eliminarSubproceso( subproceso )" class="btn btn-sm btn-outline-dark">
                                                             <i class="fa fa-trash-o"></i>
                                                         </button>
                                                     </div>
