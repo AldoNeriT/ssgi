@@ -7,6 +7,9 @@ import { Planeacion } from '../../models/planeacion.model';
 import { Auditoria } from '../../models/auditoria.model';
 import { Router, ActivatedRoute } from '@angular/router';
 
+import Swal from 'sweetalert2';
+import * as $ from 'jquery';
+
 declare function init_plugins();
 declare function inicializando_multiSelect();
 declare function inicializando_clockPicker();
@@ -74,15 +77,15 @@ export class PlaneacionComponent implements OnInit {
     });
 
     this.formaEditar = new FormGroup({
-      fecha: new FormControl( null, Validators.required ),
-      desde: new FormControl( null, Validators.required ),
-      hasta: new FormControl( null, Validators.required ),
-      proceso: new FormControl( null, Validators.required ),
-      actividad: new FormControl( null, Validators.required ),
-      criterio: new FormControl( null, Validators.required ),
-      participantes: new FormControl( null, Validators.required ),
-      contacto: new FormControl( null, Validators.required ),
-      area: new FormControl( null, Validators.required ),
+      fechaE: new FormControl( null, Validators.required ),
+      desdeE: new FormControl( null, Validators.required ),
+      hastaE: new FormControl( null, Validators.required ),
+      procesoE: new FormControl( null, Validators.required ),
+      actividadE: new FormControl( null, Validators.required ),
+      criterioE: new FormControl( null, Validators.required ),
+      participantesE: new FormControl( null, Validators.required ),
+      contactoE: new FormControl( null, Validators.required ),
+      areaE: new FormControl( null, Validators.required ),
     });
 
     this.condiciones();
@@ -188,15 +191,15 @@ export class PlaneacionComponent implements OnInit {
             let arrHoras = horas.split(' - ');
 
             this.formaEditar.setValue({
-              fecha: planeacion.fecha,
-              desde: arrHoras[0],
-              hasta: arrHoras[1],
-              proceso: planeacion.proceso._id,
-              actividad: planeacion.actividad,
-              criterio: planeacion.criterio,
-              participantes: planeacion.participantes,
-              contacto: planeacion.contacto,
-              area: planeacion.area
+              fechaE: planeacion.fecha,
+              desdeE: arrHoras[0],
+              hastaE: arrHoras[1],
+              procesoE: planeacion.proceso._id,
+              actividadE: planeacion.actividad,
+              criterioE: planeacion.criterio,
+              participantesE: planeacion.participantes,
+              contactoE: planeacion.contacto,
+              areaE: planeacion.area
             });
 
             $('#formEditable > div.m-b-40').addClass('focused');
@@ -220,7 +223,7 @@ export class PlaneacionComponent implements OnInit {
             }
 
             // Agregar arreglo al select
-            $('#participantes').val(arrAuditores);
+            $('#participantesE').val(arrAuditores);
 
             // Agregar el diseño al select
             $('ul.select2-selection__rendered:eq(0)').html('');
@@ -247,7 +250,7 @@ export class PlaneacionComponent implements OnInit {
             }
 
             // Agregar arreglo al select
-            $('#contacto').val(arrAuditados);
+            $('#contactoE').val(arrAuditados);
 
             // Agregar el diseño al select
             $('ul.select2-selection__rendered:eq(1)').html('');
@@ -273,7 +276,7 @@ export class PlaneacionComponent implements OnInit {
 
     let fecha: any = $('#fecha').val();
     let arrFechas = fecha.split('/');
-    let fechaC = arrFechas[1] + '/' + arrFechas[0] + '/' + arrFechas[2];
+    let fechaC = arrFechas[0] + '/' + arrFechas[1] + '/' + arrFechas[2];
     // mes - dia - año
     // [][][]
 
@@ -312,10 +315,10 @@ export class PlaneacionComponent implements OnInit {
 
     console.log('planeacion: ', planeacion);
 
-    // this._planeacionService.crearPlaneacion( planeacion )
-    //       .subscribe( resp => {
-    //         this.router.navigate(['/planeacion/' + this.id]);
-    //       });
+    this._planeacionService.crearPlaneacion( planeacion )
+          .subscribe( resp => {
+            this.router.navigate(['/planeacion/' + this.id]);
+          });
 
   }
 
@@ -327,16 +330,16 @@ export class PlaneacionComponent implements OnInit {
       // return;
     }
 
-    let fecha: any = $('#fecha').val();
+    let fecha: any = $('#fechaE').val();
     let arrFechas = fecha.split('/');
-    let fechaC = arrFechas[1] + '/' + arrFechas[0] + '/' + arrFechas[2];
+    let fechaC = arrFechas[0] + '/' + arrFechas[1] + '/' + arrFechas[2];
     // mes - dia - año
     // [][][]
 
-    let horaI: any = $('#desde').val();
-    let horaF: any = $('#hasta').val();
+    let horaI: any = $('#desdeE').val();
+    let horaF: any = $('#hastaE').val();
 
-    let auditor: any = $('#participantes').val();
+    let auditor: any = $('#participantesE').val();
     let objAuditor: any[] = [];
     for ( let i = 0; i < auditor.length; i++) {
       let auditorfor: string = auditor[i];
@@ -345,7 +348,7 @@ export class PlaneacionComponent implements OnInit {
     }
     // console.log('objAuditor: ', objAuditor);
 
-    let auditado: any = $('#contacto').val();
+    let auditado: any = $('#contactoE').val();
     let objAuditado: any[] = [];
     for ( let i = 0; i < auditado.length; i++) {
       let auditadofor: string = auditado[i];
@@ -357,22 +360,22 @@ export class PlaneacionComponent implements OnInit {
     let planeacion = new Planeacion(
       fechaC,
       horaI + ' - ' + horaF,
-      this.forma.value.proceso,
-      this.forma.value.actividad,
-      this.forma.value.criterio,
+      this.formaEditar.value.procesoE,
+      this.formaEditar.value.actividadE,
+      this.formaEditar.value.criterioE,
       objAuditor,
       objAuditado,
-      this.forma.value.area,
+      this.formaEditar.value.areaE,
       this.id,
       this.idP
     );
 
     console.log('planeacion: ', planeacion);
 
-    // this._planeacionService.crearPlaneacion( planeacion )
-    //       .subscribe( resp => {
-    //         this.router.navigate(['/planeacion/' + this.id]);
-    //       });
+    this._planeacionService.crearPlaneacion( planeacion )
+          .subscribe( resp => {
+            this.router.navigate(['/planeacion/' + this.id]);
+          });
 
   }
 

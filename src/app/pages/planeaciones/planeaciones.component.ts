@@ -77,7 +77,7 @@ export class PlaneacionesComponent implements OnInit {
             }
 
             // Ordenamos el array
-            this.arrFechas.sort();
+            // this.arrFechas.sort();
 
             this.cargando = false;
 
@@ -109,6 +109,32 @@ export class PlaneacionesComponent implements OnInit {
 
   redirigirNuevo() {
     this.router.navigate(['/planeacionA/' + this.id]);
+  }
+
+  eliminarPlaneacion( planeacion: Planeacion ) {
+
+    Swal.fire({
+      title: '¡Advertencia!',
+      text: `¿Estás seguro de eliminar esta fila?`,
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí',
+      cancelButtonText: 'No',
+      cancelButtonColor: '#e74c3c',
+      animation: false,
+      customClass: {
+        popup: 'animated tada'
+      }
+    }).then((eliminar) => {
+      if (eliminar.value) {
+        this._planeacionService.eliminarPlaneacion( planeacion._id )
+            .subscribe( (resp: any) => {
+              this.cargarPlaneacionesAudi( this.id );
+              this.cargarAuditoria( this.id );
+            } );
+      }
+    });
+
   }
 
 }

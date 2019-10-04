@@ -66,7 +66,7 @@
                                                     <button routerLink="/planeacionA/editar/{{ planeacion._id }}" type="button" class="btn btn-outline-secondary">
                                                     <i class="fa fa-edit"></i>
                                                 </button>
-                                                    <button type="button" class="btn btn-outline-secondary">
+                                                    <button (click)="eliminarPlaneacion( planeacion )" type="button" class="btn btn-outline-secondary">
                                                     <i class="fa fa-trash-o"></i>
                                                 </button>
                                                 </div>
@@ -74,7 +74,7 @@
                                         </div>
                                     </td>
                                     <td *ngIf="planeacion.fecha === fecha" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ planeacion.horario }}</td>
-                                    <td *ngIf="planeacion.fecha === fecha" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ planeacion.proceso.nombreProceso }}</td>
+                                    <td *ngIf="planeacion.fecha === fecha" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ planeacion.proceso.nombreProceso }} / {{ planeacion.actividad }} / {{ planeacion.criterio }}</td>
                                     <td *ngIf="planeacion.fecha === fecha" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ planeacion.participantes }}</td>
                                     <td *ngIf="planeacion.fecha === fecha" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ planeacion.contacto }}</td>
                                     <td *ngIf="planeacion.fecha === fecha" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ planeacion.area }}</td>
