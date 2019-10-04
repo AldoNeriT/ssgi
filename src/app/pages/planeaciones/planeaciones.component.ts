@@ -16,10 +16,7 @@ declare function init_plugins();
 })
 export class PlaneacionesComponent implements OnInit {
 
-  planeaciones: Planeacion[] = [];
-  // auditoria: any[] = [];
-  forma: FormGroup;
-  formaEditar: FormGroup;
+  planeaciones: any[] = [];
 
   id: string;
   arrFechasT: any[] = [];
@@ -49,14 +46,12 @@ export class PlaneacionesComponent implements OnInit {
 
   cargarPlaneacionesAudi( id: string ) {
 
-    // this.cargando = true;
+    this.cargando = true;
 
     this._planeacionService.cargarPlaneacionesAudi( id )
           .subscribe( planeaciones => {
             this.planeaciones = planeaciones;
-            // console.log(this.planeaciones);
-            // this.cargando = false;
-
+            console.log(this.planeaciones);
             // Se extraen las fechas a un array
             for ( let pl of planeaciones) {
               this.arrFechasT.push(pl.fecha);
@@ -84,8 +79,7 @@ export class PlaneacionesComponent implements OnInit {
             // Ordenamos el array
             this.arrFechas.sort();
 
-            // console.log('fechasT', this.arrFechasT);
-            // console.log('fechas', this.arrFechas);
+            this.cargando = false;
 
           });
 
@@ -93,13 +87,10 @@ export class PlaneacionesComponent implements OnInit {
 
   cargarAuditoria( id: string ) {
 
-    // this.cargando = true;
+    this.cargando = true;
 
     this._auditoriaService.cargarAuditoria( id )
           .subscribe( auditoria => {
-            // this.auditoria = auditoria;
-            console.log(auditoria);
-
             this.objetivosV = auditoria.objetivos;
             this.alcanceV = auditoria.alcance;
 
@@ -110,13 +101,13 @@ export class PlaneacionesComponent implements OnInit {
 
             this.normasV = arrNormasV.join(', ');
 
+            this.cargando = false;
 
-            // this.cargando = false;
           });
 
   }
 
-  redirigirNuevo(){
+  redirigirNuevo() {
     this.router.navigate(['/planeacionA/' + this.id]);
   }
 

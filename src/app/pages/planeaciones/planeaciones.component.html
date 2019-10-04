@@ -1,77 +1,95 @@
-<div class="row">
-    <div class="col-12">
-        <div class="card">
-            <div class="card-body">
-                <div style="padding-bottom: 35px;">
-                    <h4 class="card-title">Auditoría: </h4>
-                    <h6 class="card-subtitle">Normas de Referencia: {{ normasV }}</h6>
-                    <h6 class="card-subtitle">Objetivo: {{ objetivosV }}</h6>
-                    <h6 class="card-subtitle">Alcance: {{ alcanceV }}</h6>
-                </div>
+<div *ngIf="cargando" id="loading" class="row" style="padding-top: 20px;">
+    <div class="col-sm-12">
+        <div class="text-center">
+            <span class="font-weight-bold">Cargando Datos</span>
+            <br><br>
+            <i class="fa fa-spinner fa-spin fa-3x text-themecolor"></i>
+            <br><br>
+            <span>Por favor espere un momento...</span>
+        </div>
+    </div>
+</div>
 
-                <div class="row">
-                    <div class="col-12 text-center">
-                        <div class="btn-group sgi_paddNorm">
-                            <button type="button" class="btn btn-block btn-lg btn-outline-secondary" (click)="redirigirNuevo()">
+<!-- ============================================================== -->
+<!-- CONTENIDO -->
+<!-- ============================================================== -->
+
+<div *ngIf="!cargando">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div style="padding-bottom: 35px;">
+                        <h4 class="card-title">Auditoría: </h4>
+                        <h6 class="card-subtitle">Normas de Referencia: {{ normasV }}</h6>
+                        <h6 class="card-subtitle">Objetivo: {{ objetivosV }}</h6>
+                        <h6 class="card-subtitle">Alcance: {{ alcanceV }}</h6>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <div class="btn-group sgi_paddNorm">
+                                <button type="button" class="btn btn-block btn-lg btn-outline-secondary" (click)="redirigirNuevo()">
                                 <i class="mdi mdi-plus"></i>
                             </button>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-12">
-                        <hr class="m-t-0 m-b-40">
+                    <div class="row">
+                        <div class="col-12">
+                            <hr class="m-t-0 m-b-40">
+                        </div>
                     </div>
-                </div>
 
-                <div *ngFor="let fecha of arrFechas" style="padding-bottom: 40px;">
-                    <h4 class="card-title text-muted font-bold">Fecha: {{ fecha }}</h4>
-                    <table class="table full-color-table full-muted-table hover-table color-bordered-table muted-bordered-table">
-                        <thead class="text-center">
-                            <tr>
-                                <th style="width: 1px; padding-left: 0px; padding-right: 0px"></th>
-                                <th>Horario</th>
-                                <th>Proceso / Actividad-Requisito / Criterio</th>
-                                <th>Participantes</th>
-                                <th>Contacto</th>
-                                <th>Área / Sitio</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let planeacion of planeaciones" class="pointer">
-                                <td *ngIf="planeacion.fecha === fecha" style="width: 1px; padding-left: 0px; padding-right: 0px">
-                                    <!-- <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <div *ngFor="let fecha of arrFechas" style="padding-bottom: 40px;">
+                        <h4 class="card-title text-muted font-bold">Fecha: {{ fecha }}</h4>
+                        <table class="table full-color-table full-muted-table hover-table color-bordered-table muted-bordered-table">
+                            <thead class="text-center">
+                                <tr>
+                                    <th style="width: 1px; padding-left: 0px; padding-right: 0px"></th>
+                                    <th>Horario</th>
+                                    <th>Proceso / Actividad-Requisito / Criterio</th>
+                                    <th>Participantes</th>
+                                    <th>Contacto</th>
+                                    <th>Área / Sitio</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let planeacion of planeaciones" class="pointer">
+                                    <td *ngIf="planeacion.fecha === fecha" style="width: 1px; padding-left: 0px; padding-right: 0px">
+                                        <!-- <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         
                                     </button> -->
-                                    <div class="btn-group">
-                                        <div class="dropdown-menu text-center animated pulse">
-                                            <div class="btn-group" role="group" aria-label="Basic example">
-                                                <button type="button" class="btn btn-outline-secondary">
+                                        <div class="btn-group">
+                                            <div class="dropdown-menu text-center animated pulse">
+                                                <div class="btn-group" role="group" aria-label="Basic example">
+                                                    <button type="button" class="btn btn-outline-secondary">
                                                         <i class="fa fa-eye"></i>
                                                     </button>
-                                                <button type="button" class="btn btn-outline-secondary">
+                                                    <button type="button" class="btn btn-outline-secondary">
                                                     <i class="fa fa-edit"></i>
                                                 </button>
-                                                <button type="button" class="btn btn-outline-secondary">
+                                                    <button type="button" class="btn btn-outline-secondary">
                                                     <i class="fa fa-trash-o"></i>
                                                 </button>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </td>
-                                <td *ngIf="planeacion.fecha === fecha" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ planeacion.horario }}</td>
-                                <td *ngIf="planeacion.fecha === fecha" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Académico / Reinscripciones</td>
-                                <td *ngIf="planeacion.fecha === fecha" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Aldo, Adrián, Madera</td>
-                                <td *ngIf="planeacion.fecha === fecha" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Jorge</td>
-                                <td *ngIf="planeacion.fecha === fecha" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ planeacion.area }}</td>
-                            </tr>
-                            <tr class="pointer text-center" (click)="redirigirNuevo()">
-                                <td colspan="6"><i class="mdi mdi-plus"></i></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                                    </td>
+                                    <td *ngIf="planeacion.fecha === fecha" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ planeacion.horario }}</td>
+                                    <td *ngIf="planeacion.fecha === fecha" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ planeacion.proceso.nombreProceso }}</td>
+                                    <td *ngIf="planeacion.fecha === fecha" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ planeacion.participantes }}</td>
+                                    <td *ngIf="planeacion.fecha === fecha" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ planeacion.contacto }}</td>
+                                    <td *ngIf="planeacion.fecha === fecha" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ planeacion.area }}</td>
+                                </tr>
+                                <tr class="pointer text-center" (click)="redirigirNuevo()">
+                                    <td colspan="6"><i class="mdi mdi-plus"></i></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
+                </div>
             </div>
         </div>
     </div>

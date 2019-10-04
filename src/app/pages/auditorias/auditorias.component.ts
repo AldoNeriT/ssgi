@@ -78,8 +78,6 @@ export class AuditoriasComponent implements OnInit {
     this.cargarAuditores();
     this.cargarAuditados();
 
-    this.pruebaSplit('2019-01-01/2019-01-25');
-
     this.formaEditar = new FormGroup({
       nombre: new FormControl( null, Validators.required ),
       normas: new FormControl( null, Validators.required ),
@@ -92,27 +90,6 @@ export class AuditoriasComponent implements OnInit {
     });
 
     this.condiciones();
-  }
-
-  imprimirMultiSelect() {
-    // *** SEGUIR ORDEN DE PASOS ***
-
-    // Agregar valores al select
-    // $('#normas').val(["0: '5d8148580e34b70017e458ec'", "2: '5d8148770e34b70017e458ee'"]);
-
-    // Agregar el diseño al select
-    // $('ul.select2-selection__rendered:eq(0)').html('');
-    // $('ul.select2-selection__rendered:eq(0)').append('<li class="select2-selection__choice" title=" Seguridad "><span class="select2-selection__choice__remove" role="presentation">×</span> Seguridad </li>');
-    // $('ul.select2-selection__rendered:eq(0)').append('<li class="select2-selection__choice" title=" Calidad "><span class="select2-selection__choice__remove" role="presentation">×</span> Calidad </li>');
-
-    // Extraer valores del select
-    // $('#normas').val()
-    // console.log($('#normas').val());
-  }
-
-  pruebaSplit( arr: string ) {
-    let splitted = arr.split('/');
-    // console.log(splitted);
   }
 
   condiciones() {
@@ -371,17 +348,10 @@ export class AuditoriasComponent implements OnInit {
       this.idAuditoria
     );
 
-    console.log('auditoria: ', auditoria);
-
     this._auditoriaService.crearAuditoria( auditoria )
           .subscribe( resp => {
             this.router.navigate(['/planes']);
           });
-
-    // $('.show').hide();
-    // $('body').removeClass('modal-open');
-    // this.router.navigateByUrl('#/normas', {skipLocationChange: true}).then(() =>
-    // this.router.navigate(['/normas']));
 
   }
 

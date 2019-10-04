@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { HttpClient } from '@angular/common/http';
-// import { Norma } from '../../models/norma.model';
+import { Planeacion } from '../../models/planeacion.model';
 import { URL_SERVICIOS } from '../../config/config';
 
 import { map, catchError } from 'rxjs/operators';
@@ -49,6 +49,61 @@ export class PlaneacionService {
         return throwError( err ) ;
       })
     );
+
+  }
+
+  crearPlaneacion( planeacion: Planeacion ) {
+
+    let url = URL_SERVICIOS + '/planeacion';
+
+    if ( planeacion._id ) {
+      // *** Aqui se ACTUALIZA la Planeacion ***
+      url += '/' + planeacion._id;
+
+      // *** TOKEN ***
+      // url += '?token=' + this.token;
+
+      return this.http.put( url, planeacion )
+      .pipe(
+        map( (resp: any ) => {
+          Swal.fire({
+            title: 'Planeación Actualizada',
+            type: 'success',
+            showConfirmButton: false,
+            timer: 2000
+          });
+          return resp.planeacion;
+        }),
+        catchError( err => {
+          Swal.fire('Error', err.error.err.message, 'error');
+          return throwError( err ) ;
+        })
+      );
+
+    } else {
+      // *** Aqui se CREA la Planeacion ***
+
+      // *** TOKEN ***
+      // url += '?token=' + this.token;
+
+      return this.http.post( url, planeacion )
+      .pipe(
+        map( (resp: any ) => {
+          Swal.fire({
+            title: 'Planeación Creada',
+            text: '',
+            type: 'success',
+            showConfirmButton: false,
+            timer: 2000
+          });
+          return resp.planeacion;
+        }),
+        catchError( err => {
+          Swal.fire('Error', err.error.err.message, 'error');
+          return throwError( err ) ;
+        })
+      );
+    }
 
   }
 
