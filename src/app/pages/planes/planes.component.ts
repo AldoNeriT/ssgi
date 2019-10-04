@@ -781,7 +781,7 @@ export class PlanesComponent implements OnInit {
           }
         }).then((result) => {
           if (result.value) {
-            this.router.navigate(['/planeacion/' + auditoria._id + '/' + this._usuarioService.usuario._id]);
+            this.router.navigate(['/planeacion/' + auditoria._id]);
           }
         });
       }

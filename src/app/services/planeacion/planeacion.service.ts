@@ -32,6 +32,26 @@ export class PlaneacionService {
 
   }
 
+  cargarPlaneacion( id: string ) {
+
+    let url = URL_SERVICIOS + '/planeacion/' + id;
+
+    // *** TOKEN ***
+    // url += '?token=' + this.token;
+
+    return this.http.get( url )
+    .pipe(
+      map( (resp: any ) => {
+        return resp.planeacion;
+      }),
+      catchError( err => {
+        Swal.fire('Error', err.error.err.message, 'error');
+        return throwError( err ) ;
+      })
+    );
+
+  }
+
   cargarPlaneacionesAudi( id: string ) {
 
     let url = URL_SERVICIOS + '/planeacion/auditoria/' + id;
