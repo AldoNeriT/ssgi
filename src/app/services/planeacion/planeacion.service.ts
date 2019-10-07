@@ -65,6 +65,10 @@ export class PlaneacionService {
         return resp.planeaciones;
       }),
       catchError( err => {
+        // console.log(err.status);
+        // if ( err.status === 0) {
+        //   Swal.fire('Error', 'Servidor Caído', 'error');
+        // }
         Swal.fire('Error', err.error.err.message, 'error');
         return throwError( err ) ;
       })

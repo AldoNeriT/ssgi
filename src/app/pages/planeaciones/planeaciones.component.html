@@ -48,7 +48,7 @@
                                 <tr>
                                     <th style="width: 1px; padding-left: 0px; padding-right: 0px"></th>
                                     <th>Horario</th>
-                                    <th>Proceso / Actividad-Requisito / Criterio</th>
+                                    <th>Proceso <span class="font-bold">/</span> Actividad-Requisito <span class="font-bold">/</span> Criterio</th>
                                     <th>Participantes</th>
                                     <th>Contacto</th>
                                     <th>Área / Sitio</th>
@@ -64,19 +64,27 @@
                                             <div class="dropdown-menu text-center animated pulse">
                                                 <div class="btn-group" role="group" aria-label="Basic example">
                                                     <button routerLink="/planeacionA/editar/{{ planeacion._id }}" type="button" class="btn btn-outline-secondary">
-                                                    <i class="fa fa-edit"></i>
-                                                </button>
+                                                        <i class="fa fa-edit"></i>
+                                                    </button>
                                                     <button (click)="eliminarPlaneacion( planeacion )" type="button" class="btn btn-outline-secondary">
-                                                    <i class="fa fa-trash-o"></i>
-                                                </button>
+                                                        <i class="fa fa-trash-o"></i>
+                                                    </button>
                                                 </div>
                                             </div>
                                         </div>
                                     </td>
-                                    <td *ngIf="planeacion.fecha === fecha" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ planeacion.horario }}</td>
-                                    <td *ngIf="planeacion.fecha === fecha" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ planeacion.proceso.nombreProceso }} / {{ planeacion.actividad }} / {{ planeacion.criterio }}</td>
-                                    <td *ngIf="planeacion.fecha === fecha" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ planeacion.participantes }}</td>
-                                    <td *ngIf="planeacion.fecha === fecha" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ planeacion.contacto }}</td>
+                                    <td *ngIf="planeacion.fecha === fecha" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width: 130px;">{{ planeacion.horario }}</td>
+                                    <td *ngIf="planeacion.fecha === fecha" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ planeacion.proceso.nombreProceso }} <span class="font-bold">/</span> {{ planeacion.actividad }} <span class="font-bold">/</span> {{ planeacion.criterio }}</td>
+                                    <td *ngIf="planeacion.fecha === fecha" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <ul style="padding-left: 16px;">
+                                            <li *ngFor="let participante of planeacion.participantes">{{participante.nombre + ' ' + participante.primer_Apellido + ' ' + (participante.segundo_Apellido || '')}}</li>
+                                        </ul>
+                                    </td>
+                                    <td *ngIf="planeacion.fecha === fecha" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <ul style="padding-left: 16px;">
+                                            <li *ngFor="let contacto of planeacion.contacto">{{contacto.nombre + ' ' + contacto.primer_Apellido + ' ' + (contacto.segundo_Apellido || '')}}</li>
+                                        </ul>
+                                    </td>
                                     <td *ngIf="planeacion.fecha === fecha" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ planeacion.area }}</td>
                                 </tr>
                                 <!-- <tr class="pointer text-center" (click)="redirigirNuevo()">

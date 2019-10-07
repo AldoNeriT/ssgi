@@ -48,13 +48,10 @@
 
                             <div *ngFor="let proceso of procesos" class="tab-pane" id="{{ proceso._id }}" role="tabpanel" aria-expanded="false">
                                 <div *ngIf="_usuarioService.usuario.tipo_Usuario !== 'AUDITOR_LIDER'" class="row">
-                                    <div class="col-md-10 col-sm-12" style="padding-right: 0px;">
-                                        <button type="button" class="btn btn-outline-info btn-block" data-toggle="modal" data-target="#modalSubprocesoAgregar">Agregar Subproceso <i class="mdi mdi-plus"></i></button>
-                                    </div>
-                                    <div class="col-md-1 col-sm-6" style="padding-left: 7.5px; padding-right: 7.5px;">
+                                    <div class="col-md-6 col-sm-6">
                                         <button type="button" (click)="formEditable( proceso )" class="btn btn-outline-warning btn-block" data-toggle="modal" data-target="#modalProcesoEditar"><i class="mdi mdi-pencil"></i></button>
                                     </div>
-                                    <div class="col-md-1 col-sm-6" style="padding-left: 0px;">
+                                    <div class="col-md-6 col-sm-6">
                                         <button type="button" (click)="eliminarProceso( proceso )" class="btn btn-outline-danger btn-block"><i class="mdi mdi-delete"></i></button>
                                     </div>
                                 </div>
@@ -62,25 +59,32 @@
                                     <table class="table full-color-table full-info-table hover-table color-bordered-table info-bordered-table">
                                         <thead>
                                             <tr>
+                                                <th style="width: 1px; padding-left: 0px; padding-right: 0px"></th>
                                                 <th>Nombre</th>
                                                 <th>URL</th>
-                                                <th *ngIf="_usuarioService.usuario.tipo_Usuario !== 'AUDITOR_LIDER'">Acción</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr *ngFor="let subproceso of subprocesos">
-                                                <td>{{ subproceso.nombreSubproceso }}</td>
-                                                <td>{{ subproceso.archivoDigital }}</td>
-                                                <td *ngIf="_usuarioService.usuario.tipo_Usuario !== 'AUDITOR_LIDER'">
-                                                    <div aria-label="Basic example">
-                                                        <button (click)="formEditableSub( subproceso )" class="btn btn-sm btn-outline-info" data-toggle="modal" data-target="#modalSubprocesoEditar">
-                                                            <i class="fa fa-edit"></i>
-                                                        </button>&nbsp;
-                                                        <button (click)="eliminarSubproceso( subproceso )" class="btn btn-sm btn-outline-dark">
-                                                            <i class="fa fa-trash-o"></i>
-                                                        </button>
+                                            <tr *ngFor="let subproceso of subprocesos" [ngClass]="{pointer: (_usuarioService.usuario.tipo_Usuario !== 'AUDITOR_LIDER')}">
+                                                <td style="width: 1px; padding-left: 0px; padding-right: 0px">
+                                                    <div *ngIf="_usuarioService.usuario.tipo_Usuario !== 'AUDITOR_LIDER'" class="btn-group">
+                                                        <div class="dropdown-menu text-center animated pulse">
+                                                            <div class="btn-group" role="group" aria-label="Basic example">
+                                                                <button (click)="formEditableSub( subproceso )" class="btn btn-outline-info" data-toggle="modal" data-target="#modalSubprocesoEditar">
+                                                                    <i class="fa fa-edit"></i>
+                                                                </button>&nbsp;
+                                                                <button (click)="eliminarSubproceso( subproceso )" class="btn btn-outline-secondary">
+                                                                    <i class="fa fa-trash-o"></i>
+                                                                </button>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </td>
+                                                <td data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ subproceso.nombreSubproceso }}</td>
+                                                <td data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ subproceso.archivoDigital }}</td>
+                                            </tr>
+                                            <tr *ngIf="_usuarioService.usuario.tipo_Usuario !== 'AUDITOR_LIDER'" class="pointer text-center">
+                                                <td colspan="3" data-toggle="modal" data-target="#modalSubprocesoAgregar"><i class="mdi mdi-plus"></i></td>
                                             </tr>
                                         </tbody>
                                     </table>
