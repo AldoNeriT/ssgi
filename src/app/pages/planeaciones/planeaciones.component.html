@@ -11,89 +11,153 @@
 </div>
 
 <!-- ============================================================== -->
-<!-- CONTENIDO -->
+<!-- CONTENIDO ROOT, ADMIN Y AUDITOR LIDER-->
 <!-- ============================================================== -->
+<div *ngIf="(_usuarioService.usuario.tipo_Usuario === 'ROOT') || (_usuarioService.usuario.tipo_Usuario === 'ADMIN') || (_usuarioService.usuario.tipo_Usuario === 'AUDITOR_LIDER')">
+    <div *ngIf="!cargando">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div style="padding-bottom: 35px;">
+                            <h4 class="card-title">Auditoría: </h4>
+                            <h6 class="card-subtitle"><span class="font-bold">Normas de Referencia:</span> {{ normasV }}</h6>
+                            <h6 class="card-subtitle"><span class="font-bold">Objetivo:</span> {{ objetivosV }}</h6>
+                            <h6 class="card-subtitle"><span class="font-bold">Alcance:</span> {{ alcanceV }}</h6>
+                        </div>
 
-<div *ngIf="!cargando">
-    <div class="row">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-body">
-                    <div style="padding-bottom: 35px;">
-                        <h4 class="card-title">Auditoría: </h4>
-                        <h6 class="card-subtitle"><span class="font-bold">Normas de Referencia:</span> {{ normasV }}</h6>
-                        <h6 class="card-subtitle"><span class="font-bold">Objetivo:</span> {{ objetivosV }}</h6>
-                        <h6 class="card-subtitle"><span class="font-bold">Alcance:</span> {{ alcanceV }}</h6>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-12 text-center">
-                            <div class="btn-group sgi_paddNorm">
-                                <button type="button" class="btn btn-block btn-lg btn-outline-secondary" (click)="redirigirNuevo()">
+                        <div class="row">
+                            <div class="col-12 text-center">
+                                <div class="btn-group sgi_paddNorm">
+                                    <button type="button" class="btn btn-block btn-xl btn-circle btn-outline-secondary" (click)="redirigirNuevo()">
                                 <i class="mdi mdi-plus"></i>
                             </button>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12">
-                            <hr class="m-t-0 m-b-40">
+                        <div class="row">
+                            <div class="col-12">
+                                <hr class="m-t-0 m-b-40">
+                            </div>
                         </div>
-                    </div>
 
-                    <div *ngFor="let fecha of arrFechas" style="padding-bottom: 40px;">
-                        <h4 class="card-title text-muted font-bold">Fecha: {{ fecha }}</h4>
-                        <table class="table full-color-table full-muted-table hover-table">
-                            <thead class="text-center">
-                                <tr>
-                                    <th style="width: 1px; padding-left: 0px; padding-right: 0px"></th>
-                                    <th>Horario</th>
-                                    <th>Proceso <span class="font-bold">/</span> Actividad-Requisito <span class="font-bold">/</span> Criterio</th>
-                                    <th>Participantes</th>
-                                    <th>Contacto</th>
-                                    <th>Área / Sitio</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let planeacion of planeaciones" class="pointer">
-                                    <td *ngIf="planeacion.fecha === fecha" style="width: 1px; padding-left: 0px; padding-right: 0px">
-                                        <!-- <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        
-                                    </button> -->
-                                        <div class="btn-group">
-                                            <div class="dropdown-menu text-center animated pulse">
-                                                <div class="btn-group" role="group" aria-label="Basic example">
-                                                    <button routerLink="/planeacionA/editar/{{ planeacion._id }}" type="button" class="btn btn-outline-secondary">
+                        <div *ngFor="let fecha of arrFechas" style="padding-bottom: 40px;">
+                            <h4 class="card-title text-muted font-bold">Fecha: {{ fecha }}</h4>
+                            <table class="table full-color-table full-muted-table hover-table">
+                                <thead class="text-center">
+                                    <tr>
+                                        <th style="width: 1px; padding-left: 0px; padding-right: 0px"></th>
+                                        <th>Horario</th>
+                                        <th>Proceso <span class="font-bold">/</span> Actividad-Requisito <span class="font-bold">/</span> Criterio</th>
+                                        <th>Participantes</th>
+                                        <th>Contacto</th>
+                                        <th>Área / Sitio</th>
+                                        <th>Enviar</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let planeacion of planeaciones" class="pointer">
+                                        <td *ngIf="planeacion.fecha === fecha" style="width: 1px; padding-left: 0px; padding-right: 0px">
+                                            <div class="btn-group">
+                                                <div class="dropdown-menu text-center animated pulse">
+                                                    <div class="btn-group" role="group" aria-label="Basic example">
+                                                        <button routerLink="/planeacionA/editar/{{ planeacion._id }}" type="button" class="btn btn-outline-secondary">
                                                         <i class="fa fa-edit"></i>
                                                     </button>
-                                                    <button (click)="eliminarPlaneacion( planeacion )" type="button" class="btn btn-outline-secondary">
+                                                        <button (click)="eliminarPlaneacion( planeacion )" type="button" class="btn btn-outline-secondary">
                                                         <i class="fa fa-trash-o"></i>
                                                     </button>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </td>
-                                    <td *ngIf="planeacion.fecha === fecha" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width: 130px;">{{ planeacion.horario }}</td>
-                                    <td *ngIf="planeacion.fecha === fecha" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ planeacion.proceso.nombreProceso }} <span class="font-bold">/</span> {{ planeacion.actividad }} <span class="font-bold">/</span> {{ planeacion.criterio }}</td>
-                                    <td *ngIf="planeacion.fecha === fecha" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <ul style="padding-left: 16px;">
-                                            <li *ngFor="let participante of planeacion.participantes">{{participante.nombre + ' ' + participante.primer_Apellido + ' ' + (participante.segundo_Apellido || '')}}</li>
-                                        </ul>
-                                    </td>
-                                    <td *ngIf="planeacion.fecha === fecha" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <ul style="padding-left: 16px;">
-                                            <li *ngFor="let contacto of planeacion.contacto">{{contacto.nombre + ' ' + contacto.primer_Apellido + ' ' + (contacto.segundo_Apellido || '')}}</li>
-                                        </ul>
-                                    </td>
-                                    <td *ngIf="planeacion.fecha === fecha" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ planeacion.area }}</td>
-                                </tr>
-                                <!-- <tr class="pointer text-center" (click)="redirigirNuevo()">
+                                        </td>
+                                        <td *ngIf="planeacion.fecha === fecha" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width: 130px;">{{ planeacion.horario }}</td>
+                                        <td *ngIf="planeacion.fecha === fecha" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ planeacion.proceso.nombreProceso }} <span class="font-bold">/</span> {{ planeacion.actividad }} <span class="font-bold">/</span> {{ planeacion.criterio }}</td>
+                                        <td *ngIf="planeacion.fecha === fecha" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <ul style="padding-left: 16px;">
+                                                <li *ngFor="let participante of planeacion.participantes">{{participante.nombre + ' ' + participante.primer_Apellido + ' ' + (participante.segundo_Apellido || '')}}</li>
+                                            </ul>
+                                        </td>
+                                        <td *ngIf="planeacion.fecha === fecha" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <ul style="padding-left: 16px;">
+                                                <li *ngFor="let contacto of planeacion.contacto">{{contacto.nombre + ' ' + contacto.primer_Apellido + ' ' + (contacto.segundo_Apellido || '')}}</li>
+                                            </ul>
+                                        </td>
+                                        <td *ngIf="planeacion.fecha === fecha" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ planeacion.area }}</td>
+                                        <td *ngIf="planeacion.fecha === fecha" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ planeacion.enviar }}</td>
+                                    </tr>
+                                    <!-- <tr class="pointer text-center" (click)="redirigirNuevo()">
                                     <td colspan="6"><i class="mdi mdi-plus"></i></td>
                                 </tr> -->
-                            </tbody>
-                        </table>
-                    </div>
+                                </tbody>
+                            </table>
+                        </div>
 
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-themecolor waves-effect">Envíar para Validar</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================== -->
+<!-- CONTENIDO AUDITOR, AUDITADOS, DIRECCION -->
+<!-- ============================================================== -->
+<div *ngIf="(_usuarioService.usuario.tipo_Usuario === 'AUDITOR') || (_usuarioService.usuario.tipo_Usuario === 'AUDITADO') || (_usuarioService.usuario.tipo_Usuario === 'ALTA_DIRECCION')">
+    <div *ngIf="!cargando">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div style="padding-bottom: 35px;">
+                            <h4 class="card-title">Auditoría: </h4>
+                            <h6 class="card-subtitle"><span class="font-bold">Normas de Referencia:</span> {{ normasV }}</h6>
+                            <h6 class="card-subtitle"><span class="font-bold">Objetivo:</span> {{ objetivosV }}</h6>
+                            <h6 class="card-subtitle"><span class="font-bold">Alcance:</span> {{ alcanceV }}</h6>
+                        </div>
+
+                        <div *ngFor="let fecha of arrFechas" style="padding-bottom: 40px;">
+                            <h4 class="card-title text-muted font-bold">Fecha: {{ fecha }}</h4>
+                            <table class="table full-color-table full-muted-table hover-table">
+                                <thead class="text-center">
+                                    <tr>
+                                        <th>Horario</th>
+                                        <th>Proceso <span class="font-bold">/</span> Actividad-Requisito <span class="font-bold">/</span> Criterio</th>
+                                        <th>Participantes</th>
+                                        <th>Contacto</th>
+                                        <th>Área / Sitio</th>
+                                        <th>Enviar</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let planeacion of planeaciones">
+                                        <td *ngIf="planeacion.fecha === fecha" style="width: 130px;">{{ planeacion.horario }}</td>
+                                        <td *ngIf="planeacion.fecha === fecha">{{ planeacion.proceso.nombreProceso }} <span class="font-bold">/</span> {{ planeacion.actividad }} <span class="font-bold">/</span> {{ planeacion.criterio }}</td>
+                                        <td *ngIf="planeacion.fecha === fecha">
+                                            <ul style="padding-left: 16px;">
+                                                <li *ngFor="let participante of planeacion.participantes">{{participante.nombre + ' ' + participante.primer_Apellido + ' ' + (participante.segundo_Apellido || '')}}</li>
+                                            </ul>
+                                        </td>
+                                        <td *ngIf="planeacion.fecha === fecha">
+                                            <ul style="padding-left: 16px;">
+                                                <li *ngFor="let contacto of planeacion.contacto">{{contacto.nombre + ' ' + contacto.primer_Apellido + ' ' + (contacto.segundo_Apellido || '')}}</li>
+                                            </ul>
+                                        </td>
+                                        <td *ngIf="planeacion.fecha === fecha">{{ planeacion.area }}</td>
+                                        <td *ngIf="planeacion.fecha === fecha">{{ planeacion.enviar }}</td>
+                                    </tr>
+                                    <!-- <tr class="pointer text-center" (click)="redirigirNuevo()">
+                                    <td colspan="6"><i class="mdi mdi-plus"></i></td>
+                                </tr> -->
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
                 </div>
             </div>
         </div>

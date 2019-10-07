@@ -11,6 +11,7 @@ export class Planeacion {
         public area: string,
         public auditoria: Object,
         public _id?: string,
+        public enviar?: boolean,
         public estado?: boolean
     ) { }
 }

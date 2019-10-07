@@ -132,14 +132,27 @@ export class PlaneacionComponent implements OnInit {
     this.cargando = true;
 
     this._usuarioService.cargarUsuariosPorTipo('AUDITOR')
+    // this._usuarioService.cargarUsuariosPorTipo(this.id)
           .subscribe( auditores => {
             this.auditores = auditores;
+            console.log(auditores);
             // console.log('Auditores: ', this.auditores);
             this.cargando = false;
             // init_plugins();
             // inicializando_multiSelect();
             // inicializando_dateRange();
           });
+
+    // this._auditoriaService.cargarAuditoria(this.id)
+    //       .subscribe( auditoria => {
+    //         this.auditores = auditoria.grupoAuditor;
+    //         console.log(this.auditores);
+    //         // console.log('Auditores: ', this.auditores);
+    //         this.cargando = false;
+    //         // init_plugins();
+    //         // inicializando_multiSelect();
+    //         // inicializando_dateRange();
+    //       });
 
   }
 
@@ -156,6 +169,17 @@ export class PlaneacionComponent implements OnInit {
             // inicializando_multiSelect();
             // inicializando_dateRange();
           });
+
+    // this._auditoriaService.cargarAuditoria(this.id)
+    //       .subscribe( auditoria => {
+    //         this.auditados = auditoria.auditados;
+    //         console.log(this.auditados);
+    //         // console.log('Auditores: ', this.auditores);
+    //         this.cargando = false;
+    //         // init_plugins();
+    //         // inicializando_multiSelect();
+    //         // inicializando_dateRange();
+    //       });
 
   }
 

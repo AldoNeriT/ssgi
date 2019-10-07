@@ -688,15 +688,19 @@ export class PlanesComponent implements OnInit {
             }
           });
         } else {
-          Swal.fire({
-            title: '¡Advertencia!',
-            text: `No puedes ingresar hasta que validen la Auditoría "${auditoria.nombre}"`,
-            type: 'warning',
-            animation: false,
-            customClass: {
-              popup: 'animated pulse'
-            }
-          });
+          if ( auditoria.pasos === 0 ) {
+            this.router.navigate(['/planeacion/' + auditoria._id ]);
+          } else {
+            Swal.fire({
+              title: '¡Advertencia!',
+              text: `No puedes ingresar hasta que validen la Auditoría "${auditoria.nombre}"`,
+              type: 'warning',
+              animation: false,
+              customClass: {
+                popup: 'animated pulse'
+              }
+            });
+          }
         }
       }
 

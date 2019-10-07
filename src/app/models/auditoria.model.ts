@@ -13,6 +13,7 @@ export class Auditoria {
         public alcance: string,
         public contacto: string,
         public _id?: string,
+        public pasos?: number,
         public progreso?: string,
         public valido?: boolean,
         public estado?: boolean

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { PlaneacionService, AuditoriaService } from '../../services/service.index';
+import { PlaneacionService, AuditoriaService, UsuarioService } from '../../services/service.index';
 import { Planeacion } from '../../models/planeacion.model';
 import { Router, ActivatedRoute } from '@angular/router';
 
@@ -30,6 +30,7 @@ export class PlaneacionesComponent implements OnInit {
 
   constructor( public _planeacionService: PlaneacionService,
                public _auditoriaService: AuditoriaService,
+               public _usuarioService: UsuarioService,
                public router: Router,
                public activatedRoute: ActivatedRoute ) {
     activatedRoute.params.subscribe( params => {

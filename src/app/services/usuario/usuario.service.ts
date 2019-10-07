@@ -353,6 +353,7 @@ export class UsuarioService {
   cargarUsuariosPorTipo( role: string ) {
 
     let url = URL_SERVICIOS + '/usuario/tipo/' + role;
+    // let url = URL_SERVICIOS + '/planeacion/auditoria/auditores/' + role;
 
     // *** TOKEN ***
     // url += '?token=' + this.token;

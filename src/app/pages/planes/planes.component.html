@@ -70,6 +70,7 @@
                                                                 <td (click)="verAuditoria( auditoria, plan )" *ngIf="auditoria.valido === true" class="bg-success pointer" style="width: 3px; padding-left: 0px; padding-right: 0px"></td>
                                                                 <td (click)="verAuditoria( auditoria, plan )" *ngIf="auditoria.valido === false" class="bg-danger pointer" style="width: 3px; padding-left: 0px; padding-right: 0px"></td>
                                                                 <td (click)="verAuditoria( auditoria, plan )" class="pointer" style="width: 50px;"><i class="mdi mdi-power mdi-24px text-info"></i></td>
+                                                                <td (click)="verAuditoria( auditoria, plan )" class="pointer">{{ auditoria.pasos }}</td>
                                                                 <td (click)="verAuditoria( auditoria, plan )" class="pointer">{{ auditoria.nombre }}</td>
                                                                 <td (click)="verAuditoria( auditoria, plan )" class="text-right pointer">{{ auditoria.fechaInicial }} / {{ auditoria.fechaFinal }}</td>
                                                                 <td class="text-center" style="width: 50px;"><a (click)="editarAuditoria( auditoria )" *ngIf="auditoria.progreso === 'encurso'"><i class="mdi mdi-pencil text-dark pointer"></i></a></td>
@@ -83,6 +84,7 @@
                                                                 <td (click)="verAuditoria( auditoria, plan )" *ngIf="auditoria.valido === true" class="bg-success pointer" style="width: 3px; padding-left: 0px; padding-right: 0px"></td>
                                                                 <td (click)="verAuditoria( auditoria, plan )" *ngIf="auditoria.valido === false" class="bg-danger pointer" style="width: 3px; padding-left: 0px; padding-right: 0px"></td>
                                                                 <td (click)="verAuditoria( auditoria, plan )" class="pointer" style="width: 50px;"><i class="mdi mdi-clock mdi-24px text-warning"></i></td>
+                                                                <td (click)="verAuditoria( auditoria, plan )" class="pointer">{{ auditoria.pasos }}</td>
                                                                 <td (click)="verAuditoria( auditoria, plan )" class="pointer">{{ auditoria.nombre }}</td>
                                                                 <td (click)="verAuditoria( auditoria, plan )" class="text-right pointer">{{ auditoria.fechaInicial }} / {{ auditoria.fechaFinal }}</td>
                                                                 <td class="text-center" style="width: 50px;"><a (click)="editarAuditoria( auditoria )" *ngIf="auditoria.progreso === 'encurso'"><i class="mdi mdi-pencil text-dark pointer"></i></a></td>
@@ -96,6 +98,7 @@
                                                                 <td (click)="verAuditoria( auditoria, plan )" *ngIf="auditoria.valido === true" class="bg-success pointer" style="width: 3px; padding-left: 0px; padding-right: 0px"></td>
                                                                 <td (click)="verAuditoria( auditoria, plan )" *ngIf="auditoria.valido === false" class="bg-danger pointer" style="width: 3px; padding-left: 0px; padding-right: 0px"></td>
                                                                 <td (click)="verAuditoria( auditoria, plan )" class="pointer" style="width: 50px;"><i class="mdi mdi-spellcheck mdi-24px text-success"></i></td>
+                                                                <td (click)="verAuditoria( auditoria, plan )" class="pointer">{{ auditoria.pasos }}</td>
                                                                 <td (click)="verAuditoria( auditoria, plan )" class="pointer">{{ auditoria.nombre }}</td>
                                                                 <td (click)="verAuditoria( auditoria, plan )" class="text-right pointer">{{ auditoria.fechaInicial }} / {{ auditoria.fechaFinal }}</td>
                                                                 <td class="text-center" style="width: 50px;"><a (click)="editarAuditoria( auditoria )" *ngIf="auditoria.progreso === 'encurso'"><i class="mdi mdi-pencil text-dark pointer"></i></a></td>
