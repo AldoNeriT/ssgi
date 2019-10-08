@@ -155,7 +155,7 @@ export class PlaneacionesComponent implements OnInit {
   }
 
   redirigirNuevo() {
-    this.router.navigate(['/planeacionA/' + this.id]);
+    this.router.navigate(['/planeacionA/n/' + this.id]);
   }
 
   cambiarEnviar() {

@@ -34,6 +34,7 @@ export class PlaneacionComponent implements OnInit {
   mostrarFormAgregar: boolean;
   mostrarFormEditar: boolean;
 
+  accion: string;
   id: string;
   idP: string;
   titulo: string;
@@ -49,6 +50,7 @@ export class PlaneacionComponent implements OnInit {
                public router: Router,
                public activatedRoute: ActivatedRoute ) {
     activatedRoute.params.subscribe( params => {
+      this.accion = params['accion'];
       this.id = params['idA'];
       this.idP = params['idP'];
     });
@@ -88,13 +90,13 @@ export class PlaneacionComponent implements OnInit {
       areaE: new FormControl( null, Validators.required ),
     });
 
-    this.condiciones();
+    // this.condiciones();
 
   }
 
   condiciones() {
 
-    if ( this.id === 'editar') {
+    if ( this.accion === 'e') {
       this.cargarPlaneacion( this.idP );
       this.titulo = 'Actualizar';
       this.mostrarFormAgregar = false;
@@ -120,9 +122,10 @@ export class PlaneacionComponent implements OnInit {
             this.procesos = procesos;
             // console.log('Proceso: ', this.procesos);
             this.cargando = false;
-            // init_plugins();
-            // inicializando_multiSelect();
-            // inicializando_dateRange();
+            init_plugins();
+            inicializando_multiSelect();
+            inicializando_clockPicker();
+            inicializando_datePicker();
           });
 
   }
@@ -131,26 +134,17 @@ export class PlaneacionComponent implements OnInit {
 
     this.cargando = true;
 
-    this._usuarioService.cargarUsuariosPorTipo('AUDITOR')
-    // this._usuarioService.cargarUsuariosPorTipo(this.id)
-          .subscribe( auditores => {
-            this.auditores = auditores;
+    this._auditoriaService.cargarAuditoria(this.id)
+          .subscribe( auditoria => {
+            this.auditores = auditoria.grupoAuditor;
             console.log('Auditores: ', this.auditores);
             this.cargando = false;
-            // init_plugins();
-            // inicializando_multiSelect();
-            // inicializando_dateRange();
+            init_plugins();
+            inicializando_multiSelect();
+            inicializando_clockPicker();
+            inicializando_datePicker();
+            this.condiciones();
           });
-
-    // this._auditoriaService.cargarAuditoria(this.id)
-    //       .subscribe( auditoria => {
-    //         this.auditores = auditoria.grupoAuditor;
-    //         console.log('Auditores: ', this.auditores);
-    //         this.cargando = false;
-    //         // init_plugins();
-    //         // inicializando_multiSelect();
-    //         // inicializando_dateRange();
-    //       });
 
   }
 
@@ -158,25 +152,17 @@ export class PlaneacionComponent implements OnInit {
 
     this.cargando = true;
 
-    this._usuarioService.cargarUsuariosPorTipo('AUDITADO')
-          .subscribe( auditados => {
-            this.auditados = auditados;
+    this._auditoriaService.cargarAuditoria(this.id)
+          .subscribe( auditoria => {
+            this.auditados = auditoria.auditados;
             console.log('Auditados: ', this.auditados);
             this.cargando = false;
-            // init_plugins();
-            // inicializando_multiSelect();
-            // inicializando_dateRange();
+            init_plugins();
+            inicializando_multiSelect();
+            inicializando_clockPicker();
+            inicializando_datePicker();
+            this.condiciones();
           });
-
-    // this._auditoriaService.cargarAuditoria(this.id)
-    //       .subscribe( auditoria => {
-    //         this.auditados = auditoria.auditados;
-    //         console.log('Auditados: ', this.auditados);
-    //         this.cargando = false;
-    //         // init_plugins();
-    //         // inicializando_multiSelect();
-    //         // inicializando_dateRange();
-    //       });
 
   }
 
@@ -190,9 +176,10 @@ export class PlaneacionComponent implements OnInit {
             this.nombreAudiV = auditoria.nombre;
             // console.log('Auditoria: ', this.auditoria);
             this.cargando = false;
-            // init_plugins();
-            // inicializando_multiSelect();
-            // inicializando_dateRange();
+            init_plugins();
+            inicializando_multiSelect();
+            inicializando_clockPicker();
+            inicializando_datePicker();
           });
 
   }
@@ -243,6 +230,8 @@ export class PlaneacionComponent implements OnInit {
               }
             }
 
+            console.log(this.auditores.length);
+
             // Agregar arreglo al select
             $('#participantesE').val(arrAuditores);
 
@@ -280,9 +269,10 @@ export class PlaneacionComponent implements OnInit {
             }
 
             this.cargando = false;
-            // init_plugins();
-            // inicializando_multiSelect();
-            // inicializando_dateRange();
+            init_plugins();
+            inicializando_multiSelect();
+            inicializando_clockPicker();
+            inicializando_datePicker();
           });
 
   }

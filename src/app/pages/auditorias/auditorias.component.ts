@@ -89,7 +89,7 @@ export class AuditoriasComponent implements OnInit {
       contacto: new FormControl( null, Validators.required ),
     });
 
-    this.condiciones();
+    // this.condiciones();
   }
 
   condiciones() {
@@ -248,6 +248,7 @@ export class AuditoriasComponent implements OnInit {
             init_plugins();
             inicializando_multiSelect();
             inicializando_dateRange();
+            this.condiciones();
           });
 
   }
@@ -264,6 +265,7 @@ export class AuditoriasComponent implements OnInit {
             init_plugins();
             inicializando_multiSelect();
             inicializando_dateRange();
+            this.condiciones();
           });
 
   }
@@ -280,6 +282,7 @@ export class AuditoriasComponent implements OnInit {
             init_plugins();
             inicializando_multiSelect();
             inicializando_dateRange();
+            this.condiciones();
           });
 
   }
