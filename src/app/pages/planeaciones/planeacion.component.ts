@@ -137,7 +137,7 @@ export class PlaneacionComponent implements OnInit {
     this._auditoriaService.cargarAuditoria(this.id)
           .subscribe( auditoria => {
             this.auditores = auditoria.grupoAuditor;
-            console.log('Auditores: ', this.auditores);
+            // console.log('Auditores: ', this.auditores);
             this.cargando = false;
             init_plugins();
             inicializando_multiSelect();
@@ -155,7 +155,7 @@ export class PlaneacionComponent implements OnInit {
     this._auditoriaService.cargarAuditoria(this.id)
           .subscribe( auditoria => {
             this.auditados = auditoria.auditados;
-            console.log('Auditados: ', this.auditados);
+            // console.log('Auditados: ', this.auditados);
             this.cargando = false;
             init_plugins();
             inicializando_multiSelect();
@@ -193,7 +193,7 @@ export class PlaneacionComponent implements OnInit {
             // this.planeacion = auditoria;
             this.nombreAudiV = planeacion.auditoria.nombre;
             this.id = planeacion.auditoria._id;
-            console.log('PLANEACION: ', planeacion);
+            // console.log('PLANEACION: ', planeacion);
 
             let horas = planeacion.horario;
             let arrHoras = horas.split(' - ');
@@ -230,7 +230,7 @@ export class PlaneacionComponent implements OnInit {
               }
             }
 
-            console.log(this.auditores.length);
+            // console.log(this.auditores.length);
 
             // Agregar arreglo al select
             $('#participantesE').val(arrAuditores);
@@ -324,7 +324,7 @@ export class PlaneacionComponent implements OnInit {
       this.id
     );
 
-    console.log('planeacion: ', planeacion);
+    // console.log('planeacion: ', planeacion);
 
     this._planeacionService.crearPlaneacion( planeacion )
           .subscribe( resp => {
@@ -380,8 +380,6 @@ export class PlaneacionComponent implements OnInit {
       this.id,
       this.idP
     );
-
-    console.log('planeacion actualizada: ', planeacion);
 
     this._planeacionService.crearPlaneacion( planeacion )
           .subscribe( resp => {
