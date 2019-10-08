@@ -47,9 +47,15 @@ export class PlaneacionesComponent implements OnInit {
 
   cargarPlaneacionesAudi( id: string ) {
 
+    this.arrFechasT = [];
+    this.arrFechas = [];
+
     this.cargando = true;
 
-    this._planeacionService.cargarPlaneacionesAudi( id )
+    if ( (this._usuarioService.usuario.tipo_Usuario !== 'ALTA_DIRECCION') &&
+         (this._usuarioService.usuario.tipo_Usuario !== 'AUDITOR') &&
+         (this._usuarioService.usuario.tipo_Usuario !== 'AUDITADO')) {
+      this._planeacionService.cargarPlaneacionesAudi( id )
           .subscribe( planeaciones => {
             this.planeaciones = planeaciones;
             console.log(this.planeaciones);
@@ -83,6 +89,42 @@ export class PlaneacionesComponent implements OnInit {
             this.cargando = false;
 
           });
+    } else {
+      this._planeacionService.cargarPlaneacionesAudiEnviar( id )
+          .subscribe( planeaciones => {
+            this.planeaciones = planeaciones;
+            console.log(this.planeaciones);
+            // Se extraen las fechas a un array
+            for ( let pl of planeaciones) {
+              this.arrFechasT.push(pl.fecha);
+            }
+
+            // Se eliminas duplicados
+            for ( let i = 0; i < this.arrFechasT.length; i++ ) {
+              for ( let j = 0; j < this.arrFechasT.length - 1; j++ ) {
+                if ( i !== j ) {
+                  if ( this.arrFechasT[i] === this.arrFechasT[j] ) {
+                    // eliminamos su valor
+                    this.arrFechasT[i] = '';
+                  }
+                }
+              }
+            }
+
+            // Se crean el nuevo array de fechas sin los duplicados
+            for ( let fech of this.arrFechasT) {
+              if ( fech !== '') {
+                this.arrFechas.push(fech);
+              }
+            }
+
+            // Ordenamos el array
+            // this.arrFechas.sort();
+
+            this.cargando = false;
+
+          });
+    }
 
   }
 
@@ -110,6 +152,35 @@ export class PlaneacionesComponent implements OnInit {
 
   redirigirNuevo() {
     this.router.navigate(['/planeacionA/' + this.id]);
+  }
+
+  cambiarEnviar() {
+
+    // let planeacion = new Planeacion(
+    //   '',
+    //   '',
+    //   [],
+    //   '',
+    //   '',
+    //   [],
+    //   [],
+    //   '',
+    //   this.id
+    // );
+
+    this._planeacionService.cambiarEnviar( this.id )
+          .subscribe( resp => {
+            this.cargarPlaneacionesAudi( this.id );
+            this.cargarAuditoria( this.id );
+          });
+
+    // $('#modalNormaAgregar').modal('hide');
+
+    // $('.show').hide();
+    // $('body').removeClass('modal-open');
+    // this.router.navigateByUrl('#/normas', {skipLocationChange: true}).then(() =>
+    // this.router.navigate(['/normas']));
+
   }
 
   eliminarPlaneacion( planeacion: Planeacion ) {

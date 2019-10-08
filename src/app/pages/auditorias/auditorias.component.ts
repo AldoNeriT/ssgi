@@ -345,7 +345,8 @@ export class AuditoriasComponent implements OnInit {
       this.formaEditar.value.objetivos,
       this.formaEditar.value.alcance,
       this.formaEditar.value.contacto,
-      this.idAuditoria
+      this.idAuditoria,
+      1
     );
 
     this._auditoriaService.crearAuditoria( auditoria )

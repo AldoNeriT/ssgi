@@ -76,6 +76,30 @@ export class PlaneacionService {
 
   }
 
+  cargarPlaneacionesAudiEnviar( id: string ) {
+
+    let url = URL_SERVICIOS + '/planeacion/auditoria/enviar/' + id;
+
+    // *** TOKEN ***
+    // url += '?token=' + this.token;
+
+    return this.http.get( url )
+    .pipe(
+      map( (resp: any ) => {
+        return resp.planeaciones;
+      }),
+      catchError( err => {
+        // console.log(err.status);
+        // if ( err.status === 0) {
+        //   Swal.fire('Error', 'Servidor Caído', 'error');
+        // }
+        Swal.fire('Error', err.error.err.message, 'error');
+        return throwError( err ) ;
+      })
+    );
+
+  }
+
   crearPlaneacion( planeacion: Planeacion ) {
 
     let url = URL_SERVICIOS + '/planeacion';
@@ -151,6 +175,32 @@ export class PlaneacionService {
       }),
       catchError( err => {
         console.log(err);
+        Swal.fire('Error', err.error.err.message, 'error');
+        return throwError( err ) ;
+      })
+    );
+
+  }
+
+  cambiarEnviar( idAudi: string ) {
+
+    let url = URL_SERVICIOS + '/planeacion/auditoria/' + idAudi;
+
+    // *** TOKEN ***
+    // url += '?token=' + this.token;
+
+    return this.http.put( url, null )
+    .pipe(
+      map( (resp: any ) => {
+        Swal.fire({
+          title: 'Planeación Actualizada',
+          type: 'success',
+          showConfirmButton: false,
+          timer: 2000
+        });
+        return resp.planeacion;
+      }),
+      catchError( err => {
         Swal.fire('Error', err.error.err.message, 'error');
         return throwError( err ) ;
       })

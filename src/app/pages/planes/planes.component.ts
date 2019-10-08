@@ -688,7 +688,7 @@ export class PlanesComponent implements OnInit {
             }
           });
         } else {
-          if ( auditoria.pasos === 0 ) {
+          if ( auditoria.pasos === 1 ) {
             this.router.navigate(['/planeacion/' + auditoria._id ]);
           } else {
             Swal.fire({
