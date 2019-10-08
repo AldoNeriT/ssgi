@@ -193,10 +193,9 @@ export class PlaneacionService {
     .pipe(
       map( (resp: any ) => {
         Swal.fire({
-          title: 'Planeación Actualizada',
-          type: 'success',
-          showConfirmButton: false,
-          timer: 2000
+          title: 'Planeación Enviada',
+          text: 'Espera a que validen la Planeación para continuar con los siguientes procesos',
+          type: 'success'
         });
         return resp.planeacion;
       }),

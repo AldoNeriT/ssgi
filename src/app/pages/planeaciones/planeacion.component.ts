@@ -135,8 +135,7 @@ export class PlaneacionComponent implements OnInit {
     // this._usuarioService.cargarUsuariosPorTipo(this.id)
           .subscribe( auditores => {
             this.auditores = auditores;
-            console.log(auditores);
-            // console.log('Auditores: ', this.auditores);
+            console.log('Auditores: ', this.auditores);
             this.cargando = false;
             // init_plugins();
             // inicializando_multiSelect();
@@ -146,8 +145,7 @@ export class PlaneacionComponent implements OnInit {
     // this._auditoriaService.cargarAuditoria(this.id)
     //       .subscribe( auditoria => {
     //         this.auditores = auditoria.grupoAuditor;
-    //         console.log(this.auditores);
-    //         // console.log('Auditores: ', this.auditores);
+    //         console.log('Auditores: ', this.auditores);
     //         this.cargando = false;
     //         // init_plugins();
     //         // inicializando_multiSelect();
@@ -163,7 +161,7 @@ export class PlaneacionComponent implements OnInit {
     this._usuarioService.cargarUsuariosPorTipo('AUDITADO')
           .subscribe( auditados => {
             this.auditados = auditados;
-            // console.log('Auditados: ', this.auditados);
+            console.log('Auditados: ', this.auditados);
             this.cargando = false;
             // init_plugins();
             // inicializando_multiSelect();
@@ -173,8 +171,7 @@ export class PlaneacionComponent implements OnInit {
     // this._auditoriaService.cargarAuditoria(this.id)
     //       .subscribe( auditoria => {
     //         this.auditados = auditoria.auditados;
-    //         console.log(this.auditados);
-    //         // console.log('Auditores: ', this.auditores);
+    //         console.log('Auditados: ', this.auditados);
     //         this.cargando = false;
     //         // init_plugins();
     //         // inicializando_multiSelect();
@@ -209,7 +206,7 @@ export class PlaneacionComponent implements OnInit {
             // this.planeacion = auditoria;
             this.nombreAudiV = planeacion.auditoria.nombre;
             this.id = planeacion.auditoria._id;
-            console.log('ppppp: ', planeacion);
+            console.log('PLANEACION: ', planeacion);
 
             let horas = planeacion.horario;
             let arrHoras = horas.split(' - ');
@@ -394,7 +391,7 @@ export class PlaneacionComponent implements OnInit {
       this.idP
     );
 
-    console.log('planeacion: ', planeacion);
+    console.log('planeacion actualizada: ', planeacion);
 
     this._planeacionService.crearPlaneacion( planeacion )
           .subscribe( resp => {

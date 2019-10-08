@@ -45,6 +45,10 @@ export class PlaneacionesComponent implements OnInit {
     this.cargarAuditoria( this.id );
   }
 
+  regresar() {
+    this.router.navigate(['/planes']);
+  }
+
   cargarPlaneacionesAudi( id: string ) {
 
     this.arrFechasT = [];
@@ -58,7 +62,7 @@ export class PlaneacionesComponent implements OnInit {
       this._planeacionService.cargarPlaneacionesAudi( id )
           .subscribe( planeaciones => {
             this.planeaciones = planeaciones;
-            console.log(this.planeaciones);
+            // console.log(this.planeaciones);
             // Se extraen las fechas a un array
             for ( let pl of planeaciones) {
               this.arrFechasT.push(pl.fecha);
@@ -93,7 +97,7 @@ export class PlaneacionesComponent implements OnInit {
       this._planeacionService.cargarPlaneacionesAudiEnviar( id )
           .subscribe( planeaciones => {
             this.planeaciones = planeaciones;
-            console.log(this.planeaciones);
+            // console.log(this.planeaciones);
             // Se extraen las fechas a un array
             for ( let pl of planeaciones) {
               this.arrFechasT.push(pl.fecha);

@@ -1011,6 +1011,8 @@ export class PlanesComponent implements OnInit {
 
   validarContrasenaAudi( usuario2: Usuario, auditoria: Auditoria ) {
 
+    // auditoria.pasos = 2;
+
     Swal.fire({
       title: 'Ingrese su contraseña',
       input: 'password',
@@ -1037,8 +1039,11 @@ export class PlanesComponent implements OnInit {
           .subscribe( resp => {
             this._auditoriaService.validarAuditoria( auditoria )
                 .subscribe( resp2 => {
-                  this.cargarPlanes();
-                  this.cargarAuditorias();
+                  // this._auditoriaService.crearAuditoria( auditoria )
+                  //     .subscribe( resp3 => {
+                        this.cargarPlanes();
+                        this.cargarAuditorias();
+                      // });
                 });
           });
       } else {

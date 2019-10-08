@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuditoriaService } from '../../services/service.index';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -9,8 +10,11 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class MenuAuditoriaComponent implements OnInit {
 
   id: string;
+  cargando = true;
+  pasosV: number;
 
-  constructor( public router: Router,
+  constructor( public _auditoriaService: AuditoriaService,
+               public router: Router,
                public activatedRoute: ActivatedRoute ) {
     activatedRoute.params.subscribe( params => {
       this.id = params['idA'];
@@ -18,6 +22,20 @@ export class MenuAuditoriaComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.cargarAuditoria( this.id );
+  }
+
+  cargarAuditoria( id: string) {
+
+    this.cargando = true;
+
+    this._auditoriaService.cargarAuditoria( id )
+          .subscribe( auditoria => {
+            this.cargando = false;
+            this.pasosV = auditoria.pasos;
+            // console.log(this.pasosV);
+          });
+
   }
 
   redirigirPlaneacion() {
