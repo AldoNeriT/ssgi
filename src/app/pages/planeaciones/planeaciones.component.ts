@@ -3,7 +3,6 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { PlaneacionService, AuditoriaService, UsuarioService, InstitucionService } from '../../services/service.index';
 import { Planeacion } from '../../models/planeacion.model';
 import { Institucion } from '../../models/institucion.model';
-import { PrintPlaneacion } from '../../models/printPlaneacion.model';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import * as pdfMake from 'pdfmake/build/pdfmake.js';
@@ -221,12 +220,16 @@ export class PlaneacionesComponent implements OnInit {
 
   }
 
-  imprimir() {
-    var tablas = [];
+  imprimir( opcion: number) {
+    let tablas = [];
 
-    var arrBody = [];
+    let arrBody = [];
 
-    var arrFilas = [];
+    let arrFilas = [];
+
+    let arrParticipantes = [];
+
+    let arrContacto = [];
 
     for (let index = 0; index < this.arrFechas.length; index++) {
       arrFilas.push([]);
@@ -234,22 +237,57 @@ export class PlaneacionesComponent implements OnInit {
 
     //Ciclo para crear las fechas y tablas dependiendo de la planeacion
     for (let index = 0; index < this.arrFechas.length; index++) {
-
-      arrFilas[index].push([{ text: 'HORARIO', fillColor: '#dddddd', alignment: 'center', fontSize: 10, colSpan: 1, style: 'tableHeader' }, { text: 'PROCESO / ACTIVIDAD-REQUISITO / CRITERIO', fillColor: '#dddddd', alignment: 'center', fontSize: 10, colSpan: 1, style: 'tableHeader' }, { text: 'PARTICIPANTES', fillColor: '#dddddd', alignment: 'center', fontSize: 10, colSpan: 1, style: 'tableHeader' }, { text: 'CONTACTO', fillColor: '#dddddd', fontSize: 10, alignment: 'center', colSpan: 1, style: 'tableHeader' }, { text: 'ÁREA / SITIO', fillColor: '#dddddd', alignment: 'center', fontSize: 10, colSpan: 1, style: 'tableHeader' }]);
+      arrFilas[index].push([
+        { text: 'HORARIO', fillColor: '#dddddd', alignment: 'center', fontSize: 9, colSpan: 1, style: 'tableHeader' }, 
+        { text: 'PROCESO / ACTIVIDAD-REQUISITO / CRITERIO', fillColor: '#dddddd', alignment: 'center', fontSize: 9, colSpan: 1, style: 'tableHeader' }, 
+        { text: 'PARTICIPANTES', fillColor: '#dddddd', alignment: 'center', fontSize: 9, colSpan: 1, style: 'tableHeader' }, 
+        { text: 'CONTACTO', fillColor: '#dddddd', fontSize: 9, alignment: 'center', colSpan: 1, style: 'tableHeader' }, 
+        { text: 'ÁREA / SITIO', fillColor: '#dddddd', alignment: 'center', fontSize: 9, colSpan: 1, style: 'tableHeader' }
+      ]);
 
       for (let j = 0; j < this.planeaciones.length; j++) {
+
+
+        arrParticipantes = [];
+
+        for (let k = 0; k < this.planeaciones[j].participantes.length; k++) {
+          let nombre = this.planeaciones[j].participantes[k].nombre;
+          let pA = this.planeaciones[j].participantes[k].primer_Apellido;
+          let sA = this.planeaciones[j].participantes[k].segundo_Apellido || '' ;
+
+
+          arrParticipantes.push(`${nombre} ${pA} ${sA}`);
+        }
+
+        arrContacto = [];
+
+        for (let k = 0; k < this.planeaciones[j].contacto.length; k++) {
+          let nombreC = this.planeaciones[j].contacto[k].nombre;
+          let pAC = this.planeaciones[j].contacto[k].primer_Apellido;
+          let sAC = this.planeaciones[j].contacto[k].segundo_Apellido || '' ;
+
+
+          arrContacto.push(`${nombreC} ${pAC} ${sAC}`);
+        }
+
         if ( this.arrFechas[index] === this.planeaciones[j].fecha){
-          arrFilas[index].push([{ text: ' ', fontSize: 10, colSpan: 1, style: 'tableHeader' }, { text: ' ', fontSize: 10, colSpan: 1, style: 'tableHeader' }, { text: ' ', fontSize: 10, colSpan: 1, style: 'tableHeader' }, { text: ' ', fontSize: 10, colSpan: 1, style: 'tableHeader' }, { text: ' ', fontSize: 10, colSpan: 1, style: 'tableHeader' }]);
+          arrFilas[index].push([
+            { text: this.planeaciones[j].horario, fontSize: 8, colSpan: 1, style: 'contenido' }, 
+            { text: `${this.planeaciones[j].proceso.nombreProceso} / ${this.planeaciones[j].actividad} / ${this.planeaciones[j].criterio}`, fontSize: 8, colSpan: 1, style: 'tableHeader' }, 
+            { text: arrParticipantes.join(', '), fontSize: 8, colSpan: 1, style: 'contenido' }, 
+            { text: arrContacto.join(', '), fontSize: 8, colSpan: 1, style: 'contenido' }, 
+            { text: this.planeaciones[j].area, fontSize: 8, colSpan: 1, style: 'contenido' }
+          ]);
         }
       }
 
       arrBody.push(
         arrFilas[index]
       );
-      tablas.push({ text: 'FECHA: ' + this.arrFechas[index], margin: [35, 20, 0, 0], style: 'tableHeader' }, {
+      tablas.push({ text: [ 'FECHA: ', {text: this.arrFechas[index], bold: false}], margin: [35, 20, 0, 0], style: 'tableHeader' }, {
         style: 'tableExample',
         table: {
-            widths: [50, 'auto', 'auto', 'auto', 'auto'],
+            widths: [50, 200, 80, 80, 'auto'],
             body: arrBody[index],
 
         }
@@ -263,7 +301,7 @@ export class PlaneacionesComponent implements OnInit {
         style: 'titulo',
         table: {
             heights: [50],
-            widths: [500],
+            widths: [498],
             body: [
                 [{ text: 'PLAN DE AUDITORIA PARA EL SGI DEL G3', color: 'gray', margin: [10, 15, 10, 10], alignment: 'center' }]
             ]
@@ -273,13 +311,13 @@ export class PlaneacionesComponent implements OnInit {
             style: 'tableExample',
             color: '#444',
             table: {
-                widths: [140, 220, 38, 50],
+                widths: [140, 263, 'auto', 'auto'],
                 body: [
-                    [{ text: 'Instituto Tecnologico Superior:', fontSize: 10, colSpan: 1, style: 'tableHeader' }, { text: this.institucion[0].nombreInstitucion, colSpan: 3, style: 'tableHeader' }, ' ', ' '],
-                    [{ text: 'Norma de Referencia:', fontSize: 10, colSpan: 1, style: 'tableHeader' }, { text: ' ', colSpan: 3, style: 'tableHeader' }, ' ', ' '],
-                    [{ text: 'Domicilio:', fontSize: 10, colSpan: 1, style: 'tableHeader' }, { text: this.institucion[0].domicilio, fontSize: 10, colSpan: 1, style: 'tableHeader' }, { text: 'Idioma:', fontSize: 10, colSpan: 1, style: 'tableHeader', alignment: 'center' }, { text: 'Español', fontSize: 10, colSpan: 1, style: 'tableHeader', alignment: 'center' }],
-                    [{ text: 'Objetivo:', fontSize: 10, colSpan: 1, style: 'tableHeader' }, { text: this.objetivosV, colSpan: 1, style: 'tableHeader' }, { text: 'NACE:', fontSize: 10, colSpan: 1, style: 'tableHeader', alignment: 'center' }, { text: '37', fontSize: 10, colSpan: 1, style: 'tableHeader', alignment: 'center' }],
-                    [{ text: 'Alcance:', fontSize: 10, colSpan: 1, style: 'tableHeader' }, { text: this.alcanceV, colSpan: 3, style: 'tableHeader' }, ' ', ' '],
+                    [{ text: 'Instituto Tecnologico Superior:', fontSize: 10, colSpan: 1, style: 'tableHeader' }, { text: this.institucion[0].nombreInstitucion, fontSize: 8, colSpan: 3, style: 'contenido' }, ' ', ' '],
+                    [{ text: 'Norma de Referencia:', fontSize: 10, colSpan: 1, style: 'tableHeader' }, { text: this.normasV, fontSize: 8, colSpan: 3, style: 'contenido' }, ' ', ' '],
+                    [{ text: 'Domicilio:', fontSize: 10, colSpan: 1, style: 'tableHeader' }, { text: this.institucion[0].domicilio, fontSize: 8, colSpan: 1, style: 'contenido' }, { text: 'Idioma:', fontSize: 10, colSpan: 1, style: 'tableHeader', alignment: 'center' }, { text: 'Español', fontSize: 10, colSpan: 1, style: 'tableHeader', alignment: 'center' }],
+                    [{ text: 'Objetivo:', fontSize: 10, colSpan: 1, style: 'tableHeader' }, { text: this.objetivosV, fontSize: 8, colSpan: 1, style: 'contenido' }, { text: 'NACE:', fontSize: 10, colSpan: 1, style: 'tableHeader', alignment: 'center' }, { text: '37', fontSize: 10, colSpan: 1, style: 'tableHeader', alignment: 'center' }],
+                    [{ text: 'Alcance:', fontSize: 10, colSpan: 1, style: 'tableHeader' }, { text: this.alcanceV, fontSize: 8, colSpan: 3, style: 'contenido' }, ' ', ' '],
                 ]
             }
         },
@@ -312,7 +350,7 @@ export class PlaneacionesComponent implements OnInit {
         tableExample: {
             bold: true,
             fontSize: 11,
-            margin: [10, 5, 0, 15]
+            margin: [5, 5, 0, 15]
           },
         titulo: {
             bold: true,
@@ -320,12 +358,15 @@ export class PlaneacionesComponent implements OnInit {
             margin: [5, 5, 5, 25]
           },
         firma: {
-            margin: [170, 20, 0, 15]
+            margin: [170, 100, 0, 15]
           },
         tableHeader: {
-            bold: true,
+          bold: true,
             color: 'black'
           },
+          contenido: {
+           color: 'black'
+            },
         tableHeader2: {
             bold: true,
             widths: [100, 220, 38, 50],
@@ -334,7 +375,16 @@ export class PlaneacionesComponent implements OnInit {
       }
     };
 
-    pdfMake.createPdf(docPlaneacion).download('planeacion.pdf');
+    if ( opcion === 1 ) {
+      pdfMake.createPdf(docPlaneacion).download('planeacion.pdf');
+    }
+    if ( opcion === 2 ) {
+      pdfMake.createPdf(docPlaneacion).open();
+    }
+    if ( opcion === 3 ) {
+      pdfMake.createPdf(docPlaneacion).print();
+    }
+
   }
 
 }

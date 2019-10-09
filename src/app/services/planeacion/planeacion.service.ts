@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 
 import { HttpClient } from '@angular/common/http';
 import { Planeacion } from '../../models/planeacion.model';
-import { PrintPlaneacion } from '../../models/printPlaneacion.model';
 import { URL_SERVICIOS } from '../../config/config';
 
 import { map, catchError } from 'rxjs/operators';
@@ -204,38 +203,6 @@ export class PlaneacionService {
       }),
       catchError( err => {
         Swal.fire('Error', err.error.err.message, 'error');
-        return throwError( err ) ;
-      })
-    );
-
-  }
-
-  imprimir( planeacion: PrintPlaneacion ) {
-
-    let url = URL_SERVICIOS + '/pdf/planeacion';
-      // *** Aqui se CREA la Planeacion ***
-
-      // *** TOKEN ***
-      // url += '?token=' + this.token;
-
-    return this.http.post( url, planeacion )
-    .pipe(
-      map( (resp: any ) => {
-        // let win = window.open('', '_blank');
-
-        // pdfMake.createPdf(documentDefinition).open({}, win);
-
-        // Swal.fire({
-        //   title: 'Impreso',
-        //   text: '',
-        //   type: 'success',
-        //   showConfirmButton: false,
-        //   timer: 2000
-        // });
-        // return resp.planeacion;
-      }),
-      catchError( err => {
-        // Swal.fire('Error', err.error.err.message, 'error');
         return throwError( err ) ;
       })
     );
