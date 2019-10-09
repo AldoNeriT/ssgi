@@ -45,6 +45,11 @@
                                 <hr class="m-t-0 m-b-40">
                             </div>
                         </div>
+                        <div class="row" style="padding-bottom: 40px;">
+                            <div class="col-12 text-left">
+                                <button (click)="imprimir()" type="button" class="btn btn-rounded btn-themecolor"><i class="mdi mdi-printer"></i></button>
+                            </div>
+                        </div>
 
                         <div *ngFor="let fecha of arrFechas" style="padding-bottom: 40px;">
                             <h4 class="card-title text-muted font-bold">Fecha: {{ fecha }}</h4>

@@ -1,8 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { PlaneacionService, AuditoriaService, UsuarioService } from '../../services/service.index';
+import { PlaneacionService, AuditoriaService, UsuarioService, InstitucionService } from '../../services/service.index';
 import { Planeacion } from '../../models/planeacion.model';
+import { Institucion } from '../../models/institucion.model';
+import { PrintPlaneacion } from '../../models/printPlaneacion.model';
 import { Router, ActivatedRoute } from '@angular/router';
+
+import * as pdfMake from 'pdfmake/build/pdfmake.js';
+import * as pdfFonts from 'pdfmake/build/vfs_fonts.js';
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 import Swal from 'sweetalert2';
 import * as $ from 'jquery';
@@ -17,6 +23,7 @@ declare function init_plugins();
 export class PlaneacionesComponent implements OnInit {
 
   planeaciones: any[] = [];
+  institucion: any[] = [];
 
   id: string;
   arrFechasT: any[] = [];
@@ -31,6 +38,7 @@ export class PlaneacionesComponent implements OnInit {
   constructor( public _planeacionService: PlaneacionService,
                public _auditoriaService: AuditoriaService,
                public _usuarioService: UsuarioService,
+               public _institucionService: InstitucionService,
                public router: Router,
                public activatedRoute: ActivatedRoute ) {
     activatedRoute.params.subscribe( params => {
@@ -43,10 +51,22 @@ export class PlaneacionesComponent implements OnInit {
 
     this.cargarPlaneacionesAudi( this.id );
     this.cargarAuditoria( this.id );
+    this.cargarInstitucion();
   }
 
   regresar() {
     this.router.navigate(['/planes']);
+  }
+
+  cargarInstitucion() {
+    this.cargando = true;
+
+    this._institucionService.cargarInstituciones()
+          .subscribe( instituciones => {
+            this.institucion = instituciones.instituciones;
+            console.log('Institucion: ', this.institucion);
+            this.cargando = false;
+          });
   }
 
   cargarPlaneacionesAudi( id: string ) {
@@ -62,7 +82,7 @@ export class PlaneacionesComponent implements OnInit {
       this._planeacionService.cargarPlaneacionesAudi( id )
           .subscribe( planeaciones => {
             this.planeaciones = planeaciones;
-            // console.log(this.planeaciones);
+            console.log('Planeaciones: ', this.planeaciones);
             // Se extraen las fechas a un array
             for ( let pl of planeaciones) {
               this.arrFechasT.push(pl.fecha);
@@ -160,18 +180,6 @@ export class PlaneacionesComponent implements OnInit {
 
   cambiarEnviar() {
 
-    // let planeacion = new Planeacion(
-    //   '',
-    //   '',
-    //   [],
-    //   '',
-    //   '',
-    //   [],
-    //   [],
-    //   '',
-    //   this.id
-    // );
-
     this._planeacionService.cambiarEnviar( this.id )
           .subscribe( resp => {
             this.cargarPlaneacionesAudi( this.id );
@@ -211,6 +219,122 @@ export class PlaneacionesComponent implements OnInit {
       }
     });
 
+  }
+
+  imprimir() {
+    var tablas = [];
+
+    var arrBody = [];
+
+    var arrFilas = [];
+
+    for (let index = 0; index < this.arrFechas.length; index++) {
+      arrFilas.push([]);
+    }
+
+    //Ciclo para crear las fechas y tablas dependiendo de la planeacion
+    for (let index = 0; index < this.arrFechas.length; index++) {
+
+      arrFilas[index].push([{ text: 'HORARIO', fillColor: '#dddddd', alignment: 'center', fontSize: 10, colSpan: 1, style: 'tableHeader' }, { text: 'PROCESO / ACTIVIDAD-REQUISITO / CRITERIO', fillColor: '#dddddd', alignment: 'center', fontSize: 10, colSpan: 1, style: 'tableHeader' }, { text: 'PARTICIPANTES', fillColor: '#dddddd', alignment: 'center', fontSize: 10, colSpan: 1, style: 'tableHeader' }, { text: 'CONTACTO', fillColor: '#dddddd', fontSize: 10, alignment: 'center', colSpan: 1, style: 'tableHeader' }, { text: 'ÁREA / SITIO', fillColor: '#dddddd', alignment: 'center', fontSize: 10, colSpan: 1, style: 'tableHeader' }]);
+
+      for (let j = 0; j < this.planeaciones.length; j++) {
+        if ( this.arrFechas[index] === this.planeaciones[j].fecha){
+          arrFilas[index].push([{ text: ' ', fontSize: 10, colSpan: 1, style: 'tableHeader' }, { text: ' ', fontSize: 10, colSpan: 1, style: 'tableHeader' }, { text: ' ', fontSize: 10, colSpan: 1, style: 'tableHeader' }, { text: ' ', fontSize: 10, colSpan: 1, style: 'tableHeader' }, { text: ' ', fontSize: 10, colSpan: 1, style: 'tableHeader' }]);
+        }
+      }
+
+      arrBody.push(
+        arrFilas[index]
+      );
+      tablas.push({ text: 'FECHA: ' + this.arrFechas[index], margin: [35, 20, 0, 0], style: 'tableHeader' }, {
+        style: 'tableExample',
+        table: {
+            widths: [50, 'auto', 'auto', 'auto', 'auto'],
+            body: arrBody[index],
+
+        }
+      });
+
+    }
+
+
+    var docPlaneacion = {
+      content: [{
+        style: 'titulo',
+        table: {
+            heights: [50],
+            widths: [500],
+            body: [
+                [{ text: 'PLAN DE AUDITORIA PARA EL SGI DEL G3', color: 'gray', margin: [10, 15, 10, 10], alignment: 'center' }]
+            ]
+          }
+        },
+        {
+            style: 'tableExample',
+            color: '#444',
+            table: {
+                widths: [140, 220, 38, 50],
+                body: [
+                    [{ text: 'Instituto Tecnologico Superior:', fontSize: 10, colSpan: 1, style: 'tableHeader' }, { text: this.institucion[0].nombreInstitucion, colSpan: 3, style: 'tableHeader' }, ' ', ' '],
+                    [{ text: 'Norma de Referencia:', fontSize: 10, colSpan: 1, style: 'tableHeader' }, { text: ' ', colSpan: 3, style: 'tableHeader' }, ' ', ' '],
+                    [{ text: 'Domicilio:', fontSize: 10, colSpan: 1, style: 'tableHeader' }, { text: this.institucion[0].domicilio, fontSize: 10, colSpan: 1, style: 'tableHeader' }, { text: 'Idioma:', fontSize: 10, colSpan: 1, style: 'tableHeader', alignment: 'center' }, { text: 'Español', fontSize: 10, colSpan: 1, style: 'tableHeader', alignment: 'center' }],
+                    [{ text: 'Objetivo:', fontSize: 10, colSpan: 1, style: 'tableHeader' }, { text: this.objetivosV, colSpan: 1, style: 'tableHeader' }, { text: 'NACE:', fontSize: 10, colSpan: 1, style: 'tableHeader', alignment: 'center' }, { text: '37', fontSize: 10, colSpan: 1, style: 'tableHeader', alignment: 'center' }],
+                    [{ text: 'Alcance:', fontSize: 10, colSpan: 1, style: 'tableHeader' }, { text: this.alcanceV, colSpan: 3, style: 'tableHeader' }, ' ', ' '],
+                ]
+            }
+        },
+        tablas,
+        {
+            style: 'firma',
+            table: {
+                widths: ['auto', 'auto', 'auto'],
+                headerRows: 1,
+                body: [
+                    [' ', { text: ' ', fontSize: 10, alignment: 'center', colSpan: 1, style: 'tableHeader' }, ''],
+                    [' ', { text: 'Nombre y Firma del l(a) Auditor (a)Lider', fontSize: 8, alignment: 'center', colSpan: 1 }, ''],
+                ]
+            },
+            layout: 'lightHorizontalLines'
+        },
+      ],
+      styles: {
+        header: {
+            fontSize: 18,
+            bold: true,
+            alignment: 'center',
+            margin: [0, 0, 0, 10]
+          },
+        subheader: {
+            fontSize: 16,
+            bold: true,
+            margin: [0, 10, 0, 5]
+          },
+        tableExample: {
+            bold: true,
+            fontSize: 11,
+            margin: [10, 5, 0, 15]
+          },
+        titulo: {
+            bold: true,
+            fontSize: 20,
+            margin: [5, 5, 5, 25]
+          },
+        firma: {
+            margin: [170, 20, 0, 15]
+          },
+        tableHeader: {
+            bold: true,
+            color: 'black'
+          },
+        tableHeader2: {
+            bold: true,
+            widths: [100, 220, 38, 50],
+            color: 'black'
+        }
+      }
+    };
+
+    pdfMake.createPdf(docPlaneacion).download('planeacion.pdf');
   }
 
 }
