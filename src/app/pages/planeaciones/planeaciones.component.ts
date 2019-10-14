@@ -28,6 +28,8 @@ export class PlaneacionesComponent implements OnInit {
   arrFechasT: any[] = [];
   arrFechas: any[] = [];
 
+  arrProActCriV: any[] = [];
+
   cargando = true;
 
   objetivosV: string;
@@ -63,7 +65,7 @@ export class PlaneacionesComponent implements OnInit {
     this._institucionService.cargarInstituciones()
           .subscribe( instituciones => {
             this.institucion = instituciones.instituciones;
-            console.log('Institucion: ', this.institucion);
+            // console.log('Institucion: ', this.institucion);
             this.cargando = false;
           });
   }
@@ -81,11 +83,29 @@ export class PlaneacionesComponent implements OnInit {
       this._planeacionService.cargarPlaneacionesAudi( id )
           .subscribe( planeaciones => {
             this.planeaciones = planeaciones;
-            console.log('Planeaciones: ', this.planeaciones);
+            // console.log('Planeaciones: ', this.planeaciones);
+
             // Se extraen las fechas a un array
             for ( let pl of planeaciones) {
               this.arrFechasT.push(pl.fecha);
+
+              // Arreglo Procesos, Actividad, Criterio
+              let array: any[] = [];
+              if ( pl.proceso.nombreProceso ) {
+                array.push(pl.proceso.nombreProceso);
+              }
+              if ( pl.actividad ) {
+                array.push(pl.actividad);
+              }
+              if ( pl.criterio ) {
+                array.push(pl.criterio);
+              }
+
+              this.arrProActCriV.push(array.join(', '));
+
             }
+
+            // console.log(this.arrProActCriV);
 
             // Se eliminas duplicados
             for ( let i = 0; i < this.arrFechasT.length; i++ ) {
@@ -260,7 +280,7 @@ export class PlaneacionesComponent implements OnInit {
         if ( this.arrFechas[index] === this.planeaciones[j].fecha) {
           arrFilas[index].push([
             { text: this.planeaciones[j].horario, fontSize: 8, colSpan: 1, style: 'contenido' },
-            { text: `${this.planeaciones[j].proceso.nombreProceso}, ${this.planeaciones[j].actividad}, ${this.planeaciones[j].criterio}`, fontSize: 8, colSpan: 1, style: 'tableHeader' }, 
+            { text: this.arrProActCriV[j], fontSize: 8, colSpan: 1, style: 'tableHeader' }, 
             { text: arrAuditores.join(', '), fontSize: 8, colSpan: 1, style: 'contenido' },
             { text: this.planeaciones[j].participantes, fontSize: 8, colSpan: 1, style: 'contenido' },
             { text: this.planeaciones[j].contacto, fontSize: 8, colSpan: 1, style: 'contenido' },

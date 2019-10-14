@@ -136,9 +136,9 @@
 </div>
 
 <!-- ============================================================== -->
-<!-- CONTENIDO AUDITOR, AUDITADOS -->
+<!-- CONTENIDO AUDITOR-->
 <!-- ============================================================== -->
-<div *ngIf="(_usuarioService.usuario.tipo_Usuario === 'AUDITOR') || (_usuarioService.usuario.tipo_Usuario === 'AUDITADO')">
+<div *ngIf="_usuarioService.usuario.tipo_Usuario === 'AUDITOR'">
     <div *ngIf="!cargando">
 
         <div class="row">

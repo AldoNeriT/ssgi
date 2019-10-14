@@ -696,7 +696,7 @@ export class PlanesComponent implements OnInit {
             text: `La Auditoría "${auditoria.nombre}" está en curso`,
             type: 'warning',
             showCancelButton: true,
-            confirmButtonText: 'Ver',
+            confirmButtonText: 'Ver Menú',
             cancelButtonText: 'Cancelar',
             animation: false,
             customClass: {
@@ -713,11 +713,18 @@ export class PlanesComponent implements OnInit {
           } else {
             Swal.fire({
               title: '¡Advertencia!',
-              text: `No puedes ingresar hasta que validen la Auditoría "${auditoria.nombre}"`,
+              text: `Sólo puedes ingresar a la Planeación hasta que validen la Auditoría "${auditoria.nombre}"`,
               type: 'warning',
+              showCancelButton: true,
+              confirmButtonText: 'Planeación',
+              cancelButtonText: 'Cancelar',
               animation: false,
               customClass: {
                 popup: 'animated pulse'
+              }
+            }).then((result) => {
+              if (result.value) {
+                this.router.navigate(['/planeacion/' + auditoria._id ]);
               }
             });
           }
@@ -731,7 +738,7 @@ export class PlanesComponent implements OnInit {
             text: `La Auditoría "${auditoria.nombre}" ha finalizado`,
             type: 'success',
             showCancelButton: true,
-            confirmButtonText: 'Ver',
+            confirmButtonText: 'Ver Menú',
             cancelButtonText: 'Cancelar',
             animation: false,
             customClass: {
@@ -780,7 +787,7 @@ export class PlanesComponent implements OnInit {
           text: `La Auditoría "${auditoria.nombre}" está en curso`,
           type: 'warning',
           showCancelButton: true,
-          confirmButtonText: 'Ver',
+          confirmButtonText: 'Ver Menú',
           cancelButtonText: 'Cancelar',
           animation: false,
           customClass: {
@@ -797,7 +804,7 @@ export class PlanesComponent implements OnInit {
           text: `Antes de validar la Auditoría "${auditoria.nombre}" verifica sus datos`,
           type: 'warning',
           showCancelButton: true,
-          confirmButtonText: 'Ver',
+          confirmButtonText: 'Ver Planeación',
           cancelButtonText: 'Cancelar',
           animation: false,
           customClass: {
@@ -817,7 +824,7 @@ export class PlanesComponent implements OnInit {
         text: `La Auditoría "${auditoria.nombre}" ha finalizado`,
         type: 'success',
         showCancelButton: true,
-        confirmButtonText: 'Ver',
+        confirmButtonText: 'Ver Menú',
         cancelButtonText: 'Cancelar',
         animation: false,
         customClass: {

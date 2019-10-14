@@ -69,7 +69,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let planeacion of planeaciones" class="pointer">
+                                    <tr *ngFor="let planeacion of planeaciones; let ind=index" class="pointer">
                                         <td *ngIf="planeacion.fecha === fecha" style="width: 1px; padding-left: 0px; padding-right: 0px">
                                             <div class="btn-group">
                                                 <div class="dropdown-menu text-center animated pulse">
@@ -85,7 +85,7 @@
                                             </div>
                                         </td>
                                         <td *ngIf="planeacion.fecha === fecha" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width: 130px;">{{ planeacion.horario }}</td>
-                                        <td *ngIf="planeacion.fecha === fecha" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ planeacion.proceso.nombreProceso }}, {{ planeacion.actividad }}, {{ planeacion.criterio }}</td>
+                                        <td *ngIf="planeacion.fecha === fecha" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ arrProActCriV[ind] }}</td>
                                         <td *ngIf="planeacion.fecha === fecha" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <ul style="padding-left: 16px;">
                                                 <li *ngFor="let auditor of planeacion.auditores">{{auditor.nombre + ' ' + auditor.primer_Apellido + ' ' + (auditor.segundo_Apellido || '')}}</li>
