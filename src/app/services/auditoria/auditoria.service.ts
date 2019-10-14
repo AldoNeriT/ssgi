@@ -52,6 +52,48 @@ export class AuditoriaService {
 
   }
 
+  cargarAuditoriasGA() {
+
+    let url = URL_SERVICIOS + '/auditoria/usuario/grupoauditor';
+
+    // *** TOKEN ***
+    url += '?token=' + this.token;
+
+    return this.http.get( url )
+    .pipe(
+      map( (resp: any ) => {
+        this.totalAuditorias = resp.cuantos;
+        return resp.auditorias;
+      }),
+      catchError( err => {
+        Swal.fire('Error', err.error.err.message, 'error');
+        return throwError( err ) ;
+      })
+    );
+
+  }
+
+  cargarAuditoriasAu() {
+
+    let url = URL_SERVICIOS + '/auditoria/usuario/auditados';
+
+    // *** TOKEN ***
+    url += '?token=' + this.token;
+
+    return this.http.get( url )
+    .pipe(
+      map( (resp: any ) => {
+        this.totalAuditorias = resp.cuantos;
+        return resp.auditorias;
+      }),
+      catchError( err => {
+        Swal.fire('Error', err.error.err.message, 'error');
+        return throwError( err ) ;
+      })
+    );
+
+  }
+
   cargarAuditoria( id: string ) {
 
     let url = URL_SERVICIOS + '/auditoria/' + id;

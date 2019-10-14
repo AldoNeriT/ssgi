@@ -61,6 +61,7 @@
                                         <th style="width: 1px; padding-left: 0px; padding-right: 0px"></th>
                                         <th>Horario</th>
                                         <th>Proceso <span class="font-bold">/</span> Actividad-Requisito <span class="font-bold">/</span> Criterio</th>
+                                        <th>Auditor(es)</th>
                                         <th>Participantes</th>
                                         <th>Contacto</th>
                                         <th>Área / Sitio</th>
@@ -84,17 +85,14 @@
                                             </div>
                                         </td>
                                         <td *ngIf="planeacion.fecha === fecha" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width: 130px;">{{ planeacion.horario }}</td>
-                                        <td *ngIf="planeacion.fecha === fecha" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ planeacion.proceso.nombreProceso }} <span class="font-bold">/</span> {{ planeacion.actividad }} <span class="font-bold">/</span> {{ planeacion.criterio }}</td>
+                                        <td *ngIf="planeacion.fecha === fecha" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ planeacion.proceso.nombreProceso }}, {{ planeacion.actividad }}, {{ planeacion.criterio }}</td>
                                         <td *ngIf="planeacion.fecha === fecha" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <ul style="padding-left: 16px;">
-                                                <li *ngFor="let participante of planeacion.participantes">{{participante.nombre + ' ' + participante.primer_Apellido + ' ' + (participante.segundo_Apellido || '')}}</li>
+                                                <li *ngFor="let auditor of planeacion.auditores">{{auditor.nombre + ' ' + auditor.primer_Apellido + ' ' + (auditor.segundo_Apellido || '')}}</li>
                                             </ul>
                                         </td>
-                                        <td *ngIf="planeacion.fecha === fecha" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <ul style="padding-left: 16px;">
-                                                <li *ngFor="let contacto of planeacion.contacto">{{contacto.nombre + ' ' + contacto.primer_Apellido + ' ' + (contacto.segundo_Apellido || '')}}</li>
-                                            </ul>
-                                        </td>
+                                        <td *ngIf="planeacion.fecha === fecha" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ planeacion.participantes }}</td>
+                                        <td *ngIf="planeacion.fecha === fecha" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ planeacion.contacto }}</td>
                                         <td *ngIf="planeacion.fecha === fecha" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ planeacion.area }}</td>
                                         <td *ngIf="planeacion.fecha === fecha" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="text-center"><i *ngIf="planeacion.enviar === false" class="fa fa-window-close fa-2x text-danger"></i> <i *ngIf="planeacion.enviar === true" class="fa fa-check-square fa-2x text-success"></i></td>
                                     </tr>
@@ -118,9 +116,9 @@
 </div>
 
 <!-- ============================================================== -->
-<!-- CONTENIDO AUDITOR, AUDITADOS, DIRECCION -->
+<!-- CONTENIDO AUDITOR y DIRECCION -->
 <!-- ============================================================== -->
-<div *ngIf="(_usuarioService.usuario.tipo_Usuario === 'AUDITOR') || (_usuarioService.usuario.tipo_Usuario === 'AUDITADO') || (_usuarioService.usuario.tipo_Usuario === 'ALTA_DIRECCION')">
+<div *ngIf="(_usuarioService.usuario.tipo_Usuario === 'AUDITOR') || (_usuarioService.usuario.tipo_Usuario === 'ALTA_DIRECCION')">
     <div *ngIf="!cargando">
         <div class="row">
             <div class="col-12">

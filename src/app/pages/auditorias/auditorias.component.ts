@@ -22,7 +22,7 @@ export class AuditoriasComponent implements OnInit {
 
   normas: Norma[] = [];
   auditores: Usuario[] = [];
-  auditados: Usuario[] = [];
+  // auditados: Usuario[] = [];
 
   formaEditar: FormGroup;
 
@@ -76,14 +76,14 @@ export class AuditoriasComponent implements OnInit {
 
     this.cargarNormas();
     this.cargarAuditores();
-    this.cargarAuditados();
+    // this.cargarAuditados();
 
     this.formaEditar = new FormGroup({
       nombre: new FormControl( null, Validators.required ),
       normas: new FormControl( null, Validators.required ),
       fechas: new FormControl( null, Validators.required ),
       auditores: new FormControl( null, Validators.required ),
-      auditados: new FormControl( null, Validators.required ),
+      // auditados: new FormControl( null, Validators.required ),
       objetivos: new FormControl( null, Validators.required ),
       alcance: new FormControl( null, Validators.required ),
       contacto: new FormControl( null, Validators.required ),
@@ -128,7 +128,7 @@ export class AuditoriasComponent implements OnInit {
               // fechas: 'mes/dia/año - mes/dia/año',
               fechas: fecha,
               auditores: auditoria.grupoAuditor,
-              auditados: auditoria.auditados,
+              // auditados: auditoria.auditados,
               objetivos: auditoria.objetivos,
               alcance: auditoria.alcance,
               contacto: auditoria.contacto,
@@ -196,33 +196,6 @@ export class AuditoriasComponent implements OnInit {
             }
 
             // ************************************************
-            // *** AQUI SE AGREGARAN LOS DATOS AL SELECT AUDITADOS 03 ***
-            // ************************************************
-
-            // Inicializando arreglos necesarios
-            let arrAuditados: any[] = [];
-            let arrAuditadosNombre: any[] = [];
-
-            // Llenando arreglos
-            for ( let i = 0; i < this.auditados.length; i++ ) {
-              for ( let j = 0; j < auditoria.auditados.length; j++ ) {
-                if ( this.auditados[i]._id === auditoria.auditados[j]._id ) {
-                  arrAuditados.push(`${i}: '${this.auditados[i]._id}'`);
-                  arrAuditadosNombre.push(`${this.auditados[i].nombre} ${this.auditados[i].primer_Apellido} ${this.auditados[i].segundo_Apellido || ''}`);
-                }
-              }
-            }
-
-            // Agregar arreglo al select
-            $('#auditados').val(arrAuditados);
-
-            // Agregar el diseño al select
-            $('ul.select2-selection__rendered:eq(2)').html('');
-            for ( let k = 0; k < arrAuditados.length; k++ ) {
-              $('ul.select2-selection__rendered:eq(2)').append(`<li class="select2-selection__choice" title=" ${arrAuditadosNombre[k]} "><span class="select2-selection__choice__remove" role="presentation">×</span> ${arrAuditadosNombre[k]} </li>`);
-            }
-
-            // ************************************************
             // *** FIN SELECTS ***
             // ************************************************
 
@@ -261,23 +234,6 @@ export class AuditoriasComponent implements OnInit {
           .subscribe( auditores => {
             this.auditores = auditores;
             // console.log('Auditores: ', this.auditores);
-            this.cargando = false;
-            init_plugins();
-            inicializando_multiSelect();
-            inicializando_dateRange();
-            this.condiciones();
-          });
-
-  }
-
-  cargarAuditados() {
-
-    this.cargando = true;
-
-    this._usuarioService.cargarUsuariosPorTipo('AUDITADO')
-          .subscribe( auditados => {
-            this.auditados = auditados;
-            // console.log('Auditados: ', this.auditados);
             this.cargando = false;
             init_plugins();
             inicializando_multiSelect();
@@ -327,15 +283,6 @@ export class AuditoriasComponent implements OnInit {
     }
     // console.log('objAuditor: ', objAuditor);
 
-    let auditado: any = $('#auditados').val();
-    let objAuditado: any[] = [];
-    for ( let i = 0; i < auditado.length; i++) {
-      let auditadofor: string = auditado[i];
-      let rauditadofor = auditadofor.split(`'`);
-      objAuditado.push({_id: rauditadofor[1]});
-    }
-    // console.log('objAuditados: ', objAuditado);
-
     let auditoria = new Auditoria(
       this.planV + '_' + this.formaEditar.value.nombre,
       this.formaEditar.value.nombre,
@@ -344,7 +291,6 @@ export class AuditoriasComponent implements OnInit {
       fechaF,
       this.idPlan,
       objAuditor,
-      objAuditado,
       this.formaEditar.value.objetivos,
       this.formaEditar.value.alcance,
       this.formaEditar.value.contacto,

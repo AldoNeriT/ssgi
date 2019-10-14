@@ -71,8 +71,9 @@ export class PlaneacionComponent implements OnInit {
       desde: new FormControl( null, Validators.required ),
       hasta: new FormControl( null, Validators.required ),
       proceso: new FormControl( null, Validators.required ),
-      actividad: new FormControl( null, Validators.required ),
-      criterio: new FormControl( null, Validators.required ),
+      actividad: new FormControl(''),
+      criterio: new FormControl(''),
+      auditores: new FormControl( null, Validators.required ),
       participantes: new FormControl( null, Validators.required ),
       contacto: new FormControl( null, Validators.required ),
       area: new FormControl( null, Validators.required ),
@@ -83,8 +84,9 @@ export class PlaneacionComponent implements OnInit {
       desdeE: new FormControl( null, Validators.required ),
       hastaE: new FormControl( null, Validators.required ),
       procesoE: new FormControl( null, Validators.required ),
-      actividadE: new FormControl( null, Validators.required ),
-      criterioE: new FormControl( null, Validators.required ),
+      actividadE: new FormControl(''),
+      criterioE: new FormControl(''),
+      auditoresE: new FormControl( null, Validators.required ),
       participantesE: new FormControl( null, Validators.required ),
       contactoE: new FormControl( null, Validators.required ),
       areaE: new FormControl( null, Validators.required ),
@@ -203,8 +205,9 @@ export class PlaneacionComponent implements OnInit {
               desdeE: arrHoras[0],
               hastaE: arrHoras[1],
               procesoE: planeacion.proceso._id,
-              actividadE: planeacion.actividad,
-              criterioE: planeacion.criterio,
+              actividadE: planeacion.actividad || '',
+              criterioE: planeacion.criterio || '',
+              auditoresE: planeacion.auditores,
               participantesE: planeacion.participantes,
               contactoE: planeacion.contacto,
               areaE: planeacion.area
@@ -222,8 +225,8 @@ export class PlaneacionComponent implements OnInit {
 
             // Llenando arreglos
             for ( let i = 0; i < this.auditores.length; i++ ) {
-              for ( let j = 0; j < planeacion.participantes.length; j++ ) {
-                if ( this.auditores[i]._id === planeacion.participantes[j]._id ) {
+              for ( let j = 0; j < planeacion.auditores.length; j++ ) {
+                if ( this.auditores[i]._id === planeacion.auditores[j]._id ) {
                   arrAuditores.push(`${i}: '${this.auditores[i]._id}'`);
                   arrAuditoresNombre.push(`${this.auditores[i].nombre} ${this.auditores[i].primer_Apellido} ${this.auditores[i].segundo_Apellido || ''}`);
                 }
@@ -233,39 +236,12 @@ export class PlaneacionComponent implements OnInit {
             // console.log(this.auditores.length);
 
             // Agregar arreglo al select
-            $('#participantesE').val(arrAuditores);
+            $('#auditoresE').val(arrAuditores);
 
             // Agregar el diseño al select
             $('ul.select2-selection__rendered:eq(0)').html('');
             for ( let k = 0; k < arrAuditores.length; k++ ) {
               $('ul.select2-selection__rendered:eq(0)').append(`<li class="select2-selection__choice" title=" ${arrAuditoresNombre[k]} "><span class="select2-selection__choice__remove" role="presentation">×</span> ${arrAuditoresNombre[k]} </li>`);
-            }
-
-            // ************************************************
-            // *** AQUI SE AGREGARAN LOS DATOS AL SELECT CONTACTO 02 ***
-            // ************************************************
-
-            // Inicializando arreglos necesarios
-            let arrAuditados: any[] = [];
-            let arrAuditadosNombre: any[] = [];
-
-            // Llenando arreglos
-            for ( let i = 0; i < this.auditados.length; i++ ) {
-              for ( let j = 0; j < planeacion.contacto.length; j++ ) {
-                if ( this.auditados[i]._id === planeacion.contacto[j]._id ) {
-                  arrAuditados.push(`${i}: '${this.auditados[i]._id}'`);
-                  arrAuditadosNombre.push(`${this.auditados[i].nombre} ${this.auditados[i].primer_Apellido} ${this.auditados[i].segundo_Apellido || ''}`);
-                }
-              }
-            }
-
-            // Agregar arreglo al select
-            $('#contactoE').val(arrAuditados);
-
-            // Agregar el diseño al select
-            $('ul.select2-selection__rendered:eq(1)').html('');
-            for ( let k = 0; k < arrAuditados.length; k++ ) {
-              $('ul.select2-selection__rendered:eq(1)').append(`<li class="select2-selection__choice" title=" ${arrAuditadosNombre[k]} "><span class="select2-selection__choice__remove" role="presentation">×</span> ${arrAuditadosNombre[k]} </li>`);
             }
 
             this.cargando = false;
@@ -294,7 +270,7 @@ export class PlaneacionComponent implements OnInit {
     let horaI: any = $('#desde').val();
     let horaF: any = $('#hasta').val();
 
-    let auditor: any = $('#participantes').val();
+    let auditor: any = $('#auditores').val();
     let objAuditor: any[] = [];
     for ( let i = 0; i < auditor.length; i++) {
       let auditorfor: string = auditor[i];
@@ -303,15 +279,6 @@ export class PlaneacionComponent implements OnInit {
     }
     // console.log('objAuditor: ', objAuditor);
 
-    let auditado: any = $('#contacto').val();
-    let objAuditado: any[] = [];
-    for ( let i = 0; i < auditado.length; i++) {
-      let auditadofor: string = auditado[i];
-      let rauditadofor = auditadofor.split(`'`);
-      objAuditado.push({_id: rauditadofor[1]});
-    }
-    // console.log('objAuditados: ', objAuditado);
-
     let planeacion = new Planeacion(
       fechaC,
       horaI + ' - ' + horaF,
@@ -319,12 +286,13 @@ export class PlaneacionComponent implements OnInit {
       this.forma.value.actividad,
       this.forma.value.criterio,
       objAuditor,
-      objAuditado,
+      this.forma.value.participantes,
+      this.forma.value.contacto,
       this.forma.value.area,
       this.id
     );
 
-    // console.log('planeacion: ', planeacion);
+    console.log('planeacion: ', planeacion);
 
     this._planeacionService.crearPlaneacion( planeacion )
           .subscribe( resp => {
@@ -350,7 +318,7 @@ export class PlaneacionComponent implements OnInit {
     let horaI: any = $('#desdeE').val();
     let horaF: any = $('#hastaE').val();
 
-    let auditor: any = $('#participantesE').val();
+    let auditor: any = $('#auditoresE').val();
     let objAuditor: any[] = [];
     for ( let i = 0; i < auditor.length; i++) {
       let auditorfor: string = auditor[i];
@@ -359,14 +327,6 @@ export class PlaneacionComponent implements OnInit {
     }
     // console.log('objAuditor: ', objAuditor);
 
-    let auditado: any = $('#contactoE').val();
-    let objAuditado: any[] = [];
-    for ( let i = 0; i < auditado.length; i++) {
-      let auditadofor: string = auditado[i];
-      let rauditadofor = auditadofor.split(`'`);
-      objAuditado.push({_id: rauditadofor[1]});
-    }
-    // console.log('objAuditados: ', objAuditado);
 
     let planeacion = new Planeacion(
       fechaC,
@@ -375,7 +335,8 @@ export class PlaneacionComponent implements OnInit {
       this.formaEditar.value.actividadE,
       this.formaEditar.value.criterioE,
       objAuditor,
-      objAuditado,
+      this.forma.value.participantesE,
+      this.forma.value.contactoE,
       this.formaEditar.value.areaE,
       this.id,
       this.idP

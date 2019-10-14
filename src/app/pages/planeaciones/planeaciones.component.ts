@@ -227,9 +227,7 @@ export class PlaneacionesComponent implements OnInit {
 
     let arrFilas = [];
 
-    let arrParticipantes = [];
-
-    let arrContacto = [];
+    let arrAuditores = [];
 
     for (let index = 0; index < this.arrFechas.length; index++) {
       arrFilas.push([]);
@@ -240,6 +238,7 @@ export class PlaneacionesComponent implements OnInit {
       arrFilas[index].push([
         { text: 'HORARIO', fillColor: '#dddddd', alignment: 'center', fontSize: 9, colSpan: 1, style: 'tableHeader' }, 
         { text: 'PROCESO / ACTIVIDAD-REQUISITO / CRITERIO', fillColor: '#dddddd', alignment: 'center', fontSize: 9, colSpan: 1, style: 'tableHeader' }, 
+        { text: 'AUDITOR(ES)', fillColor: '#dddddd', alignment: 'center', fontSize: 9, colSpan: 1, style: 'tableHeader' }, 
         { text: 'PARTICIPANTES', fillColor: '#dddddd', alignment: 'center', fontSize: 9, colSpan: 1, style: 'tableHeader' }, 
         { text: 'CONTACTO', fillColor: '#dddddd', fontSize: 9, alignment: 'center', colSpan: 1, style: 'tableHeader' }, 
         { text: 'ÁREA / SITIO', fillColor: '#dddddd', alignment: 'center', fontSize: 9, colSpan: 1, style: 'tableHeader' }
@@ -247,35 +246,24 @@ export class PlaneacionesComponent implements OnInit {
 
       for (let j = 0; j < this.planeaciones.length; j++) {
 
+        arrAuditores = [];
 
-        arrParticipantes = [];
-
-        for (let k = 0; k < this.planeaciones[j].participantes.length; k++) {
-          let nombre = this.planeaciones[j].participantes[k].nombre;
-          let pA = this.planeaciones[j].participantes[k].primer_Apellido;
-          let sA = this.planeaciones[j].participantes[k].segundo_Apellido || '' ;
+        for (let k = 0; k < this.planeaciones[j].auditores.length; k++) {
+          let nombre = this.planeaciones[j].auditores[k].nombre;
+          let pA = this.planeaciones[j].auditores[k].primer_Apellido;
+          let sA = this.planeaciones[j].auditores[k].segundo_Apellido || '' ;
 
 
-          arrParticipantes.push(`${nombre} ${pA} ${sA}`);
+          arrAuditores.push(`${nombre} ${pA} ${sA}`);
         }
 
-        arrContacto = [];
-
-        for (let k = 0; k < this.planeaciones[j].contacto.length; k++) {
-          let nombreC = this.planeaciones[j].contacto[k].nombre;
-          let pAC = this.planeaciones[j].contacto[k].primer_Apellido;
-          let sAC = this.planeaciones[j].contacto[k].segundo_Apellido || '' ;
-
-
-          arrContacto.push(`${nombreC} ${pAC} ${sAC}`);
-        }
-
-        if ( this.arrFechas[index] === this.planeaciones[j].fecha){
+        if ( this.arrFechas[index] === this.planeaciones[j].fecha) {
           arrFilas[index].push([
-            { text: this.planeaciones[j].horario, fontSize: 8, colSpan: 1, style: 'contenido' }, 
-            { text: `${this.planeaciones[j].proceso.nombreProceso} / ${this.planeaciones[j].actividad} / ${this.planeaciones[j].criterio}`, fontSize: 8, colSpan: 1, style: 'tableHeader' }, 
-            { text: arrParticipantes.join(', '), fontSize: 8, colSpan: 1, style: 'contenido' }, 
-            { text: arrContacto.join(', '), fontSize: 8, colSpan: 1, style: 'contenido' }, 
+            { text: this.planeaciones[j].horario, fontSize: 8, colSpan: 1, style: 'contenido' },
+            { text: `${this.planeaciones[j].proceso.nombreProceso}, ${this.planeaciones[j].actividad}, ${this.planeaciones[j].criterio}`, fontSize: 8, colSpan: 1, style: 'tableHeader' }, 
+            { text: arrAuditores.join(', '), fontSize: 8, colSpan: 1, style: 'contenido' },
+            { text: this.planeaciones[j].participantes, fontSize: 8, colSpan: 1, style: 'contenido' },
+            { text: this.planeaciones[j].contacto, fontSize: 8, colSpan: 1, style: 'contenido' },
             { text: this.planeaciones[j].area, fontSize: 8, colSpan: 1, style: 'contenido' }
           ]);
         }
@@ -287,7 +275,8 @@ export class PlaneacionesComponent implements OnInit {
       tablas.push({ text: [ 'FECHA: ', {text: this.arrFechas[index], bold: false}], margin: [35, 20, 0, 0], style: 'tableHeader' }, {
         style: 'tableExample',
         table: {
-            widths: [50, 200, 80, 80, 'auto'],
+            //widths: [50, 200, 80, 80, 'auto', 'auto'],
+            widths: [50, 150, 70, 70, 70, 'auto'],
             body: arrBody[index],
 
         }
@@ -311,9 +300,9 @@ export class PlaneacionesComponent implements OnInit {
             style: 'tableExample',
             color: '#444',
             table: {
-                widths: [140, 263, 'auto', 'auto'],
+                widths: ['auto', 305, 'auto', 'auto'],
                 body: [
-                    [{ text: 'Instituto Tecnologico Superior:', fontSize: 10, colSpan: 1, style: 'tableHeader' }, { text: this.institucion[0].nombreInstitucion, fontSize: 8, colSpan: 3, style: 'contenido' }, ' ', ' '],
+                    [{ text: 'Institución:', fontSize: 10, colSpan: 1, style: 'tableHeader' }, { text: this.institucion[0].nombreInstitucion, fontSize: 8, colSpan: 3, style: 'contenido' }, ' ', ' '],
                     [{ text: 'Norma de Referencia:', fontSize: 10, colSpan: 1, style: 'tableHeader' }, { text: this.normasV, fontSize: 8, colSpan: 3, style: 'contenido' }, ' ', ' '],
                     [{ text: 'Domicilio:', fontSize: 10, colSpan: 1, style: 'tableHeader' }, { text: this.institucion[0].domicilio, fontSize: 8, colSpan: 1, style: 'contenido' }, { text: 'Idioma:', fontSize: 10, colSpan: 1, style: 'tableHeader', alignment: 'center' }, { text: 'Español', fontSize: 10, colSpan: 1, style: 'tableHeader', alignment: 'center' }],
                     [{ text: 'Objetivo:', fontSize: 10, colSpan: 1, style: 'tableHeader' }, { text: this.objetivosV, fontSize: 8, colSpan: 1, style: 'contenido' }, { text: 'NACE:', fontSize: 10, colSpan: 1, style: 'tableHeader', alignment: 'center' }, { text: '37', fontSize: 10, colSpan: 1, style: 'tableHeader', alignment: 'center' }],
@@ -358,7 +347,7 @@ export class PlaneacionesComponent implements OnInit {
             margin: [5, 5, 5, 25]
           },
         firma: {
-            margin: [170, 100, 0, 15]
+            margin: [170, 300, 0, 15]
           },
         tableHeader: {
           bold: true,

@@ -9,8 +9,6 @@ import { throwError } from 'rxjs/internal/observable/throwError';
 
 import Swal from 'sweetalert2';
 
-import { pdfMake } from 'pdfmake/build/pdfmake';
-
 @Injectable({
   providedIn: 'root'
 })
@@ -39,7 +37,7 @@ export class PlaneacionService {
     let url = URL_SERVICIOS + '/planeacion/' + id;
 
     // *** TOKEN ***
-    // url += '?token=' + this.token;
+    url += '?token=' + this.token;
 
     return this.http.get( url )
     .pipe(
@@ -59,7 +57,7 @@ export class PlaneacionService {
     let url = URL_SERVICIOS + '/planeacion/auditoria/' + id;
 
     // *** TOKEN ***
-    // url += '?token=' + this.token;
+    url += '?token=' + this.token;
 
     return this.http.get( url )
     .pipe(
@@ -83,7 +81,7 @@ export class PlaneacionService {
     let url = URL_SERVICIOS + '/planeacion/auditoria/enviar/' + id;
 
     // *** TOKEN ***
-    // url += '?token=' + this.token;
+    url += '?token=' + this.token;
 
     return this.http.get( url )
     .pipe(
@@ -111,7 +109,7 @@ export class PlaneacionService {
       url += '/' + planeacion._id;
 
       // *** TOKEN ***
-      // url += '?token=' + this.token;
+      url += '?token=' + this.token;
 
       return this.http.put( url, planeacion )
       .pipe(
@@ -134,7 +132,7 @@ export class PlaneacionService {
       // *** Aqui se CREA la Planeacion ***
 
       // *** TOKEN ***
-      // url += '?token=' + this.token;
+      url += '?token=' + this.token;
 
       return this.http.post( url, planeacion )
       .pipe(
@@ -162,7 +160,7 @@ export class PlaneacionService {
     let url = URL_SERVICIOS + '/planeacion/' + id;
 
     // *** TOKEN ***
-    // url += '?token=' + this.token;
+    url += '?token=' + this.token;
 
     return this.http.delete( url )
     .pipe(
@@ -189,7 +187,7 @@ export class PlaneacionService {
     let url = URL_SERVICIOS + '/planeacion/auditoria/' + idAudi;
 
     // *** TOKEN ***
-    // url += '?token=' + this.token;
+    url += '?token=' + this.token;
 
     return this.http.put( url, null )
     .pipe(

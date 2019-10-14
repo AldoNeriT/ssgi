@@ -8,7 +8,7 @@ export class Auditoria {
         public fechaFinal: string,
         public plan: string,
         public grupoAuditor: Object,
-        public auditados: Object,
+        // public auditados: Object,
         public objetivos: string,
         public alcance: string,
         public contacto: string,

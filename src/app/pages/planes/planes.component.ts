@@ -58,11 +58,32 @@ export class PlanesComponent implements OnInit {
 
     this.cargando = true;
 
-    this._auditoriaService.cargarAuditorias()
+    if ( (this._usuarioService.usuario.tipo_Usuario === 'ROOT') ||
+        (this._usuarioService.usuario.tipo_Usuario === 'ADMIN') ||
+        (this._usuarioService.usuario.tipo_Usuario === 'AUDITOR_LIDER') ||
+        (this._usuarioService.usuario.tipo_Usuario === 'ALTA_DIRECCION')) {
+      this._auditoriaService.cargarAuditorias()
           .subscribe( auditorias => {
             this.auditorias = auditorias;
             this.cargando = false;
           });
+    }
+
+    if ( this._usuarioService.usuario.tipo_Usuario === 'AUDITOR' ) {
+      this._auditoriaService.cargarAuditoriasGA()
+          .subscribe( auditorias => {
+            this.auditorias = auditorias;
+            this.cargando = false;
+          });
+    }
+
+    if ( this._usuarioService.usuario.tipo_Usuario === 'AUDITADO' ) {
+      this._auditoriaService.cargarAuditoriasAu()
+          .subscribe( auditorias => {
+            this.auditorias = auditorias;
+            this.cargando = false;
+          });
+    }
 
   }
 
@@ -484,7 +505,6 @@ export class PlanesComponent implements OnInit {
                           result2.value[i][2],
                           resp._id,
                           [],
-                          [],
                           '',
                           '',
                           ''
@@ -901,7 +921,6 @@ export class PlanesComponent implements OnInit {
             result2.value[1],
             result2.value[2],
             plan._id,
-            [],
             [],
             '',
             '',
