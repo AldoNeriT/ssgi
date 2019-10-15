@@ -2,6 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { ChartsModule } from 'ng2-charts';
+
 // Rutas
 import { APP_ROUTES } from './app.routes';
 
@@ -20,14 +22,6 @@ import { LoginComponent } from './login/login.component';
   declarations: [
     AppComponent,
     LoginComponent
-    // DashboardComponent,
-    // ProgressComponent,
-    // Graficas1Component,
-    // PagesComponent,
-    // NopagefoundComponent,
-    // HeaderComponent,
-    // SidebarComponent,
-    // BreadcrumbsComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +30,8 @@ import { LoginComponent } from './login/login.component';
     PagesModule,
     ServiceModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,9 +1,22 @@
-<div class="jumbotron">
-    <h1 class="display-3">{{ titulo }} {{ usuario.nombre }}</h1>
-    <p class="lead">Estos son los pendientes que tienes para hoy.</p>
-    <hr class="my-4">
-    <p>Estos son los avisos que dejó tu Administrador</p>
-    <p class="lead">
-        <a class="btn btn-themecolor btn-lg text-white" role="button">Más</a>
-    </p>
+<div class="row">
+    <div class="col-lg-8 col-md-12">
+        <div class="jumbotron">
+            <h1 class="display-4">{{ titulo }} {{ usuario.nombre }}</h1>
+            <p class="lead">Estos son los pendientes que tienes para hoy.</p>
+            <hr class="my-4">
+            <p>Estos son los avisos que dejó tu Administrador</p>
+            <p class="lead">
+                <a class="btn btn-themecolor text-white" role="button">Más</a>
+            </p>
+        </div>
+    </div>
+    <div class="col-lg-4 col-md-12">
+        <div class="ribbon-wrapper card">
+            <div class="ribbon ribbon-info ribbon-right">Almacenamiento</div>
+            <div class="card-body">
+                <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType" [colors]="pieChartColors" [legend]="pieChartLegend"></canvas>
+                <!-- <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend" [chartType]="barChartType"></canvas> -->
+            </div>
+        </div>
+    </div>
 </div>

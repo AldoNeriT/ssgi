@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AuditoriaService } from '../../services/service.index';
 import { Router, ActivatedRoute } from '@angular/router';
 
+declare function init_plugins();
+
 @Component({
   selector: 'app-menu-auditoria',
   templateUrl: './menu-auditoria.component.html',
@@ -22,6 +24,7 @@ export class MenuAuditoriaComponent implements OnInit {
   }
 
   ngOnInit() {
+    init_plugins();
     this.cargarAuditoria( this.id );
   }
 

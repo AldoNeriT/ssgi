@@ -15,6 +15,30 @@ export class PrincipalComponent implements OnInit {
   hora: number;
   titulo: string;
 
+  // barChartOptions = {
+  //   scaleShowVerticalLines: false,
+  //   responsive: true
+  // };
+
+  // barChartLabels = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
+  // barChartType = 'bar';
+  // barChartLegend = true;
+
+  // barChartData = [
+  //   {data: [65, 85, 65, 96, 45, 25, 65], label: 'Serie A'},
+  //   {data: [65, 85, 65, 96, 45, 25, 65], label: 'Serie B'}
+  // ];
+
+  pieChartLabels = ['En uso', 'Libre'];
+  pieChartData = [112, 400];
+  pieChartType = 'pie';
+  pieChartLegend = true;
+  pieChartColors = [
+    {
+      backgroundColor: ['rgba(41, 128, 185, 1)', 'rgba(189, 195, 199, 1)'],
+    },
+  ];
+
   constructor( public _usuarioService: UsuarioService ) {
     this.usuario = this._usuarioService.usuario;
   }

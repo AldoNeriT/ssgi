@@ -8,6 +8,8 @@ import { PagesComponent } from './pages.component';
 
 import { PipesModule } from '../pipes/pipes.module';
 
+import { ChartsModule } from 'ng2-charts';
+
 import { PrincipalComponent } from './principal/principal.component';
 import { InstitucionComponent } from './institucion/institucion.component';
 import { NormasComponent } from './normas/normas.component';
@@ -50,7 +52,7 @@ import { PlaneacionComponent } from './planeaciones/planeacion.component';
     exports: [
         PrincipalComponent,
         InstitucionComponent,
-        NormasComponent
+        NormasComponent,
     ],
     imports: [
         SharedModule,
@@ -58,7 +60,8 @@ import { PlaneacionComponent } from './planeaciones/planeacion.component';
         CommonModule,
         FormsModule,
         ReactiveFormsModule,
-        PipesModule
+        PipesModule,
+        ChartsModule
     ]
 })
 export class PagesModule {}
