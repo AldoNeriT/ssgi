@@ -4,7 +4,7 @@ import { UsuarioService } from '../../services/service.index';
 import { Usuario } from '../../models/usuario.model';
 import { Router, ActivatedRoute } from '@angular/router';
 
-declare function init_plugins();
+// declare function init_plugins();
 
 @Component({
   selector: 'app-usuario',
@@ -82,7 +82,7 @@ export class UsuarioComponent implements OnInit {
   }
 
   ngOnInit() {
-    init_plugins();
+    // init_plugins();
     this.forma = new FormGroup({
       numEmpleado: new FormControl( null, Validators.required ),
       usuario: new FormControl( null, Validators.required ),

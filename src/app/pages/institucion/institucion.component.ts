@@ -4,7 +4,7 @@ import { InstitucionService } from '../../services/institucion/institucion.servi
 import { Institucion } from '../../models/institucion.model';
 import { UsuarioService } from '../../services/service.index';
 
-declare function init_plugins();
+// declare function init_plugins();
 
 import Swal from 'sweetalert2';
 
@@ -30,7 +30,7 @@ export class InstitucionComponent implements OnInit {
                public _usuarioService: UsuarioService ) { }
 
   ngOnInit() {
-    init_plugins();
+    // init_plugins();
 
     this.formaInstitucion = new FormGroup({
       nombre: new FormControl( null, Validators.required ),

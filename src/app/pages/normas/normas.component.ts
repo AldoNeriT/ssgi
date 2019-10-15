@@ -7,7 +7,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import Swal from 'sweetalert2';
 import * as $ from 'jquery';
 
-declare function init_plugins();
+// declare function init_plugins();
 
 @Component({
   selector: 'app-normas',
@@ -37,7 +37,7 @@ export class NormasComponent implements OnInit {
   }
 
   ngOnInit() {
-    init_plugins();
+    // init_plugins();
     this.forma = new FormGroup({
       nombre: new FormControl( null, Validators.required ),
       descripcion: new FormControl( null, Validators.required ),

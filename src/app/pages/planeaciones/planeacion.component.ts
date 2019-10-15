@@ -10,7 +10,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import Swal from 'sweetalert2';
 import * as $ from 'jquery';
 
-declare function init_plugins();
+// declare function init_plugins();
 declare function inicializando_multiSelect();
 declare function inicializando_clockPicker();
 declare function inicializando_datePicker();
@@ -57,7 +57,7 @@ export class PlaneacionComponent implements OnInit {
   }
 
   ngOnInit() {
-    init_plugins();
+    // init_plugins();
     inicializando_multiSelect();
     inicializando_clockPicker();
     inicializando_datePicker();
@@ -124,7 +124,7 @@ export class PlaneacionComponent implements OnInit {
             this.procesos = procesos;
             // console.log('Proceso: ', this.procesos);
             this.cargando = false;
-            init_plugins();
+            // init_plugins();
             inicializando_multiSelect();
             inicializando_clockPicker();
             inicializando_datePicker();
@@ -141,7 +141,7 @@ export class PlaneacionComponent implements OnInit {
             this.auditores = auditoria.grupoAuditor;
             // console.log('Auditores: ', this.auditores);
             this.cargando = false;
-            init_plugins();
+            // init_plugins();
             inicializando_multiSelect();
             inicializando_clockPicker();
             inicializando_datePicker();
@@ -159,7 +159,7 @@ export class PlaneacionComponent implements OnInit {
             this.auditados = auditoria.auditados;
             // console.log('Auditados: ', this.auditados);
             this.cargando = false;
-            init_plugins();
+            // init_plugins();
             inicializando_multiSelect();
             inicializando_clockPicker();
             inicializando_datePicker();
@@ -178,7 +178,7 @@ export class PlaneacionComponent implements OnInit {
             this.nombreAudiV = auditoria.nombre;
             // console.log('Auditoria: ', this.auditoria);
             this.cargando = false;
-            init_plugins();
+            // init_plugins();
             inicializando_multiSelect();
             inicializando_clockPicker();
             inicializando_datePicker();
@@ -245,7 +245,7 @@ export class PlaneacionComponent implements OnInit {
             }
 
             this.cargando = false;
-            init_plugins();
+            // init_plugins();
             inicializando_multiSelect();
             inicializando_clockPicker();
             inicializando_datePicker();

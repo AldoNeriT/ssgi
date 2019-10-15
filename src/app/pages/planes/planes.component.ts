@@ -9,7 +9,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import Swal from 'sweetalert2';
 import * as $ from 'jquery';
 
-declare function init_plugins();
+// declare function init_plugins();
 declare function inicializando_dateRange();
 
 @Component({
@@ -35,7 +35,7 @@ export class PlanesComponent implements OnInit {
                public activatedRoute: ActivatedRoute ) { }
 
   ngOnInit() {
-    init_plugins();
+    // init_plugins();
     inicializando_dateRange();
 
     this.cargarPlanes();

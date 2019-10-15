@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Usuario } from '../../models/usuario.model';
 import { UsuarioService } from '../../services/service.index';
 
-declare function init_plugins();
+// declare function init_plugins();
 
 @Component({
   selector: 'app-principal',
@@ -44,7 +44,7 @@ export class PrincipalComponent implements OnInit {
   }
 
   ngOnInit() {
-    init_plugins();
+    // init_plugins();
 
     this.hora = new Date().getHours();
     this.saludo();

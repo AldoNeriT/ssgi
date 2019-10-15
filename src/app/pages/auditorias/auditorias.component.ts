@@ -9,7 +9,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import Swal from 'sweetalert2';
 import * as $ from 'jquery';
 
-declare function init_plugins();
+// declare function init_plugins();
 declare function inicializando_multiSelect();
 declare function inicializando_dateRange();
 
@@ -70,7 +70,7 @@ export class AuditoriasComponent implements OnInit {
   }
 
   ngOnInit() {
-    init_plugins();
+    // init_plugins();
     inicializando_multiSelect();
     inicializando_dateRange();
 
@@ -201,7 +201,7 @@ export class AuditoriasComponent implements OnInit {
 
             this.cargando = false;
 
-            init_plugins();
+            // init_plugins();
             inicializando_multiSelect();
             inicializando_dateRange();
 
@@ -218,7 +218,7 @@ export class AuditoriasComponent implements OnInit {
             this.normas = normas;
             // console.log('Normas: ', this.normas);
             this.cargando = false;
-            init_plugins();
+            // init_plugins();
             inicializando_multiSelect();
             inicializando_dateRange();
             this.condiciones();
@@ -235,7 +235,7 @@ export class AuditoriasComponent implements OnInit {
             this.auditores = auditores;
             // console.log('Auditores: ', this.auditores);
             this.cargando = false;
-            init_plugins();
+            // init_plugins();
             inicializando_multiSelect();
             inicializando_dateRange();
             this.condiciones();

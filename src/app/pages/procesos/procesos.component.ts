@@ -8,7 +8,7 @@ import { Subproceso } from '../../models/subproceso.model';
 import Swal from 'sweetalert2';
 import * as $ from 'jquery';
 
-declare function init_plugins();
+// declare function init_plugins();
 
 @Component({
   selector: 'app-procesos',
@@ -37,7 +37,7 @@ export class ProcesosComponent implements OnInit {
                public _usuarioService: UsuarioService, ) { }
 
   ngOnInit() {
-    init_plugins();
+    // init_plugins();
 
     this.forma = new FormGroup({
       nombre: new FormControl( null, Validators.required )

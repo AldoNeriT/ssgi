@@ -6,7 +6,7 @@ import { Usuario } from '../../models/usuario.model';
 import Swal from 'sweetalert2';
 
 declare function inicializando_table();
-declare function init_plugins();
+// declare function init_plugins();
 
 @Component({
   selector: 'app-usuarios',
@@ -26,7 +26,7 @@ export class UsuariosComponent implements OnInit {
   }
 
   ngOnInit() {
-    init_plugins();
+    // init_plugins();
     this.cargarUsuarios();
     inicializando_table();
   }

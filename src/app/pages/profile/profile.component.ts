@@ -3,7 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { UsuarioService } from '../../services/service.index';
 import { Usuario } from '../../models/usuario.model';
 
-declare function init_plugins();
+// declare function init_plugins();
 
 @Component({
   selector: 'app-profile',
@@ -22,7 +22,7 @@ export class ProfileComponent implements OnInit {
 }
 
   ngOnInit() {
-    init_plugins();
+    // init_plugins();
     
     this.formaMiPerfil = new FormGroup({
       correo: new FormControl( null, [Validators.required, Validators.email] ),

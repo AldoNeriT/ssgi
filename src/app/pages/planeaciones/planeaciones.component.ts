@@ -12,7 +12,7 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 import Swal from 'sweetalert2';
 import * as $ from 'jquery';
 
-declare function init_plugins();
+// declare function init_plugins();
 
 @Component({
   selector: 'app-planeaciones',
@@ -48,7 +48,7 @@ export class PlaneacionesComponent implements OnInit {
   }
 
   ngOnInit() {
-    init_plugins();
+    // init_plugins();
 
     this.cargarPlaneacionesAudi( this.id );
     this.cargarAuditoria( this.id );
