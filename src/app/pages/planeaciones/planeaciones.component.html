@@ -138,25 +138,23 @@
                                     <tr>
                                         <th>Horario</th>
                                         <th>Proceso <span class="font-bold">/</span> Actividad-Requisito <span class="font-bold">/</span> Criterio</th>
+                                        <th>Auditor(es)</th>
                                         <th>Participantes</th>
                                         <th>Contacto</th>
                                         <th>Área / Sitio</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let planeacion of planeaciones">
+                                    <tr *ngFor="let planeacion of planeaciones; let ind=index">
                                         <td *ngIf="planeacion.fecha === fecha" style="width: 130px;">{{ planeacion.horario }}</td>
-                                        <td *ngIf="planeacion.fecha === fecha">{{ planeacion.proceso.nombreProceso }} <span class="font-bold">/</span> {{ planeacion.actividad }} <span class="font-bold">/</span> {{ planeacion.criterio }}</td>
+                                        <td *ngIf="planeacion.fecha === fecha">{{ arrProActCriV[ind] }}</td>
                                         <td *ngIf="planeacion.fecha === fecha">
                                             <ul style="padding-left: 16px;">
-                                                <li *ngFor="let participante of planeacion.participantes">{{participante.nombre + ' ' + participante.primer_Apellido + ' ' + (participante.segundo_Apellido || '')}}</li>
+                                                <li *ngFor="let auditor of planeacion.auditores">{{auditor.nombre + ' ' + auditor.primer_Apellido + ' ' + (auditor.segundo_Apellido || '')}}</li>
                                             </ul>
                                         </td>
-                                        <td *ngIf="planeacion.fecha === fecha">
-                                            <ul style="padding-left: 16px;">
-                                                <li *ngFor="let contacto of planeacion.contacto">{{contacto.nombre + ' ' + contacto.primer_Apellido + ' ' + (contacto.segundo_Apellido || '')}}</li>
-                                            </ul>
-                                        </td>
+                                        <td *ngIf="planeacion.fecha === fecha">{{ planeacion.participantes }}</td>
+                                        <td *ngIf="planeacion.fecha === fecha">{{ planeacion.contacto }}</td>
                                         <td *ngIf="planeacion.fecha === fecha">{{ planeacion.area }}</td>
                                     </tr>
                                     <!-- <tr class="pointer text-center" (click)="redirigirNuevo()">

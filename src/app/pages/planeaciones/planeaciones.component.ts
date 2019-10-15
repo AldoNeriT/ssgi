@@ -77,97 +77,60 @@ export class PlaneacionesComponent implements OnInit {
 
     this.cargando = true;
 
-    if ( (this._usuarioService.usuario.tipo_Usuario !== 'ALTA_DIRECCION') &&
-         (this._usuarioService.usuario.tipo_Usuario !== 'AUDITOR') &&
-         (this._usuarioService.usuario.tipo_Usuario !== 'AUDITADO')) {
-      this._planeacionService.cargarPlaneacionesAudi( id )
-          .subscribe( planeaciones => {
-            this.planeaciones = planeaciones;
-            // console.log('Planeaciones: ', this.planeaciones);
+    this._planeacionService.cargarPlaneacionesAudi( id )
+        .subscribe( planeaciones => {
+          this.planeaciones = planeaciones;
+          // console.log('Planeaciones: ', this.planeaciones);
 
-            // Se extraen las fechas a un array
-            for ( let pl of planeaciones) {
-              this.arrFechasT.push(pl.fecha);
+          // Se extraen las fechas a un array
+          for ( let pl of planeaciones) {
+            this.arrFechasT.push(pl.fecha);
 
-              // Arreglo Procesos, Actividad, Criterio
-              let array: any[] = [];
-              if ( pl.proceso.nombreProceso ) {
-                array.push(pl.proceso.nombreProceso);
-              }
-              if ( pl.actividad ) {
-                array.push(pl.actividad);
-              }
-              if ( pl.criterio ) {
-                array.push(pl.criterio);
-              }
-
-              this.arrProActCriV.push(array.join(', '));
-
+            // Arreglo Procesos, Actividad, Criterio
+            let array: any[] = [];
+            if ( pl.proceso.nombreProceso ) {
+              array.push(pl.proceso.nombreProceso);
+            }
+            if ( pl.actividad ) {
+              array.push(pl.actividad);
+            }
+            if ( pl.criterio ) {
+              array.push(pl.criterio);
             }
 
-            // console.log(this.arrProActCriV);
+            this.arrProActCriV.push(array.join(', '));
 
-            // Se eliminas duplicados
-            for ( let i = 0; i < this.arrFechasT.length; i++ ) {
-              for ( let j = 0; j < this.arrFechasT.length - 1; j++ ) {
-                if ( i !== j ) {
-                  if ( this.arrFechasT[i] === this.arrFechasT[j] ) {
-                    // eliminamos su valor
-                    this.arrFechasT[i] = '';
-                  }
+          }
+
+          console.log('Planeaciones Audi', this.arrProActCriV);
+
+          // console.log(this.arrProActCriV);
+
+          // Se eliminas duplicados
+          for ( let i = 0; i < this.arrFechasT.length; i++ ) {
+            for ( let j = 0; j < this.arrFechasT.length - 1; j++ ) {
+              if ( i !== j ) {
+                if ( this.arrFechasT[i] === this.arrFechasT[j] ) {
+                  // eliminamos su valor
+                  this.arrFechasT[i] = '';
                 }
               }
             }
+          }
 
-            // Se crean el nuevo array de fechas sin los duplicados
-            for ( let fech of this.arrFechasT) {
-              if ( fech !== '') {
-                this.arrFechas.push(fech);
-              }
+          // Se crean el nuevo array de fechas sin los duplicados
+          for ( let fech of this.arrFechasT) {
+            if ( fech !== '') {
+              this.arrFechas.push(fech);
             }
+          }
 
-            // Ordenamos el array
-            // this.arrFechas.sort();
+          // Ordenamos el array
+          // this.arrFechas.sort();
 
-            this.cargando = false;
+          this.cargando = false;
 
-          });
-    } else {
-      this._planeacionService.cargarPlaneacionesAudiEnviar( id )
-          .subscribe( planeaciones => {
-            this.planeaciones = planeaciones;
-            // console.log(this.planeaciones);
-            // Se extraen las fechas a un array
-            for ( let pl of planeaciones) {
-              this.arrFechasT.push(pl.fecha);
-            }
-
-            // Se eliminas duplicados
-            for ( let i = 0; i < this.arrFechasT.length; i++ ) {
-              for ( let j = 0; j < this.arrFechasT.length - 1; j++ ) {
-                if ( i !== j ) {
-                  if ( this.arrFechasT[i] === this.arrFechasT[j] ) {
-                    // eliminamos su valor
-                    this.arrFechasT[i] = '';
-                  }
-                }
-              }
-            }
-
-            // Se crean el nuevo array de fechas sin los duplicados
-            for ( let fech of this.arrFechasT) {
-              if ( fech !== '') {
-                this.arrFechas.push(fech);
-              }
-            }
-
-            // Ordenamos el array
-            // this.arrFechas.sort();
-
-            this.cargando = false;
-
-          });
-    }
+        });
 
   }
 
