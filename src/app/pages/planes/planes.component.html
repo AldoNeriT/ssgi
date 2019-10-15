@@ -61,7 +61,7 @@
                                         </div>
                                     </div>
                                     <div id="{{plan._id}}" class="collapse" role="tabpanel" aria-labelledby="headingOne">
-                                        <div class="card-body">
+                                        <div class="card-body" style="overflow-x: auto;">
                                             <div *ngFor="let auditoria of auditorias">
                                                 <div *ngIf="auditoria.plan !== null">
                                                     <table *ngIf="auditoria.progreso === 'empezar' && plan._id === auditoria.plan._id" class="table full-color-table full-info-table hover-table">
@@ -153,7 +153,7 @@
                                         <div class="card-header bg-theme text-white text-center font-weight-bold">
                                             {{ plan.nombrePlan }}
                                         </div>
-                                        <div class="card-body">
+                                        <div class="card-body" style="overflow-x: auto;">
                                             <div *ngFor="let auditoria of auditorias">
                                                 <div *ngIf="(auditoria.plan !== null) && (auditoria.valido === true)">
                                                     <table *ngIf="(auditoria.progreso === 'encurso') && (plan._id === auditoria.plan._id)" class="table full-color-table full-warning-table hover-table pointer">
@@ -211,7 +211,7 @@
                                     <div class="card-header bg-theme text-white text-center font-weight-bold">
                                         {{ plan.nombrePlan }}
                                     </div>
-                                    <div class="card-body">
+                                    <div class="card-body" style="overflow-x: auto;">
                                         <div *ngFor="let auditoria of auditorias">
                                             <div *ngIf="auditoria.plan !== null">
                                                 <table *ngIf="auditoria.progreso === 'empezar' && plan._id === auditoria.plan._id" class="table full-color-table full-info-table hover-table">
