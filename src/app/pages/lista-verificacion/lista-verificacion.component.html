@@ -3,11 +3,18 @@
         <div class="card">
             <div class="card-body">
                 <div style="padding-bottom: 35px;">
-                    <h4 class="card-title">Nombre del Proceso / Procedimiento / Área / Actividad: <span class="font-bold"></span></h4>
-                    <h6 class="card-subtitle">No. de Auditoría: <span class="font-bold"></span></h6>
-                    <h6 class="card-subtitle">Personal Entrevistado: <span class="font-bold"></span></h6>
-                    <h6 class="card-subtitle">Norma: <span class="font-bold"></span></h6>
-                    <h6 class="card-subtitle">Auditor: <span class="font-bold"></span></h6>
+                    <h4 class="card-title">Nombre del Proceso / Procedimiento / Área / Actividad: <span class="font-bold">{{ arrProActCriV[0] }}</span></h4><br>
+                    <h6 class="card-subtitle">No. de Auditoría: <span class="font-bold">{{ auditoriaV }}</span></h6>
+                    <h6 class="card-subtitle">Norma: <span class="font-bold">{{ normasV }}</span></h6>
+                    <h6 class="card-subtitle">Auditor: <span class="font-bold">{{ auditorV }}</span></h6>
+
+                    <form id="formAgregar" class="floating-labels m-t-40">
+                        <div class="form-group m-b-40">
+                            <textarea name="personal" id="personal" class="form-control"></textarea>
+                            <span class="bar"></span>
+                            <label for="personal">Personal entrevistado:</label>
+                        </div>
+                    </form>
                 </div>
 
                 <div class="row">
