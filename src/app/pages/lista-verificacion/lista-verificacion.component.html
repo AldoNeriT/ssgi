@@ -43,42 +43,40 @@
                                 <th>Evidencia Encontrada</th>
                                 <th>Hallazgo</th>
                                 <th>Valido / Enviado</th>
-                                <!-- <th>Enviado</th> -->
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="pointer">
+                            <tr *ngFor="let lista of listas" class="pointer">
                                 <td style="width: 1px; padding-left: 0px; padding-right: 0px">
                                     <div class="btn-group">
                                         <div class="dropdown-menu text-center animated pulse">
                                             <div class="btn-group" role="group" aria-label="Basic example">
-                                                <button type="button" class="btn btn-outline-secondary">
+                                                <button *ngIf="(lista.valido === true) && (lista.enviar === true)" (click)="formEditable2( lista )" type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#modalListaEditar2">
+                                                    <i class="fa fa-dot-circle-o"></i>
+                                                </button>
+                                                <button type="button" (click)="formEditable1( lista )" class="btn btn-outline-secondary" data-toggle="modal" data-target="#modalListaEditar1">
                                                     <i class="fa fa-edit"></i>
                                                 </button>
-                                                <button type="button" class="btn btn-outline-secondary">
+                                                <button type="button" (click)="eliminarLista( lista )" class="btn btn-outline-secondary">
                                                     <i class="fa fa-trash-o"></i>
                                                 </button>
                                             </div>
                                         </div>
                                     </div>
                                 </td>
-                                <td data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> aaa </td>
-                                <td data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> aaa </td>
-                                <td data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> aaa </td>
-                                <td data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> aaa </td>
-                                <td data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> aaa </td>
+                                <td data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> {{ lista.puntoNorma }} </td>
+                                <td data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> {{ lista.pregunta }} </td>
+                                <td data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> {{ lista.documento }} </td>
+                                <td data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> {{ lista.evidencia }} </td>
+                                <td data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> {{ lista.hallazgos }} </td>
                                 <td data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width: 160px;">
-                                    <i class="mdi mdi-check mdi-24px text-success"></i>
-                                    <i class="mdi mdi-close mdi-24px text-danger"></i>
-                                    <i class="mdi mdi-check mdi-24px text-success"></i>
-                                    <i class="mdi mdi-close mdi-24px text-danger"></i>
+                                    <i *ngIf="lista.valido === true" class="mdi mdi-check mdi-24px text-success"></i>
+                                    <i *ngIf="lista.valido === false" class="mdi mdi-close mdi-24px text-danger"></i>
+                                    <i *ngIf="lista.enviar === true" class="mdi mdi-check mdi-24px text-success"></i>
+                                    <i *ngIf="lista.enviar === false" class="mdi mdi-close mdi-24px text-danger"></i>
                                 </td>
-                                <!-- <td class="text-center"><i *ngIf="planeacion.enviar === false" class="fa fa-window-close fa-2x text-danger"></i> <i *ngIf="planeacion.enviar === true" class="fa fa-check-square fa-2x text-success"></i></td> -->
                             </tr>
-                            <tr class="pointer text-center" data-toggle="modal" data-target="#modalListaAgregar1">
-                                <td colspan="7"><i class="mdi mdi-plus"></i></td>
-                            </tr>
-                            <tr class="pointer text-center" data-toggle="modal" data-target="#modalListaAgregar2">
+                            <tr class="pointer text-center" data-toggle="modal" data-target="#modalListaAgregar">
                                 <td colspan="7"><i class="mdi mdi-plus"></i></td>
                             </tr>
                         </tbody>
@@ -96,10 +94,10 @@
 </div>
 
 <!-- ============================================================== -->
-<!-- MODAL AGREGAR 1 -->
+<!-- MODAL AGREGAR -->
 <!-- ============================================================== -->
 
-<div class="modal fade" id="modalListaAgregar1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true" style="display: none;">
+<div class="modal fade" id="modalListaAgregar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true" style="display: none;">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -107,17 +105,14 @@
                 <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button> -->
             </div>
             <div class="modal-body">
-                <form class="floating-labels m-t-40" ngNativeValidate>
+                <form class="floating-labels m-t-40" ngNativeValidate [formGroup]="forma" (ngSubmit)="agregarLista()">
                     <div class="form-group m-b-40">
-                        <select name="norma" id="norma" class="form-control p-0" required>
-                                <!-- <option value="" selected>Elige</option> -->
-                                <option *ngFor="let norma of normas" value="{{ norma._id }}">{{ norma.nombreNorma }}</option>
-                            </select>
+                        <input formControlName="norma" name="norma" id="norma" type="text" class="form-control" required>
                         <span class="bar"></span>
                         <label for="norma">Punto de la Norma:</label>
                     </div>
                     <div class="form-group m-b-40">
-                        <textarea name="pregunta" id="pregunta" type="text" class="form-control" required></textarea>
+                        <textarea formControlName="pregunta" name="pregunta" id="pregunta" type="text" class="form-control" required></textarea>
                         <span class="bar"></span>
                         <label for="pregunta">Pregunta:</label>
                     </div>
@@ -134,10 +129,45 @@
 </div>
 
 <!-- ============================================================== -->
-<!-- MODAL AGREGAR 2 -->
+<!-- MODAL EDITAR 1 -->
 <!-- ============================================================== -->
 
-<div class="modal fade" id="modalListaAgregar2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true" style="display: none;">
+<div class="modal fade" id="modalListaEditar1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalLabel1">Editar Lista</h4>
+                <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button> -->
+            </div>
+            <div class="modal-body">
+                <form class="floating-labels m-t-40" ngNativeValidate [formGroup]="formaEditar1" (ngSubmit)="editarLista()">
+                    <div class="form-group m-b-40">
+                        <input formControlName="norma" name="norma" id="norma" type="text" class="form-control" required>
+                        <span class="bar"></span>
+                        <label for="norma">Punto de la Norma:</label>
+                    </div>
+                    <div class="form-group m-b-40">
+                        <textarea formControlName="pregunta" name="pregunta" id="pregunta" type="text" class="form-control" required></textarea>
+                        <span class="bar"></span>
+                        <label for="pregunta">Pregunta:</label>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-themecolor" data-dismiss="">Guardar</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================== -->
+<!-- MODAL EDITAR 2 -->
+<!-- ============================================================== -->
+
+<div class="modal fade" id="modalListaEditar2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true" style="display: none;">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -145,21 +175,21 @@
                 <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button> -->
             </div>
             <div class="modal-body">
-                <form class="floating-labels m-t-40" ngNativeValidate>
+                <form class="floating-labels m-t-40" ngNativeValidate [formGroup]="formaEditar2" (ngSubmit)="completarLista()">
                     <div class="form-group m-b-40">
-                        <textarea name="documento" id="documento" type="text" class="form-control" required></textarea>
+                        <textarea formControlName="documento" name="documento" id="documento" type="text" class="form-control" required></textarea>
                         <span class="bar"></span>
                         <label for="documento">Documento revisado / párrafo:</label>
                         <span class="help-block text-themecolor"><small>Anotar el nombre del documento revisado, incluyendo Rev., No., párrafo.</small></span>
                     </div>
                     <div class="form-group m-b-40">
-                        <textarea name="evidencia" id="evidencia" type="text" class="form-control" required></textarea>
+                        <textarea formControlName="evidencia" name="evidencia" id="evidencia" type="text" class="form-control" required></textarea>
                         <span class="bar"></span>
                         <label for="evidencia">Evidencia encontrada:</label>
                         <span class="help-block text-themecolor"><small>Anotar la evidencia encontrada.</small></span>
                     </div>
                     <div class="form-group m-b-40">
-                        <textarea name="hallazgos" id="hallazgos" type="text" class="form-control" required></textarea>
+                        <textarea formControlName="hallazgos" name="hallazgos" id="hallazgos" type="text" class="form-control" required></textarea>
                         <span class="bar"></span>
                         <label for="hallazgos">Hallazgos:</label>
                         <span class="help-block text-themecolor"><small>NC – No Conformidad<br>O - Observación<br>ODM – Oportunidad de Mejora

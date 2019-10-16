@@ -17,7 +17,7 @@
 <div *ngIf="(_usuarioService.usuario.tipo_Usuario === 'ROOT') || (_usuarioService.usuario.tipo_Usuario === 'ADMIN') || (_usuarioService.usuario.tipo_Usuario === 'AUDITOR_LIDER') || (_usuarioService.usuario.tipo_Usuario === 'ALTA_DIRECCION')">
     <div *ngIf="!cargando">
         <div class="row">
-            <div *ngFor="let plan of planeaciones" class="col-lg-6">
+            <div *ngFor="let plan of planeaciones" class="col-md-6 col-sm-12">
                 <div class="ribbon-wrapper card">
                     <div class="ribbon ribbon-info ribbon-left">{{ plan.proceso.nombreProceso }}</div>
                     <div class="card-body text-center font-bold" style="padding: 0px;">
@@ -45,7 +45,7 @@
 <div *ngIf="_usuarioService.usuario.tipo_Usuario === 'AUDITOR'">
     <div *ngIf="!cargando">
         <div class="row">
-            <div *ngFor="let plan of planeaciones" class="col-lg-6">
+            <div *ngFor="let plan of planeaciones" class="col-md-6 col-sm-12">
                 <div class="ribbon-wrapper card">
                     <div class="ribbon ribbon-info ribbon-left">{{ plan.proceso.nombreProceso }}</div>
                     <div class="card-body text-center font-bold" style="padding: 0px;">
