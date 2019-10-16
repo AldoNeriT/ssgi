@@ -76,6 +76,26 @@ export class PlaneacionService {
 
   }
 
+  cargarPlaneacionesAudiUsuario( id: string ) {
+
+    let url = URL_SERVICIOS + '/planeacion/auditoria/usuario/' + id;
+
+    // *** TOKEN ***
+    url += '?token=' + this.token;
+
+    return this.http.get( url )
+    .pipe(
+      map( (resp: any ) => {
+        return resp.planeaciones;
+      }),
+      catchError( err => {
+        Swal.fire('Error', err.error.err.message, 'error');
+        return throwError( err ) ;
+      })
+    );
+
+  }
+
   cargarPlaneacionesAudiEnviar( id: string ) {
 
     let url = URL_SERVICIOS + '/planeacion/auditoria/enviar/' + id;

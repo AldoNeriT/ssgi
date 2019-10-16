@@ -27,6 +27,8 @@ import { ListaVerificacionComponent } from './lista-verificacion/lista-verificac
 import { InformeComponent } from './informe/informe.component';
 import { BitacoraAccionesComponent } from './bitacora-acciones/bitacora-acciones.component';
 import { PlaneacionComponent } from './planeaciones/planeacion.component';
+import { ListasComponent } from './lista-verificacion/listas.component';
+import { ListaComponent } from './lista-verificacion/lista.component';
 
 
 @NgModule({
@@ -47,7 +49,9 @@ import { PlaneacionComponent } from './planeaciones/planeacion.component';
         ListaVerificacionComponent,
         InformeComponent,
         BitacoraAccionesComponent,
-        PlaneacionComponent
+        PlaneacionComponent,
+        ListasComponent,
+        ListaComponent
     ],
     exports: [
         PrincipalComponent,

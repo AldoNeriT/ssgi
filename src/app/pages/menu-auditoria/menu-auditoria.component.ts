@@ -46,14 +46,14 @@ export class MenuAuditoriaComponent implements OnInit {
   }
 
   redirigirLista() {
-    this.router.navigate(['/listaVerificacion/' + this.id + '/' + 'user']);
+    this.router.navigate(['/listas/' + this.id]);
   }
 
   redirigirInforme() {
-    this.router.navigate(['/informe/' + this.id + '/' + 'user']);
+    this.router.navigate(['/informe/' + this.id]);
   }
 
   redirigirBitacora() {
-    this.router.navigate(['/bitacora/' + this.id + '/' + 'user']);
+    this.router.navigate(['/bitacora/' + this.id]);
   }
 }

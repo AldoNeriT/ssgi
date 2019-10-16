@@ -23,6 +23,7 @@ import { PlaneacionComponent } from './planeaciones/planeacion.component';
 import { ListaVerificacionComponent } from './lista-verificacion/lista-verificacion.component';
 import { InformeComponent } from './informe/informe.component';
 import { BitacoraAccionesComponent } from './bitacora-acciones/bitacora-acciones.component';
+import { ListasComponent } from './lista-verificacion/listas.component';
 
 const pagesRoutes: Routes = [
     {
@@ -81,9 +82,10 @@ const pagesRoutes: Routes = [
             { path: 'planeacion/:idA', component: PlaneacionesComponent, data: { titulo: 'Planeación' } },
             { path: 'planeacionA/:accion/:idA', component: PlaneacionComponent, data: { titulo: 'Planeación' } },
             { path: 'planeacionA/:accion/:idA/:idP', component: PlaneacionComponent, data: { titulo: 'Planeación' } },
-            { path: 'listaVerificacion/:idA/:idU', component: ListaVerificacionComponent, data: { titulo: 'Lista de Verificación' } },
-            { path: 'informe/:idA/:idU', component: InformeComponent, data: { titulo: 'Informe' } },
-            { path: 'bitacora/:idA/:idU', component: BitacoraAccionesComponent, data: { titulo: 'Bitacora de Acciones' } },
+            { path: 'listas/:idA', component: ListasComponent, data: { titulo: 'Listas' } },
+            { path: 'listaVerificacion/:idP/:idU', component: ListaVerificacionComponent, data: { titulo: 'Lista de Verificación' } },
+            { path: 'informe/:idA', component: InformeComponent, data: { titulo: 'Informe' } },
+            { path: 'bitacora/:idA', component: BitacoraAccionesComponent, data: { titulo: 'Bitacora de Acciones' } },
             { path: '', redirectTo: '/home', pathMatch: 'full'}
         ]
      }

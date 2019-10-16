@@ -32,6 +32,7 @@ export class PlaneacionesComponent implements OnInit {
 
   cargando = true;
 
+  nombreV: string;
   objetivosV: string;
   alcanceV: string;
   normasV: string;
@@ -102,7 +103,7 @@ export class PlaneacionesComponent implements OnInit {
 
           }
 
-          console.log('Planeaciones Audi', this.arrProActCriV);
+          // console.log('Planeaciones Audi', this.arrProActCriV);
 
           // console.log(this.arrProActCriV);
 
@@ -142,6 +143,7 @@ export class PlaneacionesComponent implements OnInit {
           .subscribe( auditoria => {
             this.objetivosV = auditoria.objetivos;
             this.alcanceV = auditoria.alcance;
+            this.nombreV = auditoria.nombre;
 
             let arrNormasV: any[] = [];
             for ( let nor of  auditoria.normas) {

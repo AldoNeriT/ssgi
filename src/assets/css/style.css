@@ -5728,6 +5728,25 @@ Table-Layout
     color: #ffffff;
 }
 
+.full-color-table.full-muted2-table {
+    background-color: #ffffff;
+}
+
+.full-color-table.full-muted2-table thead th {
+    background-color: #ffffff;
+    border: 0;
+    color: #000000;
+}
+
+.full-color-table.full-muted2-table tbody td {
+    border: 0;
+}
+
+.full-color-table.full-muted2-table tr:hover {
+    background-color: #f8f8f8;
+    color: #ffffff;
+}
+
 
 /*******************
 Table-Data Table

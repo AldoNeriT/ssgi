@@ -1,1 +1,79 @@
-<h1>Lista de Verificación</h1>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div style="padding-bottom: 35px;">
+                    <h4 class="card-title">Nombre del Proceso / Procedimiento / Área / Actividad: <span class="font-bold"></span></h4>
+                    <h6 class="card-subtitle">No. de Auditoría: <span class="font-bold"></span></h6>
+                    <h6 class="card-subtitle">Personal Entrevistado: <span class="font-bold"></span></h6>
+                    <h6 class="card-subtitle">Norma: <span class="font-bold"></span></h6>
+                    <h6 class="card-subtitle">Auditor: <span class="font-bold"></span></h6>
+                </div>
+
+                <div class="row">
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <hr class="m-t-0 m-b-40">
+                    </div>
+                </div>
+                <div class="row" style="padding-bottom: 40px;">
+                    <div class="col-12 text-left btn-group">
+                        <button type="button" class="btn btn-rounded btn-themecolor"><i class="mdi mdi-package-down"></i></button>
+                        <button type="button" class="btn btn-rounded btn-themecolor"><i class="mdi mdi-open-in-new"></i></button>
+                        <button type="button" class="btn btn-rounded btn-themecolor"><i class="mdi mdi-printer"></i></button>
+                    </div>
+                </div>
+
+                <div style="padding-bottom: 40px; overflow-x: auto;">
+                    <table class="table full-color-table full-muted-table hover-table">
+                        <thead class="text-center">
+                            <tr>
+                                <th style="width: 1px; padding-left: 0px; padding-right: 0px"></th>
+                                <th>Punto de la Norma</th>
+                                <th>Pregunta</th>
+                                <th>Documento revisado / párrafo</th>
+                                <th>Evidencia Encontrada</th>
+                                <th>Hallazgo</th>
+                                <!-- <th>Enviado</th> -->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="pointer">
+                                <td style="width: 1px; padding-left: 0px; padding-right: 0px">
+                                    <div class="btn-group">
+                                        <div class="dropdown-menu text-center animated pulse">
+                                            <div class="btn-group" role="group" aria-label="Basic example">
+                                                <button type="button" class="btn btn-outline-secondary">
+                                                    <i class="fa fa-edit"></i>
+                                                </button>
+                                                <button type="button" class="btn btn-outline-secondary">
+                                                    <i class="fa fa-trash-o"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> aaa </td>
+                                <td data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> aaa </td>
+                                <td data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> aaa </td>
+                                <td data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> aaa </td>
+                                <td data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> aaa </td>
+                                <!-- <td class="text-center"><i *ngIf="planeacion.enviar === false" class="fa fa-window-close fa-2x text-danger"></i> <i *ngIf="planeacion.enviar === true" class="fa fa-check-square fa-2x text-success"></i></td> -->
+                            </tr>
+                            <tr class="pointer text-center">
+                                <td colspan="6"><i class="mdi mdi-plus"></i></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-themecolor waves-effect">Envíar para Validar</button>
+                    <button (click)="regresar( '2' )" type="button" class="btn btn-default" data-dismiss="modal">Regresar</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
