@@ -15,6 +15,7 @@ import Swal from 'sweetalert2';
 import * as $ from 'jquery';
 
 declare function floating_labels();
+declare function inicializando_datePicker();
 
 @Component({
   selector: 'app-lista-verificacion',
@@ -58,11 +59,11 @@ export class ListaVerificacionComponent implements OnInit {
       this.idP = params['idP'];
       this.idU = params['idU'];
     });
-    floating_labels();
   }
 
   ngOnInit() {
     floating_labels();
+    inicializando_datePicker();
     this.cargarPlaneacion( this.idP );
     this.cargarNormas();
     this.cargarUsuario( this.idU );
@@ -97,6 +98,8 @@ export class ListaVerificacionComponent implements OnInit {
           .subscribe( usuario => {
             this.auditorV = usuario.nombre + ' ' + usuario.primer_Apellido + ' ' + (usuario.segundo_Apellido || '');
             this.cargando = false;
+            floating_labels();
+            inicializando_datePicker();
           });
 
   }
@@ -110,7 +113,8 @@ export class ListaVerificacionComponent implements OnInit {
             this.normas = normas;
             // console.log('Normas: ', this.normas);
             this.cargando = false;
-            // init_plugins();
+            floating_labels();
+            inicializando_datePicker();
           });
 
   }
@@ -158,10 +162,14 @@ export class ListaVerificacionComponent implements OnInit {
 
 
                   this.cargando = false;
+                  floating_labels();
+                  inicializando_datePicker();
                 });
 
 
             this.cargando = false;
+            floating_labels();
+            inicializando_datePicker();
           });
   }
 
@@ -174,6 +182,8 @@ export class ListaVerificacionComponent implements OnInit {
             this.listas = listas;
             console.log(this.listas);
             this.cargando = false;
+            floating_labels();
+            inicializando_datePicker();
           });
 
   }
@@ -199,6 +209,7 @@ export class ListaVerificacionComponent implements OnInit {
     this._listaVerificacionService.crearListaVerificacion( listaVerificacion )
         .subscribe( resp => {
           floating_labels();
+          inicializando_datePicker();
           this.cargarPlaneacion( this.idP );
           this.cargarNormas();
           this.cargarUsuario( this.idU );
@@ -254,6 +265,7 @@ export class ListaVerificacionComponent implements OnInit {
     this._listaVerificacionService.editarListaVerificacion( listaVerificacion )
             .subscribe( resp => {
               floating_labels();
+              inicializando_datePicker();
               this.cargarPlaneacion( this.idP );
               this.cargarNormas();
               this.cargarUsuario( this.idU );
@@ -281,6 +293,7 @@ export class ListaVerificacionComponent implements OnInit {
     this._listaVerificacionService.completarListaVerificacion( listaVerificacion )
             .subscribe( resp => {
               floating_labels();
+              inicializando_datePicker();
               this.cargarPlaneacion( this.idP );
               this.cargarNormas();
               this.cargarUsuario( this.idU );
@@ -308,6 +321,7 @@ export class ListaVerificacionComponent implements OnInit {
         this._listaVerificacionService.eliminarLista( listaVerificacion._id )
           .subscribe( (resp: any) => {
               floating_labels();
+              inicializando_datePicker();
               this.cargarPlaneacion( this.idP );
               this.cargarNormas();
               this.cargarUsuario( this.idU );
