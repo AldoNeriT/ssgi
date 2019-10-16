@@ -10,6 +10,7 @@ import Swal from 'sweetalert2';
 import * as $ from 'jquery';
 
 // declare function init_plugins();
+declare function floating_labels();
 declare function inicializando_multiSelect();
 declare function inicializando_dateRange();
 
@@ -71,6 +72,7 @@ export class AuditoriasComponent implements OnInit {
 
   ngOnInit() {
     // init_plugins();
+    floating_labels();
     inicializando_multiSelect();
     inicializando_dateRange();
 

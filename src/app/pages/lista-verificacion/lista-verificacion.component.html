@@ -3,7 +3,7 @@
         <div class="card">
             <div class="card-body">
                 <div style="padding-bottom: 35px;">
-                    <h4 class="card-title">Nombre del Proceso / Procedimiento / Área / Actividad: <span class="font-bold">{{ arrProActCriV[0] }}</span></h4><br>
+                    <h4 class="card-title">Nombre del Proceso / Procedimiento / Área / Actividad: <br><span class="font-bold">{{ arrProActCriV[0] }}</span></h4><br>
                     <h6 class="card-subtitle">No. de Auditoría: <span class="font-bold">{{ auditoriaV }}</span></h6>
                     <h6 class="card-subtitle">Norma: <span class="font-bold">{{ normasV }}</span></h6>
                     <h6 class="card-subtitle">Auditor: <span class="font-bold">{{ auditorV }}</span></h6>
@@ -42,6 +42,7 @@
                                 <th>Documento revisado / párrafo</th>
                                 <th>Evidencia Encontrada</th>
                                 <th>Hallazgo</th>
+                                <th>Valido / Enviado</th>
                                 <!-- <th>Enviado</th> -->
                             </tr>
                         </thead>
@@ -66,10 +67,19 @@
                                 <td data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> aaa </td>
                                 <td data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> aaa </td>
                                 <td data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> aaa </td>
+                                <td data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width: 160px;">
+                                    <i class="mdi mdi-check mdi-24px text-success"></i>
+                                    <i class="mdi mdi-close mdi-24px text-danger"></i>
+                                    <i class="mdi mdi-check mdi-24px text-success"></i>
+                                    <i class="mdi mdi-close mdi-24px text-danger"></i>
+                                </td>
                                 <!-- <td class="text-center"><i *ngIf="planeacion.enviar === false" class="fa fa-window-close fa-2x text-danger"></i> <i *ngIf="planeacion.enviar === true" class="fa fa-check-square fa-2x text-success"></i></td> -->
                             </tr>
-                            <tr class="pointer text-center">
-                                <td colspan="6"><i class="mdi mdi-plus"></i></td>
+                            <tr class="pointer text-center" data-toggle="modal" data-target="#modalListaAgregar1">
+                                <td colspan="7"><i class="mdi mdi-plus"></i></td>
+                            </tr>
+                            <tr class="pointer text-center" data-toggle="modal" data-target="#modalListaAgregar2">
+                                <td colspan="7"><i class="mdi mdi-plus"></i></td>
                             </tr>
                         </tbody>
                     </table>
@@ -77,10 +87,92 @@
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-themecolor waves-effect">Envíar para Validar</button>
-                    <button (click)="regresar( '2' )" type="button" class="btn btn-default" data-dismiss="modal">Regresar</button>
+                    <button (click)="regresar()" type="button" class="btn btn-default" data-dismiss="modal">Regresar</button>
                 </div>
 
             </div>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================== -->
+<!-- MODAL AGREGAR 1 -->
+<!-- ============================================================== -->
+
+<div class="modal fade" id="modalListaAgregar1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalLabel1">Agregar Lista</h4>
+                <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button> -->
+            </div>
+            <div class="modal-body">
+                <form class="floating-labels m-t-40" ngNativeValidate>
+                    <div class="form-group m-b-40">
+                        <select name="norma" id="norma" class="form-control p-0" required>
+                                <!-- <option value="" selected>Elige</option> -->
+                                <option *ngFor="let norma of normas" value="{{ norma._id }}">{{ norma.nombreNorma }}</option>
+                            </select>
+                        <span class="bar"></span>
+                        <label for="norma">Punto de la Norma:</label>
+                    </div>
+                    <div class="form-group m-b-40">
+                        <textarea name="pregunta" id="pregunta" type="text" class="form-control" required></textarea>
+                        <span class="bar"></span>
+                        <label for="pregunta">Pregunta:</label>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-themecolor" data-dismiss="">Guardar</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================== -->
+<!-- MODAL AGREGAR 2 -->
+<!-- ============================================================== -->
+
+<div class="modal fade" id="modalListaAgregar2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalLabel1">Completar Lista</h4>
+                <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button> -->
+            </div>
+            <div class="modal-body">
+                <form class="floating-labels m-t-40" ngNativeValidate>
+                    <div class="form-group m-b-40">
+                        <textarea name="documento" id="documento" type="text" class="form-control" required></textarea>
+                        <span class="bar"></span>
+                        <label for="documento">Documento revisado / párrafo:</label>
+                        <span class="help-block text-themecolor"><small>Anotar el nombre del documento revisado, incluyendo Rev., No., párrafo.</small></span>
+                    </div>
+                    <div class="form-group m-b-40">
+                        <textarea name="evidencia" id="evidencia" type="text" class="form-control" required></textarea>
+                        <span class="bar"></span>
+                        <label for="evidencia">Evidencia encontrada:</label>
+                        <span class="help-block text-themecolor"><small>Anotar la evidencia encontrada.</small></span>
+                    </div>
+                    <div class="form-group m-b-40">
+                        <textarea name="hallazgos" id="hallazgos" type="text" class="form-control" required></textarea>
+                        <span class="bar"></span>
+                        <label for="hallazgos">Hallazgos:</label>
+                        <span class="help-block text-themecolor"><small>NC – No Conformidad<br>O - Observación<br>ODM – Oportunidad de Mejora
+                                </small></span>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-themecolor" data-dismiss="">Guardar</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </form>
+            </div>
+
         </div>
     </div>
 </div>

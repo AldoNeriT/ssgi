@@ -78,9 +78,9 @@ function init_plugins() {
         // ============================================================== 
         // This is for the floating labels
         // ============================================================== 
-        $('.floating-labels .form-control').on('focus blur', function(e) {
-            $(this).parents('.form-group').toggleClass('focused', (e.type === 'focus' || this.value.length > 0));
-        }).trigger('blur');
+        // $('.floating-labels .form-control').on('focus blur', function(e) {
+        //     $(this).parents('.form-group').toggleClass('focused', (e.type === 'focus' || this.value.length > 0));
+        // }).trigger('blur');
 
         // ============================================================== 
         // Auto select left navbar
@@ -160,4 +160,10 @@ function init_plugins() {
     });
 
 
+}
+
+function floating_labels() {
+    $('.floating-labels .form-control').on('focus blur', function(e) {
+        $(this).parents('.form-group').toggleClass('focused', (e.type === 'focus' || this.value.length > 0));
+    }).trigger('blur');
 }

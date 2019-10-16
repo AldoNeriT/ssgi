@@ -8,6 +8,7 @@ import Swal from 'sweetalert2';
 import * as $ from 'jquery';
 
 // declare function init_plugins();
+declare function floating_labels();
 
 @Component({
   selector: 'app-normas',
@@ -38,6 +39,7 @@ export class NormasComponent implements OnInit {
 
   ngOnInit() {
     // init_plugins();
+    floating_labels();
     this.forma = new FormGroup({
       nombre: new FormControl( null, Validators.required ),
       descripcion: new FormControl( null, Validators.required ),

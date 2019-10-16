@@ -9,6 +9,7 @@ import Swal from 'sweetalert2';
 import * as $ from 'jquery';
 
 // declare function init_plugins();
+declare function floating_labels();
 
 @Component({
   selector: 'app-procesos',
@@ -38,6 +39,7 @@ export class ProcesosComponent implements OnInit {
 
   ngOnInit() {
     // init_plugins();
+    floating_labels();
 
     this.forma = new FormGroup({
       nombre: new FormControl( null, Validators.required )

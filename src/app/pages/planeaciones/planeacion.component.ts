@@ -11,6 +11,7 @@ import Swal from 'sweetalert2';
 import * as $ from 'jquery';
 
 // declare function init_plugins();
+declare function floating_labels();
 declare function inicializando_multiSelect();
 declare function inicializando_clockPicker();
 declare function inicializando_datePicker();
@@ -58,6 +59,7 @@ export class PlaneacionComponent implements OnInit {
 
   ngOnInit() {
     // init_plugins();
+    floating_labels();
     inicializando_multiSelect();
     inicializando_clockPicker();
     inicializando_datePicker();
@@ -125,6 +127,7 @@ export class PlaneacionComponent implements OnInit {
             // console.log('Proceso: ', this.procesos);
             this.cargando = false;
             // init_plugins();
+            floating_labels();
             inicializando_multiSelect();
             inicializando_clockPicker();
             inicializando_datePicker();
@@ -142,6 +145,7 @@ export class PlaneacionComponent implements OnInit {
             // console.log('Auditores: ', this.auditores);
             this.cargando = false;
             // init_plugins();
+            floating_labels();
             inicializando_multiSelect();
             inicializando_clockPicker();
             inicializando_datePicker();
@@ -160,6 +164,7 @@ export class PlaneacionComponent implements OnInit {
             // console.log('Auditados: ', this.auditados);
             this.cargando = false;
             // init_plugins();
+            floating_labels();
             inicializando_multiSelect();
             inicializando_clockPicker();
             inicializando_datePicker();
@@ -179,6 +184,7 @@ export class PlaneacionComponent implements OnInit {
             // console.log('Auditoria: ', this.auditoria);
             this.cargando = false;
             // init_plugins();
+            floating_labels();
             inicializando_multiSelect();
             inicializando_clockPicker();
             inicializando_datePicker();
@@ -246,6 +252,7 @@ export class PlaneacionComponent implements OnInit {
 
             this.cargando = false;
             // init_plugins();
+            floating_labels();
             inicializando_multiSelect();
             inicializando_clockPicker();
             inicializando_datePicker();
