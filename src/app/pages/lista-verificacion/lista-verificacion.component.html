@@ -34,14 +34,18 @@
                             <div class="row">
                                 <div class="col-3"></div>
                                 <div class="col-6">
+                                    <div class="alert alert-warning">
+                                        <button type="button" class="close pointer" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+                                        <h3 class="text-warning"><i class="fa fa-exclamation-triangle"></i> Advertencia</h3> Tienes que tener al menos una fila para que guardes los cambios del Personal entrevistado y la Fecha.
+                                    </div>
                                     <form id="formEntrevistado" class="floating-labels m-t-40 " ngNativeValidate [formGroup]="formaEntrevistado" (ngSubmit)="editarEntrevistado()">
                                         <div class="form-group m-b-40">
-                                            <input formControlName="personal" name="personal" id="personal" class="form-control" required>
+                                            <input formControlName="personal" name="personal" id="personal" class="form-control" value="{{ personalV }}" required>
                                             <span class="bar"></span>
                                             <label for="personal">Personal entrevistado:</label>
                                         </div>
                                         <div class="form-group m-b-40">
-                                            <input formControlName="fecha" name="fecha" id="fecha" type="text" class="form-control datepicker-autoclose" required>
+                                            <input formControlName="fecha" name="fecha" id="fecha" type="text" class="form-control datepicker-autoclose" value="{{ fechaV }}" required>
                                             <span class="bar"></span>
                                             <label for="fecha">Fecha:</label>
                                         </div>
@@ -144,8 +148,8 @@
                             <h6 class="card-subtitle">No. de Auditoría: <span class="font-bold">{{ auditoriaV }}</span></h6>
                             <h6 class="card-subtitle">Norma: <span class="font-bold">{{ normasV }}</span></h6>
                             <h6 class="card-subtitle">Auditor: <span class="font-bold">{{ auditorV }}</span></h6>
-                            <h6 class="card-subtitle">Personal Entrevistado: <span class="font-bold">...</span></h6>
-                            <h6 class="card-subtitle">Fecha: <span class="font-bold">...</span></h6>
+                            <h6 class="card-subtitle">Personal Entrevistado: <span class="font-bold">{{ personalV }}</span></h6>
+                            <h6 class="card-subtitle">Fecha: <span class="font-bold">{{ fechaV }}</span></h6>
                         </div>
 
                         <div class="row">
@@ -172,7 +176,7 @@
                                         <th>Documento revisado / párrafo</th>
                                         <th>Evidencia Encontrada</th>
                                         <th>Hallazgo</th>
-                                        <th>Valido / Enviado</th>
+                                        <th>Valido</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -185,8 +189,6 @@
                                         <td style="width: 160px;">
                                             <i *ngIf="lista.valido === true" class="mdi mdi-check mdi-24px text-success"></i>
                                             <i *ngIf="lista.valido === false" class="mdi mdi-close mdi-24px text-danger"></i>
-                                            <i *ngIf="lista.enviar === true" class="mdi mdi-check mdi-24px text-success"></i>
-                                            <i *ngIf="lista.enviar === false" class="mdi mdi-close mdi-24px text-danger"></i>
                                         </td>
                                     </tr>
                                 </tbody>

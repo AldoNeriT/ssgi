@@ -46,6 +46,9 @@ export class ListaVerificacionComponent implements OnInit {
   normasV: string;
   auditorV: string;
 
+  personalV: string;
+  fechaV: string;
+
   forma: FormGroup;
   formaEditar1: FormGroup;
   formaEditar2: FormGroup;
@@ -211,6 +214,11 @@ export class ListaVerificacionComponent implements OnInit {
               // console.log('alguna esta invalidada');
             }
 
+            if ( listas[0] ) {
+              this.personalV = (listas[0].entrevistado || '');
+              this.fechaV = (listas[0].fecha || '');
+            }
+
             this.cargando = false;
             floating_labels();
             inicializando_datePicker();
@@ -220,6 +228,10 @@ export class ListaVerificacionComponent implements OnInit {
           .subscribe( listas => {
             this.listas = listas;
             // console.log(this.listas);
+            if ( listas[0] ) {
+              this.personalV = (listas[0].entrevistado || '');
+              this.fechaV = (listas[0].fecha || '');
+            }
             this.cargando = false;
             floating_labels();
             inicializando_datePicker();
@@ -233,6 +245,12 @@ export class ListaVerificacionComponent implements OnInit {
       return;
     }
 
+    // console.log($('#personal').val());
+    // console.log($('#fecha').val());
+
+    let entr = $('#personal').val() + '';
+    let fech = $('#fecha').val() + '';
+
     let listaVerificacion = new ListaVerificacion(
       this.idU,
       this.idP,
@@ -241,11 +259,11 @@ export class ListaVerificacionComponent implements OnInit {
       '',
       '',
       '',
-      'entrevistado',
-      'fecha'
+      entr,
+      fech
     );
 
-    // console.log(listaVerificacion);
+    console.log(listaVerificacion);
 
     this._listaVerificacionService.crearListaVerificacion( listaVerificacion )
         .subscribe( resp => {
@@ -289,6 +307,9 @@ export class ListaVerificacionComponent implements OnInit {
 
   editarEntrevistado() {
 
+    let entr = $('#personal').val() + '';
+    let fech = $('#fecha').val() + '';
+
     let listaVerificacion = new ListaVerificacion(
       this.idU,
       this.idP,
@@ -297,23 +318,23 @@ export class ListaVerificacionComponent implements OnInit {
       '',
       '',
       '',
-      this.formaEntrevistado.value.personal,
-      this.formaEntrevistado.value.fecha,
+      entr,
+      fech,
       this.idLista
     );
 
     console.log(listaVerificacion);
 
 
-    // this._listaVerificacionService.editarListaVerificacion( listaVerificacion )
-    //         .subscribe( resp => {
-    //           floating_labels();
-    //           inicializando_datePicker();
-    //           this.cargarPlaneacion( this.idP );
-    //           this.cargarNormas();
-    //           this.cargarUsuario( this.idU );
-    //           this.cargarListas( this.idP, this.idU);
-    //         });
+    this._listaVerificacionService.cambioMasivoEntrevistado( listaVerificacion, this.idP )
+            .subscribe( resp => {
+              floating_labels();
+              inicializando_datePicker();
+              this.cargarPlaneacion( this.idP );
+              this.cargarNormas();
+              this.cargarUsuario( this.idU );
+              this.cargarListas( this.idP, this.idU);
+            });
 
   }
 
@@ -327,8 +348,8 @@ export class ListaVerificacionComponent implements OnInit {
       '',
       '',
       '',
-      'entrevistado',
-      'fecha',
+      '',
+      '',
       this.idLista
     );
 
@@ -357,8 +378,8 @@ export class ListaVerificacionComponent implements OnInit {
       this.formaEditar2.value.documentoE,
       this.formaEditar2.value.evidenciaE,
       this.formaEditar2.value.hallazgosE,
-      'entrevistado',
-      'fecha',
+      '',
+      '',
       this.idLista
     );
 

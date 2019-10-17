@@ -225,4 +225,28 @@ export class ListaVerificacionService {
 
   }
 
+  cambioMasivoEntrevistado( listaVerificacion: ListaVerificacion, idPlaneacion: string ) {
+
+    let url = URL_SERVICIOS + '/verificacion/planeacion/entrevistado/' + idPlaneacion;
+
+    // *** TOKEN ***
+    // url += '?token=' + this.token;
+
+    return this.http.put( url, listaVerificacion )
+    .pipe(
+      map( (resp: any ) => {
+        Swal.fire({
+          title: 'Cambios guardados',
+          type: 'success'
+        });
+        return resp.planeacion;
+      }),
+      catchError( err => {
+        Swal.fire('Error', err.error.err.message, 'error');
+        return throwError( err ) ;
+      })
+    );
+
+  }
+
 }
