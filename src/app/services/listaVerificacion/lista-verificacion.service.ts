@@ -51,6 +51,26 @@ export class ListaVerificacionService {
 
   }
 
+  cargarListasPlaneacionUsuarioEnviar( idP: string, idU: string ) {
+
+    let url = URL_SERVICIOS + '/verificacion/planeacion/usuario/enviar/' + idP + '/' + idU;
+
+    // *** TOKEN ***
+    // url += '?token=' + this.token;
+
+    return this.http.get( url )
+    .pipe(
+      map( (resp: any ) => {
+        return resp.verificaciones;
+      }),
+      catchError( err => {
+        Swal.fire('Error', err.error.err.message, 'error');
+        return throwError( err ) ;
+      })
+    );
+
+  }
+
 
   crearListaVerificacion( listaVerificacion: ListaVerificacion ) {
 

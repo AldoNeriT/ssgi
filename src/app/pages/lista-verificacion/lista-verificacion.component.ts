@@ -4,6 +4,7 @@ import { PlaneacionService, UsuarioService, AuditoriaService, NormaService, List
 import { Planeacion } from '../../models/planeacion.model';
 import { Institucion } from '../../models/institucion.model';
 import { ListaVerificacion } from '../../models/lista-verificacion.model';
+import { Usuario } from '../../models/usuario.model';
 import { Norma } from 'src/app/models/norma.model';
 import { Router, ActivatedRoute } from '@angular/router';
 
@@ -13,6 +14,7 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 import Swal from 'sweetalert2';
 import * as $ from 'jquery';
+import { UsuariosComponent } from '../usuarios/usuarios.component';
 
 declare function floating_labels();
 declare function inicializando_datePicker();
@@ -47,6 +49,7 @@ export class ListaVerificacionComponent implements OnInit {
   forma: FormGroup;
   formaEditar1: FormGroup;
   formaEditar2: FormGroup;
+  formaEntrevistado: FormGroup;
 
   constructor( public _planeacionService: PlaneacionService,
                public _usuarioService: UsuarioService,
@@ -75,14 +78,19 @@ export class ListaVerificacionComponent implements OnInit {
     });
 
     this.formaEditar1 = new FormGroup({
-      norma: new FormControl( null, Validators.required ),
-      pregunta: new FormControl( null, Validators.required )
+      normaE: new FormControl( null, Validators.required ),
+      preguntaE: new FormControl( null, Validators.required )
     });
 
     this.formaEditar2 = new FormGroup({
-      documento: new FormControl( null, Validators.required ),
-      evidencia: new FormControl( null, Validators.required ),
-      hallazgos: new FormControl( null, Validators.required )
+      documentoE: new FormControl( null, Validators.required ),
+      evidenciaE: new FormControl( null, Validators.required ),
+      hallazgosE: new FormControl( null, Validators.required )
+    });
+
+    this.formaEntrevistado = new FormGroup({
+      personal: new FormControl( null, Validators.required ),
+      fecha: new FormControl( null, Validators.required )
     });
   }
 
@@ -177,7 +185,8 @@ export class ListaVerificacionComponent implements OnInit {
 
     this.cargando = true;
 
-    this._listaVerificacionService.cargarListasPlaneacionUsuario( idP, idU)
+    if ( this._usuarioService.usuario.tipo_Usuario === 'AUDITOR_LIDER') {
+      this._listaVerificacionService.cargarListasPlaneacionUsuarioEnviar( idP, idU)
           .subscribe( listas => {
             this.listas = listas;
             console.log(this.listas);
@@ -185,7 +194,16 @@ export class ListaVerificacionComponent implements OnInit {
             floating_labels();
             inicializando_datePicker();
           });
-
+    } else {
+      this._listaVerificacionService.cargarListasPlaneacionUsuario( idP, idU)
+          .subscribe( listas => {
+            this.listas = listas;
+            console.log(this.listas);
+            this.cargando = false;
+            floating_labels();
+            inicializando_datePicker();
+          });
+    }
   }
 
   agregarLista() {
@@ -201,7 +219,9 @@ export class ListaVerificacionComponent implements OnInit {
       this.forma.value.pregunta,
       '',
       '',
-      ''
+      '',
+      'entrevistado',
+      'fecha'
     );
 
     console.log(listaVerificacion);
@@ -220,8 +240,8 @@ export class ListaVerificacionComponent implements OnInit {
   formEditable1( listaVerificacion: ListaVerificacion ) {
 
     this.formaEditar1.setValue({
-      norma: listaVerificacion.puntoNorma,
-      pregunta: listaVerificacion.pregunta
+      normaE: listaVerificacion.puntoNorma,
+      preguntaE: listaVerificacion.pregunta
     });
 
     this.idLista = listaVerificacion._id;
@@ -234,9 +254,9 @@ export class ListaVerificacionComponent implements OnInit {
     console.log(listaVerificacion);
 
     this.formaEditar2.setValue({
-      documento: listaVerificacion.documento,
-      evidencia: listaVerificacion.evidencia,
-      hallazgos: listaVerificacion.hallazgos
+      documentoE: listaVerificacion.documento,
+      evidenciaE: listaVerificacion.evidencia,
+      hallazgosE: listaVerificacion.hallazgos
     });
 
     this.idLista = listaVerificacion._id;
@@ -246,16 +266,48 @@ export class ListaVerificacionComponent implements OnInit {
     }
   }
 
+  editarEntrevistado() {
+
+    let listaVerificacion = new ListaVerificacion(
+      this.idU,
+      this.idP,
+      '',
+      '',
+      '',
+      '',
+      '',
+      this.formaEntrevistado.value.personal,
+      this.formaEntrevistado.value.fecha,
+      this.idLista
+    );
+
+    console.log(listaVerificacion);
+
+
+    // this._listaVerificacionService.editarListaVerificacion( listaVerificacion )
+    //         .subscribe( resp => {
+    //           floating_labels();
+    //           inicializando_datePicker();
+    //           this.cargarPlaneacion( this.idP );
+    //           this.cargarNormas();
+    //           this.cargarUsuario( this.idU );
+    //           this.cargarListas( this.idP, this.idU);
+    //         });
+
+  }
+
   editarLista() {
 
     let listaVerificacion = new ListaVerificacion(
       this.idU,
       this.idP,
-      this.formaEditar1.value.norma,
-      this.formaEditar1.value.pregunta,
+      this.formaEditar1.value.normaE,
+      this.formaEditar1.value.preguntaE,
       '',
       '',
       '',
+      'entrevistado',
+      'fecha',
       this.idLista
     );
 
@@ -281,9 +333,11 @@ export class ListaVerificacionComponent implements OnInit {
       this.idP,
       '',
       '',
-      this.formaEditar2.value.documento,
-      this.formaEditar2.value.evidencia,
-      this.formaEditar2.value.hallazgos,
+      this.formaEditar2.value.documentoE,
+      this.formaEditar2.value.evidenciaE,
+      this.formaEditar2.value.hallazgosE,
+      'entrevistado',
+      'fecha',
       this.idLista
     );
 
@@ -327,6 +381,63 @@ export class ListaVerificacionComponent implements OnInit {
               this.cargarUsuario( this.idU );
               this.cargarListas( this.idP, this.idU);
           } );
+      }
+    });
+
+  }
+
+  validarContrasenaLista( usuario2: Usuario ) {
+
+    // auditoria.pasos = 2;
+
+    Swal.fire({
+      title: 'Ingrese su contraseña',
+      input: 'password',
+      showCancelButton: true,
+      confirmButtonText: 'Validar',
+      cancelButtonText: 'Cancelar',
+      cancelButtonColor: '#e74c3c'
+    }).then((result) => {
+      if (result.value) {
+        let usuario = new Usuario(
+          usuario2.numero_Empleado,
+          usuario2.nombre_Usuario,
+          usuario2.numero_Empleado,
+          usuario2.primer_Apellido,
+          usuario2.email,
+          usuario2.telefono,
+          usuario2.puesto,
+          result.value,
+          usuario2.tipo_Usuario,
+          usuario2.segundo_Apellido,
+          usuario2._id
+        );
+        this._usuarioService.validarContrasenaAudiL( usuario )
+          .subscribe( resp => {
+            console.log(resp);
+            // this._auditoriaService.validarAuditoria( auditoria )
+            //     .subscribe( resp2 => {
+            //       floating_labels();
+            //       inicializando_datePicker();
+            //       this.cargarPlaneacion( this.idP );
+            //       this.cargarNormas();
+            //       this.cargarUsuario( this.idU );
+            //       this.cargarListas( this.idP, this.idU);
+            //     });
+          });
+      } else {
+        if ( result.value === undefined) {
+        } else {
+          Swal.fire({
+            title: '¡Campo Vacío!',
+            text: 'No ingresaste ninguna contraseña, inténtalo de nuevo',
+            type: 'error',
+            animation: false,
+            customClass: {
+              popup: 'animated tada'
+            }
+          });
+        }
       }
     });
 

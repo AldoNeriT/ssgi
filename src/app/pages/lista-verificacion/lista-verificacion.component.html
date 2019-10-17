@@ -34,14 +34,14 @@
                             <div class="row">
                                 <div class="col-3"></div>
                                 <div class="col-6">
-                                    <form id="formAgregar1" class="floating-labels m-t-40 ">
+                                    <form id="formEntrevistado" class="floating-labels m-t-40 " ngNativeValidate [formGroup]="formaEntrevistado" (ngSubmit)="editarEntrevistado()">
                                         <div class="form-group m-b-40">
-                                            <input name="personal" id="personal" class="form-control">
+                                            <input formControlName="personal" name="personal" id="personal" class="form-control" required>
                                             <span class="bar"></span>
                                             <label for="personal">Personal entrevistado:</label>
                                         </div>
                                         <div class="form-group m-b-40">
-                                            <input name="fecha" id="fecha" type="text" class="form-control datepicker-autoclose" required>
+                                            <input formControlName="fecha" name="fecha" id="fecha" type="text" class="form-control datepicker-autoclose" required>
                                             <span class="bar"></span>
                                             <label for="fecha">Fecha:</label>
                                         </div>
@@ -111,6 +111,9 @@
                                             <i *ngIf="lista.enviar === false" class="mdi mdi-close mdi-24px text-danger"></i>
                                         </td>
                                     </tr>
+                                    <tr class="pointer text-center">
+                                        <td colspan="7" data-toggle="modal" data-target="#modalListaAgregar"><i class="mdi mdi-plus"></i></td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -128,10 +131,10 @@
 </div>
 
 <!-- ============================================================== -->
-<!-- VISTA DEL ROOT, ADMINISTRADOR Y AUDITOR LIDER -->
+<!-- VISTA DEL ROOT, ADMINISTRADOR, AUDITOR LIDER y ALTA_DIRECCION -->
 <!-- ============================================================== -->
 <div *ngIf="!cargando">
-    <div *ngIf="(_usuarioService.usuario.tipo_Usuario === 'ROOT') || (_usuarioService.usuario.tipo_Usuario === 'ADMIN') || (_usuarioService.usuario.tipo_Usuario === 'AUDITOR_LIDER')">
+    <div *ngIf="(_usuarioService.usuario.tipo_Usuario === 'ROOT') || (_usuarioService.usuario.tipo_Usuario === 'ADMIN') || (_usuarioService.usuario.tipo_Usuario === 'AUDITOR_LIDER') || (_usuarioService.usuario.tipo_Usuario === 'ALTA_DIRECCION')">
         <div class="row">
             <div class="col-12">
                 <div class="card">
@@ -191,8 +194,9 @@
                         </div>
 
                         <div class="modal-footer">
-                            <button *ngIf="_usuarioService.usuario.tipo_Usuario === 'AUDITOR_LIDER'" type="button" class="btn btn-themecolor waves-effect">Validar</button>
-                            <button (click)="regresar()" type="button" class="btn btn-default" data-dismiss="modal">Regresar</button>
+                            <button (click)="validarContrasenaLista( _usuarioService.usuario )" *ngIf="_usuarioService.usuario.tipo_Usuario === 'AUDITOR_LIDER'" type="button" class="btn btn-themecolor waves-effect">Validar</button>
+                            <a *ngIf="_usuarioService.usuario.tipo_Usuario === 'AUDITOR_LIDER'" class="btn btn-outline-secondary disabled" role="button" aria-disabled="true">Validado</a>
+                            <button (click)="regresar()" type="button" class="btn btn-default">Regresar</button>
                         </div>
 
                     </div>
@@ -251,12 +255,12 @@
             <div class="modal-body">
                 <form class="floating-labels m-t-40" ngNativeValidate [formGroup]="formaEditar1" (ngSubmit)="editarLista()">
                     <div class="form-group m-b-40">
-                        <input formControlName="norma" name="norma" id="norma" type="text" class="form-control" required>
+                        <input formControlName="normaE" name="normaE" id="normaE" type="text" class="form-control" required>
                         <span class="bar"></span>
                         <label for="norma">Punto de la Norma:</label>
                     </div>
                     <div class="form-group m-b-40">
-                        <textarea formControlName="pregunta" name="pregunta" id="pregunta" type="text" class="form-control" required></textarea>
+                        <textarea formControlName="preguntaE" name="preguntaE" id="preguntaE" type="text" class="form-control" required></textarea>
                         <span class="bar"></span>
                         <label for="pregunta">Pregunta:</label>
                     </div>
@@ -286,19 +290,19 @@
             <div class="modal-body">
                 <form class="floating-labels m-t-40" ngNativeValidate [formGroup]="formaEditar2" (ngSubmit)="completarLista()">
                     <div class="form-group m-b-40">
-                        <textarea formControlName="documento" name="documento" id="documento" type="text" class="form-control" required></textarea>
+                        <textarea formControlName="documentoE" name="documentoE" id="documentoE" type="text" class="form-control" required></textarea>
                         <span class="bar"></span>
                         <label for="documento">Documento revisado / párrafo:</label>
                         <span class="help-block text-themecolor"><small>Anotar el nombre del documento revisado, incluyendo Rev., No., párrafo.</small></span>
                     </div>
                     <div class="form-group m-b-40">
-                        <textarea formControlName="evidencia" name="evidencia" id="evidencia" type="text" class="form-control" required></textarea>
+                        <textarea formControlName="evidenciaE" name="evidenciaE" id="evidenciaE" type="text" class="form-control" required></textarea>
                         <span class="bar"></span>
                         <label for="evidencia">Evidencia encontrada:</label>
                         <span class="help-block text-themecolor"><small>Anotar la evidencia encontrada.</small></span>
                     </div>
                     <div class="form-group m-b-40">
-                        <textarea formControlName="hallazgos" name="hallazgos" id="hallazgos" type="text" class="form-control" required></textarea>
+                        <textarea formControlName="hallazgosE" name="hallazgosE" id="hallazgosE" type="text" class="form-control" required></textarea>
                         <span class="bar"></span>
                         <label for="hallazgos">Hallazgos:</label>
                         <span class="help-block text-themecolor"><small>NC – No Conformidad<br>O - Observación<br>ODM – Oportunidad de Mejora

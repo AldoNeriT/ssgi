@@ -350,6 +350,25 @@ export class UsuarioService {
           );
   }
 
+  validarContrasenaAudiL( usuario: Usuario) {
+
+    let url = URL_SERVICIOS + '/usuario/lider/' + usuario._id;
+
+    // *** TOKEN ***
+    url += '?token=' + this.token;
+
+    return this.http.post( url, usuario )
+          .pipe(
+            map( (resp: any) => {
+              return resp;
+            }),
+            catchError( err => {
+              Swal.fire('Error', err.error.err.message, 'error');
+              return throwError( err ) ;
+            })
+          );
+  }
+
   cargarUsuariosPorTipo( role: string ) {
 
     let url = URL_SERVICIOS + '/usuario/tipo/' + role;

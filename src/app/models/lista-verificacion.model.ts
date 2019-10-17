@@ -8,6 +8,8 @@ export class ListaVerificacion {
         public documento: string,
         public evidencia: string,
         public hallazgos: string,
+        public entrevistado?: string,
+        public fecha?: string,
         public _id?: string,
         public estado?: boolean,
         public valido?: boolean,
