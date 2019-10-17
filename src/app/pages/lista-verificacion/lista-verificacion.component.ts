@@ -14,7 +14,6 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 import Swal from 'sweetalert2';
 import * as $ from 'jquery';
-import { UsuariosComponent } from '../usuarios/usuarios.component';
 
 declare function floating_labels();
 declare function inicializando_datePicker();
@@ -32,7 +31,7 @@ export class ListaVerificacionComponent implements OnInit {
   idAu: string;
 
   idLista: string;
-
+    
   planeacion: any[] = [];
   normas: Norma[] = [];
   listas: ListaVerificacion[] = [];
@@ -496,6 +495,170 @@ export class ListaVerificacionComponent implements OnInit {
               this.cargarUsuario( this.idU );
               this.cargarListas( this.idP, this.idU);
           });
+
+  }
+
+  imprimir( opcion: number) {
+
+    let tabla = [];
+
+    tabla.push([{ text: 'Punto de la Norma', fontSize: 10, alignment: 'center', style:'segundaSeccion', fillColor: '#dddddd', colSpan: 1 }, { text: 'Pregunta', fontSize: 10, fillColor: '#dddddd', colSpan: 1, style:'segundaSeccion', alignment: 'center' }, { text: 'Documento Revisado/parrafo', fontSize: 10, fillColor: '#dddddd', style:'segundaSeccion', colSpan: 1, alignment: 'center' }, { text: 'Evidencia Encontrada', fontSize: 10, fillColor: '#dddddd', colSpan: 1, style:'segundaSeccion',alignment: 'center' }, { text: 'Hallazgo  NC - No Conformidad O - Observacion ODM - Oportunidad de Mejora', fontSize: 8, fillColor: '#dddddd',  style:'segundaSeccion',colSpan: 1, alignment: 'center' }]);
+
+    // for (let i = 0; i < 3; i++) {
+    //   tabla.push([' ', ' ', ' ', ' ', ' ']);
+    // }
+
+    for (let lista of this.listas) {
+      //tabla.push([lista.puntoNorma, lista.pregunta, lista.documento, lista.evidencia, lista.hallazgos]);
+      tabla.push([{ text: lista.puntoNorma, fontSize: 10, alignment: 'center', style:'negris',  colSpan: 1 }, { text: lista.pregunta, fontSize: 10, style:'negrit',  colSpan: 1 }, { text: lista.documento, fontSize: 10, alignment: 'center', style:'negrit',  colSpan: 1 }, { text: lista.evidencia, fontSize: 10, alignment: 'center', style:'negrit', colSpan: 1 },{ text: lista.hallazgos, fontSize: 10, alignment: 'center', style:'negrit',  colSpan: 1 }]);
+    }
+
+    var docVerificacion = {
+      content: [{
+          style: 'titulo',
+          table: {
+              heights: [50],
+              widths: [500],
+              body: [
+                  [{ text: 'Lista de Verificacion para Auditorias del SGI del G3', color: 'gray', margin: [10, 15, 10, 10], alignment: 'center' }]
+              ]
+          }
+        },
+        //En estas tablas se coloca la primer seccion del documento - proceso, auditoria, personal, norma
+        {
+          style: 'primerSeccion',
+          table: {
+              widths: ['auto'],
+              body: [
+                ['Nombre del Proceso / Procedimiento / Área / Actividad:'],
+                [{ text: this.arrProActCriV[0], fontSize: 10, colSpan: 1, style:'negris' }]
+              ]
+          },
+          layout: 'noBorders'
+        },
+        {
+          style: 'primerSeccion',
+          table: {
+            widths: ['auto', 'auto'],
+            body: [
+              ['No. de Auditoría:', { text: this.auditoriaV, fontSize: 10, colSpan: 1, style:'negris' }]
+            ]
+          },
+          layout: 'noBorders'
+        },
+        {
+          style: 'primerSeccion',
+          table: {
+            widths: ['auto', 'auto'],
+            body: [
+              ['Personal Entrevistado:', { text: this.personalV, fontSize: 10, colSpan: 1, style:'negris' }]
+            ]
+          },
+          layout: 'noBorders'
+        },
+        {
+          style: 'primerSeccion',
+          table: {
+            widths: ['auto', 'auto'],
+            body: [
+              ['Norma:', { text: this.normasV, fontSize: 10, colSpan: 1, style:'negris' }]
+            ]
+          },
+          layout: 'noBorders'
+        },
+        //aqui termina
+
+        //segunda seccion del documento, punto de la norma, pregunta, etc
+        {
+          style: 'segundaSeccion2',
+          color: '#444',
+          table: {
+            widths: [60, 200, 80, 60, 75],
+            body: tabla
+          }
+        },
+
+        //Tercer seccion del documento - auditor y fecha
+        {
+          style: 'tercerSeccion',
+          table: {
+            widths: ['auto', 140, 200, 'auto', 80],
+            body: [
+              ['Auditor(a): ', { text: this.auditorV, fontSize: 10, colSpan: 1, style:'negris' }, ' ', 'Fecha:', { text: this.fechaV, fontSize: 10, colSpan: 1, style:'negris' }]
+            ]
+          },
+          layout: 'noBorders'
+          //decoration:'underline',
+        },
+      ],
+      //disenio de las tablas
+      styles: {
+        header: {
+          fontSize: 18,
+          bold: true,
+          alignment: 'center',
+          margin: [0, 0, 0, 10]
+        },
+        negris:{
+          bold:false
+        },
+        negrit:{
+        bold: true
+        },
+        subheader: {
+          fontSize: 16,
+          bold: true,
+          margin: [0, 10, 0, 5]
+        },
+        primerSeccion: {
+          bold: true,
+          fontSize: 11,
+          color: 'black',
+          margin: [0, 5, 0, 0]
+        },
+        segundaSeccion: {
+          bold: true,
+          fontSize: 11,
+          color: 'black',
+          //margin: [0, 25, 0, 0]
+        },
+        segundaSeccion2: {
+          bold: true,
+          fontSize: 11,
+          color: 'black',
+          margin: [0, 25, 0, 0]
+        },
+        tercerSeccion: {
+          bold: true,
+          fontSize: 11,
+          color: 'black',
+          margin: [0, 15, 0, 0]
+        },
+        titulo: {
+          bold: true,
+          fontSize: 20,
+          margin: [0, 5, 5, 25]
+        },
+        firma: {
+          margin: [170, 20, 0, 15]
+        },
+        tableHeader2: {
+          bold: true,
+          widths: [100, 220, 38, 50],
+          color: 'black'
+        },
+      }
+    };
+
+    if ( opcion === 1 ) {
+      pdfMake.createPdf(docVerificacion).download('lista-verificacion.pdf');
+    }
+    if ( opcion === 2 ) {
+      pdfMake.createPdf(docVerificacion).open();
+    }
+    if ( opcion === 3 ) {
+      pdfMake.createPdf(docVerificacion).print();
+    }
 
   }
 
