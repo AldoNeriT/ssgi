@@ -48,6 +48,21 @@
             </div>
         </div>
     </div>
+
+    <div class="row">
+        <div *ngIf="(_usuarioService.usuario.tipo_Usuario === 'ROOT') || (_usuarioService.usuario.tipo_Usuario === 'ADMIN') || (_usuarioService.usuario.tipo_Usuario === 'AUDITOR_LIDER')" class="col-md-6 col-sm-12">
+            <div (click)="agregarInforme()" class="card text-dark pointer" style="background-color: #e2e2e2;">
+                <div class="card-body">
+                    <div class="d-flex">
+                        <div class="stats">
+                            <h1 class="text-dark">Agregar Informe</h1>
+                            <h6 class="text-dark">Si deseas empezar con el informe, da click aquí</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div *ngIf="pasosV === 3">
@@ -83,7 +98,7 @@
     </div>
 
     <div class="row">
-        <div class="col-md-12 col-sm-12">
+        <div class="col-md-6 col-sm-12">
             <div class="card bg-secondary text-white">
                 <div class="card-body">
                     <div class="d-flex">
@@ -93,6 +108,18 @@
                             <button (click)="redirigirInforme()" class="btn btn-rounded btn-outline btn-light m-t-10 font-14">Ver</button>
                         </div>
                         <div class="stats-icon text-right align-self-end ml-auto"><i class="fa fa-file-text display-5 op-3 text-dark"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="(_usuarioService.usuario.tipo_Usuario === 'ROOT') || (_usuarioService.usuario.tipo_Usuario === 'ADMIN') || (_usuarioService.usuario.tipo_Usuario === 'AUDITOR_LIDER')" class="col-md-6 col-sm-12">
+            <div (click)="agregarBitacora()" class="card text-dark pointer" style="background-color: #e2e2e2;">
+                <div class="card-body">
+                    <div class="d-flex">
+                        <div class="stats">
+                            <h1 class="text-dark">Agregar Bitácora de Acciones</h1>
+                            <h6 class="text-dark">Si deseas empezar con la Bitácora de Acciones, da click aquí</h6>
+                        </div>
                     </div>
                 </div>
             </div>

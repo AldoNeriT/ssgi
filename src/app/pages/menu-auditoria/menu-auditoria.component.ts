@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AuditoriaService } from '../../services/service.index';
+import { AuditoriaService, UsuarioService } from '../../services/service.index';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Auditoria } from '../../models/auditoria.model';
+
 
 // declare function init_plugins();
 
@@ -16,6 +18,7 @@ export class MenuAuditoriaComponent implements OnInit {
   pasosV: number;
 
   constructor( public _auditoriaService: AuditoriaService,
+               public _usuarioService: UsuarioService,
                public router: Router,
                public activatedRoute: ActivatedRoute ) {
     activatedRoute.params.subscribe( params => {
@@ -55,5 +58,57 @@ export class MenuAuditoriaComponent implements OnInit {
 
   redirigirBitacora() {
     this.router.navigate(['/bitacora/' + this.id]);
+  }
+
+
+  agregarInforme() {
+    console.log('Aquí se agregara el Informe');
+
+    this.cargando = true;
+
+    // this._auditoriaService.cambiarPaso3( auditoria )
+    //       .subscribe( resp => {
+    //         this.cargando = false;
+    //         this.cargarAuditoria( this.id );
+    //       });
+
+
+    // this._auditoriaService.cargarAuditoria( this.id )
+    //       .subscribe( auditoria2 => {
+
+    //         console.log(auditoria2);
+
+    //         // let auditoria = new Auditoria(
+    //         //   this.planV + '_' + this.formaEditar.value.nombre,
+    //         //   this.formaEditar.value.nombre,
+    //         //   objNormas,
+    //         //   fechaI,
+    //         //   fechaF,
+    //         //   this.idPlan,
+    //         //   objAuditor,
+    //         //   this.formaEditar.value.objetivos,
+    //         //   this.formaEditar.value.alcance,
+    //         //   this.formaEditar.value.contacto,
+    //         //   this.idAuditoria,
+    //         //   1
+    //         // );
+
+    //         this.cargando = false;
+
+    //         this.cargarAuditoria( this.id );
+
+    //       });
+  }
+
+  agregarBitacora() {
+    console.log('Aquí se agregara la Bitácora');
+
+    this.cargando = true;
+
+    // this._auditoriaService.cambiarPaso4( auditoria )
+    //       .subscribe( resp => {
+    //         this.cargando = false;
+    //         this.cargarAuditoria( this.id );
+    //       });
   }
 }

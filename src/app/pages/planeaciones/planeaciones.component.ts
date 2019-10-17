@@ -170,13 +170,6 @@ export class PlaneacionesComponent implements OnInit {
             this.cargarAuditoria( this.id );
           });
 
-    // $('#modalNormaAgregar').modal('hide');
-
-    // $('.show').hide();
-    // $('body').removeClass('modal-open');
-    // this.router.navigateByUrl('#/normas', {skipLocationChange: true}).then(() =>
-    // this.router.navigate(['/normas']));
-
   }
 
   eliminarPlaneacion( planeacion: Planeacion ) {

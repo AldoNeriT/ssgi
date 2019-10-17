@@ -176,4 +176,53 @@ export class ListaVerificacionService {
 
   }
 
+  cambiarEnviar( idPlaneacion: string ) {
+
+    let url = URL_SERVICIOS + '/verificacion/planeacion/' + idPlaneacion;
+
+    // *** TOKEN ***
+    // url += '?token=' + this.token;
+
+    return this.http.put( url, null )
+    .pipe(
+      map( (resp: any ) => {
+        Swal.fire({
+          title: 'Listas de Verificación Enviadas',
+          text: 'Espera a que validen las Listas de Verificación para completarla',
+          type: 'success'
+        });
+        return resp.planeacion;
+      }),
+      catchError( err => {
+        Swal.fire('Error', err.error.err.message, 'error');
+        return throwError( err ) ;
+      })
+    );
+
+  }
+
+  cambiarValido( idPlaneacion: string ) {
+
+    let url = URL_SERVICIOS + '/verificacion/planeacion/validar/' + idPlaneacion;
+
+    // *** TOKEN ***
+    // url += '?token=' + this.token;
+
+    return this.http.put( url, null )
+    .pipe(
+      map( (resp: any ) => {
+        Swal.fire({
+          title: 'Listas de Verificación Validadas',
+          type: 'success'
+        });
+        return resp.planeacion;
+      }),
+      catchError( err => {
+        Swal.fire('Error', err.error.err.message, 'error');
+        return throwError( err ) ;
+      })
+    );
+
+  }
+
 }

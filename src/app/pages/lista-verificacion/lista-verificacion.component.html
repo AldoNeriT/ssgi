@@ -119,7 +119,7 @@
                         </div>
 
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-themecolor waves-effect">Envíar para Validar</button>
+                            <button (click)="cambiarEnviar()" type="button" class="btn btn-themecolor waves-effect">Envíar para Validar</button>
                             <button (click)="regresar()" type="button" class="btn btn-default" data-dismiss="modal">Regresar</button>
                         </div>
 
@@ -194,8 +194,8 @@
                         </div>
 
                         <div class="modal-footer">
-                            <button (click)="validarContrasenaLista( _usuarioService.usuario )" *ngIf="_usuarioService.usuario.tipo_Usuario === 'AUDITOR_LIDER'" type="button" class="btn btn-themecolor waves-effect">Validar</button>
-                            <a *ngIf="_usuarioService.usuario.tipo_Usuario === 'AUDITOR_LIDER'" class="btn btn-outline-secondary disabled" role="button" aria-disabled="true">Validado</a>
+                            <button (click)="validarContrasenaLista( _usuarioService.usuario )" *ngIf="(_usuarioService.usuario.tipo_Usuario === 'AUDITOR_LIDER') && (btnValidar === true)" type="button" class="btn btn-themecolor waves-effect">Validar</button>
+                            <a *ngIf="(_usuarioService.usuario.tipo_Usuario === 'AUDITOR_LIDER') && (btnValidar === false)" class="btn btn-outline-secondary disabled" role="button" aria-disabled="true">Validado</a>
                             <button (click)="regresar()" type="button" class="btn btn-default">Regresar</button>
                         </div>
 

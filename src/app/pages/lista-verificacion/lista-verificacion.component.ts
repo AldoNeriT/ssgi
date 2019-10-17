@@ -51,6 +51,8 @@ export class ListaVerificacionComponent implements OnInit {
   formaEditar2: FormGroup;
   formaEntrevistado: FormGroup;
 
+  btnValidar: boolean;
+
   constructor( public _planeacionService: PlaneacionService,
                public _usuarioService: UsuarioService,
                public _auditoriaService: AuditoriaService,
@@ -189,7 +191,26 @@ export class ListaVerificacionComponent implements OnInit {
       this._listaVerificacionService.cargarListasPlaneacionUsuarioEnviar( idP, idU)
           .subscribe( listas => {
             this.listas = listas;
-            console.log(this.listas);
+            // console.log(this.listas);
+
+            let i = 0;
+            let long = listas.length;
+            // console.log(i, long);
+
+            for (let val of listas) {
+              if ( val.valido === true ) {
+                i++;
+              }
+            }
+
+            if ( i === long ) {
+              this.btnValidar = false;
+              // console.log('todas estan validadas');
+            } else {
+              this.btnValidar = true;
+              // console.log('alguna esta invalidada');
+            }
+
             this.cargando = false;
             floating_labels();
             inicializando_datePicker();
@@ -198,7 +219,7 @@ export class ListaVerificacionComponent implements OnInit {
       this._listaVerificacionService.cargarListasPlaneacionUsuario( idP, idU)
           .subscribe( listas => {
             this.listas = listas;
-            console.log(this.listas);
+            // console.log(this.listas);
             this.cargando = false;
             floating_labels();
             inicializando_datePicker();
@@ -224,7 +245,7 @@ export class ListaVerificacionComponent implements OnInit {
       'fecha'
     );
 
-    console.log(listaVerificacion);
+    // console.log(listaVerificacion);
 
     this._listaVerificacionService.crearListaVerificacion( listaVerificacion )
         .subscribe( resp => {
@@ -251,7 +272,7 @@ export class ListaVerificacionComponent implements OnInit {
 
   formEditable2( listaVerificacion: ListaVerificacion ) {
 
-    console.log(listaVerificacion);
+    // console.log(listaVerificacion);
 
     this.formaEditar2.setValue({
       documentoE: listaVerificacion.documento,
@@ -311,7 +332,7 @@ export class ListaVerificacionComponent implements OnInit {
       this.idLista
     );
 
-    console.log(listaVerificacion);
+    // console.log(listaVerificacion);
 
 
     this._listaVerificacionService.editarListaVerificacion( listaVerificacion )
@@ -341,7 +362,7 @@ export class ListaVerificacionComponent implements OnInit {
       this.idLista
     );
 
-    console.log(listaVerificacion);
+    // console.log(listaVerificacion);
 
 
     this._listaVerificacionService.completarListaVerificacion( listaVerificacion )
@@ -414,16 +435,16 @@ export class ListaVerificacionComponent implements OnInit {
         );
         this._usuarioService.validarContrasenaAudiL( usuario )
           .subscribe( resp => {
-            console.log(resp);
-            // this._auditoriaService.validarAuditoria( auditoria )
-            //     .subscribe( resp2 => {
-            //       floating_labels();
-            //       inicializando_datePicker();
-            //       this.cargarPlaneacion( this.idP );
-            //       this.cargarNormas();
-            //       this.cargarUsuario( this.idU );
-            //       this.cargarListas( this.idP, this.idU);
-            //     });
+            // console.log(resp);
+            this._listaVerificacionService.cambiarValido( this.idP )
+                .subscribe( resp2 => {
+                    floating_labels();
+                    inicializando_datePicker();
+                    this.cargarPlaneacion( this.idP );
+                    this.cargarNormas();
+                    this.cargarUsuario( this.idU );
+                    this.cargarListas( this.idP, this.idU);
+          });
           });
       } else {
         if ( result.value === undefined) {
@@ -440,6 +461,20 @@ export class ListaVerificacionComponent implements OnInit {
         }
       }
     });
+
+  }
+
+  cambiarEnviar() {
+
+    this._listaVerificacionService.cambiarEnviar( this.idP )
+          .subscribe( resp => {
+              floating_labels();
+              inicializando_datePicker();
+              this.cargarPlaneacion( this.idP );
+              this.cargarNormas();
+              this.cargarUsuario( this.idU );
+              this.cargarListas( this.idP, this.idU);
+          });
 
   }
 
