@@ -24,6 +24,7 @@ import { ListaVerificacionComponent } from './lista-verificacion/lista-verificac
 import { InformeComponent } from './informe/informe.component';
 import { BitacoraAccionesComponent } from './bitacora-acciones/bitacora-acciones.component';
 import { ListasComponent } from './lista-verificacion/listas.component';
+import { TablaComponent } from './tabla/tabla.component';
 
 const pagesRoutes: Routes = [
     {
@@ -78,6 +79,7 @@ const pagesRoutes: Routes = [
                 canActivate: [ AbcGuard ],
                 data: { titulo: 'Auditoría' }
             },
+            { path: 'tabla', component: TablaComponent, data: { titulo: 'Tabla' } },
             { path: 'menu-auditoria/:idA', component: MenuAuditoriaComponent, data: { titulo: 'Menú de Auditorias' } },
             { path: 'planeacion/:idA', component: PlaneacionesComponent, data: { titulo: 'Planeación' } },
             { path: 'planeacionA/:accion/:idA', component: PlaneacionComponent, data: { titulo: 'Planeación' } },

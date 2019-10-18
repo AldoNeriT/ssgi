@@ -29,6 +29,7 @@ import { BitacoraAccionesComponent } from './bitacora-acciones/bitacora-acciones
 import { PlaneacionComponent } from './planeaciones/planeacion.component';
 import { ListasComponent } from './lista-verificacion/listas.component';
 import { ListaComponent } from './lista-verificacion/lista.component';
+import { TablaComponent } from './tabla/tabla.component';
 
 
 @NgModule({
@@ -51,7 +52,8 @@ import { ListaComponent } from './lista-verificacion/lista.component';
         BitacoraAccionesComponent,
         PlaneacionComponent,
         ListasComponent,
-        ListaComponent
+        ListaComponent,
+        TablaComponent
     ],
     exports: [
         PrincipalComponent,

@@ -15,4 +15,5 @@ export { PlanService } from './plan/plan.service';
 export { AuditoriaService } from './auditoria/auditoria.service';
 export { PlaneacionService } from './planeacion/planeacion.service';
 export { ListaVerificacionService } from './listaVerificacion/lista-verificacion.service';
+export { TablaService } from './tabla/tabla.service';
 
