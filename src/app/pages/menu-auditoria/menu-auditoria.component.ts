@@ -60,44 +60,32 @@ export class MenuAuditoriaComponent implements OnInit {
     this.router.navigate(['/bitacora/' + this.id]);
   }
 
-
   agregarInforme() {
     console.log('Aquí se agregara el Informe');
 
     this.cargando = true;
 
-    // this._auditoriaService.cambiarPaso3( auditoria )
-    //       .subscribe( resp => {
-    //         this.cargando = false;
-    //         this.cargarAuditoria( this.id );
-    //       });
+    let auditoria = new Auditoria(
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      3
+    );
 
+    this._auditoriaService.cambiarPasos( this.id, auditoria )
+          .subscribe( resp => {
+            this.cargando = false;
+            this.cargarAuditoria( this.id );
+          });
 
-    // this._auditoriaService.cargarAuditoria( this.id )
-    //       .subscribe( auditoria2 => {
-
-    //         console.log(auditoria2);
-
-    //         // let auditoria = new Auditoria(
-    //         //   this.planV + '_' + this.formaEditar.value.nombre,
-    //         //   this.formaEditar.value.nombre,
-    //         //   objNormas,
-    //         //   fechaI,
-    //         //   fechaF,
-    //         //   this.idPlan,
-    //         //   objAuditor,
-    //         //   this.formaEditar.value.objetivos,
-    //         //   this.formaEditar.value.alcance,
-    //         //   this.formaEditar.value.contacto,
-    //         //   this.idAuditoria,
-    //         //   1
-    //         // );
-
-    //         this.cargando = false;
-
-    //         this.cargarAuditoria( this.id );
-
-    //       });
   }
 
   agregarBitacora() {
@@ -105,10 +93,25 @@ export class MenuAuditoriaComponent implements OnInit {
 
     this.cargando = true;
 
-    // this._auditoriaService.cambiarPaso4( auditoria )
-    //       .subscribe( resp => {
-    //         this.cargando = false;
-    //         this.cargarAuditoria( this.id );
-    //       });
+    let auditoria = new Auditoria(
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      4
+    );
+
+    this._auditoriaService.cambiarPasos( this.id, auditoria )
+          .subscribe( resp => {
+            this.cargando = false;
+            this.cargarAuditoria( this.id );
+          });
   }
 }

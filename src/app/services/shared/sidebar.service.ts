@@ -55,6 +55,7 @@ export class SidebarService {
           { titulo: 'Usuarios', url: '/usuarios' },
           { titulo: 'Normas', url: '/normas' },
           { titulo: 'Procesos', url: '/procesos' },
+          { titulo: 'Matriz del Informe', url: '/matriz' },
           { titulo: 'Plan de Auditorías', url: '/planes' }
         ]
       }
@@ -80,6 +81,7 @@ export class SidebarService {
           { titulo: 'Usuarios', url: '/usuarios' },
           { titulo: 'Normas', url: '/normas' },
           { titulo: 'Procesos', url: '/procesos' },
+          { titulo: 'Matriz del Informe', url: '/matriz' },
           { titulo: 'Plan de Auditorías', url: '/planes' }
         ]
       }
@@ -105,6 +107,7 @@ export class SidebarService {
           { titulo: 'Usuarios', url: '/usuarios' },
           { titulo: 'Normas', url: '/normas' },
           { titulo: 'Procesos', url: '/procesos' },
+          { titulo: 'Matriz del Informe', url: '/matriz' },
           { titulo: 'Plan de Auditorías', url: '/planes' }
         ]
       }

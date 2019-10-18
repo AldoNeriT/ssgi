@@ -100,4 +100,31 @@ export class TablaComponent implements OnInit {
 
   }
 
+  eliminarFila( tabla: Tabla ) {
+
+    Swal.fire({
+      title: '¡Advertencia!',
+      text: `¿Estás seguro de esta fila?`,
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí',
+      cancelButtonText: 'No',
+      cancelButtonColor: '#e74c3c',
+      animation: false,
+      customClass: {
+        popup: 'animated tada'
+      }
+    }).then((eliminar) => {
+      if (eliminar.value) {
+        this._tablaService.eliminarFila( tabla._id )
+          .subscribe( (resp: any) => {
+            floating_labels();
+            this.cargarNormas();
+            this.cargarTablas();
+          } );
+      }
+    });
+
+  }
+
 }

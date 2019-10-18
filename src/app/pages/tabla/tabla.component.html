@@ -1,28 +1,34 @@
 <div class="row">
     <div class="col-12">
         <div class="card">
-            <div class="card-body">
+            <div class="card-body table-responsive">
 
-                <table class="table full-color-table full-muted-table hover-table">
+                <table class="table full-color-table full-info-table hover-table">
                     <thead class="text-center">
                         <tr>
                             <th>Número</th>
                             <th>Requisito de la Norma</th>
-                            <th *ngFor="let norm of normas">{{ norm.nombreNorma }}</th>
+                            <th *ngFor="let norm of normas" class="text-center">{{ norm.nombreNorma }}</th>
+                            <th class="text-center"></th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr *ngFor="let tab of tablas">
                             <td>{{ tab.numero }}</td>
                             <td>{{ tab.requisito }}</td>
-                            <td *ngFor="let norm of normas">
+                            <td *ngFor="let norm of normas" class="text-center">
                                 <span *ngFor=" let normTab of tab.normas">
-                                    <span *ngIf="norm._id === normTab._id">X</span>
+                                    <span *ngIf="norm._id === normTab._id" class="font-bold">X</span>
                                 </span>
                             </td>
+                            <td class="text-center"><button (click)="eliminarFila( tab )" class="btn btn-outline-danger btn-sm"><i class="fa fa-trash-o"></i></button></td>
                         </tr>
                         <tr class="pointer text-center">
-                            <td colspan="2" data-toggle="modal" data-target="#modalTablaAgregar"><i class="mdi mdi-plus"></i></td>
+                            <!-- <td colspan="2" data-toggle="modal" data-target="#modalTablaAgregar"><i class="mdi mdi-plus"></i></td> -->
+                            <td class="text-info" data-toggle="modal" data-target="#modalTablaAgregar"><i class="mdi mdi-plus"></i> Fila</td>
+                            <td data-toggle="modal" data-target="#modalTablaAgregar"></td>
+                            <td *ngFor="let norm of normas" data-toggle="modal" data-target="#modalTablaAgregar"></td>
+                            <td data-toggle="modal" data-target="#modalTablaAgregar"></td>
                         </tr>
                     </tbody>
                 </table>
@@ -80,7 +86,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="exampleModalLabel1">Agregar Lista</h4>
+                <h4 class="modal-title" id="exampleModalLabel1">Agregar Fila</h4>
                 <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button> -->
             </div>
             <div class="modal-body">

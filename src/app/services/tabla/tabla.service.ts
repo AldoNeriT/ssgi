@@ -79,4 +79,30 @@ export class TablaService {
 
   }
 
+  eliminarFila( id: string ) {
+
+    let url = URL_SERVICIOS + '/tabla/' + id;
+
+    // *** TOKEN ***
+    // url += '?token=' + this.token;
+
+    return this.http.delete( url )
+    .pipe(
+      map( (resp: any ) => {
+        Swal.fire({
+          title: 'Fila Eliminada',
+          type: 'success',
+          showConfirmButton: false,
+          timer: 2000
+        });
+        return resp;
+      }),
+      catchError( err => {
+        Swal.fire('Error', err.error.err.message, 'error');
+        return throwError( err ) ;
+      })
+    );
+
+  }
+
 }

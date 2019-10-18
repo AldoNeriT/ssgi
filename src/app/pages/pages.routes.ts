@@ -72,6 +72,12 @@ const pagesRoutes: Routes = [
                 canActivate: [ AbcGuard ],
                 data: { titulo: 'Procesos' }
             },
+            {
+                path: 'matriz',
+                component: TablaComponent,
+                canActivate: [ AbcGuard ],
+                data: { titulo: 'Matriz del Informe' }
+            },
             { path: 'planes', component: PlanesComponent, data: { titulo: 'Plan de Auditorías' } },
             {
                 path: 'auditoria/:id',
@@ -79,7 +85,6 @@ const pagesRoutes: Routes = [
                 canActivate: [ AbcGuard ],
                 data: { titulo: 'Auditoría' }
             },
-            { path: 'tabla', component: TablaComponent, data: { titulo: 'Tabla' } },
             { path: 'menu-auditoria/:idA', component: MenuAuditoriaComponent, data: { titulo: 'Menú de Auditorias' } },
             { path: 'planeacion/:idA', component: PlaneacionesComponent, data: { titulo: 'Planeación' } },
             { path: 'planeacionA/:accion/:idA', component: PlaneacionComponent, data: { titulo: 'Planeación' } },

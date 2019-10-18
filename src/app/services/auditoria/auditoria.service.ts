@@ -241,42 +241,18 @@ export class AuditoriaService {
 
   }
 
-  cambiarPaso3( idAuditoria: string ) {
+  cambiarPasos( idAuditoria: string, auditoria: Auditoria ) {
 
-    let url = URL_SERVICIOS + '/sr/' + idAuditoria;
+    let url = URL_SERVICIOS + '/auditoria/pasos/' + idAuditoria;
 
     // *** TOKEN ***
     // url += '?token=' + this.token;
 
-    return this.http.put( url, null )
+    return this.http.put( url, auditoria )
     .pipe(
       map( (resp: any ) => {
         Swal.fire({
           title: 'Puedes empezar el Informe',
-          type: 'success'
-        });
-        return resp.planeacion;
-      }),
-      catchError( err => {
-        Swal.fire('Error', err.error.err.message, 'error');
-        return throwError( err ) ;
-      })
-    );
-
-  }
-
-  cambiarPaso4( idAuditoria: string ) {
-
-    let url = URL_SERVICIOS + '/sr/' + idAuditoria;
-
-    // *** TOKEN ***
-    // url += '?token=' + this.token;
-
-    return this.http.put( url, null )
-    .pipe(
-      map( (resp: any ) => {
-        Swal.fire({
-          title: 'Puedes empezar la Bitacora de Acciones',
           type: 'success'
         });
         return resp.planeacion;
