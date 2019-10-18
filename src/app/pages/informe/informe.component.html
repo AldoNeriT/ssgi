@@ -1,1 +1,397 @@
-<h1>informe</h1>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Título</h4>
+                <div class="row">
+                    <div class="col-12">
+                        <hr class="m-t-0 m-b-40">
+                    </div>
+                </div>
+                <div *ngIf="!mostrarFormTitulo" class="row">
+                    <div class="col-12">
+                        <h6 class="card-subtitle">No. de Auditoría: <span class="font-bold">###</span></h6>
+                        <h6 class="card-subtitle">Proceso: <span class="font-bold">###</span></h6>
+                        <h6 class="card-subtitle">Fecha: <span class="font-bold">###</span></h6>
+                        <h6 class="card-subtitle">Auditor Líder: <span class="font-bold">###</span></h6>
+                        <h6 class="card-subtitle">Grupo Auditor: <span class="font-bold">###</span></h6>
+                        <button (click)="mFormTitulo()" class="btn btn-outline-secondary btn-sm btn-rounded">Editar Campos</button>
+                    </div>
+                </div>
+                <div *ngIf="mostrarFormTitulo" class="row">
+                    <div class="col-12">
+                        <form id="formTitulo" class="floating-labels m-t-0 " ngNativeValidate>
+                            <h6 class="card-subtitle">No. de Auditoría: <span class="font-bold">???</span></h6>
+                            <div class="form-group m-b-40 m-t-40 focused">
+                                <input name="proceso" id="proceso" type="text" class="form-control" required>
+                                <span class="bar"></span>
+                                <label for="proceso">Proceso:</label>
+                            </div>
+                            <div class="form-group m-b-40 m-t-40 focused">
+                                <input name="fecha" id="fecha" type="text" class="form-control datepicker-autoclose" required>
+                                <span class="bar"></span>
+                                <label for="fecha">Fecha:</label>
+                            </div>
+                            <h6 class="card-subtitle">Auditor Líder: <span class="font-bold">###</span></h6>
+                            <h6 class="card-subtitle">Grupo Auditor: <span class="font-bold">###</span></h6>
+                            <button class="btn btn-outline-secondary btn-sm btn-rounded" type="sumbit">Guardar Cambios</button>&nbsp;
+                            <button (click)="mFormTitulo()" class="btn btn-outline-secondary btn-sm btn-rounded">Cancelar</button>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================== -->
+<!-- OBJETIVO -->
+<!-- ============================================================== -->
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Objetivo</h4>
+                <div class="row">
+                    <div class="col-12">
+                        <hr class="m-t-0 m-b-40">
+                    </div>
+                </div>
+                <p class="card-text">Aqui va el objetivo</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================== -->
+<!-- ALCANCE -->
+<!-- ============================================================== -->
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Alcance</h4>
+                <div class="row">
+                    <div class="col-12">
+                        <hr class="m-t-0 m-b-40">
+                    </div>
+                </div>
+                <p class="card-text">Aqui va el alcance</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================== -->
+<!-- PERSONAL CONTACTADO -->
+<!-- ============================================================== -->
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Personal Contactado</h4>
+                <h6 class="card-subtitle  text-themecolor">Anotar al personal contactado responsable del proceso de acuerdo a la estructura orgánica del Instituto Tecnológico Centro, ejemp: Director(a), Subdirector(a) y Jefe(a) de Departamento.</h6>
+                <h6 class="card-subtitle  text-themecolor"><span class="font-bold">Nota: </span>El personal contactado solo es representativo de los cargos más relevantes en cada proceso.</h6>
+                <div class="row">
+                    <div class="col-12">
+                        <hr class="m-t-0 m-b-40">
+                    </div>
+                </div>
+                <table class="table full-color-table full-info-table hover-table">
+                    <thead class="text-center">
+                        <tr>
+                            <th class="text-center">Nombre</th>
+                            <th class="text-center">Puesto</th>
+                            <th class="text-center"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="text-center">
+                            <td>Aldo Neri</td>
+                            <td>Jefe</td>
+                            <td class="text-center"><button class="btn btn-outline-danger btn-sm"><i class="fa fa-trash-o"></i></button></td>
+                        </tr>
+                        <tr class="text-center">
+                            <td>Aldo Neri</td>
+                            <td>Jefe</td>
+                            <td class="text-center"><button class="btn btn-outline-danger btn-sm"><i class="fa fa-trash-o"></i></button></td>
+
+                        </tr>
+                        <tr class="text-center">
+                            <td>Aldo Neri</td>
+                            <td>Jefe</td>
+                            <td><button class="btn btn-outline-danger btn-sm"><i class="fa fa-trash-o"></i></button></td>
+
+                        </tr>
+                        <tr class="text-center">
+                            <td>Aldo Neri</td>
+                            <td>Jefe</td>
+                            <td><button class="btn btn-outline-danger btn-sm"><i class="fa fa-trash-o"></i></button></td>
+
+                        </tr>
+                        <tr class="text-center">
+                            <td>Aldo Neri</td>
+                            <td>Jefe</td>
+                            <td><button class="btn btn-outline-danger btn-sm"><i class="fa fa-trash-o"></i></button></td>
+
+                        </tr>
+                        <tr class="text-center pointer">
+                            <td colspan="3"><i class="mdi mdi-plus"></i></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================== -->
+<!-- NO CONFORMIDADES -->
+<!-- ============================================================== -->
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">No Conformidades</h4>
+                <h6 class="card-subtitle  text-themecolor"><span class="font-bold">Nota: </span>Esta parte incrementa dependiendo de las Tablas de "No Conformidades" y "Oportunidades de mejora".</h6>
+                <div class="row">
+                    <div class="col-12">
+                        <hr class="m-t-0 m-b-40">
+                    </div>
+                </div>
+                <p class="card-text">En la revisión al Sistema de Gestión Integral se encontraron un total de <span class="font-bold">N</span> No Conformidades y <span class="font-bold">N</span> Oportunidades de Mejora.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================== -->
+<!-- TABLA -->
+<!-- ============================================================== -->
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Tabla</h4>
+                <div class="row">
+                    <div class="col-12">
+                        <hr class="m-t-0 m-b-40">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================== -->
+<!-- OPORTUNIDADES DE MEJORA -->
+<!-- ============================================================== -->
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Oportunidades de Mejora</h4>
+                <h6 class="card-subtitle text-themecolor text-themecolor">Anotar las oportunidades de mejora detectadas durante la auditoria.</h6>
+                <div class="row">
+                    <div class="col-12">
+                        <hr class="m-t-0 m-b-40">
+                    </div>
+                </div>
+                <table class="table full-color-table full-info-table hover-table">
+                    <thead class="text-center">
+                        <tr>
+                            <th class="text-center">Oportunidades de Mejora</th>
+                            <th class="text-center"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="text-center">
+                            <td>1</td>
+                            <td class="text-center"><button class="btn btn-outline-danger btn-sm"><i class="fa fa-trash-o"></i></button></td>
+                        </tr>
+                        <tr class="text-center">
+                            <td>2</td>
+                            <td class="text-center"><button class="btn btn-outline-danger btn-sm"><i class="fa fa-trash-o"></i></button></td>
+                        </tr>
+                        <tr class="text-center">
+                            <td>3</td>
+                            <td class="text-center"><button class="btn btn-outline-danger btn-sm"><i class="fa fa-trash-o"></i></button></td>
+                        </tr>
+                        <tr class="text-center">
+                            <td>4</td>
+                            <td class="text-center"><button class="btn btn-outline-danger btn-sm"><i class="fa fa-trash-o"></i></button></td>
+                        </tr>
+                        <tr class="text-center">
+                            <td>5</td>
+                            <td class="text-center"><button class="btn btn-outline-danger btn-sm"><i class="fa fa-trash-o"></i></button></td>
+                        </tr>
+                        <tr class="text-center pointer">
+                            <td colspan="2"><i class="mdi mdi-plus"></i></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================== -->
+<!-- COMENTARIOS -->
+<!-- ============================================================== -->
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Comentarios</h4>
+                <h6 class="card-subtitle text-themecolor text-themecolor">Anotar los comentarios sobre la apertura y disposición de las personas responsables de los procesos durante la auditoria.</h6>
+                <div class="row">
+                    <div class="col-12">
+                        <hr class="m-t-0 m-b-40">
+                    </div>
+                </div>
+
+                <div *ngIf="!mostrarFormCom" class="row">
+                    <div class="col-12">
+                        <p class="card-text">Lorem ipsum dolor sit amet</p>
+                        <button (click)="mFormCom()" class="btn btn-outline-secondary btn-sm btn-rounded">Editar</button>
+                    </div>
+                </div>
+                <div *ngIf="mostrarFormCom" class="row">
+                    <div class="col-12">
+                        <form id="formComentarios" class="floating-labels m-t-0 " ngNativeValidate>
+                            <div class="form-group m-b-40 m-t-40 focused">
+                                <textarea name="comentarios" id="comentarios" type="text" class="form-control" required></textarea>
+                                <span class="bar"></span>
+                                <label for="comentarios">Comentarios:</label>
+                            </div>
+                            <button class="btn btn-outline-secondary btn-sm btn-rounded" type="sumbit">Guardar Cambios</button>&nbsp;
+                            <button (click)="mFormCom()" class="btn btn-outline-secondary btn-sm btn-rounded">Cancelar</button>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================== -->
+<!-- NO CONFORMIDADES -->
+<!-- ============================================================== -->
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">No Conformidades</h4>
+                <h6 class="card-subtitle text-themecolor text-themecolor">Anotar las conclusiones a las que se llegó en la auditoria punto 5 de la descripción del procedimiento.</h6>
+                <div class="row">
+                    <div class="col-12">
+                        <hr class="m-t-0 m-b-40">
+                    </div>
+                </div>
+                <table class="table full-color-table full-info-table hover-table">
+                    <thead class="text-center">
+                        <tr>
+                            <th class="text-center">No.</th>
+                            <th class="text-center">Descripción del Hallazgo</th>
+                            <th class="text-center">Requisito</th>
+                            <th class="text-center"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="text-center">
+                            <td>1</td>
+                            <td>Jefe</td>
+                            <td>NA</td>
+                            <td class="text-center"><button class="btn btn-outline-danger btn-sm"><i class="fa fa-trash-o"></i></button></td>
+                        </tr>
+                        <tr class="text-center">
+                            <td>2</td>
+                            <td>Jefe</td>
+                            <td>NA</td>
+                            <td class="text-center"><button class="btn btn-outline-danger btn-sm"><i class="fa fa-trash-o"></i></button></td>
+                        </tr>
+                        <tr class="text-center">
+                            <td>3</td>
+                            <td>Jefe</td>
+                            <td>NA</td>
+                            <td class="text-center"><button class="btn btn-outline-danger btn-sm"><i class="fa fa-trash-o"></i></button></td>
+                        </tr>
+                        <tr class="text-center">
+                            <td>4</td>
+                            <td>Jefe</td>
+                            <td>NA</td>
+                            <td class="text-center"><button class="btn btn-outline-danger btn-sm"><i class="fa fa-trash-o"></i></button></td>
+                        </tr>
+                        <tr class="text-center">
+                            <td>5</td>
+                            <td>Jefe</td>
+                            <td>NA</td>
+                            <td class="text-center"><button class="btn btn-outline-danger btn-sm"><i class="fa fa-trash-o"></i></button></td>
+                        </tr>
+                        <tr class="text-center pointer">
+                            <td colspan="4"><i class="mdi mdi-plus"></i></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================== -->
+<!-- CONCLUSIONES -->
+<!-- ============================================================== -->
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Conclusiones de Auditoría</h4>
+                <h6 class="card-subtitle text-themecolor">Anotar las conclusiones de la auditoria conforme al resultado obtenido declarando el nivel de madurez de los Sistemas de Gestión.</h6>
+                <div class="row">
+                    <div class="col-12">
+                        <hr class="m-t-0 m-b-40">
+                    </div>
+                </div>
+                <p class="card-text">Aquí van las conclusiones</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================== -->
+<!-- FIRMAS -->
+<!-- ============================================================== -->
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Firmas</h4>
+                <div class="row">
+                    <div class="col-12">
+                        <hr class="m-t-0 m-b-40">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================== -->
+<!-- FECHA -->
+<!-- ============================================================== -->
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Fecha</h4>
+                <div class="row">
+                    <div class="col-12">
+                        <hr class="m-t-0 m-b-40">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
