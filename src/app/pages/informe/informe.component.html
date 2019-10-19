@@ -23,15 +23,15 @@
                 </div>
                 <div *ngIf="mostrarFormTitulo" class="row">
                     <div class="col-12">
-                        <form id="formTitulo" class="floating-labels m-t-0 " ngNativeValidate>
+                        <form ngNativeValidate [formGroup]="formaTitulo" (ngSubmit)="editarTituloS()" id="formTitulo" class="floating-labels m-t-0 " ngNativeValidate>
                             <h6 class="card-subtitle">No. de Auditoría: <span class="font-bold">{{ noAuditoriaV }}</span></h6>
                             <div class="form-group m-b-40 m-t-40 focused">
-                                <input name="proceso" id="proceso" type="text" class="form-control" required>
+                                <input formControlName="proceso" name="proceso" id="proceso" type="text" class="form-control" required>
                                 <span class="bar"></span>
                                 <label for="proceso">Proceso:</label>
                             </div>
                             <div class="form-group m-b-40 m-t-40 focused">
-                                <input name="fecha" id="fecha" type="text" class="form-control datepicker-autoclose" required>
+                                <input formControlName="fecha" name="fecha" id="fecha" type="text" class="form-control datepicker-autoclose" required>
                                 <span class="bar"></span>
                                 <label for="fecha">Fecha:</label>
                             </div>
@@ -484,7 +484,7 @@
                             <div class="form-group m-b-40 m-t-40 focused">
                                 <input name="fechas" id="fechas" type="text" class="form-control input-daterange-datepicker" required>
                                 <span class="bar"></span>
-                                <label for="fechas">Fecha Inicial - Fecha Final</label>
+                                <label for="fechas">Fechas</label>
                             </div>
                             <button class="btn btn-outline-secondary btn-sm btn-rounded" type="sumbit">Guardar Cambios</button>&nbsp;
                             <button (click)="editarFechas()" class="btn btn-outline-secondary btn-sm btn-rounded">Cancelar</button>

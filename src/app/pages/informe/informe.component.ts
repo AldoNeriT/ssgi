@@ -5,6 +5,7 @@ import { Auditoria } from '../../models/auditoria.model';
 import { Usuario } from '../../models/usuario.model';
 import { Norma } from '../../models/norma.model';
 import { Institucion } from '../../models/institucion.model';
+import { Informe } from '../../models/informe.model';
 import { Tabla } from '../../models/tabla.model';
 import { Router, ActivatedRoute } from '@angular/router';
 
@@ -27,6 +28,10 @@ export class InformeComponent implements OnInit {
 
   normas: Norma[] = [];
   tablas: Tabla[] = [];
+  informe: Informe[] = [];
+
+  // Form
+  formaTitulo: FormGroup;
 
   totalNormas = 0;
 
@@ -64,6 +69,12 @@ export class InformeComponent implements OnInit {
     this.cargarUsuarios();
     this.cargarNormas();
     this.cargarTablas();
+    this.cargarInforme( this.idA );
+
+    this.formaTitulo = new FormGroup({
+      proceso: new FormControl( null, Validators.required ),
+      fecha: new FormControl( null, Validators.required )
+    });
   }
 
   cargarAuditoria( id: string ) {
@@ -93,8 +104,6 @@ export class InformeComponent implements OnInit {
             floating_labels();
             inicializando_datePicker();
             inicializando_dateRange();
-            this.cargarNormas();
-            this.cargarTablas();
           });
 
   }
@@ -130,8 +139,6 @@ export class InformeComponent implements OnInit {
                       floating_labels();
                       inicializando_datePicker();
                       inicializando_dateRange();
-                      this.cargarNormas();
-                      this.cargarTablas();
                     });
 
             // this.cargando = false;
@@ -153,6 +160,9 @@ export class InformeComponent implements OnInit {
             this.totalNormas = normas.length;
             // console.log(normas);
             this.cargando = false;
+            floating_labels();
+            inicializando_datePicker();
+            inicializando_dateRange();
           });
 
   }
@@ -166,10 +176,28 @@ export class InformeComponent implements OnInit {
             this.tablas = tablas;
             // console.log('Tablas: ', tablas);
             this.cargando = false;
+            floating_labels();
+            inicializando_datePicker();
+            inicializando_dateRange();
           });
 
   }
 
+  cargarInforme( idAudi: string ) {
+
+    this.cargando = true;
+
+    // this._informeService.cargarInforme( idAudi )
+    //       .subscribe( informe => {
+    //         this.informe = informe;
+    //         // console.log('Informe: ', informe);
+    //         this.cargando = false;
+    //         floating_labels();
+    //         inicializando_datePicker();
+    //         inicializando_dateRange();
+    //       });
+
+  }
 
 
 
@@ -192,6 +220,11 @@ export class InformeComponent implements OnInit {
     }
 
     console.log('Titulo');
+
+    // this.formaTitulo.setValue({
+    //   proceso: this.informe.proceso,
+    //   fecha: this.informe.fecha
+    // });
   }
 
   editarComentarios() {
@@ -256,6 +289,51 @@ export class InformeComponent implements OnInit {
     }
 
     console.log('Fecha de Emisión');
+  }
+
+  // ************************************************
+  // *** EDITADAS ***
+  // ************************************************
+
+  editarTituloS() {
+
+    // if ( this.formaTitulo.invalid ) {
+    //   console.log('Invalido');
+    //   return;
+    // }
+
+    let fech = $('#fecha').val() + '';
+
+    this.mostrarFormTitulo = false;
+
+    let informe = new Informe(
+      'idAuditoria',
+      this.formaTitulo.value.proceso,
+      fech,
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      'idInforme'
+    );
+
+    console.log('Informe: ', informe);
+
+    // this._informeService.editarTitulo( informe )
+    //         .subscribe( resp => {
+    //           floating_labels();
+    //           inicializando_datePicker();
+    //           inicializando_dateRange();
+          
+    //           this.cargarAuditoria( this.idA );
+    //           this.cargarUsuarios();
+    //           this.cargarNormas();
+    //           this.cargarTablas();
+    //         });
+
   }
 
 }
