@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 declare function floating_labels();
 declare function inicializando_datePicker();
+declare function inicializando_dateRange();
 
 @Component({
   selector: 'app-informe',
@@ -13,12 +14,15 @@ export class InformeComponent implements OnInit {
   mostrarFormTitulo = false;
   mostrarFormCom = false;
   mostrarFormConc = false;
+  mostrarFormFechas = false;
+  mostrarFormFechaEmision = false;
 
   constructor() { }
 
   ngOnInit() {
     floating_labels();
     inicializando_datePicker();
+    inicializando_dateRange();
   }
 
   mFormTitulo() {
@@ -26,6 +30,7 @@ export class InformeComponent implements OnInit {
 
     floating_labels();
     inicializando_datePicker();
+    inicializando_dateRange();
   }
 
   mFormCom() {
@@ -33,6 +38,7 @@ export class InformeComponent implements OnInit {
 
     floating_labels();
     inicializando_datePicker();
+    inicializando_dateRange();
   }
 
   mFormConc() {
@@ -40,6 +46,23 @@ export class InformeComponent implements OnInit {
 
     floating_labels();
     inicializando_datePicker();
+    inicializando_dateRange();
+  }
+
+  mFormFechas() {
+    this.mostrarFormFechas = !this.mostrarFormFechas;
+
+    floating_labels();
+    inicializando_datePicker();
+    inicializando_dateRange();
+  }
+
+  mFormFechaEmision() {
+    this.mostrarFormFechaEmision = !this.mostrarFormFechaEmision;
+
+    floating_labels();
+    inicializando_datePicker();
+    inicializando_dateRange();
   }
 
 }

@@ -1,8 +1,11 @@
+<!-- ============================================================== -->
+<!-- AUDITORIA -->
+<!-- ============================================================== -->
 <div class="row">
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Título</h4>
+                <h4 class="card-title">Auditoría: <span class="font-bold">###</span></h4>
                 <div class="row">
                     <div class="col-12">
                         <hr class="m-t-0 m-b-40">
@@ -137,7 +140,7 @@
 
                         </tr>
                         <tr class="text-center pointer">
-                            <td colspan="3"><i class="mdi mdi-plus"></i></td>
+                            <td colspan="3" data-toggle="modal" data-target="#modalAgregar1"><i class="mdi mdi-plus"></i></td>
                         </tr>
                     </tbody>
                 </table>
@@ -154,7 +157,7 @@
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">No Conformidades</h4>
-                <h6 class="card-subtitle  text-themecolor"><span class="font-bold">Nota: </span>Esta parte incrementa dependiendo de las Tablas de "No Conformidades" y "Oportunidades de mejora".</h6>
+                <h6 class="card-subtitle  text-themecolor"><span class="font-bold">Nota: </span>Esta parte incrementa dependiendo de las Tablas de "No Conformidades" y "Oportunidades de Mejora".</h6>
                 <div class="row">
                     <div class="col-12">
                         <hr class="m-t-0 m-b-40">
@@ -227,7 +230,7 @@
                             <td class="text-center"><button class="btn btn-outline-danger btn-sm"><i class="fa fa-trash-o"></i></button></td>
                         </tr>
                         <tr class="text-center pointer">
-                            <td colspan="2"><i class="mdi mdi-plus"></i></td>
+                            <td colspan="2" data-toggle="modal" data-target="#modalAgregar2"><i class="mdi mdi-plus"></i></td>
                         </tr>
                     </tbody>
                 </table>
@@ -331,7 +334,7 @@
                             <td class="text-center"><button class="btn btn-outline-danger btn-sm"><i class="fa fa-trash-o"></i></button></td>
                         </tr>
                         <tr class="text-center pointer">
-                            <td colspan="4"><i class="mdi mdi-plus"></i></td>
+                            <td colspan="4" data-toggle="modal" data-target="#modalAgregar3"><i class="mdi mdi-plus"></i></td>
                         </tr>
                     </tbody>
                 </table>
@@ -363,7 +366,7 @@
                 </div>
                 <div *ngIf="mostrarFormConc" class="row">
                     <div class="col-12">
-                        <form id="formComentarios" class="floating-labels m-t-0 " ngNativeValidate>
+                        <form id="formConclusiones" class="floating-labels m-t-0 " ngNativeValidate>
                             <div class="form-group m-b-40 m-t-40 focused">
                                 <textarea name="conclusiones" id="conclusiones" type="text" class="form-control" required></textarea>
                                 <span class="bar"></span>
@@ -384,33 +387,54 @@
 <!-- ============================================================== -->
 <div class="row">
     <div class="col-lg-4 col-md-12">
-        <div class="ribbon-wrapper card">
+        <div class="ribbon-wrapper card" style="height: 85%;">
             <div class="ribbon ribbon-info ribbon-right">Auditor Líder</div>
-            <div class="card-body">
-
+            <div class="card-body text-center">
+                <span class="font-bold">Aldo Neri</span>
             </div>
         </div>
     </div>
     <div class="col-lg-4 col-md-12">
-        <div class="ribbon-wrapper card">
+        <div class="ribbon-wrapper card" style="height: 85%;">
             <div class="ribbon ribbon-info ribbon-right">Recibí de Conformidad</div>
-            <div class="card-body">
-
+            <div class="card-body text-center">
+                <span class="font-bold">Adrián Ramos</span>
             </div>
         </div>
     </div>
     <div class="col-lg-4 col-md-12">
-        <div class="ribbon-wrapper card">
+        <div class="ribbon-wrapper card" style="height: 85%;">
             <div class="ribbon ribbon-info ribbon-right">Fechas de Auditoría</div>
-            <div class="card-body">
 
+            <div *ngIf="!mostrarFormFechas" class="card-body text-center">
+                <div class="row">
+                    <div class="col-12">
+                        <p class="card-text font-bold">10/30/2019 - 10/31/2019</p>
+                        <button (click)="mFormFechas()" class="btn btn-outline-secondary btn-sm btn-rounded">Editar</button>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="mostrarFormFechas" class="card-body">
+                <div class="row">
+                    <div class="col-12">
+                        <form id="formFechaEmision" class="floating-labels m-t-0 " ngNativeValidate>
+                            <div class="form-group m-b-40 m-t-40 focused">
+                                <input name="fechas" id="fechas" type="text" class="form-control input-daterange-datepicker" required>
+                                <span class="bar"></span>
+                                <label for="fechas">Fecha Inicial - Fecha Final</label>
+                            </div>
+                            <button class="btn btn-outline-secondary btn-sm btn-rounded" type="sumbit">Guardar Cambios</button>&nbsp;
+                            <button (click)="mFormFechas()" class="btn btn-outline-secondary btn-sm btn-rounded">Cancelar</button>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
 <!-- ============================================================== -->
-<!-- FECHA -->
+<!-- FECHA DE EMISIÓN DEL INFORME -->
 <!-- ============================================================== -->
 <div class="row">
     <div class="col-lg-4 col-md-12">
@@ -418,11 +442,128 @@
     <div class="col-lg-4 col-md-12">
         <div class="ribbon-wrapper card">
             <div class="ribbon ribbon-info ribbon-right">Fecha de Emisión del Informe</div>
-            <div class="card-body">
-
+            <div *ngIf="!mostrarFormFechaEmision" class="card-body text-center">
+                <div class="row">
+                    <div class="col-12">
+                        <p class="card-text font-bold">10/31/2019</p>
+                        <button (click)="mFormFechaEmision()" class="btn btn-outline-secondary btn-sm btn-rounded">Editar</button>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="mostrarFormFechaEmision" class="card-body">
+                <div class="row">
+                    <div class="col-12">
+                        <form id="formFechaEmision" class="floating-labels m-t-0 " ngNativeValidate>
+                            <div class="form-group m-b-40 m-t-40 focused">
+                                <input name="fechaEmision" id="fechaEmision" type="text" class="form-control datepicker-autoclose" required>
+                                <span class="bar"></span>
+                                <label for="fechaEmision">Fecha:</label>
+                            </div>
+                            <button class="btn btn-outline-secondary btn-sm btn-rounded" type="sumbit">Guardar Cambios</button>&nbsp;
+                            <button (click)="mFormFechaEmision()" class="btn btn-outline-secondary btn-sm btn-rounded">Cancelar</button>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
     <div class="col-lg-4 col-md-12">
+    </div>
+</div>
+
+<!-- ============================================================== -->
+<!-- MODAL PERSONAL CONTACTADO -->
+<!-- ============================================================== -->
+
+<div class="modal fade" id="modalAgregar1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalLabel1">Agregar Personal</h4>
+            </div>
+            <div class="modal-body">
+                <form class="floating-labels m-t-40" ngNativeValidate>
+                    <div class="form-group m-b-40">
+                        <input name="nombre" id="nombre" type="text" class="form-control" required>
+                        <span class="bar"></span>
+                        <label for="nombre">Nombre:</label>
+                    </div>
+                    <div class="form-group m-b-40">
+                        <input name="puesto" id="puesto" type="text" class="form-control" required>
+                        <span class="bar"></span>
+                        <label for="puesto">Puesto:</label>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-themecolor" data-dismiss="">Guardar</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================== -->
+<!-- MODAL OPORTUNIDADES DE MEJORA -->
+<!-- ============================================================== -->
+
+<div class="modal fade" id="modalAgregar2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalLabel1">Agregar Oportunidad de Mejora</h4>
+            </div>
+            <div class="modal-body">
+                <form class="floating-labels m-t-40" ngNativeValidate>
+                    <div class="form-group m-b-40">
+                        <input name="oportunidad" id="oportunidad" type="text" class="form-control" required>
+                        <span class="bar"></span>
+                        <label for="oportunidad">Oportunidad de Mejora:</label>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-themecolor" data-dismiss="">Guardar</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================== -->
+<!-- MODAL NO CONFORMIDADES -->
+<!-- ============================================================== -->
+
+<div class="modal fade" id="modalAgregar3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalLabel1">Agregar No Conformidad</h4>
+            </div>
+            <div class="modal-body">
+                <form class="floating-labels m-t-40" ngNativeValidate>
+                    <div class="form-group m-b-40">
+                        <input name="hallazgo" id="hallazgo" type="text" class="form-control" required>
+                        <span class="bar"></span>
+                        <label for="hallazgo">Descripción del Hallazgo:</label>
+                    </div>
+                    <div class="form-group m-b-40">
+                        <input name="requisito" id="requisito" type="text" class="form-control" required>
+                        <span class="bar"></span>
+                        <label for="requisito">Requisito:</label>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-themecolor" data-dismiss="">Guardar</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
     </div>
 </div>
