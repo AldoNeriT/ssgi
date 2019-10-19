@@ -12,6 +12,7 @@ export class InformeComponent implements OnInit {
 
   mostrarFormTitulo = false;
   mostrarFormCom = false;
+  mostrarFormConc = false;
 
   constructor() { }
 
@@ -29,6 +30,13 @@ export class InformeComponent implements OnInit {
 
   mFormCom() {
     this.mostrarFormCom = !this.mostrarFormCom;
+
+    floating_labels();
+    inicializando_datePicker();
+  }
+
+  mFormConc() {
+    this.mostrarFormConc = !this.mostrarFormConc;
 
     floating_labels();
     inicializando_datePicker();
