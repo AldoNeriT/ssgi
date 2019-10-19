@@ -1,4 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { NormaService, UsuarioService, AuditoriaService, InstitucionService, TablaService } from '../../services/service.index';
+import { Auditoria } from '../../models/auditoria.model';
+import { Usuario } from '../../models/usuario.model';
+import { Norma } from '../../models/norma.model';
+import { Institucion } from '../../models/institucion.model';
+import { Tabla } from '../../models/tabla.model';
+import { Router, ActivatedRoute } from '@angular/router';
 
 declare function floating_labels();
 declare function inicializando_datePicker();
@@ -17,52 +25,237 @@ export class InformeComponent implements OnInit {
   mostrarFormFechas = false;
   mostrarFormFechaEmision = false;
 
-  constructor() { }
+  normas: Norma[] = [];
+  tablas: Tabla[] = [];
+
+  totalNormas = 0;
+
+  idA: string;
+
+  cargando = true;
+
+  // Variables para Ver
+  auditoriaNombreV: string;
+  noAuditoriaV: string;
+  auditorLiderV: string;
+  grupoAuditorV: string;
+  objetivoV: string;
+  alcanceV: string;
+  directorV: string;
+
+  constructor( public _normaService: NormaService,
+               public _auditoriaService: AuditoriaService,
+               public _usuarioService: UsuarioService,
+               public _institucionService: InstitucionService,
+               public _tablaService: TablaService,
+               public router: Router,
+               public activatedRoute: ActivatedRoute) { 
+    activatedRoute.params.subscribe( params => {
+    this.idA = params['idA'];
+  });
+}
 
   ngOnInit() {
     floating_labels();
     inicializando_datePicker();
     inicializando_dateRange();
+
+    this.cargarAuditoria( this.idA );
+    this.cargarUsuarios();
+    this.cargarNormas();
+    this.cargarTablas();
   }
 
-  mFormTitulo() {
+  cargarAuditoria( id: string ) {
+
+    this.cargando = true;
+
+    this._auditoriaService.cargarAuditoria( id )
+          .subscribe( auditoria => {
+            // this.auditoria = auditoria;
+            // console.log('Auditoria: ', auditoria);
+
+            this.auditoriaNombreV = auditoria.nombre;
+            this.noAuditoriaV = auditoria.nombreAuditoria;
+
+            let arrGrupoAuditorV: any[] = [];
+            for ( let gp of  auditoria.grupoAuditor) {
+              arrGrupoAuditorV.push(gp.nombre + ' ' + gp.primer_Apellido + ' ' + (gp.segundo_Apellido || ''));
+            }
+
+            this.grupoAuditorV = arrGrupoAuditorV.join(', ');
+
+            this.objetivoV = auditoria.objetivos;
+            this.alcanceV = auditoria.alcance;
+
+
+            this.cargando = false;
+            floating_labels();
+            inicializando_datePicker();
+            inicializando_dateRange();
+            this.cargarNormas();
+            this.cargarTablas();
+          });
+
+  }
+
+  cargarUsuarios() {
+
+    this.cargando = true;
+
+    this._usuarioService.cargarUsuariosPorTipo( 'AUDITOR_LIDER' )
+          .subscribe( usuario1 => {
+            // this.auditoria = auditoria;
+            // console.log('AuditorLider: ', usuario1[0]);
+
+            if ( usuario1[0] ) {
+              this.auditorLiderV = usuario1[0].nombre + ' ' + usuario1[0].primer_Apellido + ' ' + (usuario1[0].segundo_Apellido || '');
+            } else {
+              this.auditorLiderV = '';
+            }
+
+            this._usuarioService.cargarUsuariosPorTipo( 'ALTA_DIRECCION' )
+                    .subscribe( usuario2 => {
+                      // this.auditoria = auditoria;
+                      // console.log('AltaDireccion: ', usuario2[0]);
+
+                      if ( usuario2[0] ) {
+                        this.directorV = usuario2[0].nombre + ' ' + usuario2[0].primer_Apellido + ' ' + (usuario2[0].segundo_Apellido || '');
+                      } else {
+                        this.directorV = '';
+                      }
+
+                      this.cargando = false;
+
+                      floating_labels();
+                      inicializando_datePicker();
+                      inicializando_dateRange();
+                      this.cargarNormas();
+                      this.cargarTablas();
+                    });
+
+            // this.cargando = false;
+
+            // floating_labels();
+            // inicializando_datePicker();
+            // inicializando_dateRange();
+          });
+
+  }
+
+  cargarNormas() {
+
+    this.cargando = true;
+
+    this._normaService.cargarNormas()
+          .subscribe( normas => {
+            this.normas = normas;
+            this.totalNormas = normas.length;
+            // console.log(normas);
+            this.cargando = false;
+          });
+
+  }
+
+  cargarTablas() {
+
+    this.cargando = true;
+
+    this._tablaService.cargarTabla()
+          .subscribe( tablas => {
+            this.tablas = tablas;
+            // console.log('Tablas: ', tablas);
+            this.cargando = false;
+          });
+
+  }
+
+
+
+
+
+  // ************************************************
+  // *** EDITAR ***
+  // ************************************************
+
+  editarTitulo() {
     this.mostrarFormTitulo = !this.mostrarFormTitulo;
 
     floating_labels();
     inicializando_datePicker();
     inicializando_dateRange();
+    this.cargarNormas();
+    this.cargarTablas();
+
+    if ( !this.mostrarFormTitulo ) {
+      return;
+    }
+
+    console.log('Titulo');
   }
 
-  mFormCom() {
+  editarComentarios() {
     this.mostrarFormCom = !this.mostrarFormCom;
 
     floating_labels();
     inicializando_datePicker();
     inicializando_dateRange();
+    this.cargarNormas();
+    this.cargarTablas();
+
+    if ( !this.mostrarFormCom ) {
+      return;
+    }
+
+    console.log('Comentarios');
   }
 
-  mFormConc() {
+  editarConclusiones() {
     this.mostrarFormConc = !this.mostrarFormConc;
 
     floating_labels();
     inicializando_datePicker();
     inicializando_dateRange();
+    this.cargarNormas();
+    this.cargarTablas();
+
+    if ( !this.mostrarFormConc ) {
+      return;
+    }
+
+    console.log('Conclusiones');
   }
 
-  mFormFechas() {
+  editarFechas() {
     this.mostrarFormFechas = !this.mostrarFormFechas;
 
     floating_labels();
     inicializando_datePicker();
     inicializando_dateRange();
+    this.cargarNormas();
+    this.cargarTablas();
+
+    if ( !this.mostrarFormFechas ) {
+      return;
+    }
+
+    console.log('Fechas');
   }
 
-  mFormFechaEmision() {
+  editarFechaEmision() {
     this.mostrarFormFechaEmision = !this.mostrarFormFechaEmision;
 
     floating_labels();
     inicializando_datePicker();
     inicializando_dateRange();
+    this.cargarNormas();
+    this.cargarTablas();
+
+    if ( !this.mostrarFormFechaEmision ) {
+      return;
+    }
+
+    console.log('Fecha de Emisión');
   }
 
 }

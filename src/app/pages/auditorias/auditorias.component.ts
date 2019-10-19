@@ -3,7 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { NormaService, UsuarioService, AuditoriaService } from '../../services/service.index';
 import { Auditoria } from '../../models/auditoria.model';
 import { Usuario } from '../../models/usuario.model';
-import { Norma } from 'src/app/models/norma.model';
+import { Norma } from '../../models/norma.model';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import Swal from 'sweetalert2';

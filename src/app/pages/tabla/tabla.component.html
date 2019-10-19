@@ -1,38 +1,52 @@
-<div class="row">
-    <div class="col-12">
-        <div class="card">
-            <div class="card-body table-responsive">
+<div *ngIf="cargando" id="loading" class="row" style="padding-top: 20px;">
+    <div class="col-sm-12">
+        <div class="text-center">
+            <span class="font-weight-bold">Cargando Datos</span>
+            <br><br>
+            <i class="fa fa-spinner fa-spin fa-3x text-themecolor"></i>
+            <br><br>
+            <span>Por favor espere un momento...</span>
+        </div>
+    </div>
+</div>
 
-                <table class="table full-color-table full-info-table hover-table">
-                    <thead class="text-center">
-                        <tr>
-                            <th>Número</th>
-                            <th>Requisito de la Norma</th>
-                            <th *ngFor="let norm of normas" class="text-center">{{ norm.nombreNorma }}</th>
-                            <th class="text-center"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let tab of tablas">
-                            <td>{{ tab.numero }}</td>
-                            <td>{{ tab.requisito }}</td>
-                            <td *ngFor="let norm of normas" class="text-center">
-                                <span *ngFor=" let normTab of tab.normas">
+<div *ngIf="!cargando">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body table-responsive">
+
+                    <table class="table full-color-table full-info-table hover-table">
+                        <thead class="text-center">
+                            <tr>
+                                <th>Número</th>
+                                <th>Requisito de la Norma</th>
+                                <th *ngFor="let norm of normas" class="text-center">{{ norm.nombreNorma }}</th>
+                                <th class="text-center"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let tab of tablas">
+                                <td>{{ tab.numero }}</td>
+                                <td>{{ tab.requisito }}</td>
+                                <td *ngFor="let norm of normas" class="text-center">
+                                    <span *ngFor=" let normTab of tab.normas">
                                     <span *ngIf="norm._id === normTab._id" class="font-bold">X</span>
-                                </span>
-                            </td>
-                            <td class="text-center"><button (click)="eliminarFila( tab )" class="btn btn-outline-danger btn-sm"><i class="fa fa-trash-o"></i></button></td>
-                        </tr>
-                        <tr class="pointer text-center">
-                            <!-- <td colspan="2" data-toggle="modal" data-target="#modalTablaAgregar"><i class="mdi mdi-plus"></i></td> -->
-                            <td class="text-info" data-toggle="modal" data-target="#modalTablaAgregar"><i class="mdi mdi-plus"></i> Fila</td>
-                            <td data-toggle="modal" data-target="#modalTablaAgregar"></td>
-                            <td *ngFor="let norm of normas" data-toggle="modal" data-target="#modalTablaAgregar"></td>
-                            <td data-toggle="modal" data-target="#modalTablaAgregar"></td>
-                        </tr>
-                    </tbody>
-                </table>
+                                    </span>
+                                </td>
+                                <td class="text-center"><button (click)="eliminarFila( tab )" class="btn btn-outline-danger btn-sm"><i class="fa fa-trash-o"></i></button></td>
+                            </tr>
+                            <tr class="pointer text-center">
+                                <!-- <td colspan="2" data-toggle="modal" data-target="#modalTablaAgregar"><i class="mdi mdi-plus"></i></td> -->
+                                <td class="text-info" data-toggle="modal" data-target="#modalTablaAgregar"><i class="mdi mdi-plus"></i> Fila</td>
+                                <td data-toggle="modal" data-target="#modalTablaAgregar"></td>
+                                <td *ngFor="let norm of normas" data-toggle="modal" data-target="#modalTablaAgregar"></td>
+                                <td data-toggle="modal" data-target="#modalTablaAgregar"></td>
+                            </tr>
+                        </tbody>
+                    </table>
 
+                </div>
             </div>
         </div>
     </div>

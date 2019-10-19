@@ -5,7 +5,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Auditoría: <span class="font-bold">###</span></h4>
+                <h4 class="card-title">Auditoría: <span class="font-bold">{{ auditoriaNombreV }}</span></h4>
                 <div class="row">
                     <div class="col-12">
                         <hr class="m-t-0 m-b-40">
@@ -13,18 +13,18 @@
                 </div>
                 <div *ngIf="!mostrarFormTitulo" class="row">
                     <div class="col-12">
-                        <h6 class="card-subtitle">No. de Auditoría: <span class="font-bold">###</span></h6>
+                        <h6 class="card-subtitle">No. de Auditoría: <span class="font-bold">{{ noAuditoriaV }}</span></h6>
                         <h6 class="card-subtitle">Proceso: <span class="font-bold">###</span></h6>
                         <h6 class="card-subtitle">Fecha: <span class="font-bold">###</span></h6>
-                        <h6 class="card-subtitle">Auditor Líder: <span class="font-bold">###</span></h6>
-                        <h6 class="card-subtitle">Grupo Auditor: <span class="font-bold">###</span></h6>
-                        <button (click)="mFormTitulo()" class="btn btn-outline-secondary btn-sm btn-rounded">Editar Campos</button>
+                        <h6 class="card-subtitle">Auditor Líder: <span class="font-bold">{{ auditorLiderV }}</span></h6>
+                        <h6 class="card-subtitle">Grupo Auditor: <span class="font-bold">{{ grupoAuditorV }}</span></h6>
+                        <button (click)="editarTitulo()" class="btn btn-outline-secondary btn-sm btn-rounded">Editar Campos</button>
                     </div>
                 </div>
                 <div *ngIf="mostrarFormTitulo" class="row">
                     <div class="col-12">
                         <form id="formTitulo" class="floating-labels m-t-0 " ngNativeValidate>
-                            <h6 class="card-subtitle">No. de Auditoría: <span class="font-bold">???</span></h6>
+                            <h6 class="card-subtitle">No. de Auditoría: <span class="font-bold">{{ noAuditoriaV }}</span></h6>
                             <div class="form-group m-b-40 m-t-40 focused">
                                 <input name="proceso" id="proceso" type="text" class="form-control" required>
                                 <span class="bar"></span>
@@ -35,10 +35,10 @@
                                 <span class="bar"></span>
                                 <label for="fecha">Fecha:</label>
                             </div>
-                            <h6 class="card-subtitle">Auditor Líder: <span class="font-bold">###</span></h6>
-                            <h6 class="card-subtitle">Grupo Auditor: <span class="font-bold">###</span></h6>
+                            <h6 class="card-subtitle">Auditor Líder: <span class="font-bold">{{ auditorLiderV }}</span></h6>
+                            <h6 class="card-subtitle">Grupo Auditor: <span class="font-bold">{{ grupoAuditorV }}</span></h6>
                             <button class="btn btn-outline-secondary btn-sm btn-rounded" type="sumbit">Guardar Cambios</button>&nbsp;
-                            <button (click)="mFormTitulo()" class="btn btn-outline-secondary btn-sm btn-rounded">Cancelar</button>
+                            <button (click)="editarTitulo()" class="btn btn-outline-secondary btn-sm btn-rounded">Cancelar</button>
                         </form>
 
                     </div>
@@ -61,7 +61,7 @@
                         <hr class="m-t-0 m-b-40">
                     </div>
                 </div>
-                <p class="card-text">Aqui va el objetivo</p>
+                <p class="card-text">{{ objetivoV }}</p>
             </div>
         </div>
     </div>
@@ -80,7 +80,7 @@
                         <hr class="m-t-0 m-b-40">
                     </div>
                 </div>
-                <p class="card-text">Aqui va el alcance</p>
+                <p class="card-text">{{ alcanceV }}</p>
             </div>
         </div>
     </div>
@@ -101,49 +101,51 @@
                         <hr class="m-t-0 m-b-40">
                     </div>
                 </div>
-                <table class="table full-color-table full-info-table hover-table">
-                    <thead class="text-center">
-                        <tr>
-                            <th class="text-center">Nombre</th>
-                            <th class="text-center">Puesto</th>
-                            <th class="text-center"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="text-center">
-                            <td>Aldo Neri</td>
-                            <td>Jefe</td>
-                            <td class="text-center"><button class="btn btn-outline-danger btn-sm"><i class="fa fa-trash-o"></i></button></td>
-                        </tr>
-                        <tr class="text-center">
-                            <td>Aldo Neri</td>
-                            <td>Jefe</td>
-                            <td class="text-center"><button class="btn btn-outline-danger btn-sm"><i class="fa fa-trash-o"></i></button></td>
+                <div class="table-responsive">
+                    <table class="table full-color-table full-info-table hover-table">
+                        <thead class="text-center">
+                            <tr>
+                                <th class="text-center">Nombre</th>
+                                <th class="text-center">Puesto</th>
+                                <th class="text-center"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="text-center">
+                                <td>Aldo Neri</td>
+                                <td>Jefe</td>
+                                <td class="text-center"><button class="btn btn-outline-danger btn-sm"><i class="fa fa-trash-o"></i></button></td>
+                            </tr>
+                            <tr class="text-center">
+                                <td>Aldo Neri</td>
+                                <td>Jefe</td>
+                                <td class="text-center"><button class="btn btn-outline-danger btn-sm"><i class="fa fa-trash-o"></i></button></td>
 
-                        </tr>
-                        <tr class="text-center">
-                            <td>Aldo Neri</td>
-                            <td>Jefe</td>
-                            <td><button class="btn btn-outline-danger btn-sm"><i class="fa fa-trash-o"></i></button></td>
+                            </tr>
+                            <tr class="text-center">
+                                <td>Aldo Neri</td>
+                                <td>Jefe</td>
+                                <td><button class="btn btn-outline-danger btn-sm"><i class="fa fa-trash-o"></i></button></td>
 
-                        </tr>
-                        <tr class="text-center">
-                            <td>Aldo Neri</td>
-                            <td>Jefe</td>
-                            <td><button class="btn btn-outline-danger btn-sm"><i class="fa fa-trash-o"></i></button></td>
+                            </tr>
+                            <tr class="text-center">
+                                <td>Aldo Neri</td>
+                                <td>Jefe</td>
+                                <td><button class="btn btn-outline-danger btn-sm"><i class="fa fa-trash-o"></i></button></td>
 
-                        </tr>
-                        <tr class="text-center">
-                            <td>Aldo Neri</td>
-                            <td>Jefe</td>
-                            <td><button class="btn btn-outline-danger btn-sm"><i class="fa fa-trash-o"></i></button></td>
+                            </tr>
+                            <tr class="text-center">
+                                <td>Aldo Neri</td>
+                                <td>Jefe</td>
+                                <td><button class="btn btn-outline-danger btn-sm"><i class="fa fa-trash-o"></i></button></td>
 
-                        </tr>
-                        <tr class="text-center pointer">
-                            <td colspan="3" data-toggle="modal" data-target="#modalAgregar1"><i class="mdi mdi-plus"></i></td>
-                        </tr>
-                    </tbody>
-                </table>
+                            </tr>
+                            <tr class="text-center pointer">
+                                <td colspan="3" data-toggle="modal" data-target="#modalAgregar1"><i class="mdi mdi-plus"></i></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
@@ -176,11 +178,68 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Tabla</h4>
+                <!-- <h4 class="card-title">Tabla</h4>
                 <div class="row">
                     <div class="col-12">
                         <hr class="m-t-0 m-b-40">
                     </div>
+                </div> -->
+                <div class="table-responsive">
+                    <table class="table full-color-table full-info-table hover-table">
+                        <thead class="text-center">
+                            <tr>
+                                <th>Número</th>
+                                <th>Requisito de la Norma</th>
+                                <th *ngFor="let norm of normas" class="text-center">{{ norm.nombreNorma }}</th>
+                                <th class="text-center">Revisión</th>
+                                <th class="text-center">Resultado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let tab of tablas">
+                                <td>{{ tab.numero }}</td>
+                                <td>{{ tab.requisito }}</td>
+                                <td *ngFor="let norm of normas" class="text-center">
+                                    <span *ngFor=" let normTab of tab.normas">
+                                                    <span *ngIf="norm._id === normTab._id" class="font-bold">X</span>
+                                    </span>
+                                </td>
+                                <td>
+                                    <div class="btn-group">
+                                        <input name="g1_{{ tab._id }}" type="radio" id="r11_{{ tab._id }}" class="with-gap radio-col-indigo" checked />
+                                        <label for="r11_{{ tab._id }}"><span style="color: #67757C;">A</span></label>&nbsp;
+                                        <input name="g1_{{ tab._id }}" type="radio" id="r12_{{ tab._id }}" class="with-gap radio-col-indigo" />
+                                        <label for="r12_{{ tab._id }}"><span style="color: #67757C;">NA</span></label>&nbsp;
+                                        <input name="g1_{{ tab._id }}" type="radio" id="r13_{{ tab._id }}" class="with-gap radio-col-indigo" />
+                                        <label for="r13_{{ tab._id }}"><span style="color: #67757C;">EP</span></label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="btn-group">
+                                        <input name="g2_{{ tab._id }}" type="radio" id="r21_{{ tab._id }}" class="with-gap radio-col-blue" checked />
+                                        <label for="r21_{{ tab._id }}"><span style="color: #67757C;">AD</span></label>&nbsp;
+                                        <input name="g2_{{ tab._id }}" type="radio" id="r22_{{ tab._id }}" class="with-gap radio-col-blue" />
+                                        <label for="r22_{{ tab._id }}"><span style="color: #67757C;">NC</span></label>&nbsp;
+                                        <input name="g2_{{ tab._id }}" type="radio" id="r23_{{ tab._id }}" class="with-gap radio-col-blue" />
+                                        <label for="r23_{{ tab._id }}"><span style="color: #67757C;">NR</span></label>&nbsp;
+                                        <input name="g2_{{ tab._id }}" type="radio" id="r24_{{ tab._id }}" class="with-gap radio-col-blue" />
+                                        <label for="r24_{{ tab._id }}"><span style="color: #67757C;">EP</span></label>&nbsp;
+                                        <input name="g2_{{ tab._id }}" type="radio" id="r25_{{ tab._id }}" class="with-gap radio-col-blue" />
+                                        <label for="r25_{{ tab._id }}"><span style="color: #67757C;">NA</span></label>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+                <span class="help-block text-themecolor"><small>Revisión: ( <span class="font-bold">A</span> = Aplica, <span class="font-bold">NA</span> = No Aplica, <span class="font-bold">EP</span> = Exclusión Permitida )</small>
+                </span><br>
+                <span class="help-block text-themecolor"><small>Resultado: ( <span class="font-bold">AD</span> = Adecuado, <span class="font-bold">NC</span> = No Conforme, <span class="font-bold">NR</span> = No Revisado, <span class="font-bold">EP</span>                = Exclusión Permitida, <span class="font-bold">NA</span> = No Aplica )</small>
+                </span>
+
+                <div class="text-center" style="padding-top: 30px;">
+                    <button class="btn btn-outline-secondary btn-sm btn-rounded">Guardar Cambios</button>
                 </div>
             </div>
         </div>
@@ -201,39 +260,41 @@
                         <hr class="m-t-0 m-b-40">
                     </div>
                 </div>
-                <table class="table full-color-table full-info-table hover-table">
-                    <thead class="text-center">
-                        <tr>
-                            <th class="text-center">Oportunidades de Mejora</th>
-                            <th class="text-center"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="text-center">
-                            <td>1</td>
-                            <td class="text-center"><button class="btn btn-outline-danger btn-sm"><i class="fa fa-trash-o"></i></button></td>
-                        </tr>
-                        <tr class="text-center">
-                            <td>2</td>
-                            <td class="text-center"><button class="btn btn-outline-danger btn-sm"><i class="fa fa-trash-o"></i></button></td>
-                        </tr>
-                        <tr class="text-center">
-                            <td>3</td>
-                            <td class="text-center"><button class="btn btn-outline-danger btn-sm"><i class="fa fa-trash-o"></i></button></td>
-                        </tr>
-                        <tr class="text-center">
-                            <td>4</td>
-                            <td class="text-center"><button class="btn btn-outline-danger btn-sm"><i class="fa fa-trash-o"></i></button></td>
-                        </tr>
-                        <tr class="text-center">
-                            <td>5</td>
-                            <td class="text-center"><button class="btn btn-outline-danger btn-sm"><i class="fa fa-trash-o"></i></button></td>
-                        </tr>
-                        <tr class="text-center pointer">
-                            <td colspan="2" data-toggle="modal" data-target="#modalAgregar2"><i class="mdi mdi-plus"></i></td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="table-responsive">
+                    <table class="table full-color-table full-info-table hover-table">
+                        <thead class="text-center">
+                            <tr>
+                                <th class="text-center">Oportunidades de Mejora</th>
+                                <th class="text-center"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="text-center">
+                                <td>1</td>
+                                <td class="text-center"><button class="btn btn-outline-danger btn-sm"><i class="fa fa-trash-o"></i></button></td>
+                            </tr>
+                            <tr class="text-center">
+                                <td>2</td>
+                                <td class="text-center"><button class="btn btn-outline-danger btn-sm"><i class="fa fa-trash-o"></i></button></td>
+                            </tr>
+                            <tr class="text-center">
+                                <td>3</td>
+                                <td class="text-center"><button class="btn btn-outline-danger btn-sm"><i class="fa fa-trash-o"></i></button></td>
+                            </tr>
+                            <tr class="text-center">
+                                <td>4</td>
+                                <td class="text-center"><button class="btn btn-outline-danger btn-sm"><i class="fa fa-trash-o"></i></button></td>
+                            </tr>
+                            <tr class="text-center">
+                                <td>5</td>
+                                <td class="text-center"><button class="btn btn-outline-danger btn-sm"><i class="fa fa-trash-o"></i></button></td>
+                            </tr>
+                            <tr class="text-center pointer">
+                                <td colspan="2" data-toggle="modal" data-target="#modalAgregar2"><i class="mdi mdi-plus"></i></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
@@ -257,7 +318,7 @@
                 <div *ngIf="!mostrarFormCom" class="row">
                     <div class="col-12">
                         <p class="card-text">Lorem ipsum dolor sit amet</p>
-                        <button (click)="mFormCom()" class="btn btn-outline-secondary btn-sm btn-rounded">Editar</button>
+                        <button (click)="editarComentarios()" class="btn btn-outline-secondary btn-sm btn-rounded">Editar</button>
                     </div>
                 </div>
                 <div *ngIf="mostrarFormCom" class="row">
@@ -269,7 +330,7 @@
                                 <label for="comentarios">Comentarios:</label>
                             </div>
                             <button class="btn btn-outline-secondary btn-sm btn-rounded" type="sumbit">Guardar Cambios</button>&nbsp;
-                            <button (click)="mFormCom()" class="btn btn-outline-secondary btn-sm btn-rounded">Cancelar</button>
+                            <button (click)="editarComentarios()" class="btn btn-outline-secondary btn-sm btn-rounded">Cancelar</button>
                         </form>
                     </div>
                 </div>
@@ -293,51 +354,53 @@
                         <hr class="m-t-0 m-b-40">
                     </div>
                 </div>
-                <table class="table full-color-table full-info-table hover-table">
-                    <thead class="text-center">
-                        <tr>
-                            <th class="text-center">No.</th>
-                            <th class="text-center">Descripción del Hallazgo</th>
-                            <th class="text-center">Requisito</th>
-                            <th class="text-center"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="text-center">
-                            <td>1</td>
-                            <td>Jefe</td>
-                            <td>NA</td>
-                            <td class="text-center"><button class="btn btn-outline-danger btn-sm"><i class="fa fa-trash-o"></i></button></td>
-                        </tr>
-                        <tr class="text-center">
-                            <td>2</td>
-                            <td>Jefe</td>
-                            <td>NA</td>
-                            <td class="text-center"><button class="btn btn-outline-danger btn-sm"><i class="fa fa-trash-o"></i></button></td>
-                        </tr>
-                        <tr class="text-center">
-                            <td>3</td>
-                            <td>Jefe</td>
-                            <td>NA</td>
-                            <td class="text-center"><button class="btn btn-outline-danger btn-sm"><i class="fa fa-trash-o"></i></button></td>
-                        </tr>
-                        <tr class="text-center">
-                            <td>4</td>
-                            <td>Jefe</td>
-                            <td>NA</td>
-                            <td class="text-center"><button class="btn btn-outline-danger btn-sm"><i class="fa fa-trash-o"></i></button></td>
-                        </tr>
-                        <tr class="text-center">
-                            <td>5</td>
-                            <td>Jefe</td>
-                            <td>NA</td>
-                            <td class="text-center"><button class="btn btn-outline-danger btn-sm"><i class="fa fa-trash-o"></i></button></td>
-                        </tr>
-                        <tr class="text-center pointer">
-                            <td colspan="4" data-toggle="modal" data-target="#modalAgregar3"><i class="mdi mdi-plus"></i></td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="table-responsive">
+                    <table class="table full-color-table full-info-table hover-table">
+                        <thead class="text-center">
+                            <tr>
+                                <th class="text-center">No.</th>
+                                <th class="text-center">Descripción del Hallazgo</th>
+                                <th class="text-center">Requisito</th>
+                                <th class="text-center"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="text-center">
+                                <td>1</td>
+                                <td>Jefe</td>
+                                <td>NA</td>
+                                <td class="text-center"><button class="btn btn-outline-danger btn-sm"><i class="fa fa-trash-o"></i></button></td>
+                            </tr>
+                            <tr class="text-center">
+                                <td>2</td>
+                                <td>Jefe</td>
+                                <td>NA</td>
+                                <td class="text-center"><button class="btn btn-outline-danger btn-sm"><i class="fa fa-trash-o"></i></button></td>
+                            </tr>
+                            <tr class="text-center">
+                                <td>3</td>
+                                <td>Jefe</td>
+                                <td>NA</td>
+                                <td class="text-center"><button class="btn btn-outline-danger btn-sm"><i class="fa fa-trash-o"></i></button></td>
+                            </tr>
+                            <tr class="text-center">
+                                <td>4</td>
+                                <td>Jefe</td>
+                                <td>NA</td>
+                                <td class="text-center"><button class="btn btn-outline-danger btn-sm"><i class="fa fa-trash-o"></i></button></td>
+                            </tr>
+                            <tr class="text-center">
+                                <td>5</td>
+                                <td>Jefe</td>
+                                <td>NA</td>
+                                <td class="text-center"><button class="btn btn-outline-danger btn-sm"><i class="fa fa-trash-o"></i></button></td>
+                            </tr>
+                            <tr class="text-center pointer">
+                                <td colspan="4" data-toggle="modal" data-target="#modalAgregar3"><i class="mdi mdi-plus"></i></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
@@ -361,7 +424,7 @@
                 <div *ngIf="!mostrarFormConc" class="row">
                     <div class="col-12">
                         <p class="card-text">Lorem ipsum dolor sit amet</p>
-                        <button (click)="mFormConc()" class="btn btn-outline-secondary btn-sm btn-rounded">Editar</button>
+                        <button (click)="editarConclusiones()" class="btn btn-outline-secondary btn-sm btn-rounded">Editar</button>
                     </div>
                 </div>
                 <div *ngIf="mostrarFormConc" class="row">
@@ -373,7 +436,7 @@
                                 <label for="conclusiones">Conclusiones:</label>
                             </div>
                             <button class="btn btn-outline-secondary btn-sm btn-rounded" type="sumbit">Guardar Cambios</button>&nbsp;
-                            <button (click)="mFormConc()" class="btn btn-outline-secondary btn-sm btn-rounded">Cancelar</button>
+                            <button (click)="editarConclusiones()" class="btn btn-outline-secondary btn-sm btn-rounded">Cancelar</button>
                         </form>
                     </div>
                 </div>
@@ -390,7 +453,7 @@
         <div class="ribbon-wrapper card" style="height: 85%;">
             <div class="ribbon ribbon-info ribbon-right">Auditor Líder</div>
             <div class="card-body text-center">
-                <span class="font-bold">Aldo Neri</span>
+                <span class="font-bold">{{ auditorLiderV }}</span>
             </div>
         </div>
     </div>
@@ -398,7 +461,7 @@
         <div class="ribbon-wrapper card" style="height: 85%;">
             <div class="ribbon ribbon-info ribbon-right">Recibí de Conformidad</div>
             <div class="card-body text-center">
-                <span class="font-bold">Adrián Ramos</span>
+                <span class="font-bold">{{ directorV }}</span>
             </div>
         </div>
     </div>
@@ -410,7 +473,7 @@
                 <div class="row">
                     <div class="col-12">
                         <p class="card-text font-bold">10/30/2019 - 10/31/2019</p>
-                        <button (click)="mFormFechas()" class="btn btn-outline-secondary btn-sm btn-rounded">Editar</button>
+                        <button (click)="editarFechas()" class="btn btn-outline-secondary btn-sm btn-rounded">Editar</button>
                     </div>
                 </div>
             </div>
@@ -424,7 +487,7 @@
                                 <label for="fechas">Fecha Inicial - Fecha Final</label>
                             </div>
                             <button class="btn btn-outline-secondary btn-sm btn-rounded" type="sumbit">Guardar Cambios</button>&nbsp;
-                            <button (click)="mFormFechas()" class="btn btn-outline-secondary btn-sm btn-rounded">Cancelar</button>
+                            <button (click)="editarFechas()" class="btn btn-outline-secondary btn-sm btn-rounded">Cancelar</button>
                         </form>
                     </div>
                 </div>
@@ -446,7 +509,7 @@
                 <div class="row">
                     <div class="col-12">
                         <p class="card-text font-bold">10/31/2019</p>
-                        <button (click)="mFormFechaEmision()" class="btn btn-outline-secondary btn-sm btn-rounded">Editar</button>
+                        <button (click)="editarFechaEmision()" class="btn btn-outline-secondary btn-sm btn-rounded">Editar</button>
                     </div>
                 </div>
             </div>
@@ -460,7 +523,7 @@
                                 <label for="fechaEmision">Fecha:</label>
                             </div>
                             <button class="btn btn-outline-secondary btn-sm btn-rounded" type="sumbit">Guardar Cambios</button>&nbsp;
-                            <button (click)="mFormFechaEmision()" class="btn btn-outline-secondary btn-sm btn-rounded">Cancelar</button>
+                            <button (click)="editarFechaEmision()" class="btn btn-outline-secondary btn-sm btn-rounded">Cancelar</button>
                         </form>
                     </div>
                 </div>
