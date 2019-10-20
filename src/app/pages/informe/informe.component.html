@@ -37,8 +37,8 @@
                             </div>
                             <h6 class="card-subtitle">Auditor Líder: <span class="font-bold">{{ auditorLiderV }}</span></h6>
                             <h6 class="card-subtitle">Grupo Auditor: <span class="font-bold">{{ grupoAuditorV }}</span></h6>
-                            <button class="btn btn-outline-secondary btn-sm btn-rounded" type="sumbit">Guardar Cambios</button>&nbsp;
-                            <button (click)="editarTitulo()" class="btn btn-outline-secondary btn-sm btn-rounded">Cancelar</button>
+                            <button class="btn btn-outline-secondary btn-sm btn-rounded" type="submit">Guardar Cambios</button>&nbsp;
+                            <button (click)="editarTitulo()" class="btn btn-outline-secondary btn-sm btn-rounded" type="button">Cancelar</button>
                         </form>
 
                     </div>
@@ -323,14 +323,14 @@
                 </div>
                 <div *ngIf="mostrarFormCom" class="row">
                     <div class="col-12">
-                        <form id="formComentarios" class="floating-labels m-t-0 " ngNativeValidate>
+                        <form ngNativeValidate [formGroup]="formaComentarios" (ngSubmit)="editarComentariosS()" id="formComentarios" class="floating-labels m-t-0 " ngNativeValidate>
                             <div class="form-group m-b-40 m-t-40 focused">
-                                <textarea name="comentarios" id="comentarios" type="text" class="form-control" required></textarea>
+                                <textarea formControlName="comentarios" name="comentarios" id="comentarios" type="text" class="form-control" required></textarea>
                                 <span class="bar"></span>
                                 <label for="comentarios">Comentarios:</label>
                             </div>
-                            <button class="btn btn-outline-secondary btn-sm btn-rounded" type="sumbit">Guardar Cambios</button>&nbsp;
-                            <button (click)="editarComentarios()" class="btn btn-outline-secondary btn-sm btn-rounded">Cancelar</button>
+                            <button class="btn btn-outline-secondary btn-sm btn-rounded" type="submit">Guardar Cambios</button>&nbsp;
+                            <button (click)="editarComentarios()" class="btn btn-outline-secondary btn-sm btn-rounded" type="button">Cancelar</button>
                         </form>
                     </div>
                 </div>
@@ -429,14 +429,14 @@
                 </div>
                 <div *ngIf="mostrarFormConc" class="row">
                     <div class="col-12">
-                        <form id="formConclusiones" class="floating-labels m-t-0 " ngNativeValidate>
+                        <form ngNativeValidate [formGroup]="formaConclusiones" (ngSubmit)="editarConclusionesS()" id="formConclusiones" class="floating-labels m-t-0 " ngNativeValidate>
                             <div class="form-group m-b-40 m-t-40 focused">
-                                <textarea name="conclusiones" id="conclusiones" type="text" class="form-control" required></textarea>
+                                <textarea formControlName="conclusiones" name="conclusiones" id="conclusiones" type="text" class="form-control" required></textarea>
                                 <span class="bar"></span>
                                 <label for="conclusiones">Conclusiones:</label>
                             </div>
-                            <button class="btn btn-outline-secondary btn-sm btn-rounded" type="sumbit">Guardar Cambios</button>&nbsp;
-                            <button (click)="editarConclusiones()" class="btn btn-outline-secondary btn-sm btn-rounded">Cancelar</button>
+                            <button class="btn btn-outline-secondary btn-sm btn-rounded" type="submit">Guardar Cambios</button>&nbsp;
+                            <button (click)="editarConclusiones()" class="btn btn-outline-secondary btn-sm btn-rounded" type="button">Cancelar</button>
                         </form>
                     </div>
                 </div>
@@ -480,14 +480,14 @@
             <div *ngIf="mostrarFormFechas" class="card-body">
                 <div class="row">
                     <div class="col-12">
-                        <form id="formFechaEmision" class="floating-labels m-t-0 " ngNativeValidate>
+                        <form ngNativeValidate [formGroup]="formaFechas" (ngSubmit)="editarFechasS()" id="formFechas" class="floating-labels m-t-0 " ngNativeValidate>
                             <div class="form-group m-b-40 m-t-40 focused">
-                                <input name="fechas" id="fechas" type="text" class="form-control input-daterange-datepicker" required>
+                                <input formControlName="fechas" name="fechas" id="fechas" type="text" class="form-control input-daterange-datepicker" required>
                                 <span class="bar"></span>
                                 <label for="fechas">Fechas</label>
                             </div>
-                            <button class="btn btn-outline-secondary btn-sm btn-rounded" type="sumbit">Guardar Cambios</button>&nbsp;
-                            <button (click)="editarFechas()" class="btn btn-outline-secondary btn-sm btn-rounded">Cancelar</button>
+                            <button class="btn btn-outline-secondary btn-sm btn-rounded" type="submit">Guardar Cambios</button>&nbsp;
+                            <button (click)="editarFechas()" class="btn btn-outline-secondary btn-sm btn-rounded" type="button">Cancelar</button>
                         </form>
                     </div>
                 </div>
@@ -516,14 +516,14 @@
             <div *ngIf="mostrarFormFechaEmision" class="card-body">
                 <div class="row">
                     <div class="col-12">
-                        <form id="formFechaEmision" class="floating-labels m-t-0 " ngNativeValidate>
+                        <form ngNativeValidate [formGroup]="formaFechaEmision" (ngSubmit)="editarFechaEmisionS()" id="formFechaEmision" class="floating-labels m-t-0 " ngNativeValidate>
                             <div class="form-group m-b-40 m-t-40 focused">
-                                <input name="fechaEmision" id="fechaEmision" type="text" class="form-control datepicker-autoclose" required>
+                                <input formControlName="fechaEmision" name="fechaEmision" id="fechaEmision" type="text" class="form-control datepicker-autoclose" required>
                                 <span class="bar"></span>
                                 <label for="fechaEmision">Fecha:</label>
                             </div>
-                            <button class="btn btn-outline-secondary btn-sm btn-rounded" type="sumbit">Guardar Cambios</button>&nbsp;
-                            <button (click)="editarFechaEmision()" class="btn btn-outline-secondary btn-sm btn-rounded">Cancelar</button>
+                            <button class="btn btn-outline-secondary btn-sm btn-rounded" type="submit">Guardar Cambios</button>&nbsp;
+                            <button (click)="editarFechaEmision()" class="btn btn-outline-secondary btn-sm btn-rounded" type="button">Cancelar</button>
                         </form>
                     </div>
                 </div>

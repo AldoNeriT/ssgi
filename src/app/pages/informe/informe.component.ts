@@ -32,6 +32,10 @@ export class InformeComponent implements OnInit {
 
   // Form
   formaTitulo: FormGroup;
+  formaComentarios: FormGroup;
+  formaConclusiones: FormGroup;
+  formaFechas: FormGroup;
+  formaFechaEmision: FormGroup;
 
   totalNormas = 0;
 
@@ -74,6 +78,22 @@ export class InformeComponent implements OnInit {
     this.formaTitulo = new FormGroup({
       proceso: new FormControl( null, Validators.required ),
       fecha: new FormControl( null, Validators.required )
+    });
+
+    this.formaComentarios = new FormGroup({
+      comentarios: new FormControl( null, Validators.required )
+    });
+
+    this.formaConclusiones = new FormGroup({
+      conclusiones: new FormControl( null, Validators.required )
+    });
+
+    this.formaFechas = new FormGroup({
+      fechas: new FormControl( null, Validators.required )
+    });
+
+    this.formaFechaEmision = new FormGroup({
+      fechaEmision: new FormControl( null, Validators.required )
     });
   }
 
@@ -185,7 +205,7 @@ export class InformeComponent implements OnInit {
 
   cargarInforme( idAudi: string ) {
 
-    this.cargando = true;
+    // this.cargando = true;
 
     // this._informeService.cargarInforme( idAudi )
     //       .subscribe( informe => {
@@ -203,7 +223,7 @@ export class InformeComponent implements OnInit {
 
 
   // ************************************************
-  // *** EDITAR ***
+  // *** FORMS DE LOS EDITABLES ***
   // ************************************************
 
   editarTitulo() {
@@ -241,6 +261,10 @@ export class InformeComponent implements OnInit {
     }
 
     console.log('Comentarios');
+
+    // this.formaComentarios.setValue({
+    //   comentarios: this.informe.comentarios
+    // });
   }
 
   editarConclusiones() {
@@ -257,6 +281,10 @@ export class InformeComponent implements OnInit {
     }
 
     console.log('Conclusiones');
+
+    // this.formaConclusiones.setValue({
+    //   conclusiones: this.informe.conclusiones,
+    // });
   }
 
   editarFechas() {
@@ -273,6 +301,10 @@ export class InformeComponent implements OnInit {
     }
 
     console.log('Fechas');
+    
+    // this.formaFechas.setValue({
+    //   fechas: this.informe.fechas
+    // });
   }
 
   editarFechaEmision() {
@@ -289,10 +321,14 @@ export class InformeComponent implements OnInit {
     }
 
     console.log('Fecha de Emisión');
+
+    // this.formaFechaEmision.setValue({
+    //   fechaEmision: this.informe.fechaEmision
+    // });
   }
 
   // ************************************************
-  // *** EDITADAS ***
+  // *** EDITAR ***
   // ************************************************
 
   editarTituloS() {
@@ -307,7 +343,7 @@ export class InformeComponent implements OnInit {
     this.mostrarFormTitulo = false;
 
     let informe = new Informe(
-      'idAuditoria',
+      this.idA,
       this.formaTitulo.value.proceso,
       fech,
       '',
@@ -317,6 +353,166 @@ export class InformeComponent implements OnInit {
       '',
       '',
       '',
+      'idInforme'
+    );
+
+    console.log('Informe: ', informe);
+
+    // this._informeService.editarTitulo( informe )
+    //         .subscribe( resp => {
+    //           floating_labels();
+    //           inicializando_datePicker();
+    //           inicializando_dateRange();
+          
+    //           this.cargarAuditoria( this.idA );
+    //           this.cargarUsuarios();
+    //           this.cargarNormas();
+    //           this.cargarTablas();
+    //         });
+
+  }
+
+  editarComentariosS() {
+
+    if ( this.formaComentarios.invalid ) {
+      console.log('Invalido');
+      return;
+    }
+
+    this.mostrarFormCom = false;
+
+    let informe = new Informe(
+      this.idA,
+      '',
+      '',
+      '',
+      this.formaComentarios.value.comentarios,
+      '',
+      '',
+      '',
+      '',
+      '',
+      'idInforme'
+    );
+
+    console.log('Informe: ', informe);
+
+    // this._informeService.editarTitulo( informe )
+    //         .subscribe( resp => {
+    //           floating_labels();
+    //           inicializando_datePicker();
+    //           inicializando_dateRange();
+          
+    //           this.cargarAuditoria( this.idA );
+    //           this.cargarUsuarios();
+    //           this.cargarNormas();
+    //           this.cargarTablas();
+    //         });
+
+  }
+
+  editarConclusionesS() {
+
+    if ( this.formaConclusiones.invalid ) {
+      console.log('Invalido');
+      return;
+    }
+
+    this.mostrarFormConc = false;
+
+    let informe = new Informe(
+      this.idA,
+      '',
+      '',
+      '',
+      '',
+      this.formaConclusiones.value.conclusiones,
+      '',
+      '',
+      '',
+      '',
+      'idInforme'
+    );
+
+    console.log('Informe: ', informe);
+
+    // this._informeService.editarTitulo( informe )
+    //         .subscribe( resp => {
+    //           floating_labels();
+    //           inicializando_datePicker();
+    //           inicializando_dateRange();
+          
+    //           this.cargarAuditoria( this.idA );
+    //           this.cargarUsuarios();
+    //           this.cargarNormas();
+    //           this.cargarTablas();
+    //         });
+
+  }
+
+  editarFechasS() {
+
+    // if ( this.formaTitulo.invalid ) {
+    //   console.log('Invalido');
+    //   return;
+    // }
+
+    let fech = $('#fechas').val() + '';
+
+    this.mostrarFormFechas = false;
+
+    let informe = new Informe(
+      this.idA,
+      this.formaTitulo.value.proceso,
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      fech,
+      '',
+      'idInforme'
+    );
+
+    console.log('Informe: ', informe);
+
+    // this._informeService.editarTitulo( informe )
+    //         .subscribe( resp => {
+    //           floating_labels();
+    //           inicializando_datePicker();
+    //           inicializando_dateRange();
+          
+    //           this.cargarAuditoria( this.idA );
+    //           this.cargarUsuarios();
+    //           this.cargarNormas();
+    //           this.cargarTablas();
+    //         });
+
+  }
+
+  editarFechaEmisionS() {
+
+    // if ( this.formaTitulo.invalid ) {
+    //   console.log('Invalido');
+    //   return;
+    // }
+
+    let fech = $('#fechaEmision').val() + '';
+
+    this.mostrarFormFechaEmision = false;
+
+    let informe = new Informe(
+      this.idA,
+      this.formaTitulo.value.proceso,
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      fech,
       'idInforme'
     );
 
