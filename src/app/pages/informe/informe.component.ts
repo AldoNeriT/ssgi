@@ -6,8 +6,13 @@ import { Usuario } from '../../models/usuario.model';
 import { Norma } from '../../models/norma.model';
 import { Institucion } from '../../models/institucion.model';
 import { Informe } from '../../models/informe.model';
+import { PersonalContactado } from '../../models/personal-contactado.model';
+import { NoConformidades } from '../../models/no-conformidades.model';
 import { Tabla } from '../../models/tabla.model';
 import { Router, ActivatedRoute } from '@angular/router';
+
+import Swal from 'sweetalert2';
+import * as $ from 'jquery';
 
 declare function floating_labels();
 declare function inicializando_datePicker();
@@ -28,7 +33,9 @@ export class InformeComponent implements OnInit {
 
   normas: Norma[] = [];
   tablas: Tabla[] = [];
-  informe: Informe[] = [];
+  personal: PersonalContactado[] = [];
+  hallazgos: NoConformidades[] = [];
+  informe: Informe;
 
   // Form
   formaTitulo: FormGroup;
@@ -36,10 +43,14 @@ export class InformeComponent implements OnInit {
   formaConclusiones: FormGroup;
   formaFechas: FormGroup;
   formaFechaEmision: FormGroup;
+  formaOM: FormGroup;
+  formaPersonal: FormGroup;
+  formaHallazgo: FormGroup;
 
   totalNormas = 0;
 
   idA: string;
+  idInforme: string;
 
   cargando = true;
 
@@ -57,6 +68,7 @@ export class InformeComponent implements OnInit {
   conclusionesV: string;
   fechasV: string;
   fechaEmisionV: string;
+  oportunidadesMejoraV: any[];
 
 
   constructor( public _normaService: NormaService,
@@ -78,7 +90,6 @@ export class InformeComponent implements OnInit {
     inicializando_dateRange();
 
     this.cargarAuditoria( this.idA );
-    // this.cargarUsuarios();
     this.cargarNormas();
     this.cargarTablas();
     this.cargarInforme( this.idA );
@@ -102,6 +113,20 @@ export class InformeComponent implements OnInit {
 
     this.formaFechaEmision = new FormGroup({
       fechaEmision: new FormControl( null, Validators.required )
+    });
+
+    this.formaOM = new FormGroup({
+      oportunidad: new FormControl( null, Validators.required )
+    });
+
+    this.formaPersonal = new FormGroup({
+      nombre: new FormControl( null, Validators.required ),
+      puesto: new FormControl( null, Validators.required )
+    });
+
+    this.formaHallazgo = new FormGroup({
+      hallazgo: new FormControl( null, Validators.required ),
+      requisito: new FormControl( null, Validators.required )
     });
   }
 
@@ -135,48 +160,6 @@ export class InformeComponent implements OnInit {
           });
 
   }
-
-  // cargarUsuarios() {
-
-  //   this.cargando = true;
-
-  //   this._usuarioService.cargarUsuariosPorTipo( 'AUDITOR_LIDER' )
-  //         .subscribe( usuario1 => {
-  //           // this.auditoria = auditoria;
-  //           // console.log('AuditorLider: ', usuario1[0]);
-
-  //           if ( usuario1[0] ) {
-  //             this.auditorLiderV = usuario1[0].nombre + ' ' + usuario1[0].primer_Apellido + ' ' + (usuario1[0].segundo_Apellido || '');
-  //           } else {
-  //             this.auditorLiderV = '';
-  //           }
-
-  //           this._usuarioService.cargarUsuariosPorTipo( 'ALTA_DIRECCION' )
-  //                   .subscribe( usuario2 => {
-  //                     // this.auditoria = auditoria;
-  //                     // console.log('AltaDireccion: ', usuario2[0]);
-
-  //                     if ( usuario2[0] ) {
-  //                       this.directorV = usuario2[0].nombre + ' ' + usuario2[0].primer_Apellido + ' ' + (usuario2[0].segundo_Apellido || '');
-  //                     } else {
-  //                       this.directorV = '';
-  //                     }
-
-  //                     this.cargando = false;
-
-  //                     floating_labels();
-  //                     inicializando_datePicker();
-  //                     inicializando_dateRange();
-  //                   });
-
-  //           // this.cargando = false;
-
-  //           // floating_labels();
-  //           // inicializando_datePicker();
-  //           // inicializando_dateRange();
-  //         });
-
-  // }
 
   cargarNormas() {
 
@@ -232,6 +215,47 @@ export class InformeComponent implements OnInit {
             this.fechasV = informe.fechaAuditorias;
             this.fechaEmisionV = informe.fechaEmision;
 
+            this.oportunidadesMejoraV = informe.oportunidadesMejora;
+
+            console.log('OPOPOP', this.oportunidadesMejoraV);
+
+            this.idInforme = informe._id;
+
+            this.cargarPersonal( informe._id );
+            this.cargarNoConf( informe._id );
+
+            this.cargando = false;
+            floating_labels();
+            inicializando_datePicker();
+            inicializando_dateRange();
+          });
+
+  }
+
+  cargarPersonal( id: string) {
+
+    this.cargando = true;
+
+    this._informeService.cargarPersonal( id )
+          .subscribe( personal => {
+            this.personal = personal;
+            console.log('Personal: ', personal);
+            this.cargando = false;
+            floating_labels();
+            inicializando_datePicker();
+            inicializando_dateRange();
+          });
+
+  }
+
+  cargarNoConf( id: string) {
+
+    this.cargando = true;
+
+    this._informeService.cargarNoConformidades( id )
+          .subscribe( hallazgos => {
+            this.hallazgos = hallazgos;
+            console.log('Hallazgos: ', hallazgos);
             this.cargando = false;
             floating_labels();
             inicializando_datePicker();
@@ -262,10 +286,10 @@ export class InformeComponent implements OnInit {
 
     console.log('Titulo');
 
-    // this.formaTitulo.setValue({
-    //   proceso: this.informe.proceso,
-    //   fecha: this.informe.fecha
-    // });
+    this.formaTitulo.setValue({
+      proceso: this.informe.proceso,
+      fecha: this.informe.fecha
+    });
   }
 
   editarComentarios() {
@@ -283,9 +307,9 @@ export class InformeComponent implements OnInit {
 
     console.log('Comentarios');
 
-    // this.formaComentarios.setValue({
-    //   comentarios: this.informe.comentarios
-    // });
+    this.formaComentarios.setValue({
+      comentarios: this.informe.comentarios
+    });
   }
 
   editarConclusiones() {
@@ -303,9 +327,9 @@ export class InformeComponent implements OnInit {
 
     console.log('Conclusiones');
 
-    // this.formaConclusiones.setValue({
-    //   conclusiones: this.informe.conclusiones,
-    // });
+    this.formaConclusiones.setValue({
+      conclusiones: this.informe.conclusiones,
+    });
   }
 
   editarFechas() {
@@ -323,9 +347,9 @@ export class InformeComponent implements OnInit {
 
     console.log('Fechas');
     
-    // this.formaFechas.setValue({
-    //   fechas: this.informe.fechas
-    // });
+    this.formaFechas.setValue({
+      fechas: this.informe.fechaAuditorias
+    });
   }
 
   editarFechaEmision() {
@@ -343,9 +367,9 @@ export class InformeComponent implements OnInit {
 
     console.log('Fecha de Emisión');
 
-    // this.formaFechaEmision.setValue({
-    //   fechaEmision: this.informe.fechaEmision
-    // });
+    this.formaFechaEmision.setValue({
+      fechaEmision: this.informe.fechaEmision
+    });
   }
 
   // ************************************************
@@ -367,29 +391,29 @@ export class InformeComponent implements OnInit {
       this.idA,
       this.formaTitulo.value.proceso,
       fech,
+      [],
       '',
       '',
       '',
       '',
       '',
       '',
-      '',
-      'idInforme'
+      this.idInforme
     );
 
-    console.log('Informe: ', informe);
+    console.log('Informe Titulo: ', informe);
 
-    // this._informeService.editarTitulo( informe )
-    //         .subscribe( resp => {
-    //           floating_labels();
-    //           inicializando_datePicker();
-    //           inicializando_dateRange();
-          
-    //           this.cargarAuditoria( this.idA );
-    //           this.cargarUsuarios();
-    //           this.cargarNormas();
-    //           this.cargarTablas();
-    //         });
+    this._informeService.modificarTitulo( informe )
+            .subscribe( resp => {
+              floating_labels();
+              inicializando_datePicker();
+              inicializando_dateRange();
+
+              this.cargarAuditoria( this.idA );
+              this.cargarNormas();
+              this.cargarTablas();
+              this.cargarInforme( this.idA );
+            });
 
   }
 
@@ -406,29 +430,29 @@ export class InformeComponent implements OnInit {
       this.idA,
       '',
       '',
-      '',
+      [],
       this.formaComentarios.value.comentarios,
       '',
       '',
       '',
       '',
       '',
-      'idInforme'
+      this.idInforme
     );
 
-    console.log('Informe: ', informe);
+    console.log('Informe Comentarios: ', informe);
 
-    // this._informeService.editarTitulo( informe )
-    //         .subscribe( resp => {
-    //           floating_labels();
-    //           inicializando_datePicker();
-    //           inicializando_dateRange();
-          
-    //           this.cargarAuditoria( this.idA );
-    //           this.cargarUsuarios();
-    //           this.cargarNormas();
-    //           this.cargarTablas();
-    //         });
+    this._informeService.modificarComentarios( informe )
+            .subscribe( resp => {
+              floating_labels();
+              inicializando_datePicker();
+              inicializando_dateRange();
+
+              this.cargarAuditoria( this.idA );
+              this.cargarNormas();
+              this.cargarTablas();
+              this.cargarInforme( this.idA );
+            });
 
   }
 
@@ -445,29 +469,29 @@ export class InformeComponent implements OnInit {
       this.idA,
       '',
       '',
-      '',
+      [],
       '',
       this.formaConclusiones.value.conclusiones,
       '',
       '',
       '',
       '',
-      'idInforme'
+      this.idInforme
     );
 
-    console.log('Informe: ', informe);
+    console.log('Informe Conclusiones: ', informe);
 
-    // this._informeService.editarTitulo( informe )
-    //         .subscribe( resp => {
-    //           floating_labels();
-    //           inicializando_datePicker();
-    //           inicializando_dateRange();
-          
-    //           this.cargarAuditoria( this.idA );
-    //           this.cargarUsuarios();
-    //           this.cargarNormas();
-    //           this.cargarTablas();
-    //         });
+    this._informeService.modificarConclusiones( informe )
+            .subscribe( resp => {
+              floating_labels();
+              inicializando_datePicker();
+              inicializando_dateRange();
+
+              this.cargarAuditoria( this.idA );
+              this.cargarNormas();
+              this.cargarTablas();
+              this.cargarInforme( this.idA );
+            });
 
   }
 
@@ -486,29 +510,29 @@ export class InformeComponent implements OnInit {
       this.idA,
       this.formaTitulo.value.proceso,
       '',
-      '',
+      [],
       '',
       '',
       '',
       '',
       fech,
       '',
-      'idInforme'
+      this.idInforme
     );
 
-    console.log('Informe: ', informe);
+    console.log('Informe Fecha Auditorias: ', informe);
 
-    // this._informeService.editarTitulo( informe )
-    //         .subscribe( resp => {
-    //           floating_labels();
-    //           inicializando_datePicker();
-    //           inicializando_dateRange();
-          
-    //           this.cargarAuditoria( this.idA );
-    //           this.cargarUsuarios();
-    //           this.cargarNormas();
-    //           this.cargarTablas();
-    //         });
+    this._informeService.modificarFechas( informe )
+            .subscribe( resp => {
+              floating_labels();
+              inicializando_datePicker();
+              inicializando_dateRange();
+
+              this.cargarAuditoria( this.idA );
+              this.cargarNormas();
+              this.cargarTablas();
+              this.cargarInforme( this.idA );
+            });
 
   }
 
@@ -527,28 +551,183 @@ export class InformeComponent implements OnInit {
       this.idA,
       this.formaTitulo.value.proceso,
       '',
-      '',
+      [],
       '',
       '',
       '',
       '',
       '',
       fech,
-      'idInforme'
+      this.idInforme
     );
 
-    console.log('Informe: ', informe);
+    console.log('Informe Fecha Emision: ', informe);
 
-    // this._informeService.editarTitulo( informe )
+    this._informeService.modificarFechaEmision( informe )
+            .subscribe( resp => {
+              floating_labels();
+              inicializando_datePicker();
+              inicializando_dateRange();
+
+              this.cargarAuditoria( this.idA );
+              this.cargarNormas();
+              this.cargarTablas();
+              this.cargarInforme( this.idA );
+            });
+
+  }
+
+  editarOMS() {
+
+    if ( this.formaOM.invalid ) {
+      console.log('Invalido');
+      return;
+    }
+
+    this.mostrarFormCom = false;
+
+    this.oportunidadesMejoraV.push(this.formaOM.value.oportunidad);
+
+    let informe = new Informe(
+      this.idA,
+      '',
+      '',
+      this.oportunidadesMejoraV,
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      this.idInforme
+    );
+
+    console.log('Informe OM: ', informe);
+
+    this._informeService.modificarOM( informe )
+            .subscribe( resp => {
+              floating_labels();
+              inicializando_datePicker();
+              inicializando_dateRange();
+
+              this.cargarAuditoria( this.idA );
+              this.cargarNormas();
+              this.cargarTablas();
+              this.cargarInforme( this.idA );
+            });
+
+  }
+
+  eliminarOM( ind: number ) {
+
+    Swal.fire({
+      title: '¡Advertencia!',
+      text: `¿Estás seguro de eliminar esta Oportunidad de Mejora?`,
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí',
+      cancelButtonText: 'No',
+      cancelButtonColor: '#e74c3c',
+      animation: false,
+      customClass: {
+        popup: 'animated tada'
+      }
+    }).then((eliminar) => {
+      if (eliminar.value) {
+        
+
+        console.log('index: ', ind);
+        this.oportunidadesMejoraV.splice(ind, 1);
+        console.log('OOPOPPPPPPPPPP: ',this.oportunidadesMejoraV);
+
+        let informe = new Informe(
+          this.idA,
+          '',
+          '',
+          this.oportunidadesMejoraV,
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          this.idInforme
+        );
+
+        console.log('Informe OM: ', informe);
+
+        this._informeService.eliminarOM( informe )
+                .subscribe( resp => {
+                  floating_labels();
+                  inicializando_datePicker();
+                  inicializando_dateRange();
+
+                  this.cargarAuditoria( this.idA );
+                  this.cargarNormas();
+                  this.cargarTablas();
+                  this.cargarInforme( this.idA );
+                });
+
+
+      }
+    });
+
+  }
+
+  editarPersonalS() {
+
+    if ( this.formaPersonal.invalid ) {
+      console.log('Invalido');
+      return;
+    }
+
+    let personal = new PersonalContactado(
+      this.idInforme,
+      this.formaPersonal.value.nombre,
+      this.formaPersonal.value.puesto,
+    );
+
+    console.log('Personal: ', personal);
+
+    // this._informeService.modificarConclusiones( informe )
     //         .subscribe( resp => {
     //           floating_labels();
     //           inicializando_datePicker();
     //           inicializando_dateRange();
-          
+
     //           this.cargarAuditoria( this.idA );
-    //           this.cargarUsuarios();
     //           this.cargarNormas();
     //           this.cargarTablas();
+    //           this.cargarInforme( this.idA );
+    //         });
+
+  }
+
+  editarHallazgoS() {
+
+    if ( this.formaHallazgo.invalid ) {
+      console.log('Invalido');
+      return;
+    }
+
+    let hallazgo = new NoConformidades(
+      this.idInforme,
+      this.formaHallazgo.value.hallazgo,
+      this.formaHallazgo.value.requisito,
+    );
+
+    console.log('Hallazgo: ', hallazgo);
+
+    // this._informeService.modificarConclusiones( informe )
+    //         .subscribe( resp => {
+    //           floating_labels();
+    //           inicializando_datePicker();
+    //           inicializando_dateRange();
+
+    //           this.cargarAuditoria( this.idA );
+    //           this.cargarNormas();
+    //           this.cargarTablas();
+    //           this.cargarInforme( this.idA );
     //         });
 
   }

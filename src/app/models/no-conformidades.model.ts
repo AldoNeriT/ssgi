@@ -4,7 +4,6 @@ export class NoConformidades {
         public informe: string,
         public hallazgo: string,
         public requisito: string,
-        public _id?: string,
-        public estado?: boolean
+        public _id?: string
     ) { }
 }

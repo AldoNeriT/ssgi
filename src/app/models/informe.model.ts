@@ -4,7 +4,7 @@ export class Informe {
         public auditoria: string,
         public proceso: string,
         public fecha: string,
-        public oportunidadesMejora: Object,
+        public oportunidadesMejora: any[],
         public comentarios: string,
         public conclusiones: string,
         public auditorLider: string,

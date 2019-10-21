@@ -111,34 +111,10 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="text-center">
-                                <td>Aldo Neri</td>
-                                <td>Jefe</td>
+                            <tr *ngFor="let per of personal" class="text-center">
+                                <td>{{ per.nombre }}</td>
+                                <td>{{ per.puesto }}</td>
                                 <td class="text-center"><button class="btn btn-outline-danger btn-sm"><i class="fa fa-trash-o"></i></button></td>
-                            </tr>
-                            <tr class="text-center">
-                                <td>Aldo Neri</td>
-                                <td>Jefe</td>
-                                <td class="text-center"><button class="btn btn-outline-danger btn-sm"><i class="fa fa-trash-o"></i></button></td>
-
-                            </tr>
-                            <tr class="text-center">
-                                <td>Aldo Neri</td>
-                                <td>Jefe</td>
-                                <td><button class="btn btn-outline-danger btn-sm"><i class="fa fa-trash-o"></i></button></td>
-
-                            </tr>
-                            <tr class="text-center">
-                                <td>Aldo Neri</td>
-                                <td>Jefe</td>
-                                <td><button class="btn btn-outline-danger btn-sm"><i class="fa fa-trash-o"></i></button></td>
-
-                            </tr>
-                            <tr class="text-center">
-                                <td>Aldo Neri</td>
-                                <td>Jefe</td>
-                                <td><button class="btn btn-outline-danger btn-sm"><i class="fa fa-trash-o"></i></button></td>
-
                             </tr>
                             <tr class="text-center pointer">
                                 <td colspan="3" data-toggle="modal" data-target="#modalAgregar1"><i class="mdi mdi-plus"></i></td>
@@ -269,25 +245,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="text-center">
-                                <td>1</td>
-                                <td class="text-center"><button class="btn btn-outline-danger btn-sm"><i class="fa fa-trash-o"></i></button></td>
-                            </tr>
-                            <tr class="text-center">
-                                <td>2</td>
-                                <td class="text-center"><button class="btn btn-outline-danger btn-sm"><i class="fa fa-trash-o"></i></button></td>
-                            </tr>
-                            <tr class="text-center">
-                                <td>3</td>
-                                <td class="text-center"><button class="btn btn-outline-danger btn-sm"><i class="fa fa-trash-o"></i></button></td>
-                            </tr>
-                            <tr class="text-center">
-                                <td>4</td>
-                                <td class="text-center"><button class="btn btn-outline-danger btn-sm"><i class="fa fa-trash-o"></i></button></td>
-                            </tr>
-                            <tr class="text-center">
-                                <td>5</td>
-                                <td class="text-center"><button class="btn btn-outline-danger btn-sm"><i class="fa fa-trash-o"></i></button></td>
+                            <tr *ngFor="let op of oportunidadesMejoraV; let i=index;" class="text-center">
+                                <td>{{ op }}</td>
+                                <td class="text-center"><button (click)="eliminarOM( i )" class="btn btn-outline-danger btn-sm"><i class="fa fa-trash-o"></i></button></td>
                             </tr>
                             <tr class="text-center pointer">
                                 <td colspan="2" data-toggle="modal" data-target="#modalAgregar2"><i class="mdi mdi-plus"></i></td>
@@ -365,34 +325,10 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="text-center">
-                                <td>1</td>
-                                <td>Jefe</td>
-                                <td>NA</td>
-                                <td class="text-center"><button class="btn btn-outline-danger btn-sm"><i class="fa fa-trash-o"></i></button></td>
-                            </tr>
-                            <tr class="text-center">
-                                <td>2</td>
-                                <td>Jefe</td>
-                                <td>NA</td>
-                                <td class="text-center"><button class="btn btn-outline-danger btn-sm"><i class="fa fa-trash-o"></i></button></td>
-                            </tr>
-                            <tr class="text-center">
-                                <td>3</td>
-                                <td>Jefe</td>
-                                <td>NA</td>
-                                <td class="text-center"><button class="btn btn-outline-danger btn-sm"><i class="fa fa-trash-o"></i></button></td>
-                            </tr>
-                            <tr class="text-center">
-                                <td>4</td>
-                                <td>Jefe</td>
-                                <td>NA</td>
-                                <td class="text-center"><button class="btn btn-outline-danger btn-sm"><i class="fa fa-trash-o"></i></button></td>
-                            </tr>
-                            <tr class="text-center">
-                                <td>5</td>
-                                <td>Jefe</td>
-                                <td>NA</td>
+                            <tr *ngFor="let hall of hallazgos; let i=index" class="text-center">
+                                <td>{{ i + 1 }}</td>
+                                <td>{{ hall.hallazgo }}</td>
+                                <td>{{ hall.requisito }}</td>
                                 <td class="text-center"><button class="btn btn-outline-danger btn-sm"><i class="fa fa-trash-o"></i></button></td>
                             </tr>
                             <tr class="text-center pointer">
@@ -545,14 +481,14 @@
                 <h4 class="modal-title" id="exampleModalLabel1">Agregar Personal</h4>
             </div>
             <div class="modal-body">
-                <form class="floating-labels m-t-40" ngNativeValidate>
+                <form ngNativeValidate [formGroup]="formaPersonal" (ngSubmit)="editarPersonalS()" class="floating-labels m-t-40" ngNativeValidate>
                     <div class="form-group m-b-40">
-                        <input name="nombre" id="nombre" type="text" class="form-control" required>
+                        <input formControlName="nombre" name="nombre" id="nombre" type="text" class="form-control" required>
                         <span class="bar"></span>
                         <label for="nombre">Nombre:</label>
                     </div>
                     <div class="form-group m-b-40">
-                        <input name="puesto" id="puesto" type="text" class="form-control" required>
+                        <input formControlName="puesto" name="puesto" id="puesto" type="text" class="form-control" required>
                         <span class="bar"></span>
                         <label for="puesto">Puesto:</label>
                     </div>
@@ -579,9 +515,9 @@
                 <h4 class="modal-title" id="exampleModalLabel1">Agregar Oportunidad de Mejora</h4>
             </div>
             <div class="modal-body">
-                <form class="floating-labels m-t-40" ngNativeValidate>
+                <form ngNativeValidate [formGroup]="formaOM" (ngSubmit)="editarOMS()" class="floating-labels m-t-40" ngNativeValidate>
                     <div class="form-group m-b-40">
-                        <input name="oportunidad" id="oportunidad" type="text" class="form-control" required>
+                        <input formControlName="oportunidad" name="oportunidad" id="oportunidad" type="text" class="form-control" required>
                         <span class="bar"></span>
                         <label for="oportunidad">Oportunidad de Mejora:</label>
                     </div>
@@ -608,14 +544,14 @@
                 <h4 class="modal-title" id="exampleModalLabel1">Agregar No Conformidad</h4>
             </div>
             <div class="modal-body">
-                <form class="floating-labels m-t-40" ngNativeValidate>
+                <form ngNativeValidate [formGroup]="formaHallazgo" (ngSubmit)="editarHallazgoS()" class="floating-labels m-t-40" ngNativeValidate>
                     <div class="form-group m-b-40">
-                        <input name="hallazgo" id="hallazgo" type="text" class="form-control" required>
+                        <input formControlName="hallazgo" name="hallazgo" id="hallazgo" type="text" class="form-control" required>
                         <span class="bar"></span>
                         <label for="hallazgo">Descripción del Hallazgo:</label>
                     </div>
                     <div class="form-group m-b-40">
-                        <input name="requisito" id="requisito" type="text" class="form-control" required>
+                        <input formControlName="requisito" name="requisito" id="requisito" type="text" class="form-control" required>
                         <span class="bar"></span>
                         <label for="requisito">Requisito:</label>
                     </div>

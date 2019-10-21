@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Informe } from '../../models/informe.model';
+import { PersonalContactado } from '../../models/personal-contactado.model';
+import { NoConformidades } from '../../models/no-conformidades.model';
 import { URL_SERVICIOS } from '../../config/config';
 
 import { map, catchError } from 'rxjs/operators';
@@ -48,4 +50,343 @@ export class InformeService {
     );
 
   }
+
+  modificarTitulo( informe: Informe ) {
+
+    let url = URL_SERVICIOS + '/informe/proceso/' + informe._id;
+
+    // *** TOKEN ***
+    url += '?token=' + this.token;
+
+    return this.http.put( url, informe )
+    .pipe(
+      map( (resp: any ) => {
+        Swal.fire({
+          title: 'Cambios Guardados (Titulo)',
+          type: 'success',
+          showConfirmButton: false,
+          timer: 2000
+        });
+        return resp.verificacion;
+      }),
+      catchError( err => {
+        Swal.fire('Error', err.error.err.message, 'error');
+        return throwError( err ) ;
+      })
+    );
+
+  }
+
+  modificarComentarios( informe: Informe ) {
+
+    let url = URL_SERVICIOS + '/informe/comentarios/' + informe._id;
+
+    // *** TOKEN ***
+    url += '?token=' + this.token;
+
+    return this.http.put( url, informe )
+    .pipe(
+      map( (resp: any ) => {
+        Swal.fire({
+          title: 'Cambios Guardados (Comentarios)',
+          type: 'success',
+          showConfirmButton: false,
+          timer: 2000
+        });
+        return resp.verificacion;
+      }),
+      catchError( err => {
+        Swal.fire('Error', err.error.err.message, 'error');
+        return throwError( err ) ;
+      })
+    );
+
+  }
+
+  modificarConclusiones( informe: Informe ) {
+
+    let url = URL_SERVICIOS + '/informe/conclusiones/' + informe._id;
+
+    // *** TOKEN ***
+    url += '?token=' + this.token;
+
+    return this.http.put( url, informe )
+    .pipe(
+      map( (resp: any ) => {
+        Swal.fire({
+          title: 'Cambios Guardados (Conclusiones)',
+          type: 'success',
+          showConfirmButton: false,
+          timer: 2000
+        });
+        return resp.verificacion;
+      }),
+      catchError( err => {
+        Swal.fire('Error', err.error.err.message, 'error');
+        return throwError( err ) ;
+      })
+    );
+
+  }
+
+  modificarFechas( informe: Informe ) {
+
+    let url = URL_SERVICIOS + '/informe/fechaauditorias/' + informe._id;
+
+    // *** TOKEN ***
+    url += '?token=' + this.token;
+
+    return this.http.put( url, informe )
+    .pipe(
+      map( (resp: any ) => {
+        Swal.fire({
+          title: 'Cambios Guardados (Fechas)',
+          type: 'success',
+          showConfirmButton: false,
+          timer: 2000
+        });
+        return resp.verificacion;
+      }),
+      catchError( err => {
+        Swal.fire('Error', err.error.err.message, 'error');
+        return throwError( err ) ;
+      })
+    );
+
+  }
+
+  modificarFechaEmision( informe: Informe ) {
+
+    let url = URL_SERVICIOS + '/informe/fechaemision/' + informe._id;
+
+    // *** TOKEN ***
+    url += '?token=' + this.token;
+
+    return this.http.put( url, informe )
+    .pipe(
+      map( (resp: any ) => {
+        Swal.fire({
+          title: 'Cambios Guardados (Fecha Emision)',
+          type: 'success',
+          showConfirmButton: false,
+          timer: 2000
+        });
+        return resp.verificacion;
+      }),
+      catchError( err => {
+        Swal.fire('Error', err.error.err.message, 'error');
+        return throwError( err ) ;
+      })
+    );
+
+  }
+
+  modificarOM( informe: Informe ) {
+
+    let url = URL_SERVICIOS + '/informe/oportunidades/' + informe._id;
+
+    // *** TOKEN ***
+    url += '?token=' + this.token;
+
+    return this.http.put( url, informe )
+    .pipe(
+      map( (resp: any ) => {
+        Swal.fire({
+          title: 'Cambios Guardados (Oport Mej)',
+          type: 'success',
+          showConfirmButton: false,
+          timer: 2000
+        });
+        return resp.verificacion;
+      }),
+      catchError( err => {
+        Swal.fire('Error', err.error.err.message, 'error');
+        return throwError( err ) ;
+      })
+    );
+
+  }
+
+  eliminarOM( informe: Informe ) {
+
+    let url = URL_SERVICIOS + '/informe/oportunidades/' + informe._id;
+
+    // *** TOKEN ***
+    url += '?token=' + this.token;
+
+    return this.http.put( url, informe )
+    .pipe(
+      map( (resp: any ) => {
+        Swal.fire({
+          title: 'Eliminado (Oport Mej)',
+          type: 'success',
+          showConfirmButton: false,
+          timer: 2000
+        });
+        return resp.verificacion;
+      }),
+      catchError( err => {
+        Swal.fire('Error', err.error.err.message, 'error');
+        return throwError( err ) ;
+      })
+    );
+
+  }
+
+  // ************************************************
+  // *** PERSONAL CONTACTADO ***
+  // ************************************************
+
+  cargarPersonal( id: string ) {
+
+    let url = URL_SERVICIOS + '/personal/informe/' + id;
+
+    // *** TOKEN ***
+    // url += '?token=' + this.token;
+
+    return this.http.get( url )
+    .pipe(
+      map( (resp: any ) => {
+        return resp.auditados;
+      }),
+      catchError( err => {
+        Swal.fire('Error', err.error.err.message, 'error');
+        return throwError( err ) ;
+      })
+    );
+
+  }
+
+  crearNorma( personal: PersonalContactado ) {
+
+    let url = URL_SERVICIOS + '/personal';
+
+    // *** Aqui se CREA el Personal ***
+
+    // *** TOKEN ***
+    url += '?token=' + this.token;
+
+    return this.http.post( url, personal )
+    .pipe(
+      map( (resp: any ) => {
+        Swal.fire({
+          title: 'Personal Creado',
+          type: 'success',
+          showConfirmButton: false,
+          timer: 2000
+        });
+        return resp.auditado;
+      }),
+      catchError( err => {
+        Swal.fire('Error', err.error.err.message, 'error');
+        return throwError( err ) ;
+      })
+    );
+
+  }
+
+  eliminarPersonal( id: string ) {
+
+    let url = URL_SERVICIOS + '/personal/' + id;
+
+    // *** TOKEN ***
+    url += '?token=' + this.token;
+
+    return this.http.delete( url )
+    .pipe(
+      map( (resp: any ) => {
+        Swal.fire({
+          title: 'Eliminado (Personal)',
+          type: 'success',
+          showConfirmButton: false,
+          timer: 2000
+        });
+        return resp;
+      }),
+      catchError( err => {
+        Swal.fire('Error', err.error.err.message, 'error');
+        return throwError( err ) ;
+      })
+    );
+
+  }
+
+  // ************************************************
+  // *** NO CONFORMIDADES ***
+  // ************************************************
+
+  cargarNoConformidades( id: string ) {
+
+    let url = URL_SERVICIOS + '/hallazgo/informe/' + id;
+
+    // *** TOKEN ***
+    // url += '?token=' + this.token;
+
+    return this.http.get( url )
+    .pipe(
+      map( (resp: any ) => {
+        return resp.hallazgos;
+      }),
+      catchError( err => {
+        Swal.fire('Error', err.error.err.message, 'error');
+        return throwError( err ) ;
+      })
+    );
+
+  }
+
+  crearNoConformidades( hallazgo: NoConformidades ) {
+
+    let url = URL_SERVICIOS + '/hallazgo';
+
+    // *** Aqui se CREA el Personal ***
+
+    // *** TOKEN ***
+    url += '?token=' + this.token;
+
+    return this.http.post( url, hallazgo )
+    .pipe(
+      map( (resp: any ) => {
+        Swal.fire({
+          title: 'No Conformidad Agregada',
+          type: 'success',
+          showConfirmButton: false,
+          timer: 2000
+        });
+        return resp.hallazgo;
+      }),
+      catchError( err => {
+        Swal.fire('Error', err.error.err.message, 'error');
+        return throwError( err ) ;
+      })
+    );
+
+  }
+
+  eliminarNoConformidades( id: string ) {
+
+    let url = URL_SERVICIOS + '/hallazgo/' + id;
+
+    // *** TOKEN ***
+    url += '?token=' + this.token;
+
+    return this.http.delete( url )
+    .pipe(
+      map( (resp: any ) => {
+        Swal.fire({
+          title: 'Eliminado (No Conformidad)',
+          type: 'success',
+          showConfirmButton: false,
+          timer: 2000
+        });
+        return resp;
+      }),
+      catchError( err => {
+        Swal.fire('Error', err.error.err.message, 'error');
+        return throwError( err ) ;
+      })
+    );
+
+  }
+
 }

@@ -4,7 +4,6 @@ export class PersonalContactado {
         public informe: string,
         public nombre: string,
         public puesto: string,
-        public _id?: string,
-        public estado?: boolean
+        public _id?: string
     ) { }
 }
