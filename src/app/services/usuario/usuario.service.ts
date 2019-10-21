@@ -375,7 +375,7 @@ export class UsuarioService {
     // let url = URL_SERVICIOS + '/planeacion/auditoria/auditores/' + role;
 
     // *** TOKEN ***
-    // url += '?token=' + this.token;
+    url += '?token=' + this.token;
 
     return this.http.get( url )
     .pipe(

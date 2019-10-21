@@ -16,7 +16,8 @@ import { LoginGuardGuard,
          AuditoriaService,
          PlaneacionService,
          ListaVerificacionService,
-         TablaService
+         TablaService,
+         InformeService
         } from './service.index';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -43,7 +44,8 @@ import { HttpClientModule } from '@angular/common/http';
     AuditoriaService,
     PlaneacionService,
     ListaVerificacionService,
-    TablaService
+    TablaService,
+    InformeService
   ]
 })
 export class ServiceModule { }

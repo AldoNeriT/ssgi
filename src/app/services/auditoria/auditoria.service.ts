@@ -246,7 +246,7 @@ export class AuditoriaService {
     let url = URL_SERVICIOS + '/auditoria/pasos/' + idAuditoria;
 
     // *** TOKEN ***
-    // url += '?token=' + this.token;
+    url += '?token=' + this.token;
 
     return this.http.put( url, auditoria )
     .pipe(

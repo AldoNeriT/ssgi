@@ -36,7 +36,7 @@ export class ListaVerificacionService {
     let url = URL_SERVICIOS + '/verificacion/planeacion/usuario/' + idP + '/' + idU;
 
     // *** TOKEN ***
-    // url += '?token=' + this.token;
+    url += '?token=' + this.token;
 
     return this.http.get( url )
     .pipe(
@@ -56,7 +56,7 @@ export class ListaVerificacionService {
     let url = URL_SERVICIOS + '/verificacion/planeacion/usuario/enviar/' + idP + '/' + idU;
 
     // *** TOKEN ***
-    // url += '?token=' + this.token;
+    url += '?token=' + this.token;
 
     return this.http.get( url )
     .pipe(
@@ -76,8 +76,8 @@ export class ListaVerificacionService {
 
     let url = URL_SERVICIOS + '/verificacion';
 
-      // *** TOKEN ***
-      // url += '?token=' + this.token;
+    // *** TOKEN ***
+    url += '?token=' + this.token;
 
     return this.http.post( url, listaVerificacion )
     .pipe(
@@ -103,7 +103,7 @@ export class ListaVerificacionService {
     let url = URL_SERVICIOS + '/verificacion/punto/' + listaVerificacion._id;
 
     // *** TOKEN ***
-    // url += '?token=' + this.token;
+    url += '?token=' + this.token;
 
     return this.http.put( url, listaVerificacion )
     .pipe(
@@ -129,7 +129,7 @@ export class ListaVerificacionService {
     let url = URL_SERVICIOS + '/verificacion/documento/' + listaVerificacion._id;
 
     // *** TOKEN ***
-    // url += '?token=' + this.token;
+    url += '?token=' + this.token;
 
     return this.http.put( url, listaVerificacion )
     .pipe(
@@ -155,7 +155,7 @@ export class ListaVerificacionService {
     let url = URL_SERVICIOS + '/verificacion/' + id;
 
     // *** TOKEN ***
-    // url += '?token=' + this.token;
+    url += '?token=' + this.token;
 
     return this.http.delete( url )
     .pipe(
@@ -181,7 +181,7 @@ export class ListaVerificacionService {
     let url = URL_SERVICIOS + '/verificacion/planeacion/' + idPlaneacion;
 
     // *** TOKEN ***
-    // url += '?token=' + this.token;
+    url += '?token=' + this.token;
 
     return this.http.put( url, null )
     .pipe(
@@ -206,7 +206,7 @@ export class ListaVerificacionService {
     let url = URL_SERVICIOS + '/verificacion/planeacion/validar/' + idPlaneacion;
 
     // *** TOKEN ***
-    // url += '?token=' + this.token;
+    url += '?token=' + this.token;
 
     return this.http.put( url, null )
     .pipe(
@@ -230,7 +230,7 @@ export class ListaVerificacionService {
     let url = URL_SERVICIOS + '/verificacion/planeacion/entrevistado/' + idPlaneacion;
 
     // *** TOKEN ***
-    // url += '?token=' + this.token;
+    url += '?token=' + this.token;
 
     return this.http.put( url, listaVerificacion )
     .pipe(

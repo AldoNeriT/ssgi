@@ -14,8 +14,8 @@
                 <div *ngIf="!mostrarFormTitulo" class="row">
                     <div class="col-12">
                         <h6 class="card-subtitle">No. de Auditoría: <span class="font-bold">{{ noAuditoriaV }}</span></h6>
-                        <h6 class="card-subtitle">Proceso: <span class="font-bold">###</span></h6>
-                        <h6 class="card-subtitle">Fecha: <span class="font-bold">###</span></h6>
+                        <h6 class="card-subtitle">Proceso: <span class="font-bold">{{ procesoV }}</span></h6>
+                        <h6 class="card-subtitle">Fecha: <span class="font-bold">{{ fechaV }}</span></h6>
                         <h6 class="card-subtitle">Auditor Líder: <span class="font-bold">{{ auditorLiderV }}</span></h6>
                         <h6 class="card-subtitle">Grupo Auditor: <span class="font-bold">{{ grupoAuditorV }}</span></h6>
                         <button (click)="editarTitulo()" class="btn btn-outline-secondary btn-sm btn-rounded">Editar Campos</button>
@@ -317,7 +317,7 @@
 
                 <div *ngIf="!mostrarFormCom" class="row">
                     <div class="col-12">
-                        <p class="card-text">Lorem ipsum dolor sit amet</p>
+                        <p class="card-text">{{ comentariosV }}</p>
                         <button (click)="editarComentarios()" class="btn btn-outline-secondary btn-sm btn-rounded">Editar</button>
                     </div>
                 </div>
@@ -423,7 +423,7 @@
 
                 <div *ngIf="!mostrarFormConc" class="row">
                     <div class="col-12">
-                        <p class="card-text">Lorem ipsum dolor sit amet</p>
+                        <p class="card-text">{{ conclusionesV }}</p>
                         <button (click)="editarConclusiones()" class="btn btn-outline-secondary btn-sm btn-rounded">Editar</button>
                     </div>
                 </div>
@@ -472,7 +472,7 @@
             <div *ngIf="!mostrarFormFechas" class="card-body text-center">
                 <div class="row">
                     <div class="col-12">
-                        <p class="card-text font-bold">10/30/2019 - 10/31/2019</p>
+                        <p class="card-text font-bold">{{ fechasV }}</p>
                         <button (click)="editarFechas()" class="btn btn-outline-secondary btn-sm btn-rounded">Editar</button>
                     </div>
                 </div>
@@ -508,7 +508,7 @@
             <div *ngIf="!mostrarFormFechaEmision" class="card-body text-center">
                 <div class="row">
                     <div class="col-12">
-                        <p class="card-text font-bold">10/31/2019</p>
+                        <p class="card-text font-bold">{{ fechaEmisionV }}</p>
                         <button (click)="editarFechaEmision()" class="btn btn-outline-secondary btn-sm btn-rounded">Editar</button>
                     </div>
                 </div>

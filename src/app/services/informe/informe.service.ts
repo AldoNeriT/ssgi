@@ -28,4 +28,24 @@ export class InformeService {
     }
 
   }
+
+  cargarInforme( id: string ) {
+
+    let url = URL_SERVICIOS + '/informe/auditoria/' + id;
+
+    // *** TOKEN ***
+    // url += '?token=' + this.token;
+
+    return this.http.get( url )
+    .pipe(
+      map( (resp: any ) => {
+        return resp.informe;
+      }),
+      catchError( err => {
+        Swal.fire('Error', err.error.err.message, 'error');
+        return throwError( err ) ;
+      })
+    );
+
+  }
 }

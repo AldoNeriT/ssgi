@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { NormaService, UsuarioService, AuditoriaService, InstitucionService, TablaService } from '../../services/service.index';
+import { NormaService, UsuarioService, AuditoriaService, InstitucionService, TablaService, InformeService } from '../../services/service.index';
 import { Auditoria } from '../../models/auditoria.model';
 import { Usuario } from '../../models/usuario.model';
 import { Norma } from '../../models/norma.model';
@@ -51,12 +51,20 @@ export class InformeComponent implements OnInit {
   objetivoV: string;
   alcanceV: string;
   directorV: string;
+  procesoV: string;
+  fechaV: string;
+  comentariosV: string;
+  conclusionesV: string;
+  fechasV: string;
+  fechaEmisionV: string;
+
 
   constructor( public _normaService: NormaService,
                public _auditoriaService: AuditoriaService,
                public _usuarioService: UsuarioService,
                public _institucionService: InstitucionService,
                public _tablaService: TablaService,
+               public _informeService: InformeService,
                public router: Router,
                public activatedRoute: ActivatedRoute) { 
     activatedRoute.params.subscribe( params => {
@@ -70,7 +78,7 @@ export class InformeComponent implements OnInit {
     inicializando_dateRange();
 
     this.cargarAuditoria( this.idA );
-    this.cargarUsuarios();
+    // this.cargarUsuarios();
     this.cargarNormas();
     this.cargarTablas();
     this.cargarInforme( this.idA );
@@ -128,47 +136,47 @@ export class InformeComponent implements OnInit {
 
   }
 
-  cargarUsuarios() {
+  // cargarUsuarios() {
 
-    this.cargando = true;
+  //   this.cargando = true;
 
-    this._usuarioService.cargarUsuariosPorTipo( 'AUDITOR_LIDER' )
-          .subscribe( usuario1 => {
-            // this.auditoria = auditoria;
-            // console.log('AuditorLider: ', usuario1[0]);
+  //   this._usuarioService.cargarUsuariosPorTipo( 'AUDITOR_LIDER' )
+  //         .subscribe( usuario1 => {
+  //           // this.auditoria = auditoria;
+  //           // console.log('AuditorLider: ', usuario1[0]);
 
-            if ( usuario1[0] ) {
-              this.auditorLiderV = usuario1[0].nombre + ' ' + usuario1[0].primer_Apellido + ' ' + (usuario1[0].segundo_Apellido || '');
-            } else {
-              this.auditorLiderV = '';
-            }
+  //           if ( usuario1[0] ) {
+  //             this.auditorLiderV = usuario1[0].nombre + ' ' + usuario1[0].primer_Apellido + ' ' + (usuario1[0].segundo_Apellido || '');
+  //           } else {
+  //             this.auditorLiderV = '';
+  //           }
 
-            this._usuarioService.cargarUsuariosPorTipo( 'ALTA_DIRECCION' )
-                    .subscribe( usuario2 => {
-                      // this.auditoria = auditoria;
-                      // console.log('AltaDireccion: ', usuario2[0]);
+  //           this._usuarioService.cargarUsuariosPorTipo( 'ALTA_DIRECCION' )
+  //                   .subscribe( usuario2 => {
+  //                     // this.auditoria = auditoria;
+  //                     // console.log('AltaDireccion: ', usuario2[0]);
 
-                      if ( usuario2[0] ) {
-                        this.directorV = usuario2[0].nombre + ' ' + usuario2[0].primer_Apellido + ' ' + (usuario2[0].segundo_Apellido || '');
-                      } else {
-                        this.directorV = '';
-                      }
+  //                     if ( usuario2[0] ) {
+  //                       this.directorV = usuario2[0].nombre + ' ' + usuario2[0].primer_Apellido + ' ' + (usuario2[0].segundo_Apellido || '');
+  //                     } else {
+  //                       this.directorV = '';
+  //                     }
 
-                      this.cargando = false;
+  //                     this.cargando = false;
 
-                      floating_labels();
-                      inicializando_datePicker();
-                      inicializando_dateRange();
-                    });
+  //                     floating_labels();
+  //                     inicializando_datePicker();
+  //                     inicializando_dateRange();
+  //                   });
 
-            // this.cargando = false;
+  //           // this.cargando = false;
 
-            // floating_labels();
-            // inicializando_datePicker();
-            // inicializando_dateRange();
-          });
+  //           // floating_labels();
+  //           // inicializando_datePicker();
+  //           // inicializando_dateRange();
+  //         });
 
-  }
+  // }
 
   cargarNormas() {
 
@@ -205,17 +213,30 @@ export class InformeComponent implements OnInit {
 
   cargarInforme( idAudi: string ) {
 
-    // this.cargando = true;
+    this.cargando = true;
 
-    // this._informeService.cargarInforme( idAudi )
-    //       .subscribe( informe => {
-    //         this.informe = informe;
-    //         // console.log('Informe: ', informe);
-    //         this.cargando = false;
-    //         floating_labels();
-    //         inicializando_datePicker();
-    //         inicializando_dateRange();
-    //       });
+    this._informeService.cargarInforme( idAudi )
+          .subscribe( informe => {
+            this.informe = informe;
+            console.log('Informe: ', this.informe);
+
+            this.auditorLiderV = informe.auditorLider.nombre + ' ' + informe.auditorLider.primer_Apellido + ' ' + (informe.auditorLider.segundo_Apellido || '');
+            this.directorV = informe.director.nombre + ' ' + informe.director.primer_Apellido + ' ' + (informe.director.segundo_Apellido || '');
+
+            this.procesoV = informe.proceso;
+            this.fechaV = informe.fecha;
+
+            this.comentariosV = informe.comentarios;
+            this.conclusionesV = informe.conclusiones;
+
+            this.fechasV = informe.fechaAuditorias;
+            this.fechaEmisionV = informe.fechaEmision;
+
+            this.cargando = false;
+            floating_labels();
+            inicializando_datePicker();
+            inicializando_dateRange();
+          });
 
   }
 
