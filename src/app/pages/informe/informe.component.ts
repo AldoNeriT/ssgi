@@ -201,7 +201,7 @@ export class InformeComponent implements OnInit {
     this._informeService.cargarInforme( idAudi )
           .subscribe( informe => {
             this.informe = informe;
-            console.log('Informe: ', this.informe);
+            // console.log('Informe: ', this.informe);
 
             this.auditorLiderV = informe.auditorLider.nombre + ' ' + informe.auditorLider.primer_Apellido + ' ' + (informe.auditorLider.segundo_Apellido || '');
             this.directorV = informe.director.nombre + ' ' + informe.director.primer_Apellido + ' ' + (informe.director.segundo_Apellido || '');
@@ -217,7 +217,7 @@ export class InformeComponent implements OnInit {
 
             this.oportunidadesMejoraV = informe.oportunidadesMejora;
 
-            console.log('OPOPOP', this.oportunidadesMejoraV);
+            // console.log('OPOPOP', this.oportunidadesMejoraV);
 
             this.idInforme = informe._id;
 
@@ -239,7 +239,7 @@ export class InformeComponent implements OnInit {
     this._informeService.cargarPersonal( id )
           .subscribe( personal => {
             this.personal = personal;
-            console.log('Personal: ', personal);
+            // console.log('Personal: ', personal);
             this.cargando = false;
             floating_labels();
             inicializando_datePicker();
@@ -255,7 +255,7 @@ export class InformeComponent implements OnInit {
     this._informeService.cargarNoConformidades( id )
           .subscribe( hallazgos => {
             this.hallazgos = hallazgos;
-            console.log('Hallazgos: ', hallazgos);
+            // console.log('Hallazgos: ', hallazgos);
             this.cargando = false;
             floating_labels();
             inicializando_datePicker();
@@ -284,7 +284,7 @@ export class InformeComponent implements OnInit {
       return;
     }
 
-    console.log('Titulo');
+    // console.log('Titulo');
 
     this.formaTitulo.setValue({
       proceso: this.informe.proceso,
@@ -305,7 +305,7 @@ export class InformeComponent implements OnInit {
       return;
     }
 
-    console.log('Comentarios');
+    // console.log('Comentarios');
 
     this.formaComentarios.setValue({
       comentarios: this.informe.comentarios
@@ -325,7 +325,7 @@ export class InformeComponent implements OnInit {
       return;
     }
 
-    console.log('Conclusiones');
+    // console.log('Conclusiones');
 
     this.formaConclusiones.setValue({
       conclusiones: this.informe.conclusiones,
@@ -345,8 +345,8 @@ export class InformeComponent implements OnInit {
       return;
     }
 
-    console.log('Fechas');
-    
+    // console.log('Fechas');
+
     this.formaFechas.setValue({
       fechas: this.informe.fechaAuditorias
     });
@@ -365,7 +365,7 @@ export class InformeComponent implements OnInit {
       return;
     }
 
-    console.log('Fecha de Emisión');
+    // console.log('Fecha de Emisión');
 
     this.formaFechaEmision.setValue({
       fechaEmision: this.informe.fechaEmision
@@ -401,7 +401,7 @@ export class InformeComponent implements OnInit {
       this.idInforme
     );
 
-    console.log('Informe Titulo: ', informe);
+    // console.log('Informe Titulo: ', informe);
 
     this._informeService.modificarTitulo( informe )
             .subscribe( resp => {
@@ -420,7 +420,7 @@ export class InformeComponent implements OnInit {
   editarComentariosS() {
 
     if ( this.formaComentarios.invalid ) {
-      console.log('Invalido');
+      // console.log('Invalido');
       return;
     }
 
@@ -440,7 +440,7 @@ export class InformeComponent implements OnInit {
       this.idInforme
     );
 
-    console.log('Informe Comentarios: ', informe);
+    // console.log('Informe Comentarios: ', informe);
 
     this._informeService.modificarComentarios( informe )
             .subscribe( resp => {
@@ -459,7 +459,7 @@ export class InformeComponent implements OnInit {
   editarConclusionesS() {
 
     if ( this.formaConclusiones.invalid ) {
-      console.log('Invalido');
+      // console.log('Invalido');
       return;
     }
 
@@ -479,7 +479,7 @@ export class InformeComponent implements OnInit {
       this.idInforme
     );
 
-    console.log('Informe Conclusiones: ', informe);
+    // console.log('Informe Conclusiones: ', informe);
 
     this._informeService.modificarConclusiones( informe )
             .subscribe( resp => {
@@ -520,7 +520,7 @@ export class InformeComponent implements OnInit {
       this.idInforme
     );
 
-    console.log('Informe Fecha Auditorias: ', informe);
+    // console.log('Informe Fecha Auditorias: ', informe);
 
     this._informeService.modificarFechas( informe )
             .subscribe( resp => {
@@ -561,7 +561,7 @@ export class InformeComponent implements OnInit {
       this.idInforme
     );
 
-    console.log('Informe Fecha Emision: ', informe);
+    // console.log('Informe Fecha Emision: ', informe);
 
     this._informeService.modificarFechaEmision( informe )
             .subscribe( resp => {
@@ -580,7 +580,7 @@ export class InformeComponent implements OnInit {
   editarOMS() {
 
     if ( this.formaOM.invalid ) {
-      console.log('Invalido');
+      // console.log('Invalido');
       return;
     }
 
@@ -602,7 +602,7 @@ export class InformeComponent implements OnInit {
       this.idInforme
     );
 
-    console.log('Informe OM: ', informe);
+    // console.log('Informe OM: ', informe);
 
     this._informeService.modificarOM( informe )
             .subscribe( resp => {
@@ -634,11 +634,10 @@ export class InformeComponent implements OnInit {
       }
     }).then((eliminar) => {
       if (eliminar.value) {
-        
 
-        console.log('index: ', ind);
+        // console.log('index: ', ind);
         this.oportunidadesMejoraV.splice(ind, 1);
-        console.log('OOPOPPPPPPPPPP: ',this.oportunidadesMejoraV);
+        // console.log('OOPOPPPPPPPPPP: ',this.oportunidadesMejoraV);
 
         let informe = new Informe(
           this.idA,
@@ -654,7 +653,7 @@ export class InformeComponent implements OnInit {
           this.idInforme
         );
 
-        console.log('Informe OM: ', informe);
+        // console.log('Informe OM: ', informe);
 
         this._informeService.eliminarOM( informe )
                 .subscribe( resp => {
@@ -677,7 +676,7 @@ export class InformeComponent implements OnInit {
   editarPersonalS() {
 
     if ( this.formaPersonal.invalid ) {
-      console.log('Invalido');
+      // console.log('Invalido');
       return;
     }
 
@@ -687,26 +686,58 @@ export class InformeComponent implements OnInit {
       this.formaPersonal.value.puesto,
     );
 
-    console.log('Personal: ', personal);
+    // console.log('Personal: ', personal);
 
-    // this._informeService.modificarConclusiones( informe )
-    //         .subscribe( resp => {
-    //           floating_labels();
-    //           inicializando_datePicker();
-    //           inicializando_dateRange();
+    this._informeService.crearPersonal( personal )
+            .subscribe( resp => {
+              floating_labels();
+              inicializando_datePicker();
+              inicializando_dateRange();
 
-    //           this.cargarAuditoria( this.idA );
-    //           this.cargarNormas();
-    //           this.cargarTablas();
-    //           this.cargarInforme( this.idA );
-    //         });
+              this.cargarAuditoria( this.idA );
+              this.cargarNormas();
+              this.cargarTablas();
+              this.cargarInforme( this.idA );
+            });
+
+  }
+
+  eliminarPersonal( personal: PersonalContactado ) {
+
+    Swal.fire({
+      title: '¡Advertencia!',
+      text: `¿Estás seguro de eliminar a "${personal.nombre}"?`,
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí',
+      cancelButtonText: 'No',
+      cancelButtonColor: '#e74c3c',
+      animation: false,
+      customClass: {
+        popup: 'animated tada'
+      }
+    }).then((eliminar) => {
+      if (eliminar.value) {
+        this._informeService.eliminarPersonal( personal._id )
+          .subscribe( (resp: any) => {
+              floating_labels();
+              inicializando_datePicker();
+              inicializando_dateRange();
+
+              this.cargarAuditoria( this.idA );
+              this.cargarNormas();
+              this.cargarTablas();
+              this.cargarInforme( this.idA );
+          } );
+      }
+    });
 
   }
 
   editarHallazgoS() {
 
     if ( this.formaHallazgo.invalid ) {
-      console.log('Invalido');
+      // console.log('Invalido');
       return;
     }
 
@@ -716,19 +747,51 @@ export class InformeComponent implements OnInit {
       this.formaHallazgo.value.requisito,
     );
 
-    console.log('Hallazgo: ', hallazgo);
+    // console.log('Hallazgo: ', hallazgo);
 
-    // this._informeService.modificarConclusiones( informe )
-    //         .subscribe( resp => {
-    //           floating_labels();
-    //           inicializando_datePicker();
-    //           inicializando_dateRange();
+    this._informeService.crearNoConformidades( hallazgo )
+            .subscribe( resp => {
+              floating_labels();
+              inicializando_datePicker();
+              inicializando_dateRange();
 
-    //           this.cargarAuditoria( this.idA );
-    //           this.cargarNormas();
-    //           this.cargarTablas();
-    //           this.cargarInforme( this.idA );
-    //         });
+              this.cargarAuditoria( this.idA );
+              this.cargarNormas();
+              this.cargarTablas();
+              this.cargarInforme( this.idA );
+            });
+
+  }
+
+  eliminarHallazgo( hallazgo: NoConformidades ) {
+
+    Swal.fire({
+      title: '¡Advertencia!',
+      text: `¿Estás seguro de eliminar "${hallazgo.hallazgo}"?`,
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí',
+      cancelButtonText: 'No',
+      cancelButtonColor: '#e74c3c',
+      animation: false,
+      customClass: {
+        popup: 'animated tada'
+      }
+    }).then((eliminar) => {
+      if (eliminar.value) {
+        this._informeService.eliminarNoConformidades( hallazgo._id )
+          .subscribe( (resp: any) => {
+              floating_labels();
+              inicializando_datePicker();
+              inicializando_dateRange();
+
+              this.cargarAuditoria( this.idA );
+              this.cargarNormas();
+              this.cargarTablas();
+              this.cargarInforme( this.idA );
+          } );
+      }
+    });
 
   }
 

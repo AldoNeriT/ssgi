@@ -104,7 +104,7 @@ export class TablaComponent implements OnInit {
 
     Swal.fire({
       title: '¡Advertencia!',
-      text: `¿Estás seguro de esta fila?`,
+      text: `¿Estás seguro de eliminar esta fila?`,
       type: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Sí',

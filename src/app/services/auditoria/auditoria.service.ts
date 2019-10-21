@@ -251,10 +251,10 @@ export class AuditoriaService {
     return this.http.put( url, auditoria )
     .pipe(
       map( (resp: any ) => {
-        Swal.fire({
-          title: 'Puedes empezar el Informe',
-          type: 'success'
-        });
+        // Swal.fire({
+        //   title: 'Puedes empezar',
+        //   type: 'success'
+        // });
         return resp.planeacion;
       }),
       catchError( err => {

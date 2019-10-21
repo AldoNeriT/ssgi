@@ -36,12 +36,40 @@ export class InformeService {
     let url = URL_SERVICIOS + '/informe/auditoria/' + id;
 
     // *** TOKEN ***
-    // url += '?token=' + this.token;
+    url += '?token=' + this.token;
 
     return this.http.get( url )
     .pipe(
       map( (resp: any ) => {
         return resp.informe;
+      }),
+      catchError( err => {
+        Swal.fire('Error', err.error.err.message, 'error');
+        return throwError( err ) ;
+      })
+    );
+
+  }
+
+  crearInforme( informe: Informe ) {
+
+    let url = URL_SERVICIOS + '/informe';
+
+    // *** Aqui se CREA el Informe ***
+
+    // *** TOKEN ***
+    url += '?token=' + this.token;
+
+    return this.http.post( url, informe )
+    .pipe(
+      map( (resp: any ) => {
+        Swal.fire({
+          title: 'Puedes empezar el Informe',
+          type: 'success',
+          showConfirmButton: false,
+          timer: 2000
+        });
+        return resp.hallazgo;
       }),
       catchError( err => {
         Swal.fire('Error', err.error.err.message, 'error');
@@ -62,7 +90,7 @@ export class InformeService {
     .pipe(
       map( (resp: any ) => {
         Swal.fire({
-          title: 'Cambios Guardados (Titulo)',
+          title: 'Cambios Guardados',
           type: 'success',
           showConfirmButton: false,
           timer: 2000
@@ -88,7 +116,7 @@ export class InformeService {
     .pipe(
       map( (resp: any ) => {
         Swal.fire({
-          title: 'Cambios Guardados (Comentarios)',
+          title: 'Comentarios Guardados',
           type: 'success',
           showConfirmButton: false,
           timer: 2000
@@ -114,7 +142,7 @@ export class InformeService {
     .pipe(
       map( (resp: any ) => {
         Swal.fire({
-          title: 'Cambios Guardados (Conclusiones)',
+          title: 'Conclusiones Guardadas',
           type: 'success',
           showConfirmButton: false,
           timer: 2000
@@ -140,7 +168,7 @@ export class InformeService {
     .pipe(
       map( (resp: any ) => {
         Swal.fire({
-          title: 'Cambios Guardados (Fechas)',
+          title: 'Fechas de Auditoría Guardadas',
           type: 'success',
           showConfirmButton: false,
           timer: 2000
@@ -166,7 +194,7 @@ export class InformeService {
     .pipe(
       map( (resp: any ) => {
         Swal.fire({
-          title: 'Cambios Guardados (Fecha Emision)',
+          title: 'Fecha de Emisión Guardada',
           type: 'success',
           showConfirmButton: false,
           timer: 2000
@@ -192,7 +220,7 @@ export class InformeService {
     .pipe(
       map( (resp: any ) => {
         Swal.fire({
-          title: 'Cambios Guardados (Oport Mej)',
+          title: 'Oportunidad de Mejora Agregada',
           type: 'success',
           showConfirmButton: false,
           timer: 2000
@@ -218,7 +246,7 @@ export class InformeService {
     .pipe(
       map( (resp: any ) => {
         Swal.fire({
-          title: 'Eliminado (Oport Mej)',
+          title: 'Oportunidad de Mejora Eliminada',
           type: 'success',
           showConfirmButton: false,
           timer: 2000
@@ -242,7 +270,7 @@ export class InformeService {
     let url = URL_SERVICIOS + '/personal/informe/' + id;
 
     // *** TOKEN ***
-    // url += '?token=' + this.token;
+    url += '?token=' + this.token;
 
     return this.http.get( url )
     .pipe(
@@ -257,7 +285,7 @@ export class InformeService {
 
   }
 
-  crearNorma( personal: PersonalContactado ) {
+  crearPersonal( personal: PersonalContactado ) {
 
     let url = URL_SERVICIOS + '/personal';
 
@@ -296,7 +324,7 @@ export class InformeService {
     .pipe(
       map( (resp: any ) => {
         Swal.fire({
-          title: 'Eliminado (Personal)',
+          title: 'Personal Eliminado',
           type: 'success',
           showConfirmButton: false,
           timer: 2000
@@ -320,7 +348,7 @@ export class InformeService {
     let url = URL_SERVICIOS + '/hallazgo/informe/' + id;
 
     // *** TOKEN ***
-    // url += '?token=' + this.token;
+    url += '?token=' + this.token;
 
     return this.http.get( url )
     .pipe(
@@ -374,7 +402,7 @@ export class InformeService {
     .pipe(
       map( (resp: any ) => {
         Swal.fire({
-          title: 'Eliminado (No Conformidad)',
+          title: 'No Conformidad Eliminada',
           type: 'success',
           showConfirmButton: false,
           timer: 2000

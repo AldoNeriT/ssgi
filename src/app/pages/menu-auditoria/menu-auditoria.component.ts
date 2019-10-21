@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { AuditoriaService, UsuarioService } from '../../services/service.index';
+import { AuditoriaService, UsuarioService, InformeService } from '../../services/service.index';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Auditoria } from '../../models/auditoria.model';
+import { Informe } from '../../models/informe.model';
+import { Usuario } from '../../models/usuario.model';
+
+import Swal from 'sweetalert2';
+import * as $ from 'jquery';
 
 
 // declare function init_plugins();
@@ -17,8 +22,12 @@ export class MenuAuditoriaComponent implements OnInit {
   cargando = true;
   pasosV: number;
 
+  auditorL: Usuario;
+  director: Usuario;
+
   constructor( public _auditoriaService: AuditoriaService,
                public _usuarioService: UsuarioService,
+               public _informeService: InformeService,
                public router: Router,
                public activatedRoute: ActivatedRoute ) {
     activatedRoute.params.subscribe( params => {
@@ -29,6 +38,8 @@ export class MenuAuditoriaComponent implements OnInit {
   ngOnInit() {
     // init_plugins();
     this.cargarAuditoria( this.id );
+    this.cargarAuditorL();
+    this.cargarDirector();
   }
 
   cargarAuditoria( id: string) {
@@ -39,6 +50,34 @@ export class MenuAuditoriaComponent implements OnInit {
           .subscribe( auditoria => {
             this.cargando = false;
             this.pasosV = auditoria.pasos;
+            // console.log(this.pasosV);
+          });
+
+  }
+
+  cargarAuditorL() {
+
+    this.cargando = true;
+
+    this._usuarioService.cargarUsuariosPorTipo( 'AUDITOR_LIDER' )
+          .subscribe( usuario => {
+            console.log(usuario[0]);
+            this.auditorL = usuario[0];
+            this.cargando = false;
+            // console.log(this.pasosV);
+          });
+
+  }
+
+  cargarDirector() {
+
+    this.cargando = true;
+
+    this._usuarioService.cargarUsuariosPorTipo( 'ALTA_DIRECCION' )
+          .subscribe( usuario => {
+            console.log(usuario[0]);
+            this.director = usuario[0];
+            this.cargando = false;
             // console.log(this.pasosV);
           });
 
@@ -63,8 +102,6 @@ export class MenuAuditoriaComponent implements OnInit {
   agregarInforme() {
     console.log('Aquí se agregara el Informe');
 
-    this.cargando = true;
-
     let auditoria = new Auditoria(
       '',
       '',
@@ -80,18 +117,57 @@ export class MenuAuditoriaComponent implements OnInit {
       3
     );
 
-    this._auditoriaService.cambiarPasos( this.id, auditoria )
+    Swal.fire({
+      title: '¿Empezar Informe?',
+      type: 'question',
+      showCancelButton: true,
+      confirmButtonText: 'Sí',
+      cancelButtonText: 'No',
+      cancelButtonColor: '#e74c3c',
+      animation: false,
+      customClass: {
+        popup: 'animated tada'
+      }
+    }).then((eliminar) => {
+      if (eliminar.value) {
+        this.cargando = true;
+
+        let informe = new Informe(
+          this.id,
+          '',
+          '',
+          [],
+          '',
+          '',
+          this.auditorL._id,
+          this.director._id,
+          '',
+          ''
+        );
+
+        console.log('INFORMEEEE', informe);
+
+        this._informeService.crearInforme( informe )
           .subscribe( resp => {
             this.cargando = false;
+
+            this._auditoriaService.cambiarPasos( this.id, auditoria )
+                  .subscribe( resp => {
+                    this.cargando = false;
+                    this.cargarAuditoria( this.id );
+                  });
+
             this.cargarAuditoria( this.id );
           });
+
+        
+      }
+    });
 
   }
 
   agregarBitacora() {
     console.log('Aquí se agregara la Bitácora');
-
-    this.cargando = true;
 
     let auditoria = new Auditoria(
       '',
@@ -108,10 +184,27 @@ export class MenuAuditoriaComponent implements OnInit {
       4
     );
 
-    this._auditoriaService.cambiarPasos( this.id, auditoria )
-          .subscribe( resp => {
-            this.cargando = false;
-            this.cargarAuditoria( this.id );
-          });
+    Swal.fire({
+      title: '¿Empezar Bitácora de Acciones?',
+      type: 'question',
+      showCancelButton: true,
+      confirmButtonText: 'Sí',
+      cancelButtonText: 'No',
+      cancelButtonColor: '#e74c3c',
+      animation: false,
+      customClass: {
+        popup: 'animated tada'
+      }
+    }).then((eliminar) => {
+      if (eliminar.value) {
+        this.cargando = true;
+
+        this._auditoriaService.cambiarPasos( this.id, auditoria )
+        .subscribe( resp => {
+          this.cargando = false;
+          this.cargarAuditoria( this.id );
+        });
+      }
+    });
   }
 }
