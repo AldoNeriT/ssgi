@@ -9,6 +9,7 @@ import { Informe } from '../../models/informe.model';
 import { PersonalContactado } from '../../models/personal-contactado.model';
 import { NoConformidades } from '../../models/no-conformidades.model';
 import { Tabla } from '../../models/tabla.model';
+import { Matriz } from '../../models/matriz.model';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import Swal from 'sweetalert2';
@@ -35,6 +36,7 @@ export class InformeComponent implements OnInit {
   tablas: Tabla[] = [];
   personal: PersonalContactado[] = [];
   hallazgos: NoConformidades[] = [];
+  matriz: any[] = [];
   informe: Informe;
 
   // Form
@@ -91,7 +93,7 @@ export class InformeComponent implements OnInit {
 
     this.cargarAuditoria( this.idA );
     this.cargarNormas();
-    this.cargarTablas();
+    // this.cargarTablas();
     this.cargarInforme( this.idA );
 
     this.formaTitulo = new FormGroup({
@@ -128,6 +130,49 @@ export class InformeComponent implements OnInit {
       hallazgo: new FormControl( null, Validators.required ),
       requisito: new FormControl( null, Validators.required )
     });
+  }
+
+  matrizValores() {
+
+    for ( let t of this.tablas) {
+      for ( let m of this.matriz) {
+        if ( t._id === m.tabla._id) {
+          if ( m.revision === 'A' ) {
+            console.log('A');
+            $('#r11_' + t._id).attr('checked', 'true');
+          }
+          if ( m.revision === 'NA' ) {
+            console.log('NA');
+            $('#r12_' + t._id).attr('checked', 'true');
+          }
+          if ( m.revision === 'EP' ) {
+            console.log('EP');
+            $('#r13_' + t._id).attr('checked', 'true');
+          }
+
+          if ( m.resultado === 'AD' ) {
+            console.log('AD');
+            $('#r21_' + t._id).attr('checked', 'true');
+          }
+          if ( m.resultado === 'NC' ) {
+            console.log('NC');
+            $('#r22_' + t._id).attr('checked', 'true');
+          }
+          if ( m.resultado === 'NR' ) {
+            console.log('NR');
+            $('#r23_' + t._id).attr('checked', 'true');
+          }
+          if ( m.resultado === 'EP' ) {
+            console.log('EP');
+            $('#r24_' + t._id).attr('checked', 'true');
+          }
+          if ( m.resultado === 'NA' ) {
+            console.log('NA');
+            $('#r25_' + t._id).attr('checked', 'true');
+          }
+        }
+      }
+    }
   }
 
   cargarAuditoria( id: string ) {
@@ -186,6 +231,26 @@ export class InformeComponent implements OnInit {
           .subscribe( tablas => {
             this.tablas = tablas;
             // console.log('Tablas: ', tablas);
+
+
+
+            this._informeService.cargarMatrizInforme( this.idInforme )
+                .subscribe( matriz => {
+                  this.matriz = matriz;
+                  console.log('Matriz: ', matriz);
+
+
+                  this.matrizValores();
+
+
+                  this.cargando = false;
+                  floating_labels();
+                  inicializando_datePicker();
+                  inicializando_dateRange();
+                });
+
+
+
             this.cargando = false;
             floating_labels();
             inicializando_datePicker();
@@ -223,6 +288,7 @@ export class InformeComponent implements OnInit {
 
             this.cargarPersonal( informe._id );
             this.cargarNoConf( informe._id );
+            this.cargarTablas();
 
             this.cargando = false;
             floating_labels();
@@ -278,7 +344,7 @@ export class InformeComponent implements OnInit {
     inicializando_datePicker();
     inicializando_dateRange();
     this.cargarNormas();
-    this.cargarTablas();
+    // this.cargarTablas();
 
     if ( !this.mostrarFormTitulo ) {
       return;
@@ -299,7 +365,7 @@ export class InformeComponent implements OnInit {
     inicializando_datePicker();
     inicializando_dateRange();
     this.cargarNormas();
-    this.cargarTablas();
+    // this.cargarTablas();
 
     if ( !this.mostrarFormCom ) {
       return;
@@ -319,7 +385,7 @@ export class InformeComponent implements OnInit {
     inicializando_datePicker();
     inicializando_dateRange();
     this.cargarNormas();
-    this.cargarTablas();
+    // this.cargarTablas();
 
     if ( !this.mostrarFormConc ) {
       return;
@@ -339,7 +405,7 @@ export class InformeComponent implements OnInit {
     inicializando_datePicker();
     inicializando_dateRange();
     this.cargarNormas();
-    this.cargarTablas();
+    // this.cargarTablas();
 
     if ( !this.mostrarFormFechas ) {
       return;
@@ -359,7 +425,7 @@ export class InformeComponent implements OnInit {
     inicializando_datePicker();
     inicializando_dateRange();
     this.cargarNormas();
-    this.cargarTablas();
+    // this.cargarTablas();
 
     if ( !this.mostrarFormFechaEmision ) {
       return;
@@ -411,7 +477,7 @@ export class InformeComponent implements OnInit {
 
               this.cargarAuditoria( this.idA );
               this.cargarNormas();
-              this.cargarTablas();
+              // this.cargarTablas();
               this.cargarInforme( this.idA );
             });
 
@@ -450,7 +516,7 @@ export class InformeComponent implements OnInit {
 
               this.cargarAuditoria( this.idA );
               this.cargarNormas();
-              this.cargarTablas();
+              // this.cargarTablas();
               this.cargarInforme( this.idA );
             });
 
@@ -489,7 +555,7 @@ export class InformeComponent implements OnInit {
 
               this.cargarAuditoria( this.idA );
               this.cargarNormas();
-              this.cargarTablas();
+              // this.cargarTablas();
               this.cargarInforme( this.idA );
             });
 
@@ -530,7 +596,7 @@ export class InformeComponent implements OnInit {
 
               this.cargarAuditoria( this.idA );
               this.cargarNormas();
-              this.cargarTablas();
+              // this.cargarTablas();
               this.cargarInforme( this.idA );
             });
 
@@ -571,7 +637,7 @@ export class InformeComponent implements OnInit {
 
               this.cargarAuditoria( this.idA );
               this.cargarNormas();
-              this.cargarTablas();
+              // this.cargarTablas();
               this.cargarInforme( this.idA );
             });
 
@@ -612,7 +678,7 @@ export class InformeComponent implements OnInit {
 
               this.cargarAuditoria( this.idA );
               this.cargarNormas();
-              this.cargarTablas();
+              // this.cargarTablas();
               this.cargarInforme( this.idA );
             });
 
@@ -663,7 +729,7 @@ export class InformeComponent implements OnInit {
 
                   this.cargarAuditoria( this.idA );
                   this.cargarNormas();
-                  this.cargarTablas();
+                  // this.cargarTablas();
                   this.cargarInforme( this.idA );
                 });
 
@@ -696,7 +762,7 @@ export class InformeComponent implements OnInit {
 
               this.cargarAuditoria( this.idA );
               this.cargarNormas();
-              this.cargarTablas();
+              // this.cargarTablas();
               this.cargarInforme( this.idA );
             });
 
@@ -726,7 +792,7 @@ export class InformeComponent implements OnInit {
 
               this.cargarAuditoria( this.idA );
               this.cargarNormas();
-              this.cargarTablas();
+              // this.cargarTablas();
               this.cargarInforme( this.idA );
           } );
       }
@@ -757,7 +823,7 @@ export class InformeComponent implements OnInit {
 
               this.cargarAuditoria( this.idA );
               this.cargarNormas();
-              this.cargarTablas();
+              // this.cargarTablas();
               this.cargarInforme( this.idA );
             });
 
@@ -787,7 +853,7 @@ export class InformeComponent implements OnInit {
 
               this.cargarAuditoria( this.idA );
               this.cargarNormas();
-              this.cargarTablas();
+              // this.cargarTablas();
               this.cargarInforme( this.idA );
           } );
       }

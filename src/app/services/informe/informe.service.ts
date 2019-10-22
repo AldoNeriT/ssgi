@@ -417,4 +417,28 @@ export class InformeService {
 
   }
 
+  // ************************************************
+  // *** MATRIZ ***
+  // ************************************************
+
+  cargarMatrizInforme( id: string ) {
+
+    let url = URL_SERVICIOS + '/matriz/informe/' + id;
+
+    // *** TOKEN ***
+    url += '?token=' + this.token;
+
+    return this.http.get( url )
+    .pipe(
+      map( (resp: any ) => {
+        return resp.matrices;
+      }),
+      catchError( err => {
+        Swal.fire('Error', err.error.err.message, 'error');
+        return throwError( err ) ;
+      })
+    );
+
+  }
+
 }

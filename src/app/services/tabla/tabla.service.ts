@@ -36,7 +36,7 @@ export class TablaService {
     let url = URL_SERVICIOS + '/tabla';
 
     // *** TOKEN ***
-    // url += '?token=' + this.token;
+    url += '?token=' + this.token;
 
     return this.http.get( url )
     .pipe(
@@ -58,7 +58,7 @@ export class TablaService {
     // *** Aqui se CREA la Tabla ***
 
     // *** TOKEN ***
-    // url += '?token=' + this.token;
+    url += '?token=' + this.token;
 
     return this.http.post( url, fila )
     .pipe(
@@ -84,7 +84,7 @@ export class TablaService {
     let url = URL_SERVICIOS + '/tabla/' + id;
 
     // *** TOKEN ***
-    // url += '?token=' + this.token;
+    url += '?token=' + this.token;
 
     return this.http.delete( url )
     .pipe(
