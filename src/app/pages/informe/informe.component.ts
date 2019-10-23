@@ -61,6 +61,7 @@ export class InformeComponent implements OnInit {
   cargando = true;
 
   // Variables para Ver
+  institucionV: string;
   auditoriaNombreV: string;
   noAuditoriaV: string;
   auditorLiderV: string;
@@ -162,6 +163,19 @@ export class InformeComponent implements OnInit {
             this.objetivoV = auditoria.objetivos;
             this.alcanceV = auditoria.alcance;
 
+            this._institucionService.cargarInstituciones()
+                .subscribe( instituciones => {
+                  // this.institucion = instituciones.instituciones;
+                  // console.log(instituciones.instituciones[0]);
+
+                  this.institucionV = instituciones.instituciones[0].nombreInstitucion;
+
+                  this.cargando = false;
+                  floating_labels();
+                  inicializando_datePicker();
+                  inicializando_dateRange();
+                });
+
 
             this.cargando = false;
             floating_labels();
@@ -231,7 +245,7 @@ export class InformeComponent implements OnInit {
     this._informeService.cargarInforme( idAudi )
           .subscribe( informe => {
             this.informe = informe;
-            console.log('Informe: ', this.informe);
+            // console.log('Informe: ', this.informe);
 
             this.auditorLiderV = informe.auditorLider.nombre + ' ' + informe.auditorLider.primer_Apellido + ' ' + (informe.auditorLider.segundo_Apellido || '');
             this.directorV = informe.director.nombre + ' ' + informe.director.primer_Apellido + ' ' + (informe.director.segundo_Apellido || '');
@@ -247,7 +261,7 @@ export class InformeComponent implements OnInit {
 
             this.oportunidadesMejoraV = informe.oportunidadesMejora;
 
-            console.log('OPOPOP', this.oportunidadesMejoraV);
+            // console.log('OPOPOP', this.oportunidadesMejoraV);
             this.totalOM = this.oportunidadesMejoraV.length;
 
             this.idInforme = informe._id;
@@ -273,6 +287,7 @@ export class InformeComponent implements OnInit {
                   this.cargando = false;
                   floating_labels();
                   inicializando_datePicker();
+                  inicializando_dateRange();
                 });
 
             this.cargando = false;
@@ -1018,7 +1033,7 @@ export class InformeComponent implements OnInit {
         table: {
           widths: [80, 260, 70, 80],
           body: [
-            [{ text: 'INSTITUCIÓN', fontSize: 10, colSpan: 1}, { text: 'Falta esto', fontSize: 10, colSpan: 1}, { text: 'NO. AUDITORIA',  alignment: 'center', fontSize: 10, colSpan: 1 }, { text: this.noAuditoriaV,  fontSize: 10, alignment: 'center', colSpan: 1, style: 'tableHeader' }],
+            [{ text: 'INSTITUCIÓN', fontSize: 10, colSpan: 1}, { text: this.institucionV, fontSize: 10, colSpan: 1}, { text: 'NO. AUDITORIA',  alignment: 'center', fontSize: 10, colSpan: 1 }, { text: this.noAuditoriaV,  fontSize: 10, alignment: 'center', colSpan: 1, style: 'tableHeader' }],
             [{ text: 'PROCESO', fontSize: 10, colSpan: 1}, { text: this.procesoV, fontSize: 10, colSpan: 1}, { text: 'FECHA',  alignment: 'center', fontSize: 10, colSpan: 1}, { text: this.fechaV,  fontSize: 10, alignment: 'center', colSpan: 1, style: 'tableHeader' }],
             [{ text: 'AUDITOR LIDER', fontSize: 10, colSpan: 1}, { text: this.auditorLiderV, fontSize: 10, colSpan: 3}, { text: '',  alignment: 'center', fontSize: 10, colSpan: 0}, { text: ' ',  fontSize: 10, alignment: 'center', colSpan: 0, style: 'tableHeader' }],
             [{ text: 'GRUPO AUDITOR', fontSize: 10, colSpan: 1}, { text: this.grupoAuditorV, fontSize: 10, colSpan: 3}, { text: '',  alignment: 'center', fontSize: 10, colSpan: 0}, { text: ' ',  fontSize: 10, alignment: 'center', colSpan: 0, style: 'tableHeader' }],
