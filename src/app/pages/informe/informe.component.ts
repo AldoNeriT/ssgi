@@ -12,6 +12,10 @@ import { Tabla } from '../../models/tabla.model';
 import { Matriz } from '../../models/matriz.model';
 import { Router, ActivatedRoute } from '@angular/router';
 
+import * as pdfMake from 'pdfmake/build/pdfmake.js';
+import * as pdfFonts from 'pdfmake/build/vfs_fonts.js';
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
+
 import Swal from 'sweetalert2';
 import * as $ from 'jquery';
 
@@ -71,6 +75,10 @@ export class InformeComponent implements OnInit {
   fechasV: string;
   fechaEmisionV: string;
   oportunidadesMejoraV: any[];
+  normasV: string;
+
+  totalNC: number;
+  totalOM: number;
 
 
   constructor( public _normaService: NormaService,
@@ -223,7 +231,7 @@ export class InformeComponent implements OnInit {
     this._informeService.cargarInforme( idAudi )
           .subscribe( informe => {
             this.informe = informe;
-            // console.log('Informe: ', this.informe);
+            console.log('Informe: ', this.informe);
 
             this.auditorLiderV = informe.auditorLider.nombre + ' ' + informe.auditorLider.primer_Apellido + ' ' + (informe.auditorLider.segundo_Apellido || '');
             this.directorV = informe.director.nombre + ' ' + informe.director.primer_Apellido + ' ' + (informe.director.segundo_Apellido || '');
@@ -239,13 +247,33 @@ export class InformeComponent implements OnInit {
 
             this.oportunidadesMejoraV = informe.oportunidadesMejora;
 
-            // console.log('OPOPOP', this.oportunidadesMejoraV);
+            console.log('OPOPOP', this.oportunidadesMejoraV);
+            this.totalOM = this.oportunidadesMejoraV.length;
 
             this.idInforme = informe._id;
 
             this.cargarPersonal( informe._id );
             this.cargarNoConf( informe._id );
             this.cargarTablas();
+
+            this._auditoriaService.cargarAuditoria( informe.auditoria._id )
+                .subscribe( auditoria => {
+                  // this.institucion = instituciones.instituciones;
+                  // console.log('Auditoria: ', auditoria);
+
+
+                  let arrNormasV: any[] = [];
+                  for ( let nor of  auditoria.normas) {
+                    arrNormasV.push(nor.nombreNorma);
+                  }
+
+                  this.normasV = arrNormasV.join(', ');
+
+
+                  this.cargando = false;
+                  floating_labels();
+                  inicializando_datePicker();
+                });
 
             this.cargando = false;
             floating_labels();
@@ -279,6 +307,7 @@ export class InformeComponent implements OnInit {
           .subscribe( hallazgos => {
             this.hallazgos = hallazgos;
             // console.log('Hallazgos: ', hallazgos);
+            this.totalNC = hallazgos.length;
             this.cargando = false;
             floating_labels();
             inicializando_datePicker();
@@ -300,8 +329,6 @@ export class InformeComponent implements OnInit {
     floating_labels();
     inicializando_datePicker();
     inicializando_dateRange();
-    this.cargarNormas();
-    // this.cargarTablas();
 
     if ( !this.mostrarFormTitulo ) {
       return;
@@ -321,8 +348,6 @@ export class InformeComponent implements OnInit {
     floating_labels();
     inicializando_datePicker();
     inicializando_dateRange();
-    this.cargarNormas();
-    // this.cargarTablas();
 
     if ( !this.mostrarFormCom ) {
       return;
@@ -341,8 +366,6 @@ export class InformeComponent implements OnInit {
     floating_labels();
     inicializando_datePicker();
     inicializando_dateRange();
-    this.cargarNormas();
-    // this.cargarTablas();
 
     if ( !this.mostrarFormConc ) {
       return;
@@ -361,8 +384,6 @@ export class InformeComponent implements OnInit {
     floating_labels();
     inicializando_datePicker();
     inicializando_dateRange();
-    this.cargarNormas();
-    // this.cargarTablas();
 
     if ( !this.mostrarFormFechas ) {
       return;
@@ -381,8 +402,6 @@ export class InformeComponent implements OnInit {
     floating_labels();
     inicializando_datePicker();
     inicializando_dateRange();
-    this.cargarNormas();
-    // this.cargarTablas();
 
     if ( !this.mostrarFormFechaEmision ) {
       return;
@@ -952,6 +971,249 @@ export class InformeComponent implements OnInit {
             // this.cargarTablas();
             this.cargarInforme( this.idA );
           });
+
+  }
+
+  imprimir( opcion: number) {
+
+    let arrPersonalContactado = [];
+    arrPersonalContactado.push([{ text: 'PERSONAL CONTACTADO', fontSize: 10, fillColor: '#dddddd', colSpan: 2, alignment: 'center' }, { text: ' ', fontSize: 10, fillColor: '#dddddd', colSpan: 0, alignment: 'center' }]);
+    arrPersonalContactado.push([{ text: 'NOMBRE', fontSize: 10, fillColor: '#dddddd', colSpan: 1, alignment: 'center' }, { text: 'PUESTO', fontSize: 10, fillColor: '#dddddd', colSpan: 1, alignment: 'center' }]);
+    for (let per of this.personal) {
+      arrPersonalContactado.push([{ text: per.nombre, fontSize: 10, colSpan: 1, alignment: 'center' }, { text: per.puesto, fontSize: 10, colSpan: 1, alignment: 'center' }]);
+    }
+
+    let n = 0;
+    let arrOportunidadesMejor = [];
+    arrOportunidadesMejor.push([{ text: 'OPORTUNIDADES DE MEJORA', fontSize: 10, fillColor: '#dddddd', colSpan: 1, alignment: 'center' }]);
+    for (let op of this.oportunidadesMejoraV) {
+      n++;
+      arrOportunidadesMejor.push([{ text: n + '. ' + op, fontSize: 10, colSpan: 1, alignment: 'center' }]);
+    }
+
+    let nn = 0;
+    let arrHallazgos = [];
+    arrHallazgos.push([{ text: 'NO CONFORMIDADES', fontSize: 10, fillColor: '#dddddd', alignment: 'center', colSpan: 3 }, { text: '', fontSize: 10, fillColor: '#dddddd', alignment: 'center', colSpan: 0 }, { text: '', fontSize: 10, fillColor: '#dddddd', alignment: 'center', colSpan: 0 }]);
+    arrHallazgos.push([{ text: 'NO', fontSize: 10, colSpan: 1, fillColor: '#dddddd', alignment: 'center' }, { text: 'DESCRIPCIÓN DEL HALLAZGO', fontSize: 10, colSpan: 1, fillColor: '#dddddd', alignment: 'center' }, { text: 'REQUISITO', fillColor: '#dddddd', alignment: 'center', fontSize: 10, colSpan: 1 }]);
+    for (let hall of this.hallazgos) {
+      nn++;
+      arrHallazgos.push([{ text: nn, fontSize: 10, colSpan: 1, alignment: 'center'}, { text: hall.hallazgo, fontSize: 10, colSpan: 1, alignment: 'center' }, { text: hall.requisito, fontSize: 10, colSpan: 1, alignment: 'center'}]);
+    }
+
+
+    let docInforme = {
+      content: [{
+        style: 'titulo',
+        table: {
+          heights: [50],
+          widths: [500],
+          body: [
+            [{ text: 'Informe de Auditoria del SGI del G3', color: 'gray', margin: [10, 15, 10, 10], alignment: 'center' }]
+          ]
+        }
+      },
+      // En estas tablas se coloca la primer seccion del documento despuès de la cabecera
+      {
+        style: 'primerSeccion',
+        table: {
+          widths: [80, 260, 70, 80],
+          body: [
+            [{ text: 'INSTITUCIÓN', fontSize: 10, colSpan: 1}, { text: 'Falta esto', fontSize: 10, colSpan: 1}, { text: 'NO. AUDITORIA',  alignment: 'center', fontSize: 10, colSpan: 1 }, { text: this.noAuditoriaV,  fontSize: 10, alignment: 'center', colSpan: 1, style: 'tableHeader' }],
+            [{ text: 'PROCESO', fontSize: 10, colSpan: 1}, { text: this.procesoV, fontSize: 10, colSpan: 1}, { text: 'FECHA',  alignment: 'center', fontSize: 10, colSpan: 1}, { text: this.fechaV,  fontSize: 10, alignment: 'center', colSpan: 1, style: 'tableHeader' }],
+            [{ text: 'AUDITOR LIDER', fontSize: 10, colSpan: 1}, { text: this.auditorLiderV, fontSize: 10, colSpan: 3}, { text: '',  alignment: 'center', fontSize: 10, colSpan: 0}, { text: ' ',  fontSize: 10, alignment: 'center', colSpan: 0, style: 'tableHeader' }],
+            [{ text: 'GRUPO AUDITOR', fontSize: 10, colSpan: 1}, { text: this.grupoAuditorV, fontSize: 10, colSpan: 3}, { text: '',  alignment: 'center', fontSize: 10, colSpan: 0}, { text: ' ',  fontSize: 10, alignment: 'center', colSpan: 0, style: 'tableHeader' }],
+          ]
+        },
+        // layout: 'noBorders'
+      },
+      // segunda seccion del documento, norma de referencia
+      {
+        style: 'segundaSeccion',
+        color: '#444',
+        table: {
+          widths: [120, 377],
+          body: [
+            [{ text: 'NORMA DE REFERENCIA:', fontSize: 10, fillColor: '#dddddd', colSpan: 1 }, { text: this.normasV, fontSize: 10, colSpan: 1 }],
+          ]
+        }
+      },
+      // tercer seccion del documento, objetivo y alcance
+      {
+        style: 'segundaSeccion',
+        color: '#444',
+        table: {
+          widths: [505],
+          body: [
+            [{ text: 'OBJETIVO:', fontSize: 10, fillColor: '#dddddd', colSpan: 1, alignment: 'center' }],
+            [{ text: this.objetivoV, fontSize: 10, colSpan: 1, alignment: 'center' }],
+            [{ text: 'ALCANCE:', fontSize: 10, fillColor: '#dddddd', colSpan: 1, alignment: 'center' }],
+            [{ text: this.alcanceV, fontSize: 10, colSpan: 1, alignment: 'center' }],
+          ]
+        }
+      },
+      // cuarta seccion del documento, objetivo y alcance
+      {
+        style: 'tercerSeccion',
+        color: '#444',
+        table: {
+          widths: [247, 247],
+          body: arrPersonalContactado,
+        }
+      },
+      // quinta seccion del documento, no conformidades
+      {
+        style: 'segundaSeccion',
+        color: '#444',
+        table: {
+          widths: [505],
+          body: [
+            [{ text: 'NO CONFORMIDADES', fontSize: 10, fillColor: '#dddddd', colSpan: 1, alignment: 'center' }],
+            [{ text: 'En la revisión al Sistema de Gestión Integral se encontraron un total de ' + this.totalNC + ' No Conformidades y ' + this.totalOM + ' Oportunidades de Mejora', fontSize: 10, colSpan: 1, alignment: 'center' }],
+          ]
+        }
+      },
+      // sexta seccion del documento, 
+      {
+        style: 'primerSeccion',
+        table: {
+          widths: ['auto', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto'],
+          body: [
+            [{ text: 'Núm', rowSpan: 2, fontSize: 10, colSpan: 1 }, { text: 'Requisito de la Norma', rowSpan: 2, alignment: 'center', fontSize: 10, colSpan: 1}, { text: ' NORMA',  fontSize: 10, alignment: 'center', colSpan: 3, style: 'tableHeader' }, { text: ' ',  fontSize: 10, alignment: 'center', colSpan: 0, style: 'tableHeader' }, { text: ' ',  fontSize: 10, alignment: 'center', colSpan: 0, style: 'tableHeader' }, { text: 'DOCUMENTO DE REFERENCIA',  alignment: 'center', fontSize: 10, colSpan: 2 }, { text: ' ',  fontSize: 10, alignment: 'center', colSpan: 0, style: 'tableHeader' }],
+            ['', '', 'SGC', 'SGA', 'SSGSST', 'REVISION', 'RESULTADO' ],
+            [{ text: '4', fontSize: 10, alignment: 'center', colSpan: 1 }, 'Contexto de la organizacion', { text: 'X', fontSize: 10, alignment: 'center', colSpan: 1 }, { text: 'X', fontSize: 10, alignment: 'center', colSpan: 1 }, { text: 'X', fontSize: 10, alignment: 'center', colSpan: 1 }, { text: ' ', fontSize: 10, alignment: 'center', colSpan: 1 }, { text: ' ', fontSize: 10, alignment: 'center', colSpan: 1 } ],
+            [{ text: '4.1', fontSize: 10, alignment: 'center', colSpan: 1 }, 'Comportamiento de la organizacion y su contexto', { text: 'X', fontSize: 10, alignment: 'center', colSpan: 1 }, { text: 'X', fontSize: 10, alignment: 'center', colSpan: 1 }, { text: 'X', fontSize: 10, alignment: 'center', colSpan: 1 }, { text: ' ', fontSize: 10, alignment: 'center', colSpan: 1 }, { text: ' ', fontSize: 10, alignment: 'center', colSpan: 1 } ],
+            [{ text: '4.2', fontSize: 10, alignment: 'center', colSpan: 1 }, 'Contexto de la organizacion', { text: 'X', fontSize: 10, alignment: 'center', colSpan: 1 }, { text: 'X', fontSize: 10, alignment: 'center', colSpan: 1 }, { text: 'X', fontSize: 10, alignment: 'center', colSpan: 1 }, { text: ' ', fontSize: 10, alignment: 'center', colSpan: 1 }, { text: ' ', fontSize: 10, alignment: 'center', colSpan: 1 } ],
+            [{ text: '4.3', fontSize: 10, alignment: 'center', colSpan: 1 }, 'Contexto de la organizacion', { text: 'X', fontSize: 10, alignment: 'center', colSpan: 1 }, { text: 'X', fontSize: 10, alignment: 'center', colSpan: 1 }, { text: 'X', fontSize: 10, alignment: 'center', colSpan: 1 }, { text: ' ', fontSize: 10, alignment: 'center', colSpan: 1 }, { text: ' ', fontSize: 10, alignment: 'center', colSpan: 1 } ],
+            [{ text: '4.4', fontSize: 10, alignment: 'center', colSpan: 1 }, 'Sistema de Gestion y sus procesos', { text: 'X', fontSize: 10, alignment: 'center', colSpan: 1 }, { text: 'X', fontSize: 10, alignment: 'center', colSpan: 1 }, { text: 'X', fontSize: 10, alignment: 'center', colSpan: 1 }, ' ', ' ' ]
+          ]
+        },
+        // layout: 'noBorders'
+      },
+      // septima seccion del documento, oportunidades de mejora
+      {
+        style: 'segundaSeccion',
+        color: '#444',
+        table: {
+          widths: [505],
+          body: arrOportunidadesMejor,
+        }
+      },
+      // octava seccion del documento, comentarios
+      {
+        style: 'segundaSeccion',
+        color: '#444',
+        table: {
+          widths: [505],
+          body: [
+            [{ text: 'COMENTARIOS', fontSize: 10, fillColor: '#dddddd', colSpan: 1, alignment: 'center' }],
+            [ { text: this.comentariosV, fontSize: 10, colSpan: 1, alignment: 'center' }],
+          ]
+        }
+      },
+      // novenaa seccion del documento, NO conformidades, hallazgo
+      {
+        style: 'segundaSeccion',
+        color: '#444',
+        table: {
+          widths: [20, 410, 60],
+          body: arrHallazgos,
+        }
+      },
+      // decima seccion del documento, conclusiones
+      {
+        style: 'segundaSeccion',
+        color: '#444',
+        table: {
+          widths: [505],
+          body: [
+            [{ text: 'CONCLUSIONES DE AUDITORÍA', fontSize: 10, fillColor: '#dddddd', colSpan: 1, alignment: 'center' }],
+            [ { text: this.conclusionesV, fontSize: 10, colSpan: 1, alignment: 'center' }],
+          ]
+        }
+      },
+      // onceava seccion del documento, auditor lider-fechas
+      {
+        style: 'segundaSeccion',
+        color: '#444',
+        table: {
+          widths: [165, 165, 165],
+          body: [
+            [{ text: 'AUDITOR LÍDER', fontSize: 10, fillColor: '#dddddd', colSpan: 1, alignment: 'center'}, { text: 'RECIBÍ DE CONFORMIDAD', fontSize: 10, fillColor: '#dddddd', colSpan: 1, alignment: 'center'}, { text: 'FECHAS DE AUDITORÍA', fontSize: 10, fillColor: '#dddddd', colSpan: 1, alignment: 'center'}],
+            [{ text: this.auditorLiderV, fontSize: 10, colSpan: 1, alignment: 'center'}, { text: this.directorV, fontSize: 10, colSpan: 1, alignment: 'center'}, { text: this.fechasV, fontSize: 10, colSpan: 1, alignment: 'center'}]
+          ]
+        }
+      },
+      // doceava seccion del documento, fecha de emision
+      {
+        style: 'tercerSeccion',
+        color: '#444',
+        table: {
+          widths: [180, 320],
+          body: [
+            [{ text: 'FECHA DE EMISIÓN DEL INFORME:', fontSize: 10, fillColor: '#dddddd', colSpan: 1 }, { text: this.fechaEmisionV, fontSize: 10, colSpan: 1 }],
+          ]
+        }
+      }],
+      // disenio de las tablas
+      styles: {
+        header: {
+          fontSize: 18,
+          bold: true,
+          alignment: 'center',
+          margin: [0, 0, 0, 10]
+        },
+        subheader: {
+          fontSize: 16,
+          bold: true,
+          margin: [0, 10, 0, 5]
+        },
+        primerSeccion: {
+          bold: true,
+          fontSize: 11,
+          color: 'black',
+          margin: [0, 25, 0, 0]
+        },
+        segundaSeccion: {
+          bold: true,
+          fontSize: 11,
+          color: 'black',
+          margin: [0, 25, 0, 0]
+        },
+        tercerSeccion: {
+          bold: true,
+          fontSize: 11,
+          color: 'black',
+          margin: [0, 25, 0, 0]
+        },
+        titulo: {
+          bold: true,
+          fontSize: 20,
+          margin: [5, 5, 5, 25]
+        },
+        firma: {
+          margin: [170, 20, 0, 15]
+        },
+        tableHeader2: {
+          bold: true,
+          widths: [100, 220, 38, 50],
+          color: 'black'
+        },
+        tableHeader: {
+          bold: true,
+          color: 'black'
+        }
+      }
+    };
+
+    if ( opcion === 1 ) {
+      pdfMake.createPdf(docInforme).download('informe.pdf');
+    }
+    if ( opcion === 2 ) {
+      pdfMake.createPdf(docInforme).open();
+    }
+    if ( opcion === 3 ) {
+      pdfMake.createPdf(docInforme).print();
+    }
 
   }
 
