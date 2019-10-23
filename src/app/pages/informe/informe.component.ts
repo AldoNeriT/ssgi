@@ -132,49 +132,6 @@ export class InformeComponent implements OnInit {
     });
   }
 
-  matrizValores() {
-
-    for ( let t of this.tablas) {
-      for ( let m of this.matriz) {
-        if ( t._id === m.tabla._id) {
-          if ( m.revision === 'A' ) {
-            console.log('A');
-            $('#r11_' + t._id).attr('checked', 'true');
-          }
-          if ( m.revision === 'NA' ) {
-            console.log('NA');
-            $('#r12_' + t._id).attr('checked', 'true');
-          }
-          if ( m.revision === 'EP' ) {
-            console.log('EP');
-            $('#r13_' + t._id).attr('checked', 'true');
-          }
-
-          if ( m.resultado === 'AD' ) {
-            console.log('AD');
-            $('#r21_' + t._id).attr('checked', 'true');
-          }
-          if ( m.resultado === 'NC' ) {
-            console.log('NC');
-            $('#r22_' + t._id).attr('checked', 'true');
-          }
-          if ( m.resultado === 'NR' ) {
-            console.log('NR');
-            $('#r23_' + t._id).attr('checked', 'true');
-          }
-          if ( m.resultado === 'EP' ) {
-            console.log('EP');
-            $('#r24_' + t._id).attr('checked', 'true');
-          }
-          if ( m.resultado === 'NA' ) {
-            console.log('NA');
-            $('#r25_' + t._id).attr('checked', 'true');
-          }
-        }
-      }
-    }
-  }
-
   cargarAuditoria( id: string ) {
 
     this.cargando = true;
@@ -237,7 +194,7 @@ export class InformeComponent implements OnInit {
             this._informeService.cargarMatrizInforme( this.idInforme )
                 .subscribe( matriz => {
                   this.matriz = matriz;
-                  console.log('Matriz: ', matriz);
+                  // console.log('Matriz: ', matriz);
 
 
                   this.matrizValores();
@@ -643,6 +600,10 @@ export class InformeComponent implements OnInit {
 
   }
 
+  // ************************************************
+  // *** OPORTUNIDADES DE MEJORA ***
+  // ************************************************
+
   editarOMS() {
 
     if ( this.formaOM.invalid ) {
@@ -739,6 +700,10 @@ export class InformeComponent implements OnInit {
 
   }
 
+  // ************************************************
+  // *** PERSONAL CONTACTADO ***
+  // ************************************************
+
   editarPersonalS() {
 
     if ( this.formaPersonal.invalid ) {
@@ -800,6 +765,10 @@ export class InformeComponent implements OnInit {
 
   }
 
+  // ************************************************
+  // *** HALLAZGOS ***
+  // ************************************************
+
   editarHallazgoS() {
 
     if ( this.formaHallazgo.invalid ) {
@@ -858,6 +827,131 @@ export class InformeComponent implements OnInit {
           } );
       }
     });
+
+  }
+
+  // ************************************************
+  // *** MATRIZ ***
+  // ************************************************
+
+  matrizValores() {
+
+    for ( let t of this.tablas) {
+      for ( let m of this.matriz) {
+        if ( t._id === m.tabla._id) {
+          if ( m.revision === 'A' ) {
+            // console.log('A');
+            $('#r11_' + t._id).attr('checked', 'true');
+          }
+          if ( m.revision === 'NA' ) {
+            // console.log('NA');
+            $('#r12_' + t._id).attr('checked', 'true');
+          }
+          if ( m.revision === 'EP' ) {
+            // console.log('EP');
+            $('#r13_' + t._id).attr('checked', 'true');
+          }
+
+          if ( m.resultado === 'AD' ) {
+            // console.log('AD');
+            $('#r21_' + t._id).attr('checked', 'true');
+          }
+          if ( m.resultado === 'NC' ) {
+            // console.log('NC');
+            $('#r22_' + t._id).attr('checked', 'true');
+          }
+          if ( m.resultado === 'NR' ) {
+            // console.log('NR');
+            $('#r23_' + t._id).attr('checked', 'true');
+          }
+          if ( m.resultado === 'EP' ) {
+            // console.log('EP');
+            $('#r24_' + t._id).attr('checked', 'true');
+          }
+          if ( m.resultado === 'NA' ) {
+            // console.log('NA');
+            $('#r25_' + t._id).attr('checked', 'true');
+          }
+        }
+      }
+    }
+  }
+
+  matrizGuardar() {
+
+    this._informeService.eliminarMatriz( this.idInforme )
+          .subscribe( resp => {
+
+            for (let t of this.tablas) {
+              let rev = '';
+              let res = '';
+
+              if ( $('#r11_' + t._id).prop('checked') ) {
+                rev = 'A';
+              }
+              if ( $('#r12_' + t._id).prop('checked') ) {
+                rev = 'NA';
+              }
+              if ( $('#r13_' + t._id).prop('checked') ) {
+                rev = 'EP';
+              }
+
+              if ( $('#r21_' + t._id).prop('checked') ) {
+                res = 'AD';
+              }
+              if ( $('#r22_' + t._id).prop('checked') ) {
+                res = 'NC';
+              }
+              if ( $('#r23_' + t._id).prop('checked') ) {
+                res = 'NR';
+              }
+              if ( $('#r24_' + t._id).prop('checked') ) {
+                res = 'EP';
+              }
+              if ( $('#r25_' + t._id).prop('checked') ) {
+                res = 'NA';
+              }
+
+              let matriz = new Matriz(
+                this.idInforme,
+                t._id,
+                rev,
+                res
+              );
+
+              // console.log('MMM; ', matriz);
+
+              this._informeService.crearMatriz( matriz )
+                  .subscribe( resp1 => {
+                    // console.log(resp);
+                    floating_labels();
+                    inicializando_datePicker();
+                    inicializando_dateRange();
+
+                    this.cargarAuditoria( this.idA );
+                    this.cargarNormas();
+                    // this.cargarTablas();
+                    this.cargarInforme( this.idA );
+                  });
+
+            }
+
+            Swal.fire({
+              title: 'Cambios Guardados',
+              type: 'success',
+              showConfirmButton: false,
+              timer: 2000
+            });
+
+            floating_labels();
+            inicializando_datePicker();
+            inicializando_dateRange();
+
+            this.cargarAuditoria( this.idA );
+            this.cargarNormas();
+            // this.cargarTablas();
+            this.cargarInforme( this.idA );
+          });
 
   }
 

@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Informe } from '../../models/informe.model';
 import { PersonalContactado } from '../../models/personal-contactado.model';
 import { NoConformidades } from '../../models/no-conformidades.model';
+import { Matriz } from '../../models/matriz.model';
 import { URL_SERVICIOS } from '../../config/config';
 
 import { map, catchError } from 'rxjs/operators';
@@ -432,6 +433,60 @@ export class InformeService {
     .pipe(
       map( (resp: any ) => {
         return resp.matrices;
+      }),
+      catchError( err => {
+        Swal.fire('Error', err.error.err.message, 'error');
+        return throwError( err ) ;
+      })
+    );
+
+  }
+
+  crearMatriz( matriz: Matriz ) {
+
+    let url = URL_SERVICIOS + '/matriz';
+
+    // *** Aqui se CREA la Matriz ***
+
+    // *** TOKEN ***
+    url += '?token=' + this.token;
+
+    return this.http.post( url, matriz )
+    .pipe(
+      map( (resp: any ) => {
+        // Swal.fire({
+        //   title: 'Matriz Creada',
+        //   type: 'success',
+        //   showConfirmButton: false,
+        //   timer: 2000
+        // });
+        return resp.matriz;
+      }),
+      catchError( err => {
+        Swal.fire('Error', err.error.err.message, 'error');
+        return throwError( err ) ;
+      })
+    );
+
+  }
+
+  eliminarMatriz( id: string ) {
+
+    let url = URL_SERVICIOS + '/matriz/informe/' + id;
+
+    // *** TOKEN ***
+    url += '?token=' + this.token;
+
+    return this.http.delete( url )
+    .pipe(
+      map( (resp: any ) => {
+        // Swal.fire({
+        //   title: 'Matriz Eliminada',
+        //   type: 'success',
+        //   showConfirmButton: false,
+        //   timer: 2000
+        // });
+        return resp;
       }),
       catchError( err => {
         Swal.fire('Error', err.error.err.message, 'error');

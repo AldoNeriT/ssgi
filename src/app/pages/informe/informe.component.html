@@ -199,7 +199,7 @@
                                         </td>
                                         <td>
                                             <div class="btn-group">
-                                                <input name="g1_{{ tab._id }}" type="radio" id="r11_{{ tab._id }}" class="with-gap radio-col-indigo" />
+                                                <input name="g1_{{ tab._id }}" type="radio" id="r11_{{ tab._id }}" class="with-gap radio-col-indigo" checked/>
                                                 <label for="r11_{{ tab._id }}"><span style="color: #67757C;">A</span></label>&nbsp;
 
                                                 <input name="g1_{{ tab._id }}" type="radio" id="r12_{{ tab._id }}" class="with-gap radio-col-indigo" />
@@ -211,7 +211,7 @@
                                         </td>
                                         <td>
                                             <div class="btn-group">
-                                                <input name="g2_{{ tab._id }}" type="radio" id="r21_{{ tab._id }}" class="with-gap radio-col-blue" />
+                                                <input name="g2_{{ tab._id }}" type="radio" id="r21_{{ tab._id }}" class="with-gap radio-col-blue" checked/>
                                                 <label for="r21_{{ tab._id }}"><span style="color: #67757C;">AD</span></label>&nbsp;
 
                                                 <input name="g2_{{ tab._id }}" type="radio" id="r22_{{ tab._id }}" class="with-gap radio-col-blue" />
@@ -280,7 +280,7 @@
                         </span>
 
                         <div class="text-center" style="padding-top: 30px;">
-                            <button class="btn btn-outline-secondary btn-sm btn-rounded">Guardar Cambios</button>
+                            <button (click)="matrizGuardar()" class="btn btn-outline-secondary btn-sm btn-rounded">Guardar Cambios</button>
                         </div>
                     </div>
                 </div>
@@ -698,25 +698,25 @@
                                         </td>
                                         <td>
                                             <div class="btn-group">
-                                                <input name="g1_{{ tab._id }}" type="radio" id="r11_{{ tab._id }}" class="with-gap radio-col-indigo" checked />
+                                                <input name="g1_{{ tab._id }}" type="radio" id="r11_{{ tab._id }}" class="with-gap radio-col-indigo" checked disabled/>
                                                 <label for="r11_{{ tab._id }}"><span style="color: #67757C;">A</span></label>&nbsp;
-                                                <input name="g1_{{ tab._id }}" type="radio" id="r12_{{ tab._id }}" class="with-gap radio-col-indigo" />
+                                                <input name="g1_{{ tab._id }}" type="radio" id="r12_{{ tab._id }}" class="with-gap radio-col-indigo" disabled/>
                                                 <label for="r12_{{ tab._id }}"><span style="color: #67757C;">NA</span></label>&nbsp;
-                                                <input name="g1_{{ tab._id }}" type="radio" id="r13_{{ tab._id }}" class="with-gap radio-col-indigo" />
+                                                <input name="g1_{{ tab._id }}" type="radio" id="r13_{{ tab._id }}" class="with-gap radio-col-indigo" disabled/>
                                                 <label for="r13_{{ tab._id }}"><span style="color: #67757C;">EP</span></label>
                                             </div>
                                         </td>
                                         <td>
                                             <div class="btn-group">
-                                                <input name="g2_{{ tab._id }}" type="radio" id="r21_{{ tab._id }}" class="with-gap radio-col-blue" checked />
+                                                <input name="g2_{{ tab._id }}" type="radio" id="r21_{{ tab._id }}" class="with-gap radio-col-blue" checked disabled/>
                                                 <label for="r21_{{ tab._id }}"><span style="color: #67757C;">AD</span></label>&nbsp;
-                                                <input name="g2_{{ tab._id }}" type="radio" id="r22_{{ tab._id }}" class="with-gap radio-col-blue" />
+                                                <input name="g2_{{ tab._id }}" type="radio" id="r22_{{ tab._id }}" class="with-gap radio-col-blue" disabled/>
                                                 <label for="r22_{{ tab._id }}"><span style="color: #67757C;">NC</span></label>&nbsp;
-                                                <input name="g2_{{ tab._id }}" type="radio" id="r23_{{ tab._id }}" class="with-gap radio-col-blue" />
+                                                <input name="g2_{{ tab._id }}" type="radio" id="r23_{{ tab._id }}" class="with-gap radio-col-blue" disabled/>
                                                 <label for="r23_{{ tab._id }}"><span style="color: #67757C;">NR</span></label>&nbsp;
-                                                <input name="g2_{{ tab._id }}" type="radio" id="r24_{{ tab._id }}" class="with-gap radio-col-blue" />
+                                                <input name="g2_{{ tab._id }}" type="radio" id="r24_{{ tab._id }}" class="with-gap radio-col-blue" disabled/>
                                                 <label for="r24_{{ tab._id }}"><span style="color: #67757C;">EP</span></label>&nbsp;
-                                                <input name="g2_{{ tab._id }}" type="radio" id="r25_{{ tab._id }}" class="with-gap radio-col-blue" />
+                                                <input name="g2_{{ tab._id }}" type="radio" id="r25_{{ tab._id }}" class="with-gap radio-col-blue" disabled/>
                                                 <label for="r25_{{ tab._id }}"><span style="color: #67757C;">NA</span></label>
                                             </div>
                                         </td>
