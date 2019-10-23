@@ -19,10 +19,13 @@
                     <table class="table full-color-table full-info-table hover-table">
                         <thead class="text-center">
                             <tr>
-                                <th>Número</th>
-                                <th>Requisito de la Norma</th>
+                                <th rowspan="2" class="text-center">Número</th>
+                                <th rowspan="2" class="text-center">Requisito de la Norma</th>
+                                <th [attr.colspan]="totalNormas" class="text-center">NORMA</th>
+                                <th rowspan="2" class="text-center"></th>
+                            </tr>
+                            <tr>
                                 <th *ngFor="let norm of normas" class="text-center">{{ norm.nombreNorma }}</th>
-                                <th class="text-center"></th>
                             </tr>
                         </thead>
                         <tbody>
