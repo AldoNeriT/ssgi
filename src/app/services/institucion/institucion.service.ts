@@ -159,4 +159,24 @@ export class InstitucionService {
 
   }
 
+  almacenamiento() {
+
+    let url = URL_SERVICIOS + '/size';
+
+    // *** TOKEN ***
+    // url += '?token=' + this.token;
+
+    return this.http.get( url )
+    .pipe(
+      map( (resp: any ) => {
+        return resp;
+      }),
+      catchError( err => {
+        Swal.fire('Error', err.error.err.message, 'error');
+        return throwError( err ) ;
+      })
+    );
+
+  }
+
 }

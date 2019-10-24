@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Usuario } from '../../models/usuario.model';
-import { UsuarioService } from '../../services/service.index';
+import { UsuarioService, InstitucionService } from '../../services/service.index';
 
 // declare function init_plugins();
 
@@ -39,7 +39,9 @@ export class PrincipalComponent implements OnInit {
     },
   ];
 
-  constructor( public _usuarioService: UsuarioService ) {
+
+  constructor( public _usuarioService: UsuarioService,
+               public _institucionService: InstitucionService ) {
     this.usuario = this._usuarioService.usuario;
   }
 
@@ -48,6 +50,7 @@ export class PrincipalComponent implements OnInit {
 
     this.hora = new Date().getHours();
     this.saludo();
+    this.almacenamiento();
   }
 
   saludo() {
@@ -67,6 +70,20 @@ export class PrincipalComponent implements OnInit {
       this.titulo = 'Buenas Noches';
       return;
     }
+  }
+
+  almacenamiento() {
+
+    this._institucionService.almacenamiento()
+            .subscribe( resp => {
+              console.log(resp);
+
+              let tam = resp.tamaño.dataSize + resp.tamaño.indexSize;
+
+              this.pieChartData = [ ((tam / 1024) / 1024) , ( ((536870912 / 1024)) / 1024 - ((tam / 1024)) / 1024) ];
+
+            });
+
   }
 
 }
