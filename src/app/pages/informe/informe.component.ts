@@ -1049,7 +1049,6 @@ export class InformeComponent implements OnInit {
     let arrT1 = [];
     let arrT2 = [];
     let arrC = [];
-    let arrContenido = [];
     for (let tab of this.tablas) {
       let arrTemp = [];
 
@@ -1104,8 +1103,10 @@ export class InformeComponent implements OnInit {
 
       for (let mat of this.matriz) {
         if ( tab._id === mat.tabla._id ) {
-          arrC[i1][ arrC.length - 2 ] = mat.revision;
-          arrC[i1][ arrC.length - 1 ] = mat.resultado;
+          arrC[i1][ arrC[i1].length - 2 ] = mat.revision;
+          // console.log(arrC.length - 2);
+          arrC[i1][ arrC[i1].length - 1 ] = mat.resultado;
+          // console.log(arrC.length - 1);
         }
       }
 
