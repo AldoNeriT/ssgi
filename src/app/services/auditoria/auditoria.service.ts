@@ -265,4 +265,28 @@ export class AuditoriaService {
 
   }
 
+  cambiarTerminado( idAuditoria: string ) {
+
+    let url = URL_SERVICIOS + '/auditoria/progreso/' + idAuditoria;
+
+    // *** TOKEN ***
+    url += '?token=' + this.token;
+
+    return this.http.put( url, null )
+    .pipe(
+      map( (resp: any ) => {
+        Swal.fire({
+          title: 'Auditoría Concluida',
+          type: 'success'
+        });
+        return resp;
+      }),
+      catchError( err => {
+        Swal.fire('Error', err.error.err.message, 'error');
+        return throwError( err ) ;
+      })
+    );
+
+  }
+
 }

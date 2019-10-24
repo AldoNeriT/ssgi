@@ -634,6 +634,32 @@ export class InformeComponent implements OnInit {
 
   }
 
+  terminado() {
+
+    Swal.fire({
+      title: '¿Terminar Auditoría?',
+      type: 'question',
+      showCancelButton: true,
+      confirmButtonText: 'Sí',
+      cancelButtonText: 'No',
+      cancelButtonColor: '#e74c3c',
+      animation: false,
+      customClass: {
+        popup: 'animated tada'
+      }
+    }).then((respuesta) => {
+      if (respuesta.value) {
+        this._auditoriaService.cambiarTerminado( this.idA )
+            .subscribe( resp => {
+
+              this.router.navigate(['/planes']);
+
+            });
+      }
+    });
+
+  }
+
   // ************************************************
   // *** OPORTUNIDADES DE MEJORA ***
   // ************************************************
@@ -1023,11 +1049,13 @@ export class InformeComponent implements OnInit {
     let arrT1 = [];
     let arrT2 = [];
     let arrC = [];
+    let arrContenido = [];
     for (let tab of this.tablas) {
       let arrTemp = [];
 
       for ( let i = 0; i < ( 4 + this.normas.length ); i++) {
         arrTemp.push('');
+        console.log(( 4 + this.normas.length ));
       }
 
       arrC.push(arrTemp);
@@ -1066,7 +1094,6 @@ export class InformeComponent implements OnInit {
 
       let j1 = 2;
       for (let norm of this.normas) {
-
         for ( let normTab of tab.normas ) {
           if ( norm._id === normTab._id ) {
             arrC[i1][j1] = 'X';
@@ -1076,47 +1103,31 @@ export class InformeComponent implements OnInit {
       }
 
       for (let mat of this.matriz) {
-
         if ( tab._id === mat.tabla._id ) {
           arrC[i1][ arrC.length - 2 ] = mat.revision;
           arrC[i1][ arrC.length - 1 ] = mat.resultado;
         }
-
       }
 
       i1++;
     }
-
     console.log(arrC);
-
     // FIN MATRIZ EN OBJETO
 
+     // FUNCIONA
+    for (let i = 0; i < this.tablas.length; i++ ) {
 
+      let arrTemporal = [];
 
-    // FUNCIONA
-    // for (let tab of this.tablas) {
+      for ( let j = 0; j < ( 4 + this.normas.length ); j++ ) {
 
-    //   arrC = [];
+        arrTemporal.push({ text: arrC[i][j], fontSize: 10, alignment: 'center', colSpan: 1 });
 
-    //   arrC.push({ text: tab.numero, fontSize: 10, alignment: 'center', colSpan: 1 });
-    //   arrC.push({ text: tab.requisito });
+      }
 
-    //   for (let norm of this.normas) {
+      arrMatriz.push(arrTemporal);
 
-    //     arrC.push({ text: 'X', fontSize: 10, alignment: 'center', colSpan: 1 });
-    //     // arrC.push({ text: 'X', fontSize: 10, alignment: 'center', colSpan: 1 });
-    //     // arrC.push({ text: 'X', fontSize: 10, alignment: 'center', colSpan: 1 });
-    //     // arrC.push({ text: 'X', fontSize: 10, alignment: 'center', colSpan: 1 });
-
-    //   }
-
-    //   arrC.push({ text: ' ', fontSize: 10, alignment: 'center', colSpan: 1 });
-    //   arrC.push({ text: ' ', fontSize: 10, alignment: 'center', colSpan: 1 });
- 
-    //   arrMatriz.push(arrC);
-    // FIN FUNCIONA
-
-    // }
+    }
 
 
     let docInforme = {
