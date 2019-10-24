@@ -61,7 +61,7 @@ export class MenuAuditoriaComponent implements OnInit {
 
     this._usuarioService.cargarUsuariosPorTipo( 'AUDITOR_LIDER' )
           .subscribe( usuario => {
-            console.log(usuario[0]);
+            // console.log(usuario[0]);
             this.auditorL = usuario[0];
             this.cargando = false;
             // console.log(this.pasosV);
@@ -75,7 +75,7 @@ export class MenuAuditoriaComponent implements OnInit {
 
     this._usuarioService.cargarUsuariosPorTipo( 'ALTA_DIRECCION' )
           .subscribe( usuario => {
-            console.log(usuario[0]);
+            // console.log(usuario[0]);
             this.director = usuario[0];
             this.cargando = false;
             // console.log(this.pasosV);
@@ -145,7 +145,7 @@ export class MenuAuditoriaComponent implements OnInit {
           ''
         );
 
-        console.log('INFORMEEEE', informe);
+        // console.log('INFORMEEEE', informe);
 
         this._informeService.crearInforme( informe )
           .subscribe( resp => {
@@ -160,51 +160,9 @@ export class MenuAuditoriaComponent implements OnInit {
             this.cargarAuditoria( this.id );
           });
 
-        
       }
     });
 
   }
 
-  agregarBitacora() {
-    console.log('Aquí se agregara la Bitácora');
-
-    let auditoria = new Auditoria(
-      '',
-      '',
-      '',
-      '',
-      '',
-      '',
-      '',
-      '',
-      '',
-      '',
-      '',
-      4
-    );
-
-    Swal.fire({
-      title: '¿Empezar Bitácora de Acciones?',
-      type: 'question',
-      showCancelButton: true,
-      confirmButtonText: 'Sí',
-      cancelButtonText: 'No',
-      cancelButtonColor: '#e74c3c',
-      animation: false,
-      customClass: {
-        popup: 'animated tada'
-      }
-    }).then((eliminar) => {
-      if (eliminar.value) {
-        this.cargando = true;
-
-        this._auditoriaService.cambiarPasos( this.id, auditoria )
-        .subscribe( resp => {
-          this.cargando = false;
-          this.cargarAuditoria( this.id );
-        });
-      }
-    });
-  }
 }

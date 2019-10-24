@@ -78,13 +78,19 @@ const pagesRoutes: Routes = [
                 canActivate: [ AbcGuard ],
                 data: { titulo: 'Matriz del Informe' }
             },
-            { path: 'planes', component: PlanesComponent, data: { titulo: 'Plan de Auditorías' } },
             {
                 path: 'auditoria/:id',
                 component: AuditoriasComponent,
                 canActivate: [ AbcGuard ],
                 data: { titulo: 'Auditoría' }
             },
+            {
+                path: 'bitacora',
+                component: BitacoraAccionesComponent,
+                canActivate: [ AbcGuard ],
+                data: { titulo: 'Bitacora de Acciones'}
+            },
+            { path: 'planes', component: PlanesComponent, data: { titulo: 'Plan de Auditorías' } },
             { path: 'menu-auditoria/:idA', component: MenuAuditoriaComponent, data: { titulo: 'Menú de Auditorias' } },
             { path: 'planeacion/:idA', component: PlaneacionesComponent, data: { titulo: 'Planeación' } },
             { path: 'planeacionA/:accion/:idA', component: PlaneacionComponent, data: { titulo: 'Planeación' } },
@@ -92,7 +98,6 @@ const pagesRoutes: Routes = [
             { path: 'listas/:idA', component: ListasComponent, data: { titulo: 'Listas' } },
             { path: 'listaVerificacion/:idP/:idU', component: ListaVerificacionComponent, data: { titulo: 'Lista de Verificación' } },
             { path: 'informe/:idA', component: InformeComponent, data: { titulo: 'Informe' } },
-            { path: 'bitacora/:idA', component: BitacoraAccionesComponent, data: { titulo: 'Bitacora de Acciones' } },
             { path: '', redirectTo: '/home', pathMatch: 'full'}
         ]
      }

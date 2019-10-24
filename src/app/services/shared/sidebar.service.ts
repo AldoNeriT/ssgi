@@ -41,13 +41,6 @@ export class SidebarService {
 
     this.menu = [
       {
-        titulo: 'Inicio',
-        icono: 'mdi mdi-home',
-        submenu: [
-          { titulo: 'Home', url: '/home' }
-        ]
-      },
-      {
         titulo: 'Sistema ABC',
         icono: 'mdi mdi-account-settings-variant',
         submenu: [
@@ -55,8 +48,15 @@ export class SidebarService {
           { titulo: 'Usuarios', url: '/usuarios' },
           { titulo: 'Normas', url: '/normas' },
           { titulo: 'Procesos', url: '/procesos' },
-          { titulo: 'Matriz del Informe', url: '/matriz' },
-          { titulo: 'Plan de Auditorías', url: '/planes' }
+          { titulo: 'Matriz del Informe', url: '/matriz' }
+        ]
+      },
+      {
+        titulo: 'Auditorías',
+        icono: 'mdi mdi-book',
+        submenu: [
+          { titulo: 'Plan de Auditorías', url: '/planes' },
+          { titulo: 'Bitácora de Acciones', url: '/bitacora' }
         ]
       }
     ];
@@ -67,13 +67,6 @@ export class SidebarService {
 
     this.menu = [
       {
-        titulo: 'Inicio',
-        icono: 'mdi mdi-home',
-        submenu: [
-          { titulo: 'Home', url: '/home' }
-        ]
-      },
-      {
         titulo: 'Sistema ABC',
         icono: 'mdi mdi-account-settings-variant',
         submenu: [
@@ -81,8 +74,15 @@ export class SidebarService {
           { titulo: 'Usuarios', url: '/usuarios' },
           { titulo: 'Normas', url: '/normas' },
           { titulo: 'Procesos', url: '/procesos' },
-          { titulo: 'Matriz del Informe', url: '/matriz' },
-          { titulo: 'Plan de Auditorías', url: '/planes' }
+          { titulo: 'Matriz del Informe', url: '/matriz' }
+        ]
+      },
+      {
+        titulo: 'Auditorías',
+        icono: 'mdi mdi-book',
+        submenu: [
+          { titulo: 'Plan de Auditorías', url: '/planes' },
+          { titulo: 'Bitácora de Acciones', url: '/bitacora' }
         ]
       }
     ];
@@ -93,13 +93,6 @@ export class SidebarService {
 
     this.menu = [
       {
-        titulo: 'Inicio',
-        icono: 'mdi mdi-home',
-        submenu: [
-          { titulo: 'Home', url: '/home' }
-        ]
-      },
-      {
         titulo: 'Sistema',
         icono: 'mdi mdi-account-settings-variant',
         submenu: [
@@ -107,8 +100,15 @@ export class SidebarService {
           { titulo: 'Usuarios', url: '/usuarios' },
           { titulo: 'Normas', url: '/normas' },
           { titulo: 'Procesos', url: '/procesos' },
-          { titulo: 'Matriz del Informe', url: '/matriz' },
-          { titulo: 'Plan de Auditorías', url: '/planes' }
+          { titulo: 'Matriz del Informe', url: '/matriz' }
+        ]
+      },
+      {
+        titulo: 'Auditorías',
+        icono: 'mdi mdi-book',
+        submenu: [
+          { titulo: 'Plan de Auditorías', url: '/planes' },
+          { titulo: 'Bitácora de Acciones', url: '/bitacora' }
         ]
       }
     ];
@@ -118,13 +118,6 @@ export class SidebarService {
   menuAuditor() {
 
     this.menu = [
-      {
-        titulo: 'Inicio',
-        icono: 'mdi mdi-home',
-        submenu: [
-          { titulo: 'Home', url: '/home' }
-        ]
-      },
       {
         titulo: 'Auditorias',
         icono: 'mdi mdi-book',
@@ -140,13 +133,6 @@ export class SidebarService {
 
     this.menu = [
       {
-        titulo: 'Inicio',
-        icono: 'mdi mdi-home',
-        submenu: [
-          { titulo: 'Home', url: '/home' }
-        ]
-      },
-      {
         titulo: 'Auditorias',
         icono: 'mdi mdi-book',
         submenu: [
@@ -160,13 +146,6 @@ export class SidebarService {
   menuAltaD() {
 
     this.menu = [
-      {
-        titulo: 'Inicio',
-        icono: 'mdi mdi-home',
-        submenu: [
-          { titulo: 'Home', url: '/home' }
-        ]
-      },
       {
         titulo: 'Auditorias',
         icono: 'mdi mdi-book',

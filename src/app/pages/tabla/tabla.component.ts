@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { NormaService, TablaService } from '../../services/service.index';
+import { NormaService, TablaService, UsuarioService } from '../../services/service.index';
 import { Norma } from '../../models/norma.model';
 import { Tabla } from '../../models/tabla.model';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -17,7 +17,8 @@ declare function floating_labels();
 export class TablaComponent implements OnInit {
 
   constructor( public _normaService: NormaService,
-               public _tablaService: TablaService ) {
+               public _tablaService: TablaService,
+               public _usuarioService: UsuarioService ) {
 
   }
 

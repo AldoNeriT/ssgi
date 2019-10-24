@@ -28,7 +28,6 @@ import { InformeComponent } from './informe/informe.component';
 import { BitacoraAccionesComponent } from './bitacora-acciones/bitacora-acciones.component';
 import { PlaneacionComponent } from './planeaciones/planeacion.component';
 import { ListasComponent } from './lista-verificacion/listas.component';
-import { ListaComponent } from './lista-verificacion/lista.component';
 import { TablaComponent } from './tabla/tabla.component';
 
 
@@ -52,7 +51,6 @@ import { TablaComponent } from './tabla/tabla.component';
         BitacoraAccionesComponent,
         PlaneacionComponent,
         ListasComponent,
-        ListaComponent,
         TablaComponent
     ],
     exports: [

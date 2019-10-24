@@ -39,7 +39,7 @@
                                 </td>
                                 <td class="text-center"><button (click)="eliminarFila( tab )" class="btn btn-outline-danger btn-sm"><i class="fa fa-trash-o"></i></button></td>
                             </tr>
-                            <tr class="pointer text-center">
+                            <tr *ngIf="_usuarioService.usuario.tipo_Usuario !== 'AUDITOR_LIDER'" class="pointer text-center">
                                 <td [attr.colspan]="2 + totalNormas  + 1" class="text-info" data-toggle="modal" data-target="#modalTablaAgregar"><i class="mdi mdi-plus"></i> Fila</td>
                             </tr>
                         </tbody>
