@@ -37,7 +37,7 @@ export class InformeComponent implements OnInit {
   mostrarFormFechaEmision = false;
 
   normas: Norma[] = [];
-  tablas: Tabla[] = [];
+  tablas: any[] = [];
   personal: PersonalContactado[] = [];
   hallazgos: NoConformidades[] = [];
   matriz: any[] = [];
@@ -1015,6 +1015,109 @@ export class InformeComponent implements OnInit {
       arrHallazgos.push([{ text: nn, fontSize: 10, colSpan: 1, alignment: 'center'}, { text: hall.hallazgo, fontSize: 10, colSpan: 1, alignment: 'center' }, { text: hall.requisito, fontSize: 10, colSpan: 1, alignment: 'center'}]);
     }
 
+    // ************************************************
+    // *** MATRIZ IMPRIMIR ***
+    // ************************************************
+
+    let arrMatriz = [];
+    let arrT1 = [];
+    let arrT2 = [];
+    let arrC = [];
+    for (let tab of this.tablas) {
+      let arrTemp = [];
+
+      for ( let i = 0; i < ( 4 + this.normas.length ); i++) {
+        arrTemp.push('');
+      }
+
+      arrC.push(arrTemp);
+    }
+
+    // Primera Fila
+    arrT1.push({ text: 'Núm', rowSpan: 2, fontSize: 10, colSpan: 1 });
+    arrT1.push({ text: 'Requisito de la Norma', rowSpan: 2, alignment: 'center', fontSize: 10, colSpan: 1});
+    arrT1.push({ text: ' NORMA',  fontSize: 10, alignment: 'center', colSpan: this.normas.length, style: 'tableHeader' });
+    for (let i = 0; i < (this.normas.length - 1 ); i++) {
+      arrT1.push({ text: ' ',  fontSize: 10, alignment: 'center', colSpan: 0, style: 'tableHeader' });
+    }
+    arrT1.push({ text: 'DOCUMENTO DE REFERENCIA',  alignment: 'center', fontSize: 10, colSpan: 2 });
+    arrT1.push({ text: ' ',  fontSize: 10, alignment: 'center', colSpan: 0, style: 'tableHeader' });
+    // FIN Primera Fila
+
+    // Segunda Fila
+    arrT2.push('');
+    arrT2.push('');
+    for (let norm of this.normas) {
+      arrT2.push(norm.nombreNorma + '');
+    }
+    arrT2.push('REVISION');
+    arrT2.push('RESULTADO');
+
+    arrMatriz.push(arrT1);
+    arrMatriz.push(arrT2);
+    // FIN Segunda Fila
+
+    // MATRIZ EN OBJETO
+    let i1 = 0;
+    for (let tab of this.tablas) {
+
+      arrC[i1][0] = (tab.numero);
+      arrC[i1][1] = (tab.requisito);
+
+      let j1 = 2;
+      for (let norm of this.normas) {
+
+        for ( let normTab of tab.normas ) {
+          if ( norm._id === normTab._id ) {
+            arrC[i1][j1] = 'X';
+          }
+        }
+        j1++;
+      }
+
+      for (let mat of this.matriz) {
+
+        if ( tab._id === mat.tabla._id ) {
+          arrC[i1][ arrC.length - 2 ] = mat.revision;
+          arrC[i1][ arrC.length - 1 ] = mat.resultado;
+        }
+
+      }
+
+      i1++;
+    }
+
+    console.log(arrC);
+
+    // FIN MATRIZ EN OBJETO
+
+
+
+    // FUNCIONA
+    // for (let tab of this.tablas) {
+
+    //   arrC = [];
+
+    //   arrC.push({ text: tab.numero, fontSize: 10, alignment: 'center', colSpan: 1 });
+    //   arrC.push({ text: tab.requisito });
+
+    //   for (let norm of this.normas) {
+
+    //     arrC.push({ text: 'X', fontSize: 10, alignment: 'center', colSpan: 1 });
+    //     // arrC.push({ text: 'X', fontSize: 10, alignment: 'center', colSpan: 1 });
+    //     // arrC.push({ text: 'X', fontSize: 10, alignment: 'center', colSpan: 1 });
+    //     // arrC.push({ text: 'X', fontSize: 10, alignment: 'center', colSpan: 1 });
+
+    //   }
+
+    //   arrC.push({ text: ' ', fontSize: 10, alignment: 'center', colSpan: 1 });
+    //   arrC.push({ text: ' ', fontSize: 10, alignment: 'center', colSpan: 1 });
+ 
+    //   arrMatriz.push(arrC);
+    // FIN FUNCIONA
+
+    // }
+
 
     let docInforme = {
       content: [{
@@ -1091,16 +1194,8 @@ export class InformeComponent implements OnInit {
       {
         style: 'primerSeccion',
         table: {
-          widths: ['auto', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto'],
-          body: [
-            [{ text: 'Núm', rowSpan: 2, fontSize: 10, colSpan: 1 }, { text: 'Requisito de la Norma', rowSpan: 2, alignment: 'center', fontSize: 10, colSpan: 1}, { text: ' NORMA',  fontSize: 10, alignment: 'center', colSpan: 3, style: 'tableHeader' }, { text: ' ',  fontSize: 10, alignment: 'center', colSpan: 0, style: 'tableHeader' }, { text: ' ',  fontSize: 10, alignment: 'center', colSpan: 0, style: 'tableHeader' }, { text: 'DOCUMENTO DE REFERENCIA',  alignment: 'center', fontSize: 10, colSpan: 2 }, { text: ' ',  fontSize: 10, alignment: 'center', colSpan: 0, style: 'tableHeader' }],
-            ['', '', 'SGC', 'SGA', 'SSGSST', 'REVISION', 'RESULTADO' ],
-            [{ text: '4', fontSize: 10, alignment: 'center', colSpan: 1 }, 'Contexto de la organizacion', { text: 'X', fontSize: 10, alignment: 'center', colSpan: 1 }, { text: 'X', fontSize: 10, alignment: 'center', colSpan: 1 }, { text: 'X', fontSize: 10, alignment: 'center', colSpan: 1 }, { text: ' ', fontSize: 10, alignment: 'center', colSpan: 1 }, { text: ' ', fontSize: 10, alignment: 'center', colSpan: 1 } ],
-            [{ text: '4.1', fontSize: 10, alignment: 'center', colSpan: 1 }, 'Comportamiento de la organizacion y su contexto', { text: 'X', fontSize: 10, alignment: 'center', colSpan: 1 }, { text: 'X', fontSize: 10, alignment: 'center', colSpan: 1 }, { text: 'X', fontSize: 10, alignment: 'center', colSpan: 1 }, { text: ' ', fontSize: 10, alignment: 'center', colSpan: 1 }, { text: ' ', fontSize: 10, alignment: 'center', colSpan: 1 } ],
-            [{ text: '4.2', fontSize: 10, alignment: 'center', colSpan: 1 }, 'Contexto de la organizacion', { text: 'X', fontSize: 10, alignment: 'center', colSpan: 1 }, { text: 'X', fontSize: 10, alignment: 'center', colSpan: 1 }, { text: 'X', fontSize: 10, alignment: 'center', colSpan: 1 }, { text: ' ', fontSize: 10, alignment: 'center', colSpan: 1 }, { text: ' ', fontSize: 10, alignment: 'center', colSpan: 1 } ],
-            [{ text: '4.3', fontSize: 10, alignment: 'center', colSpan: 1 }, 'Contexto de la organizacion', { text: 'X', fontSize: 10, alignment: 'center', colSpan: 1 }, { text: 'X', fontSize: 10, alignment: 'center', colSpan: 1 }, { text: 'X', fontSize: 10, alignment: 'center', colSpan: 1 }, { text: ' ', fontSize: 10, alignment: 'center', colSpan: 1 }, { text: ' ', fontSize: 10, alignment: 'center', colSpan: 1 } ],
-            [{ text: '4.4', fontSize: 10, alignment: 'center', colSpan: 1 }, 'Sistema de Gestion y sus procesos', { text: 'X', fontSize: 10, alignment: 'center', colSpan: 1 }, { text: 'X', fontSize: 10, alignment: 'center', colSpan: 1 }, { text: 'X', fontSize: 10, alignment: 'center', colSpan: 1 }, ' ', ' ' ]
-          ]
+          // widths: ['auto', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto'],
+          body: arrMatriz,
         },
         // layout: 'noBorders'
       },

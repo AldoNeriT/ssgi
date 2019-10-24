@@ -679,7 +679,7 @@
                                         <td>{{ tab.requisito }}</td>
                                         <td *ngFor="let norm of normas" class="text-center">
                                             <span *ngFor=" let normTab of tab.normas">
-                                                            <span *ngIf="norm._id === normTab._id" class="font-bold">X</span>
+                                                <span *ngIf="norm._id === normTab._id" class="font-bold">X</span>
                                             </span>
                                         </td>
                                         <td>
