@@ -38,7 +38,7 @@
                             </tr>
                         </thead>
                         <tbody *ngIf="_usuarioService.usuario.tipo_Usuario !== 'AUDITOR_LIDER'">
-                            <tr class="text-center pointer">
+                            <tr *ngFor="let bitacora of bitacoras; let i=index" class="text-center pointer">
                                 <td style="width: 1px; padding-left: 0px; padding-right: 0px">
                                     <div class="btn-group">
                                         <div class="dropdown-menu text-center animated pulse">
@@ -46,27 +46,27 @@
                                                 <!-- <button (click)="formVer(  )" class="btn btn-outline-info" data-toggle="modal" data-target="#modalBitacoraVer">
                                                     <i class="fa fa-eye"></i>
                                                 </button>&nbsp; -->
-                                                <button (click)="formEditable(  )" class="btn btn-outline-info" data-toggle="modal" data-target="#modalBitacoraEditar">
+                                                <button (click)="formEditable( bitacora )" class="btn btn-outline-info" data-toggle="modal" data-target="#modalBitacoraEditar">
                                                     <i class="fa fa-edit"></i>
                                                 </button>&nbsp;
-                                                <button (click)="eliminarBitacora(  )" class="btn btn-outline-secondary">
+                                                <button (click)="eliminarBitacora( bitacora )" class="btn btn-outline-secondary">
                                                     <i class="fa fa-trash-o"></i>
                                                 </button>
                                             </div>
                                         </div>
                                     </div>
                                 </td>
-                                <td data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">sads</td>
-                                <td data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">sadcf</td>
-                                <td data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">sadcf</td>
-                                <td data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">sadcf</td>
-                                <td data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">sadcf</td>
-                                <td data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">sadcf</td>
-                                <td data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">sadcf</td>
-                                <td data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">sadcf</td>
-                                <td data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">sadcf</td>
-                                <td data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">sadcf</td>
-                                <td data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">sadcf</td>
+                                <td data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ i + 1 }}</td>
+                                <td data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ bitacora.fecha }}</td>
+                                <td data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ bitacora.seleccion }}</td>
+                                <td data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ bitacora.correccion }}</td>
+                                <td data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ bitacora.causa }}</td>
+                                <td data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ bitacora.antecedentes }}</td>
+                                <td data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ bitacora.correctiva }}</td>
+                                <td data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ bitacora.planes }}</td>
+                                <td data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ bitacora.fechaCumplimiento }}</td>
+                                <td data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ bitacora.responsable }}</td>
+                                <td data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ bitacora.fechaCierre }}</td>
                             </tr>
                             <tr class="text-center pointer">
                                 <td colspan="11" data-toggle="modal" data-target="#modalBitacoraAgregar"><i class="mdi mdi-plus"></i></td>
@@ -74,20 +74,20 @@
                         </tbody>
 
                         <tbody *ngIf="_usuarioService.usuario.tipo_Usuario === 'AUDITOR_LIDER'">
-                            <tr class="text-center">
+                            <tr *ngFor="let bitacora of bitacoras; let i=index" class="text-center">
                                 <td style="width: 1px; padding-left: 0px; padding-right: 0px">
                                 </td>
-                                <td>sads</td>
-                                <td>sadcf</td>
-                                <td>sadcf</td>
-                                <td>sadcf</td>
-                                <td>sadcf</td>
-                                <td>sadcf</td>
-                                <td>sadcf</td>
-                                <td>sadcf</td>
-                                <td>sadcf</td>
-                                <td>sadcf</td>
-                                <td>sadcf</td>
+                                <td>{{ i + 1 }}</td>
+                                <td>{{ bitacora.fecha }}</td>
+                                <td>{{ bitacora.seleccion }}</td>
+                                <td>{{ bitacora.correccion }}</td>
+                                <td>{{ bitacora.causa }}</td>
+                                <td>{{ bitacora.antecedentes }}</td>
+                                <td>{{ bitacora.correctiva }}</td>
+                                <td>{{ bitacora.planes }}</td>
+                                <td>{{ bitacora.fechaCumplimiento }}</td>
+                                <td>{{ bitacora.responsable }}</td>
+                                <td>{{ bitacora.fechaCierre }}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -136,9 +136,14 @@
                         <label for="antecedentes">Antecedentes:</label>
                     </div>
                     <div class="form-group m-b-40">
-                        <textarea formControlName="requiere" name="requiere" id="requiere" class="form-control" required></textarea>
-                        <span class="bar"></span>
-                        <label for="requiere">Requiere acción correctiva:</label>
+                        <label>Requiere acción correctiva:</label><br><br>
+                        <div class="btn-group">
+                            <input name="requiere" type="radio" id="requiereSI" class="with-gap radio-col-indigo" checked/>
+                            <label for="requiereSI"><span style="color: #67757C;">SI</span></label>&nbsp;
+
+                            <input name="requiere" type="radio" id="requiereNO" class="with-gap radio-col-indigo" />
+                            <label for="requiereNO"><span style="color: #67757C;">NO</span></label>&nbsp;
+                        </div>
                     </div>
                     <div class="form-group m-b-40">
                         <textarea formControlName="accion" name="accion" id="accion" class="form-control" required></textarea>
@@ -210,9 +215,14 @@
                         <label for="antecedentes">Antecedentes:</label>
                     </div>
                     <div class="form-group m-b-40">
-                        <textarea formControlName="requiere" name="requiere" id="requiere" class="form-control" required></textarea>
-                        <span class="bar"></span>
-                        <label for="requiere">Requiere acción correctiva:</label>
+                        <label>Requiere acción correctiva:</label><br><br>
+                        <div class="btn-group">
+                            <input name="requiere2" type="radio" id="requiereSI2" class="with-gap radio-col-indigo" />
+                            <label for="requiereSI2"><span style="color: #67757C;">SI</span></label>&nbsp;
+
+                            <input name="requiere2" type="radio" id="requiereNO2" class="with-gap radio-col-indigo" />
+                            <label for="requiereNO2"><span style="color: #67757C;">NO</span></label>&nbsp;
+                        </div>
                     </div>
                     <div class="form-group m-b-40">
                         <textarea formControlName="accion" name="accion" id="accion" class="form-control" required></textarea>

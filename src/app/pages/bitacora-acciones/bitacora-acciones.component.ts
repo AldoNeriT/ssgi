@@ -51,7 +51,6 @@ export class BitacoraAccionesComponent implements OnInit {
       correccion: new FormControl( null, Validators.required ),
       causa: new FormControl( null, Validators.required ),
       antecedentes: new FormControl( null, Validators.required ),
-      requiere: new FormControl( null, Validators.required ),
       accion: new FormControl( null, Validators.required ),
       fecha_cumplimiento: new FormControl( null, Validators.required ),
       responsable: new FormControl( null, Validators.required ),
@@ -64,7 +63,6 @@ export class BitacoraAccionesComponent implements OnInit {
       correccion: new FormControl( null, Validators.required ),
       causa: new FormControl( null, Validators.required ),
       antecedentes: new FormControl( null, Validators.required ),
-      requiere: new FormControl( null, Validators.required ),
       accion: new FormControl( null, Validators.required ),
       fecha_cumplimiento: new FormControl( null, Validators.required ),
       responsable: new FormControl( null, Validators.required ),
@@ -95,36 +93,53 @@ export class BitacoraAccionesComponent implements OnInit {
 
   cargarBitacoras() {
 
-    // this.cargando = true;
+    this.cargando = true;
 
-    // this._bitacoraService.cargarBitacoras()
-    //       .subscribe( bitacoras => {
-    //         this.bitacoras = bitacoras;
-    //         this.cargando = false;
+    this._bitacoraService.cargarBitacoras()
+          .subscribe( bitacoras => {
+            this.bitacoras = bitacoras;
+            this.cargando = false;
 
-    //         floating_labels();
-    //         inicializando_datePicker();
-    //       });
+            floating_labels();
+            inicializando_datePicker();
+          });
 
   }
 
   agregarBitacora() {
 
-    if ( this.forma.invalid ) {
-      return;
+    // if ( this.forma.invalid ) {
+    //   return;
+    // }
+
+    let req: string;
+
+    if ( $('#requiereSI').prop('checked') ) {
+      req = 'SI';
+    }
+    if ( $('#requiereNO').prop('checked') ) {
+      req = 'NO';
     }
 
-    // let bitacora = new Bitacora(
-    //   this.forma.value.nombre,
-    //   this.forma.value.descripcion,
-    //   this.forma.value.archivo,
-    //   this.forma.value.color
-    // );
+    let bitacora = new Bitacora(
+      $('#fecha').val() + '',
+      this.forma.value.salida,
+      this.forma.value.correccion,
+      this.forma.value.causa,
+      this.forma.value.antecedentes,
+      req,
+      this.forma.value.accion,
+      $('#fecha_cumplimiento').val() + '',
+      this.forma.value.responsable,
+      $('#fecha_cierre').val() + ''
+    );
 
-    // this._bitacoraService.crearBitacora( bitacora )
-    //       .subscribe( resp => {
-    //         this.cargarBitacoras();
-    //       });
+    console.log(bitacora);
+
+    this._bitacoraService.crearBitacora( bitacora )
+          .subscribe( resp => {
+            this.cargarBitacoras();
+          });
 
   }
 
@@ -157,14 +172,32 @@ export class BitacoraAccionesComponent implements OnInit {
 
   formEditable( bitacora: Bitacora ) {
 
-    // this.formaEditar.setValue({
-    //   nombre: norma.nombreNorma,
-    //   descripcion: norma.descripcion,
-    //   archivo: norma.archivoDigital,
-    //   color: norma.color
-    // });
+    this.formaEditar.setValue({
+      fecha: bitacora.fecha,
+      salida: bitacora.seleccion,
+      correccion: bitacora.correccion,
+      causa: bitacora.causa,
+      antecedentes: bitacora.antecedentes,
+      accion: bitacora.planes,
+      fecha_cumplimiento: bitacora.fechaCumplimiento,
+      responsable: bitacora.responsable,
+      fecha_cierre: bitacora.fechaCierre
+    });
 
-    // this.idBit = bitacora._id;
+    console.log(bitacora.correctiva);
+
+
+    if (bitacora.correctiva === 'SI') {
+      $('#requiereSI2').attr('checked', 'true');
+      $('#requiereNO2').attr('checked', 'false');
+    }
+
+    if (bitacora.correctiva === 'NO') {
+      $('#requiereSI2').attr('checked', 'false');
+      $('#requiereNO2').attr('checked', 'true');
+    }
+
+    this.idBit = bitacora._id;
 
     $('#modalBitacoraEditar > div > div > div > form > div.m-b-40').addClass('focused');
   }
