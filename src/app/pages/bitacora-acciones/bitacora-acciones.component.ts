@@ -58,15 +58,15 @@ export class BitacoraAccionesComponent implements OnInit {
     });
 
     this.formaEditar = new FormGroup({
-      fecha: new FormControl( null, Validators.required ),
-      salida: new FormControl( null, Validators.required ),
-      correccion: new FormControl( null, Validators.required ),
-      causa: new FormControl( null, Validators.required ),
-      antecedentes: new FormControl( null, Validators.required ),
-      accion: new FormControl( null, Validators.required ),
-      fecha_cumplimiento: new FormControl( null, Validators.required ),
-      responsable: new FormControl( null, Validators.required ),
-      fecha_cierre: new FormControl( null, Validators.required )
+      fecha2: new FormControl( null, Validators.required ),
+      salida2: new FormControl( null, Validators.required ),
+      correccion2: new FormControl( null, Validators.required ),
+      causa2: new FormControl( null, Validators.required ),
+      antecedentes2: new FormControl( null, Validators.required ),
+      accion2: new FormControl( null, Validators.required ),
+      fecha_cumplimiento2: new FormControl( null, Validators.required ),
+      responsable2: new FormControl( null, Validators.required ),
+      fecha_cierre2: new FormControl( null, Validators.required )
     });
 
     this.cargarBitacoras();
@@ -173,27 +173,30 @@ export class BitacoraAccionesComponent implements OnInit {
   formEditable( bitacora: Bitacora ) {
 
     this.formaEditar.setValue({
-      fecha: bitacora.fecha,
-      salida: bitacora.seleccion,
-      correccion: bitacora.correccion,
-      causa: bitacora.causa,
-      antecedentes: bitacora.antecedentes,
-      accion: bitacora.planes,
-      fecha_cumplimiento: bitacora.fechaCumplimiento,
-      responsable: bitacora.responsable,
-      fecha_cierre: bitacora.fechaCierre
+      fecha2: bitacora.fecha,
+      salida2: bitacora.seleccion,
+      correccion2: bitacora.correccion,
+      causa2: bitacora.causa,
+      antecedentes2: bitacora.antecedentes,
+      accion2: bitacora.planes,
+      fecha_cumplimiento2: bitacora.fechaCumplimiento,
+      responsable2: bitacora.responsable,
+      fecha_cierre2: bitacora.fechaCierre
     });
 
     console.log(bitacora.correctiva);
 
+    $('#requiereSI2').removeAttr('checked');
+    $('#requiereNO2').removeAttr('checked');
+
 
     if (bitacora.correctiva === 'SI') {
       $('#requiereSI2').attr('checked', 'true');
-      $('#requiereNO2').attr('checked', 'false');
+      // $('#requiereNO2').attr('checked', 'false');
     }
 
     if (bitacora.correctiva === 'NO') {
-      $('#requiereSI2').attr('checked', 'false');
+      // $('#requiereSI2').attr('checked', 'false');
       $('#requiereNO2').attr('checked', 'true');
     }
 
@@ -204,18 +207,39 @@ export class BitacoraAccionesComponent implements OnInit {
 
   editarBitacora() {
 
-    // let bitacora = new Bitacora(
-    //   this.formaEditar.value.nombre,
-    //   this.formaEditar.value.descripcion,
-    //   this.formaEditar.value.archivo,
-    //   this.formaEditar.value.color,
-    //   this.idNor
-    // );
+    // if ( this.forma.invalid ) {
+    //   return;
+    // }
 
-    // this._bitacoraService.crearBitacora( bitacora )
-    //         .subscribe( resp => {
-    //           this.cargarBitacoras();
-    //         });
+    let req2: string;
+
+    if ( $('#requiereSI2').prop('checked') ) {
+      req2 = 'SI';
+    }
+    if ( $('#requiereNO2').prop('checked') ) {
+      req2 = 'NO';
+    }
+
+    let bitacora = new Bitacora(
+      $('#fecha2').val() + '',
+      this.formaEditar.value.salida2,
+      this.formaEditar.value.correccion2,
+      this.formaEditar.value.causa2,
+      this.formaEditar.value.antecedentes2,
+      req2,
+      this.formaEditar.value.accion2,
+      $('#fecha_cumplimiento2').val() + '',
+      this.formaEditar.value.responsable2,
+      $('#fecha_cierre2').val() + '',
+      this.idBit
+    );
+
+    console.log(bitacora);
+
+    this._bitacoraService.crearBitacora( bitacora )
+          .subscribe( resp => {
+            this.cargarBitacoras();
+          });
 
   }
 
@@ -235,10 +259,10 @@ export class BitacoraAccionesComponent implements OnInit {
       }
     }).then((eliminar) => {
       if (eliminar.value) {
-        // this._bitacoraService.eliminarBitacora( bitacora._id )
-        //   .subscribe( (resp: any) => {
-        //     this.cargarBitacoras();
-        //   } );
+        this._bitacoraService.eliminarBitacora( bitacora._id )
+          .subscribe( (resp: any) => {
+            this.cargarBitacoras();
+          } );
       }
     });
 
