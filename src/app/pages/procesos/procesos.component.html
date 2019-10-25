@@ -64,10 +64,10 @@
                                                 <th>URL</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            <tr *ngFor="let subproceso of subprocesos" [ngClass]="{pointer: (_usuarioService.usuario.tipo_Usuario !== 'AUDITOR_LIDER')}">
+                                        <tbody *ngIf="_usuarioService.usuario.tipo_Usuario !== 'AUDITOR_LIDER'">
+                                            <tr *ngFor="let subproceso of subprocesos" class="pointer">
                                                 <td style="width: 1px; padding-left: 0px; padding-right: 0px">
-                                                    <div *ngIf="_usuarioService.usuario.tipo_Usuario !== 'AUDITOR_LIDER'" class="btn-group">
+                                                    <div class="btn-group">
                                                         <div class="dropdown-menu text-center animated pulse">
                                                             <div class="btn-group" role="group" aria-label="Basic example">
                                                                 <button (click)="formEditableSub( subproceso )" class="btn btn-outline-info" data-toggle="modal" data-target="#modalSubprocesoEditar">
@@ -86,8 +86,20 @@
                                                     <a href="http://www.google.com">Google</a>
                                                 </td> -->
                                             </tr>
-                                            <tr *ngIf="_usuarioService.usuario.tipo_Usuario !== 'AUDITOR_LIDER'" class="pointer text-center">
+                                            <tr class="pointer text-center">
                                                 <td colspan="3" data-toggle="modal" data-target="#modalSubprocesoAgregar"><i class="mdi mdi-plus"></i></td>
+                                            </tr>
+                                        </tbody>
+
+                                        <tbody *ngIf="_usuarioService.usuario.tipo_Usuario === 'AUDITOR_LIDER'">
+                                            <tr *ngFor="let subproceso of subprocesos">
+                                                <td style="width: 1px; padding-left: 0px; padding-right: 0px">
+                                                </td>
+                                                <td>{{ subproceso.nombreSubproceso }}</td>
+                                                <td>{{ subproceso.archivoDigital }}</td>
+                                                <!-- <td>
+                                                        <a href="http://www.google.com">Google</a>
+                                                    </td> -->
                                             </tr>
                                         </tbody>
                                     </table>

@@ -17,3 +17,4 @@ export { PlaneacionService } from './planeacion/planeacion.service';
 export { ListaVerificacionService } from './listaVerificacion/lista-verificacion.service';
 export { TablaService } from './tabla/tabla.service';
 export { InformeService } from './informe/informe.service';
+export { BitacoraService } from './bitacora/bitacora.service';
