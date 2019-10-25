@@ -43,6 +43,12 @@ export class SettingsService {
     this.guardarAjustes();
 
   }
+
+  cambiarImagen( id: string, url: string ) {
+
+    this._document.getElementById('' + id).setAttribute('src', url);
+
+  }
 }
 
 interface Ajustes {

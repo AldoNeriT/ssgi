@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { SettingsService } from '../../services/service.index';
 
 // declare function init_plugins();
+declare function floating_labels();
 
 @Component({
   selector: 'app-accout-settings',
@@ -15,6 +16,7 @@ export class AccoutSettingsComponent implements OnInit {
 
   ngOnInit() {
     // init_plugins();
+    floating_labels();
     
     this.colocarCheck();
   }
@@ -50,6 +52,10 @@ export class AccoutSettingsComponent implements OnInit {
         break;
       }
     }
+  }
+
+  cambiarFondo() {
+    this._ajustes.cambiarImagen( 'fondoForm',  'https://the1975.com/wp-content/uploads/2018/05/cropped-Facebook_ProfilePic-1.png' );
   }
 
 }

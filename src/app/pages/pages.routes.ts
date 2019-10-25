@@ -33,7 +33,7 @@ const pagesRoutes: Routes = [
         canActivate: [ LoginGuardGuard ],
         children: [
             { path: 'home', component: PrincipalComponent, data: { titulo: 'Home' } },
-            { path: 'account-settings', component: AccoutSettingsComponent, data: { titulo: 'Ajustes del Tema' } },
+            { path: 'account-settings', component: AccoutSettingsComponent, data: { titulo: 'Ajustes' } },
             { path: 'perfil', component: ProfileComponent, data: { titulo: 'Mi Perfil' } },
             // Mantenimiento
             {
