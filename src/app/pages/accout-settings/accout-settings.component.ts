@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { SettingsService } from '../../services/service.index';
+import { SettingsService, UsuarioService } from '../../services/service.index';
 import { Imagen } from '../../models/imagen.model';
 
 // declare function init_plugins();
@@ -20,7 +20,8 @@ export class AccoutSettingsComponent implements OnInit {
 
   cargando = true;
 
-  constructor( public _ajustes: SettingsService ) { }
+  constructor( public _ajustes: SettingsService,
+               public _usuarioService: UsuarioService ) { }
 
   ngOnInit() {
     // init_plugins();
@@ -75,30 +76,33 @@ export class AccoutSettingsComponent implements OnInit {
           .subscribe( imagenes => {
             this.imagenes = imagenes[0];
             // console.log(this.imagenes);
-            this.idImg = imagenes[0]._id;
-            $('#link_fondo').val(this.imagenes.fondo + '');
-            $('#link_logo_login').val(this.imagenes.logoLogin + '');
-            $('#link_LPC').val(this.imagenes.logoPequenoClaro + '');
-            $('#link_LPO').val(this.imagenes.logoPequenoOscuro + '');
-            $('#link_LGC').val(this.imagenes.logoGrandeClaro + '');
-            $('#link_LGO').val(this.imagenes.logoGrandeOscuro + '');
-
-            $('#fondoForm').attr('src', this.imagenes.fondo + '');
-            $('#logoLoginForm').attr('src', this.imagenes.logoLogin + '');
-            $('#LPCForm').attr('src', this.imagenes.logoPequenoClaro + '');
-            $('#LPOForm').attr('src', this.imagenes.logoPequenoOscuro + '');
-            $('#LGCForm').attr('src', this.imagenes.logoGrandeClaro + '');
-            $('#LGOForm').attr('src', this.imagenes.logoGrandeOscuro + '');
-
-            $('#wrapper').attr('style', 'background-image:url(' + imagenes[0].fondo + ');');
-            $('#LLogin').attr('src', imagenes[0].logoLogin + '');
-            $('#LPC').attr('src', imagenes[0].logoPequenoClaro + '');
-            $('#LPO').attr('src', imagenes[0].logoPequenoOscuro + '');
-            $('#LGC').attr('src', imagenes[0].logoGrandeClaro + '');
-            $('#LGO').attr('src', imagenes[0].logoGrandeOscuro + '');
-            $('#errorFondo').attr('src', imagenes[0].logoLogin + '');
-
-            $('div.m-b-40').addClass('focused');
+            if ( imagenes[0] ) {
+              this.idImg = imagenes[0]._id;
+              $('#link_fondo').val(this.imagenes.fondo + '');
+              $('#link_logo_login').val(this.imagenes.logoLogin + '');
+              $('#link_LPC').val(this.imagenes.logoPequenoClaro + '');
+              $('#link_LPO').val(this.imagenes.logoPequenoOscuro + '');
+              $('#link_LGC').val(this.imagenes.logoGrandeClaro + '');
+              $('#link_LGO').val(this.imagenes.logoGrandeOscuro + '');
+  
+              $('#fondoForm').attr('src', this.imagenes.fondo + '');
+              $('#logoLoginForm').attr('src', this.imagenes.logoLogin + '');
+              $('#LPCForm').attr('src', this.imagenes.logoPequenoClaro + '');
+              $('#LPOForm').attr('src', this.imagenes.logoPequenoOscuro + '');
+              $('#LGCForm').attr('src', this.imagenes.logoGrandeClaro + '');
+              $('#LGOForm').attr('src', this.imagenes.logoGrandeOscuro + '');
+  
+              $('#wrapper').attr('style', 'background-image:url(' + imagenes[0].fondo + ');');
+              $('#icono').attr('href', imagenes[0].logoLogin + '');
+              $('#LLogin').attr('src', imagenes[0].logoLogin + '');
+              $('#LPC').attr('src', imagenes[0].logoPequenoClaro + '');
+              $('#LPO').attr('src', imagenes[0].logoPequenoOscuro + '');
+              $('#LGC').attr('src', imagenes[0].logoGrandeClaro + '');
+              $('#LGO').attr('src', imagenes[0].logoGrandeOscuro + '');
+              $('#errorFondo').attr('src', imagenes[0].logoLogin + '');
+  
+              $('div.m-b-40').addClass('focused');
+            }
 
             this.cargando = false;
           });

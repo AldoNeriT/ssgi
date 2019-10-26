@@ -31,196 +31,198 @@
     </div>
 </div>
 
-<div class="row">
-    <div class="col-md-6 col-sm-12">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="card-title">Fondo</h4>
-                <hr>
+<div *ngIf="_usuarioService.usuario.tipo_Usuario === 'ROOT'">
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Fondo</h4>
+                    <hr>
 
-                <div class="row">
-                    <div class="col-12 text-center">
-                        <img id="fondoForm" src="" alt="fondo" class="fondo" style="height: 150px;" />
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <img id="fondoForm" src="" alt="fondo" class="fondo" style="height: 150px;" />
+                        </div>
                     </div>
-                </div>
 
-                <div class="row">
-                    <div class="col-12">
-                        <form id="formFondo" class="floating-labels m-t-0 " ngNativeValidate>
-                            <div class="form-group m-b-40 m-t-40 focused">
-                                <input name="link_fondo" id="link_fondo" type="text" class="form-control" required>
-                                <span class="bar"></span>
-                                <label for="link_fondo">Link:</label>
-                                <span class="help-block text-themecolor">
-                                    <small>Resolución recomendada: <span class="font-bold">2500px x 1400px</span></small>
-                                </span>
-                            </div>
-                            <button (click)="cambiarFondo()" class="btn btn-outline-secondary btn-sm btn-rounded" type="button">Guardar Cambios</button>&nbsp;
-                        </form>
+                    <div class="row">
+                        <div class="col-12">
+                            <form id="formFondo" class="floating-labels m-t-0 " ngNativeValidate>
+                                <div class="form-group m-b-40 m-t-40 focused">
+                                    <input name="link_fondo" id="link_fondo" type="text" class="form-control" required>
+                                    <span class="bar"></span>
+                                    <label for="link_fondo">Link:</label>
+                                    <span class="help-block text-themecolor">
+                                                <small>Resolución recomendada: <span class="font-bold">2500px x 1400px</span></small>
+                                    </span>
+                                </div>
+                                <button (click)="cambiarFondo()" class="btn btn-outline-secondary btn-sm btn-rounded" type="button">Guardar Cambios</button>&nbsp;
+                            </form>
+                        </div>
                     </div>
-                </div>
 
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Logo Login</h4>
+                    <hr>
+
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <img id="logoLoginForm" src="" alt="logoLogin" class="dark-logo" style="height: 150px;" />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <form id="formFondoLogin" class="floating-labels m-t-0 " ngNativeValidate>
+                                <div class="form-group m-b-40 m-t-40 focused">
+                                    <input name="link_logo_login" id="link_logo_login" type="text" class="form-control" required>
+                                    <span class="bar"></span>
+                                    <label for="link_fondo">Link:</label>
+                                    <span class="help-block text-themecolor">
+                                                    <small>Resolución recomendada: <span class="font-bold">150px x 150px</span></small>
+                                    </span>
+                                </div>
+                                <button (click)="cambiarLogoLogin()" class="btn btn-outline-secondary btn-sm btn-rounded" type="submit">Guardar Cambios</button>&nbsp;
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
             </div>
         </div>
     </div>
-    <div class="col-md-6 col-sm-12">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="card-title">Logo Login</h4>
-                <hr>
 
-                <div class="row">
-                    <div class="col-12 text-center">
-                        <img id="logoLoginForm" src="" alt="logoLogin" class="dark-logo" style="height: 150px;" />
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Logo Pequeño Claro</h4>
+                    <hr>
+
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <img id="LPCForm" src="" alt="logoClaro" class="dark-logo" style="height: 50px;" />
+                        </div>
                     </div>
-                </div>
 
-                <div class="row">
-                    <div class="col-12">
-                        <form id="formFondoLogin" class="floating-labels m-t-0 " ngNativeValidate>
-                            <div class="form-group m-b-40 m-t-40 focused">
-                                <input name="link_logo_login" id="link_logo_login" type="text" class="form-control" required>
-                                <span class="bar"></span>
-                                <label for="link_fondo">Link:</label>
-                                <span class="help-block text-themecolor">
-                                        <small>Resolución recomendada: <span class="font-bold">150px x 150px</span></small>
-                                </span>
-                            </div>
-                            <button (click)="cambiarLogoLogin()" class="btn btn-outline-secondary btn-sm btn-rounded" type="submit">Guardar Cambios</button>&nbsp;
-                        </form>
+                    <div class="row">
+                        <div class="col-12">
+                            <form id="formLPC" class="floating-labels m-t-0 " ngNativeValidate>
+                                <div class="form-group m-b-40 m-t-40 focused">
+                                    <input name="link_LPC" id="link_LPC" type="text" class="form-control" required>
+                                    <span class="bar"></span>
+                                    <label for="link_fondo">Link:</label>
+                                    <span class="help-block text-themecolor">
+                                                    <small>Resolución recomendada: <span class="font-bold">40px x 40px</span></small>
+                                    </span>
+                                </div>
+                                <button (click)="cambiarLPC()" class="btn btn-outline-secondary btn-sm btn-rounded" type="submit">Guardar Cambios</button>&nbsp;
+                            </form>
+                        </div>
                     </div>
-                </div>
 
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Logo Pequeño Oscuro</h4>
+                    <hr>
+
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <img id="LPOForm" src="" alt="logoOscuro" class="dark-logo" style="height: 50px;" />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <form id="formLPO" class="floating-labels m-t-0 " ngNativeValidate>
+                                <div class="form-group m-b-40 m-t-40 focused">
+                                    <input name="link_LPO" id="link_LPO" type="text" class="form-control" required>
+                                    <span class="bar"></span>
+                                    <label for="link_fondo">Link:</label>
+                                    <span class="help-block text-themecolor">
+                                                    <small>Resolución recomendada: <span class="font-bold">40px x 40px</span></small>
+                                    </span>
+                                </div>
+                                <button (click)="cambiarLPO()" class="btn btn-outline-secondary btn-sm btn-rounded" type="submit">Guardar Cambios</button>&nbsp;
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<div class="row">
-    <div class="col-md-6 col-sm-12">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="card-title">Logo Pequeño Claro</h4>
-                <hr>
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Logo Grande Claro</h4>
+                    <hr>
 
-                <div class="row">
-                    <div class="col-12 text-center">
-                        <img id="LPCForm" src="" alt="logoClaro" class="dark-logo" style="height: 50px;" />
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <img id="LGCForm" src="" alt="logoClaro" class="dark-logo" style="height: 50px;" />
+                        </div>
                     </div>
-                </div>
 
-                <div class="row">
-                    <div class="col-12">
-                        <form id="formLPC" class="floating-labels m-t-0 " ngNativeValidate>
-                            <div class="form-group m-b-40 m-t-40 focused">
-                                <input name="link_LPC" id="link_LPC" type="text" class="form-control" required>
-                                <span class="bar"></span>
-                                <label for="link_fondo">Link:</label>
-                                <span class="help-block text-themecolor">
-                                        <small>Resolución recomendada: <span class="font-bold">40px x 40px</span></small>
-                                </span>
-                            </div>
-                            <button (click)="cambiarLPC()" class="btn btn-outline-secondary btn-sm btn-rounded" type="submit">Guardar Cambios</button>&nbsp;
-                        </form>
+                    <div class="row">
+                        <div class="col-12">
+                            <form id="formLGC" class="floating-labels m-t-0 " ngNativeValidate>
+                                <div class="form-group m-b-40 m-t-40 focused">
+                                    <input name="link_LGC" id="link_LGC" type="text" class="form-control" required>
+                                    <span class="bar"></span>
+                                    <label for="link_fondo">Link:</label>
+                                    <span class="help-block text-themecolor">
+                                                    <small>Resolución recomendada: <span class="font-bold">140px x 30px</span></small>
+                                    </span>
+                                </div>
+                                <button (click)="cambiarLGC()" class="btn btn-outline-secondary btn-sm btn-rounded" type="submit">Guardar Cambios</button>&nbsp;
+                            </form>
+                        </div>
                     </div>
-                </div>
 
+                </div>
             </div>
         </div>
-    </div>
-    <div class="col-md-6 col-sm-12">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="card-title">Logo Pequeño Oscuro</h4>
-                <hr>
+        <div class="col-md-6 col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Logo Grande Oscuro</h4>
+                    <hr>
 
-                <div class="row">
-                    <div class="col-12 text-center">
-                        <img id="LPOForm" src="" alt="logoOscuro" class="dark-logo" style="height: 50px;" />
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <img id="LGOForm" src="" alt="logoOscuro" class="dark-logo" style="height: 50px;" />
+                        </div>
                     </div>
-                </div>
 
-                <div class="row">
-                    <div class="col-12">
-                        <form id="formLPO" class="floating-labels m-t-0 " ngNativeValidate>
-                            <div class="form-group m-b-40 m-t-40 focused">
-                                <input name="link_LPO" id="link_LPO" type="text" class="form-control" required>
-                                <span class="bar"></span>
-                                <label for="link_fondo">Link:</label>
-                                <span class="help-block text-themecolor">
-                                        <small>Resolución recomendada: <span class="font-bold">40px x 40px</span></small>
-                                </span>
-                            </div>
-                            <button (click)="cambiarLPO()" class="btn btn-outline-secondary btn-sm btn-rounded" type="submit">Guardar Cambios</button>&nbsp;
-                        </form>
+                    <div class="row">
+                        <div class="col-12">
+                            <form id="formLGO" class="floating-labels m-t-0 " ngNativeValidate>
+                                <div class="form-group m-b-40 m-t-40 focused">
+                                    <input name="link_LGO" id="link_LGO" type="text" class="form-control" required>
+                                    <span class="bar"></span>
+                                    <label for="link_fondo">Link:</label>
+                                    <span class="help-block text-themecolor">
+                                                    <small>Resolución recomendada: <span class="font-bold">140px x 30px</span></small>
+                                    </span>
+                                </div>
+                                <button (click)="cambiarLGO()" class="btn btn-outline-secondary btn-sm btn-rounded" type="submit">Guardar Cambios</button>&nbsp;
+                            </form>
+                        </div>
                     </div>
+
                 </div>
-
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-md-6 col-sm-12">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="card-title">Logo Grande Claro</h4>
-                <hr>
-
-                <div class="row">
-                    <div class="col-12 text-center">
-                        <img id="LGCForm" src="" alt="logoClaro" class="dark-logo" style="height: 50px;" />
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-12">
-                        <form id="formLGC" class="floating-labels m-t-0 " ngNativeValidate>
-                            <div class="form-group m-b-40 m-t-40 focused">
-                                <input name="link_LGC" id="link_LGC" type="text" class="form-control" required>
-                                <span class="bar"></span>
-                                <label for="link_fondo">Link:</label>
-                                <span class="help-block text-themecolor">
-                                        <small>Resolución recomendada: <span class="font-bold">140px x 30px</span></small>
-                                </span>
-                            </div>
-                            <button (click)="cambiarLGC()" class="btn btn-outline-secondary btn-sm btn-rounded" type="submit">Guardar Cambios</button>&nbsp;
-                        </form>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-    <div class="col-md-6 col-sm-12">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="card-title">Logo Grande Oscuro</h4>
-                <hr>
-
-                <div class="row">
-                    <div class="col-12 text-center">
-                        <img id="LGOForm" src="" alt="logoOscuro" class="dark-logo" style="height: 50px;" />
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-12">
-                        <form id="formLGO" class="floating-labels m-t-0 " ngNativeValidate>
-                            <div class="form-group m-b-40 m-t-40 focused">
-                                <input name="link_LGO" id="link_LGO" type="text" class="form-control" required>
-                                <span class="bar"></span>
-                                <label for="link_fondo">Link:</label>
-                                <span class="help-block text-themecolor">
-                                        <small>Resolución recomendada: <span class="font-bold">140px x 30px</span></small>
-                                </span>
-                            </div>
-                            <button (click)="cambiarLGO()" class="btn btn-outline-secondary btn-sm btn-rounded" type="submit">Guardar Cambios</button>&nbsp;
-                        </form>
-                    </div>
-                </div>
-
             </div>
         </div>
     </div>
