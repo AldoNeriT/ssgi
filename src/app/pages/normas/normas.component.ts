@@ -102,6 +102,8 @@ export class NormasComponent implements OnInit {
     this.txtDescripcionV.nativeElement.innerText = norma.descripcion;
     this.txtArchV.nativeElement.innerText = norma.archivoDigital;
 
+    $('#archDigital').attr('href', norma.archivoDigital + '');
+
     if ( norma.color === 'secondary') {
       this.txtColorV.nativeElement.innerText = 'Blanco';
     }

@@ -81,10 +81,10 @@
                                                     </div>
                                                 </td>
                                                 <td data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ subproceso.nombreSubproceso }}</td>
-                                                <td data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ subproceso.archivoDigital }}</td>
-                                                <!-- <td>
-                                                    <a href="http://www.google.com">Google</a>
-                                                </td> -->
+                                                <!-- <td data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ subproceso.archivoDigital }}</td> -->
+                                                <td>
+                                                    <a href="{{ subproceso.archivoDigital }}">{{ subproceso.archivoDigital }}</a>
+                                                </td>
                                             </tr>
                                             <tr class="pointer text-center">
                                                 <td colspan="3" data-toggle="modal" data-target="#modalSubprocesoAgregar"><i class="mdi mdi-plus"></i></td>
@@ -97,9 +97,9 @@
                                                 </td>
                                                 <td>{{ subproceso.nombreSubproceso }}</td>
                                                 <td>{{ subproceso.archivoDigital }}</td>
-                                                <!-- <td>
-                                                        <a href="http://www.google.com">Google</a>
-                                                    </td> -->
+                                                <td>
+                                                    <a href="{{ subproceso.archivoDigital }}">{{ subproceso.archivoDigital }}</a>
+                                                </td>
                                             </tr>
                                         </tbody>
                                     </table>

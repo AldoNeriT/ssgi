@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 import { SettingsService } from '../../services/service.index';
+import { Imagen } from '../../models/imagen.model';
 
 // declare function init_plugins();
 declare function floating_labels();
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-accout-settings',
@@ -11,6 +13,8 @@ declare function floating_labels();
   styles: []
 })
 export class AccoutSettingsComponent implements OnInit {
+
+  idImg: string = '';
 
   constructor( public _ajustes: SettingsService ) { }
 
@@ -55,7 +59,142 @@ export class AccoutSettingsComponent implements OnInit {
   }
 
   cambiarFondo() {
-    this._ajustes.cambiarImagen( 'fondoForm',  'https://the1975.com/wp-content/uploads/2018/05/cropped-Facebook_ProfilePic-1.png' );
+    // https://the1975.com/wp-content/uploads/2018/05/cropped-Facebook_ProfilePic-1.png
+    let url = $('#link_fondo').val() + '';
+    this._ajustes.cambiarImagen( 'fondoForm',  url );
+
+    let imagen = new Imagen(
+      url,
+      '',
+      '',
+      '',
+      '',
+      '',
+      this.idImg
+    );
+
+    console.log('Img: ', imagen);
+
+    this._ajustes.cambiarFondo( imagen )
+            .subscribe( resp => {
+              floating_labels();
+              this.colocarCheck();
+            });
+  }
+
+  cambiarLogoLogin() {
+    let url = $('#link_logo_login').val() + '';
+    this._ajustes.cambiarImagen( 'logoLoginForm',  url );
+
+    let imagen = new Imagen(
+      '',
+      url,
+      '',
+      '',
+      '',
+      '',
+      this.idImg
+    );
+
+    console.log('Img: ', imagen);
+
+    this._ajustes.cambiarLogoLogin( imagen )
+            .subscribe( resp => {
+              floating_labels();
+              this.colocarCheck();
+            });
+  }
+
+  cambiarLPC() {
+    let url = $('#link_LPC').val() + '';
+    this._ajustes.cambiarImagen( 'LPCForm',  url );
+
+    let imagen = new Imagen(
+      '',
+      '',
+      url,
+      '',
+      '',
+      '',
+      this.idImg
+    );
+
+    console.log('Img: ', imagen);
+
+    this._ajustes.cambiarLPC( imagen )
+            .subscribe( resp => {
+              floating_labels();
+              this.colocarCheck();
+            });
+  }
+
+  cambiarLPO() {
+    let url = $('#link_LPO').val() + '';
+    this._ajustes.cambiarImagen( 'LPOForm',  url );
+
+    let imagen = new Imagen(
+      '',
+      '',
+      '',
+      url,
+      '',
+      '',
+      this.idImg
+    );
+
+    console.log('Img: ', imagen);
+
+    this._ajustes.cambiarLPO( imagen )
+            .subscribe( resp => {
+              floating_labels();
+              this.colocarCheck();
+            });
+  }
+
+  cambiarLGC() {
+    let url = $('#link_LGC').val() + '';
+    this._ajustes.cambiarImagen( 'LGCForm',  url );
+
+    let imagen = new Imagen(
+      '',
+      '',
+      '',
+      '',
+      url,
+      '',
+      this.idImg
+    );
+
+    console.log('Img: ', imagen);
+
+    this._ajustes.cambiarLGC( imagen )
+            .subscribe( resp => {
+              floating_labels();
+              this.colocarCheck();
+            });
+  }
+
+  cambiarLGO() {
+    let url = $('#link_LGO').val() + '';
+    this._ajustes.cambiarImagen( 'LGOForm',  url );
+
+    let imagen = new Imagen(
+      '',
+      '',
+      '',
+      '',
+      '',
+      url,
+      this.idImg
+    );
+
+    console.log('Img: ', imagen);
+
+    this._ajustes.cambiarLGO( imagen )
+            .subscribe( resp => {
+              floating_labels();
+              this.colocarCheck();
+            });
   }
 
 }
