@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Usuario } from '../../models/usuario.model';
-import { UsuarioService, InstitucionService } from '../../services/service.index';
+import { UsuarioService, InstitucionService, SettingsService } from '../../services/service.index';
 
 // declare function init_plugins();
 
@@ -41,6 +41,7 @@ export class PrincipalComponent implements OnInit {
 
 
   constructor( public _usuarioService: UsuarioService,
+               public _ajustes: SettingsService,
                public _institucionService: InstitucionService ) {
     this.usuario = this._usuarioService.usuario;
   }
@@ -51,6 +52,24 @@ export class PrincipalComponent implements OnInit {
     this.hora = new Date().getHours();
     this.saludo();
     this.almacenamiento();
+    this.cargarImagenesInicializar();
+  }
+
+  cargarImagenesInicializar() {
+    this._ajustes.cargarImagenes()
+          .subscribe( imagenes => {
+            // this.imagenes = imagenes[0];
+            // console.log(imagenes[0]);
+
+            $('#wrapper').attr('style', 'background-image:url(' + imagenes[0].fondo + ');');
+            $('#LLogin').attr('src', imagenes[0].logoLogin + '');
+            $('#LPC').attr('src', imagenes[0].logoPequenoClaro + '');
+            $('#LPO').attr('src', imagenes[0].logoPequenoOscuro + '');
+            $('#LGC').attr('src', imagenes[0].logoGrandeClaro + '');
+            $('#LGO').attr('src', imagenes[0].logoGrandeOscuro + '');
+            $('#errorFondo').attr('src', imagenes[0].logoLogin + '');
+
+          });
   }
 
   saludo() {

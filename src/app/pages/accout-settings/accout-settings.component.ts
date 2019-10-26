@@ -14,7 +14,11 @@ import * as $ from 'jquery';
 })
 export class AccoutSettingsComponent implements OnInit {
 
-  idImg: string = '';
+  idImg: string;
+
+  imagenes: Imagen;
+
+  cargando = true;
 
   constructor( public _ajustes: SettingsService ) { }
 
@@ -23,6 +27,7 @@ export class AccoutSettingsComponent implements OnInit {
     floating_labels();
     
     this.colocarCheck();
+    this.cargarImagenes();
   }
 
   cambiarColor( tema: string, link: any ) {
@@ -58,6 +63,48 @@ export class AccoutSettingsComponent implements OnInit {
     }
   }
 
+  // ************************************************
+  // *** IMAGENES ***
+  // ************************************************
+
+  cargarImagenes() {
+
+    this.cargando = true;
+
+    this._ajustes.cargarImagenes()
+          .subscribe( imagenes => {
+            this.imagenes = imagenes[0];
+            // console.log(this.imagenes);
+            this.idImg = imagenes[0]._id;
+            $('#link_fondo').val(this.imagenes.fondo + '');
+            $('#link_logo_login').val(this.imagenes.logoLogin + '');
+            $('#link_LPC').val(this.imagenes.logoPequenoClaro + '');
+            $('#link_LPO').val(this.imagenes.logoPequenoOscuro + '');
+            $('#link_LGC').val(this.imagenes.logoGrandeClaro + '');
+            $('#link_LGO').val(this.imagenes.logoGrandeOscuro + '');
+
+            $('#fondoForm').attr('src', this.imagenes.fondo + '');
+            $('#logoLoginForm').attr('src', this.imagenes.logoLogin + '');
+            $('#LPCForm').attr('src', this.imagenes.logoPequenoClaro + '');
+            $('#LPOForm').attr('src', this.imagenes.logoPequenoOscuro + '');
+            $('#LGCForm').attr('src', this.imagenes.logoGrandeClaro + '');
+            $('#LGOForm').attr('src', this.imagenes.logoGrandeOscuro + '');
+
+            $('#wrapper').attr('style', 'background-image:url(' + imagenes[0].fondo + ');');
+            $('#LLogin').attr('src', imagenes[0].logoLogin + '');
+            $('#LPC').attr('src', imagenes[0].logoPequenoClaro + '');
+            $('#LPO').attr('src', imagenes[0].logoPequenoOscuro + '');
+            $('#LGC').attr('src', imagenes[0].logoGrandeClaro + '');
+            $('#LGO').attr('src', imagenes[0].logoGrandeOscuro + '');
+            $('#errorFondo').attr('src', imagenes[0].logoLogin + '');
+
+            $('div.m-b-40').addClass('focused');
+
+            this.cargando = false;
+          });
+
+  }
+
   cambiarFondo() {
     // https://the1975.com/wp-content/uploads/2018/05/cropped-Facebook_ProfilePic-1.png
     let url = $('#link_fondo').val() + '';
@@ -79,6 +126,7 @@ export class AccoutSettingsComponent implements OnInit {
             .subscribe( resp => {
               floating_labels();
               this.colocarCheck();
+              this.cargarImagenes();
             });
   }
 
@@ -102,6 +150,7 @@ export class AccoutSettingsComponent implements OnInit {
             .subscribe( resp => {
               floating_labels();
               this.colocarCheck();
+              this.cargarImagenes();
             });
   }
 
@@ -125,6 +174,7 @@ export class AccoutSettingsComponent implements OnInit {
             .subscribe( resp => {
               floating_labels();
               this.colocarCheck();
+              this.cargarImagenes();
             });
   }
 
@@ -148,6 +198,7 @@ export class AccoutSettingsComponent implements OnInit {
             .subscribe( resp => {
               floating_labels();
               this.colocarCheck();
+              this.cargarImagenes();
             });
   }
 
@@ -171,6 +222,7 @@ export class AccoutSettingsComponent implements OnInit {
             .subscribe( resp => {
               floating_labels();
               this.colocarCheck();
+              this.cargarImagenes();
             });
   }
 
@@ -194,6 +246,7 @@ export class AccoutSettingsComponent implements OnInit {
             .subscribe( resp => {
               floating_labels();
               this.colocarCheck();
+              this.cargarImagenes();
             });
   }
 

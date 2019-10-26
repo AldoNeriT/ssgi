@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
-import { UsuarioService } from '../services/service.index';
+import { UsuarioService, SettingsService } from '../services/service.index';
 import { Usuario } from '../models/usuario.model';
 
 // import swal from 'sweetalert';
@@ -20,7 +20,8 @@ export class LoginComponent implements OnInit {
   userName: string;
 
   constructor( public router: Router,
-               public _usuarioService: UsuarioService ) { }
+               public _usuarioService: UsuarioService,
+               public _ajustes: SettingsService ) { }
 
   ngOnInit() {
     init_plugins();
@@ -32,6 +33,25 @@ export class LoginComponent implements OnInit {
     if ( this.userName.length > 1 ) {
       this.recuerdame = true;
     }
+
+    this.cargarImagenesInicializar();
+  }
+
+  cargarImagenesInicializar() {
+    this._ajustes.cargarImagenes()
+          .subscribe( imagenes => {
+            // this.imagenes = imagenes[0];
+            // console.log(imagenes[0]);
+
+            $('#wrapper').attr('style', 'background-image:url(' + imagenes[0].fondo + ');');
+            $('#LLogin').attr('src', imagenes[0].logoLogin + '');
+            $('#LPC').attr('src', imagenes[0].logoPequenoClaro + '');
+            $('#LPO').attr('src', imagenes[0].logoPequenoOscuro + '');
+            $('#LGC').attr('src', imagenes[0].logoGrandeClaro + '');
+            $('#LGO').attr('src', imagenes[0].logoGrandeOscuro + '');
+            $('#errorFondo').attr('src', imagenes[0].logoLogin + '');
+
+          });
   }
 
   ingresar( forma: NgForm) {

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SettingsService } from '../../services/service.index';
 
 declare function init_plugins();
 
@@ -11,10 +12,28 @@ export class NopagefoundComponent implements OnInit {
 
   anio: number = new Date().getFullYear();
 
-  constructor() { }
+  constructor( public _ajustes: SettingsService ) { }
 
   ngOnInit() {
     init_plugins();
+    this.cargarImagenesInicializar();
+  }
+
+  cargarImagenesInicializar() {
+    this._ajustes.cargarImagenes()
+          .subscribe( imagenes => {
+            // this.imagenes = imagenes[0];
+            // console.log(imagenes[0]);
+
+            $('#wrapper').attr('style', 'background-image:url(' + imagenes[0].fondo + ');');
+            $('#LLogin').attr('src', imagenes[0].logoLogin + '');
+            $('#LPC').attr('src', imagenes[0].logoPequenoClaro + '');
+            $('#LPO').attr('src', imagenes[0].logoPequenoOscuro + '');
+            $('#LGC').attr('src', imagenes[0].logoGrandeClaro + '');
+            $('#LGO').attr('src', imagenes[0].logoGrandeOscuro + '');
+            $('#errorFondo').attr('src', imagenes[0].logoLogin + '');
+
+          });
   }
 
 }
