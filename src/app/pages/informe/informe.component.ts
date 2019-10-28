@@ -1075,9 +1075,10 @@ export class InformeComponent implements OnInit {
     arrT2.push('');
     arrT2.push('');
     for (let norm of this.normas) {
-      arrT2.push(norm.nombreNorma + '');
+      //arrT2.push(norm.nombreNorma + '');
+      arrT2.push({ text: norm.nombreNorma,  fontSize: 10, alignment: 'center', colSpan: 0, style: 'tableHeader' });
     }
-    arrT2.push('REVISION');
+    arrT2.push('REVISIÓN');
     arrT2.push('RESULTADO');
 
     arrMatriz.push(arrT1);
@@ -1148,10 +1149,10 @@ export class InformeComponent implements OnInit {
         table: {
           widths: [80, 260, 70, 80],
           body: [
-            [{ text: 'INSTITUCIÓN', fontSize: 10, colSpan: 1}, { text: this.institucionV, fontSize: 10, colSpan: 1}, { text: 'NO. AUDITORIA',  alignment: 'center', fontSize: 10, colSpan: 1 }, { text: this.noAuditoriaV,  fontSize: 10, alignment: 'center', colSpan: 1, style: 'tableHeader' }],
-            [{ text: 'PROCESO', fontSize: 10, colSpan: 1}, { text: this.procesoV, fontSize: 10, colSpan: 1}, { text: 'FECHA',  alignment: 'center', fontSize: 10, colSpan: 1}, { text: this.fechaV,  fontSize: 10, alignment: 'center', colSpan: 1, style: 'tableHeader' }],
-            [{ text: 'AUDITOR LIDER', fontSize: 10, colSpan: 1}, { text: this.auditorLiderV, fontSize: 10, colSpan: 3}, { text: '',  alignment: 'center', fontSize: 10, colSpan: 0}, { text: ' ',  fontSize: 10, alignment: 'center', colSpan: 0, style: 'tableHeader' }],
-            [{ text: 'GRUPO AUDITOR', fontSize: 10, colSpan: 1}, { text: this.grupoAuditorV, fontSize: 10, colSpan: 3}, { text: '',  alignment: 'center', fontSize: 10, colSpan: 0}, { text: ' ',  fontSize: 10, alignment: 'center', colSpan: 0, style: 'tableHeader' }],
+            [{ text: 'INSTITUCIÓN', fontSize: 10, colSpan: 1}, { text: this.institucionV, fontSize: 10, colSpan: 1, style:'sinN'}, { text: 'NO. AUDITORIA',  alignment: 'center', fontSize: 10, colSpan: 1 }, { text: this.noAuditoriaV,  fontSize: 10, alignment: 'center', colSpan: 1, style: 'sinN' }],
+            [{ text: 'PROCESO', fontSize: 10, colSpan: 1}, { text: this.procesoV, fontSize: 10, colSpan: 1, style:'sinN'}, { text: 'FECHA',  alignment: 'center', fontSize: 10, colSpan: 1}, { text: this.fechaV,  fontSize: 10, alignment: 'center', colSpan: 1, style: 'sinN' }],
+            [{ text: 'AUDITOR LIDER', fontSize: 10, colSpan: 1}, { text: this.auditorLiderV, fontSize: 10, colSpan: 3, style:'sinN'}, { text: '',  alignment: 'center', fontSize: 10, colSpan: 0}, { text: ' ',  fontSize: 10, alignment: 'center', colSpan: 0, style: 'tableHeader' }],
+            [{ text: 'GRUPO AUDITOR', fontSize: 10, colSpan: 1}, { text: this.grupoAuditorV, fontSize: 10, colSpan: 3, style:'sinN'}, { text: '',  alignment: 'center', fontSize: 10, colSpan: 0}, { text: ' ',  fontSize: 10, alignment: 'center', colSpan: 0, style: 'tableHeader' }],
           ]
         },
         // layout: 'noBorders'
@@ -1322,6 +1323,10 @@ export class InformeComponent implements OnInit {
         },
         tableHeader: {
           bold: true,
+          color: 'black'
+        },
+        sinN: {
+          bold: false,
           color: 'black'
         }
       }

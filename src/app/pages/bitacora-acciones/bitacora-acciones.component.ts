@@ -4,6 +4,10 @@ import { BitacoraService, UsuarioService, InstitucionService } from '../../servi
 import { Bitacora } from '../../models/bitacora.model';
 import { Router, ActivatedRoute } from '@angular/router';
 
+import * as pdfMake from 'pdfmake/build/pdfmake.js';
+import * as pdfFonts from 'pdfmake/build/vfs_fonts.js';
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
+
 import Swal from 'sweetalert2';
 import * as $ from 'jquery';
 
@@ -265,6 +269,106 @@ export class BitacoraAccionesComponent implements OnInit {
           } );
       }
     });
+
+  }
+
+  imprimir( opcion: number) {
+
+    let arrBitacoras = [];
+    let i = 1;
+    arrBitacoras.push([{text: 'NO', fontSize: 9, alignment: 'center', colSpan: 1, style: 'contenido'}, {text: 'Fecha', fontSize: 9, alignment: 'center', colSpan: 1, style: 'contenido'}, {text: 'Salida No Conforme / No Conformidad / Incidente', fontSize: 9, alignment: 'center', colSpan: 1, style: 'contenido'}, {text: 'Corrección', fontSize: 9, alignment: 'center', colSpan: 1, style: 'contenido'}, {text: 'Causa(s)', fontSize: 9, alignment: 'center', colSpan: 1, style: 'contenido'}, {text: 'Antecedentes', fontSize: 9, alignment: 'center', colSpan: 1, style: 'contenido'}, {text: 'Requiere Acción Correctiva (SI/NO)', fontSize: 9, alignment: 'center', colSpan: 1, style: 'contenido'}, {text: 'Acción Correctiva (Planes de Acción)', fontSize: 9, alignment: 'center', colSpan: 1, style: 'contenido'}, {text: 'Fecha de Cumplimiento', fontSize: 9, alignment: 'center', colSpan: 1, style: 'contenido'}, {text: 'Responsable de Ejecutar las Acciones', fontSize: 9, alignment: 'center', colSpan: 1, style: 'contenido'}, {text: 'Fecha de Cierre de la Acción', fontSize: 9, alignment: 'center', colSpan: 1, style: 'contenido'}]);
+    for (let bit of this.bitacoras) {
+      arrBitacoras.push([ {text: i, fontSize: 8, colSpan: 1, style: 'contenido2'}, {text: bit.fecha, fontSize: 8, colSpan: 1, style: 'contenido2'}, {text: bit.seleccion, fontSize: 8, colSpan: 1, style: 'contenido2'}, {text: bit.correccion, fontSize: 8, colSpan: 1, style: 'contenido2'}, {text: bit.causa, fontSize: 8, colSpan: 1, style: 'contenido2'}, {text: bit.antecedentes, fontSize: 8, colSpan: 1, style: 'contenido2'}, {text: bit.correctiva, fontSize: 8, colSpan: 1, style: 'contenido2'}, {text: bit.planes, fontSize: 8, colSpan: 1, style: 'contenido2'}, {text: bit.fechaCumplimiento, fontSize: 8, colSpan: 1, style: 'contenido2'}, {text: bit.responsable, fontSize: 8, colSpan: 1, style: 'contenido2'}, {text: bit.fechaCierre, fontSize: 8, colSpan: 1, style: 'contenido2'}]);
+      i++;
+    }
+
+    let docBitacora = {
+      pageOrientation: 'landscape',
+      content: [{
+        style: 'titulo',
+        pageOrientation: 'landscape',
+        table: {
+            heights: [50],
+            widths: [750],
+            body: [
+                [{ text: 'BITÁCORA DE ACCIONES DEL SGI DEL G3', color: 'gray', margin: [10, 15, 10, 10], alignment: 'center'}]
+            ]
+          }
+        },
+        {
+          style: 'tableExample',
+          pageOrientation: 'landscape',
+          color: '#444',
+          table: {
+            widths: ['auto', 615],
+            body: [
+              [{text: 'INSTITUCIÓN:', fontSize: 10, colSpan: 1, style: 'contenido'}, {text: this.institucionV.toUpperCase(), pageOrientation: 'landscape', fontSize: 10, colSpan: 1, style: 'contenido2'}],
+              [{text: 'SALIDA NO CONFORME:', fontSize: 10, colSpan: 1, style: 'contenido'}, {text: 'FALLA O INCUMPLIMIENTO DEL SERVICIO', fontSize: 10, colSpan: 1, style: 'contenido2'}],
+              [{text: 'NO CONFORMIDAD:', fontSize: 10, colSpan: 1, style: 'contenido'}, {text: 'INCUMPLIMIENTO DE UN REQUISITO', fontSize: 10, colSpan: 1, style: 'contenido2'}],
+              [{text: 'INCIDENTE:', fontSize: 10, colSpan: 1, style: 'contenido'},{text: 'POSIBLES LESIONES O ENFERMEDADES PRODUCIDAS POR CAUSA DEL TRABAJO', fontSize: 10, colSpan: 1, style: 'contenido2'}]
+            ]
+          }
+        },
+        {
+          style: 'tableExample',
+          pageOrientation: 'landscape',
+          color: '#444',
+          table: {
+            widths: ['auto', 45, 'auto', 'auto', 'auto', 'auto', 70, 'auto', 60, 70, 50],
+            body: arrBitacoras
+          }
+        }
+      ],
+      styles: {
+        header: {
+          fontSize: 18,
+          bold: true,
+          alignment: 'center',
+          margin: [0, 0, 0, 10]
+        },
+        subheader: {
+          fontSize: 16,
+          bold: true,
+          margin: [0, 10, 0, 5]
+        },
+        tableExample: {
+          bold: true,
+          fontSize: 11,
+          margin: [10, 5, 0, 15]
+        },
+        titulo: {
+          bold: true,
+          fontSize: 20,
+          margin: [5, 5, 5, 25]
+        },
+        firma: {
+          margin: [170, 20, 0, 15]
+        },
+        contenido: {
+          bold: true,
+          color: 'black'
+        },
+        contenido2: {
+          bold: false,
+          color: 'black'
+        },
+        tableHeader2: {
+          bold: true,
+          widths: [100, 220, 38, 50],
+          color: 'black'
+        }
+      }
+    };
+
+    if ( opcion === 1 ) {
+      pdfMake.createPdf(docBitacora).download('bitacora-acciones.pdf');
+    }
+    if ( opcion === 2 ) {
+      pdfMake.createPdf(docBitacora).open();
+    }
+    if ( opcion === 3 ) {
+      pdfMake.createPdf(docBitacora).print();
+    }
 
   }
 
